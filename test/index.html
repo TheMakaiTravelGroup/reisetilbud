@@ -52,6 +52,14 @@
       .hotel-long { padding:18px 20px; }
       .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
+      /* Galleri / soft carousel – luksuriøs og email-safe */
+      .gallery{ margin-top:12px; }
+      .gallery-strip{ white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:8px; }
+      .gallery-strip a{ display:inline-block; margin-right:8px; }
+      .gallery-strip a:last-child{ margin-right:0; }
+      .gallery-strip img{ display:block; height:170px; width:auto; border-radius:12px; border:1px solid #e7e2da; }
+      .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:4px; text-align:left; }
+
       .rate-list { width:100%; margin-top:8px; }
       .rate-list td { vertical-align:top; }
       .rate-list td:first-child { padding-right:12px; }
@@ -140,107 +148,111 @@
         text-decoration:underline;
       }
 
-/* ---------------------------
-   MOBIL (≤600px): stacked med desktop-rytmik
-   --------------------------- */
-@media only screen and (max-width:600px){
+      /* ---------------------------
+         MOBIL (≤600px): stacked med desktop-rytmik
+         --------------------------- */
+      @media only screen and (max-width:600px){
 
-  /* MOBIL: finjustér luft mellem sidste pris og Høydepunkter-boksen */
-  .rate-list tr:last-child{ 
-    padding-bottom:5px !important;   /* mindre luft fra prisen ned til divideren */
-  }
-  /* Nulstil evt. desktop-regel der gav ekstra td-bundpadding */
-  .rate-list tr:last-child td{
-    padding-bottom:0 !important;
-  }
+        /* Galleri mobil – en tand højere billeder + swipe-hint */
+        .gallery-strip img{ height:180px !important; }
+        .scroll-hint{ display:block !important; }
 
-  /* MOBIL: identisk divider-rytme + LIDT MERE luft ned til Høydepunkter */
-  .rate-list::after{
-    content:"";
-    display:block;
-    width:100%;
-    height:1px;
-    background:#f0ece4;              /* samme farve som øvrige dividers */
-    margin:8px 0 22px;               /* mindre luft oppe (var 12px 0 22px) */
-  }
+        /* MOBIL: finjustér luft mellem sidste pris og Høydepunkter-boksen */
+        .rate-list tr:last-child{ 
+          padding-bottom:5px !important;   /* mindre luft fra prisen ned til divideren */
+        }
+        /* Nulstil evt. desktop-regel der gav ekstra td-bundpadding */
+        .rate-list tr:last-child td{
+          padding-bottom:0 !important;
+        }
 
-  /* LIDT MERE luft FRA divideren NED til villatypen (ikke første række) */
-  .rate-list tr:not(:first-child){
-    padding-top:16px !important;     /* var 12px → lidt mere luft */
-  }
+        /* MOBIL: identisk divider-rytme + LIDT MERE luft ned til Høydepunkter */
+        .rate-list::after{
+          content:"";
+          display:block;
+          width:100%;
+          height:1px;
+          background:#f0ece4;              /* samme farve som øvrige dividers */
+          margin:8px 0 22px;               /* mindre luft oppe (var 12px 0 22px) */
+        }
 
-  /* Alternativ/ekstra justering direkte på boksen (beholdt lav) */
-  .extras{
-    margin-top:2px !important;       /* finjustér hvis du vil have endnu mere/mindre */
-  }
+        /* LIDT MERE luft FRA divideren NED til villatypen (ikke første række) */
+        .rate-list tr:not(:first-child){
+          padding-top:16px !important;     /* var 12px → lidt mere luft */
+        }
 
-  /* Container */
-  .wrap { width:100% !important; max-width:100% !important; }
-  .px { padding-left:18px !important; padding-right:18px !important; }
+        /* Alternativ/ekstra justering direkte på boksen (beholdt lav) */
+        .extras{
+          margin-top:2px !important;       /* finjustér hvis du vil have endnu mere/mindre */
+        }
 
-  /* Typografi – læsbart og roligt */
-  .heading{ font-size:24px !important; }
-  .section-title{ font-size:16px !important; }
-  .text{ font-size:15px !important; line-height:23px !important; }
-  .journey-title{ font-size:15px !important; }
-  .times{ font-size:15px !important; }
-  .chip{ font-size:11px !important; }
-  .hotel-cap{ font-size:15px !important; }
-  .hotel-long{ padding:18px 18px !important; }
+        /* Container */
+        .wrap { width:100% !important; max-width:100% !important; }
+        .px { padding-left:18px !important; padding-right:18px !important; }
 
-  /* Rate-liste: 1 kolonne – pris under værelse, med desktop-rytmik */
-  .rate-list, .rate-list tr, .rate-list td{
-    display:block !important;
-    width:100% !important;
-  }
+        /* Typografi – læsbart og roligt */
+        .heading{ font-size:24px !important; }
+        .section-title{ font-size:16px !important; }
+        .text{ font-size:15px !important; line-height:23px !important; }
+        .journey-title{ font-size:15px !important; }
+        .times{ font-size:15px !important; }
+        .chip{ font-size:11px !important; }
+        .hotel-cap{ font-size:15px !important; }
+        .hotel-long{ padding:18px 18px !important; }
 
-  /* Nulstil cellers padding/border – vi styrer rytmen pr. tr */
-  .hotel-long .tight td{ padding:0 !important; border:none !important; }
+        /* Rate-liste: 1 kolonne – pris under værelse, med desktop-rytmik */
+        .rate-list, .rate-list tr, .rate-list td{
+          display:block !important;
+          width:100% !important;
+        }
 
-  /* Divider + padding pr. række (= desktop baseline) */
-  .rate-list tr{
-    padding:12px 0 16px !important;           /* baseline: 12 top, 16 bund */
-    border-top:1px solid #f0ece4 !important;  /* divider mellem rækker */
-  }
-  .rate-list tr:first-child{
-    border-top:0 !important;
-    padding-top:8px !important;               /* desktop første række */
-    padding-bottom:16px !important;
-  }
+        /* Nulstil cellers padding/border – vi styrer rytmen pr. tr */
+        .hotel-long .tight td{ padding:0 !important; border:none !important; }
 
-  /* Kolonne-specifik */
-  .rate-list td:first-child{ padding-right:0 !important; }
-  .rate-list td:last-child{
-    text-align:left !important;
-    padding-top:8px !important;               /* elegant luft over prisen */
-  }
-  .rate-list td:last-child strong{
-    display:inline-block !important;
-    font-size:15px !important;
-    line-height:22px !important;
-  }
+        /* Divider + padding pr. række (= desktop baseline) */
+        .rate-list tr{
+          padding:12px 0 16px !important;           /* baseline: 12 top, 16 bund */
+          border-top:1px solid #f0ece4 !important;  /* divider mellem rækker */
+        }
+        .rate-list tr:first-child{
+          border-top:0 !important;
+          padding-top:8px !important;               /* desktop første række */
+          padding-bottom:16px !important;
+        }
 
-  /* Room-link & meal plan – samme optik som desktop */
-  .room-link{ margin-top:4px !important; line-height:18px !important; }
-  .mp{
-    white-space:normal !important;            /* undgå horisontal scroll */
-    margin-top:10px !important;               /* = desktop rytme */
-    line-height:16px !important;
-  }
+        /* Kolonne-specifik */
+        .rate-list td:first-child{ padding-right:0 !important; }
+        .rate-list td:last-child{
+          text-align:left !important;
+          padding-top:8px !important;               /* elegant luft over prisen */
+        }
+        .rate-list td:last-child strong{
+          display:inline-block !important;
+          font-size:15px !important;
+          line-height:22px !important;
+        }
 
-  /* Høydepunkter-boks */
-  .extras{ padding:12px 16px 12px !important; }
-  .extras-title{ line-height:18px !important; }
-  .extras-more{ line-height:18px !important; }
+        /* Room-link & meal plan – samme optik som desktop */
+        .room-link{ margin-top:4px !important; line-height:18px !important; }
+        .mp{
+          white-space:normal !important;            /* undgå horisontal scroll */
+          margin-top:10px !important;               /* = desktop rytme */
+          line-height:16px !important;
+        }
 
-  /* Transfer/links */
-  .hotel-meta{ margin-top:14px !important; }
-  .hotel-link{ margin-top:10px !important; }
+        /* Høydepunkter-boks */
+        .extras{ padding:12px 16px 12px !important; }
+        .extras-title{ line-height:18px !important; }
+        .extras-more{ line-height:18px !important; }
 
-  /* Billeder & overflow-sikring */
-  img{ max-width:100% !important; height:auto !important; }
-  body, table, td{ max-width:100% !important; }
-}
+        /* Transfer/links */
+        .hotel-meta{ margin-top:14px !important; }
+        .hotel-link{ margin-top:10px !important; }
+
+        /* Billeder & overflow-sikring */
+        img{ max-width:100% !important; height:auto !important; }
+        body, table, td{ max-width:100% !important; }
+      }
       
     </style>
   </head>
@@ -359,6 +371,18 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Six Senses Kanuhura 5+★</div>
 
+                        <!-- Galleri -->
+                        <div class="gallery">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Six Senses Kanuhura overview"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" alt="Beach Villa interior"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" alt="Aerial view"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" alt="Sunset point"></a>
+                          </div>
+                          <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
+                        </div>
+
                         <table class="rate-list">
                           <tr class="tight">
                             <td>
@@ -402,6 +426,18 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Conrad Rangali Island 5+★</div>
 
+                        <!-- Galleri -->
+                        <div class="gallery">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" alt="Villa interior"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" alt="Aerial view"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" alt="Sunset point"></a>
+                          </div>
+                          <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
+                        </div>
+
                         <table class="rate-list">
                           <tr class="tight">
                             <td>
@@ -444,6 +480,18 @@
                       <!-- Hotell 3 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Six Senses Laamu 5+★</div>
+
+                        <!-- Galleri -->
+                        <div class="gallery">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" alt="Villa interior"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" alt="Aerial view"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" alt="Sunset point"></a>
+                          </div>
+                          <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
+                        </div>
 
                         <table class="rate-list">
                           <tr class="tight">
@@ -489,6 +537,18 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Gili Lankanfushi 5+★</div>
 
+                        <!-- Galleri -->
+                        <div class="gallery">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" alt="Villa interior"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" alt="Aerial view"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" alt="Sunset point"></a>
+                          </div>
+                          <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
+                        </div>
+
                         <table class="rate-list">
                           <tr class="tight">
                             <td>
@@ -532,6 +592,18 @@
                       <!-- Hotell 5 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">InterContinental Maamunagau 5+★</div>
+
+                        <!-- Galleri -->
+                        <div class="gallery">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Beach-Villa-interior.jpg.jpg" alt="Villa interior"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Six-Senses-Kanuhura-The-Maldives_01.jpg" alt="Aerial view"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/The_Point_Six_Senses_Kanuhura-scaled-1.jpg" alt="Sunset point"></a>
+                          </div>
+                          <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
+                        </div>
 
                         <table class="rate-list">
                           <tr class="tight">
