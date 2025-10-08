@@ -146,28 +146,33 @@
 @media only screen and (max-width:600px){
 
   /* MOBIL: finjustér luft mellem sidste pris og Høydepunkter-boksen */
-.rate-list tr:last-child{ 
-  padding-bottom:8px !important;   /* mere/mindre luft fra prisen ned til boksen */
-}
-/* Nulstil evt. desktop-regel der gav ekstra td-bundpadding */
-.rate-list tr:last-child td{
-  padding-bottom:0 !important;
-}
+  .rate-list tr:last-child{ 
+    padding-bottom:8px !important;   /* luft fra prisen ned til divideren */
+  }
+  /* Nulstil evt. desktop-regel der gav ekstra td-bundpadding */
+  .rate-list tr:last-child td{
+    padding-bottom:0 !important;
+  }
 
-  /* MOBIL: identisk divider-rytme mellem pris og Høydepunkter */
-.rate-list::after{
-  content:"";
-  display:block;
-  width:100%;
-  height:1px;
-  background:#f0ece4;       /* samme farve som eksisterende divider */
-  margin:12px 0 16px;       /* identisk padding som over divideren */
-}
+  /* MOBIL: identisk divider-rytme + LIDT MERE luft ned til Høydepunkter */
+  .rate-list::after{
+    content:"";
+    display:block;
+    width:100%;
+    height:1px;
+    background:#f0ece4;              /* samme farve som øvrige dividers */
+    margin:12px 0 20px;              /* var 12px 0 16px → lidt mere nedad */
+  }
 
-/* Alternativ/ekstra justering direkte på boksen */
-.extras{
-  margin-top:2px !important;       /* mere/mindre luft over boksen */
-}
+  /* LIDT MERE luft FRA divideren NED til villatypen (ikke første række) */
+  .rate-list tr:not(:first-child){
+    padding-top:14px !important;     /* var 12px → lidt mere luft */
+  }
+
+  /* Alternativ/ekstra justering direkte på boksen (beholdt lav) */
+  .extras{
+    margin-top:2px !important;       /* finjustér hvis du vil have endnu mere/ mindre */
+  }
 
   /* Container */
   .wrap { width:100% !important; max-width:100% !important; }
@@ -183,8 +188,7 @@
   .hotel-cap{ font-size:14px !important; }
   .hotel-long{ padding:18px 18px !important; }
 
-  /* Rate-liste: 1 kolonne – pris under værelse,
-     men med samme vertikale rytme som desktop */
+  /* Rate-liste: 1 kolonne – pris under værelse, med desktop-rytmik */
   .rate-list, .rate-list tr, .rate-list td{
     display:block !important;
     width:100% !important;
@@ -193,9 +197,9 @@
   /* Nulstil cellers padding/border – vi styrer rytmen pr. tr */
   .hotel-long .tight td{ padding:0 !important; border:none !important; }
 
-  /* Divider + padding pr. række (= desktop) */
+  /* Divider + padding pr. række (= desktop baseline) */
   .rate-list tr{
-    padding:12px 0 16px !important;           /* desktop: 12 top, 16 bund */
+    padding:12px 0 16px !important;           /* baseline: 12 top, 16 bund */
     border-top:1px solid #f0ece4 !important;  /* divider mellem rækker */
   }
   .rate-list tr:first-child{
@@ -237,7 +241,7 @@
   img{ max-width:100% !important; height:auto !important; }
   body, table, td{ max-width:100% !important; }
 }
-
+      
     </style>
   </head>
   <body>
