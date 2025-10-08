@@ -145,6 +145,20 @@
    --------------------------- */
 @media only screen and (max-width:600px){
 
+  /* MOBIL: finjustér luft mellem sidste pris og Høydepunkter-boksen */
+.rate-list tr:last-child{ 
+  padding-bottom:10px !important;   /* mere/mindre luft fra prisen ned til boksen */
+}
+/* Nulstil evt. desktop-regel der gav ekstra td-bundpadding */
+.rate-list tr:last-child td{
+  padding-bottom:0 !important;
+}
+
+/* Alternativ/ekstra justering direkte på boksen */
+.extras{
+  margin-top:10px !important;       /* mere/mindre luft over boksen */
+}
+
   /* Container */
   .wrap { width:100% !important; max-width:100% !important; }
   .px { padding-left:18px !important; padding-right:18px !important; }
