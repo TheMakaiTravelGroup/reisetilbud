@@ -48,32 +48,31 @@
       /* Global “tight” rader */
       .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
 
-/* Hoteller — LITT MER LUFT */
-.hotel-long { padding:18px 20px; }
-.hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
+      /* Hoteller — LITT MER LUFT */
+      .hotel-long { padding:18px 20px; }
+      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
-.rate-list { width:100%; margin-top:8px; }
-.rate-list td { vertical-align:top; }
-.rate-list td:first-child { padding-right:12px; }
-.rate-list tr:first-child td { border-top:0; padding-top:8px; padding-bottom:16px; } /* + bundluft på første rad */
+      .rate-list { width:100%; margin-top:8px; }
+      .rate-list td { vertical-align:top; }
+      .rate-list td:first-child { padding-right:12px; }
+      .rate-list tr:first-child td { border-top:0; padding-top:8px; padding-bottom:16px; } /* + bundluft på første rad */
 
- /* Enhetlig vertikal rytme i hotellrader */
-.hotel-long .tight td { padding:12px 0 16px; border-top:1px solid #f0ece4; } /* +2px bundluft */
-.rate-list tr:last-child td{ padding-bottom:12px !important; } /* samme bunnluft før fordelsboks */
-
+      /* Enhetlig vertikal rytme i hotellrader */
+      .hotel-long .tight td { padding:12px 0 16px; border-top:1px solid #f0ece4; }
+      .rate-list tr:last-child td{ padding-bottom:12px !important; } /* samme bunnluft før fordelsboks */
 
       /* Meal plan chip – VENSTRESTILT, ensartet spacing */
       .mp{
         display:inline-block;
         padding:3px 10px;
         margin:10px 0 0;              /* avstand fra “Les om villatypen” */
-        border:1px solid #9d8665;    /* guldborder 1px */
+        border:1px solid #9d8665;     /* guldborder 1px */
         border-radius:999px;
         font-size:12px;
         line-height:16px;
         font-weight:700;
         color:#1c1c1c;
-        background:#c4dad6;          /* ønsket bakgrunn */
+        background:#c4dad6;           /* ønsket bakgrunn */
         white-space:nowrap;
       }
 
@@ -82,7 +81,7 @@
       .hotel-long + .hotel-long { margin-top:18px; }
 
       /* Transfer-badge */
-      .hotel-meta{ margin-top:10px; }
+      .hotel-meta{ margin-top:14px; }
       .tr{
         display:inline-block; padding:3px 10px;
         border:1px solid #e7e2da; border-radius:999px;
@@ -99,62 +98,103 @@
       .room-link{ margin-top:4px; font-size:12px; line-height:18px; color:#6a6a6a; }
       .room-link a{ color:#9d8665; text-decoration:underline; }
 
-/* Ens spacing over og under Høydepunkter & fordeler-boksen */
-.rate-list tr:last-child td{
-  padding-bottom:8px !important; /* luft over boksen (fra meal plan) */
-}
-.extras{
-  margin-top:8px;                /* luft over boksen */
-  margin-bottom:8px;             /* luft under boksen */
-  padding:12px 12px 12px;        /* indre luft (top=bottom=12px) */
-  border:1px solid #e7e2da;
-  border-radius:10px;
-  background:#f9f6f0;
-}
-.extras-title{
-  margin:0 0 6px;
-  font-size:13px;
-  font-weight:700;
-  color:#9d8665;
-  line-height:18px;              /* matcher linkets line-height */
-}
-.extras-list{
-  margin:0;
-  padding:0;
-  list-style:none;
-  font-size:13px;
-  line-height:20px;
-  color:#1c1c1c;
-}
-.extras-list li{
-  margin:0;
-  padding:0;
-}
-.extras-more{
-  margin:8px 0 0;                /* kun luft OVER linket */
-  font-size:12px;
-  line-height:18px;
-  color:#6a6a6a;
-}
-.extras-more a{
-  color:#9d8665;
-  text-decoration:underline;
-}
-.hotel-meta{
-  margin-top:14px;                /* ens luft under boksen mod Transfer-linje */
-}
+      /* Ens spacing over og under Høydepunkter & fordeler-boksen */
+      .rate-list tr:last-child td{
+        padding-bottom:8px !important; /* luft over boksen (fra meal plan) */
+      }
+      .extras{
+        margin-top:8px;                /* luft over boksen */
+        margin-bottom:8px;             /* luft under boksen */
+        padding:12px 12px 12px;        /* indre luft (top=bottom=12px) */
+        border:1px solid #e7e2da;
+        border-radius:10px;
+        background:#f9f6f0;
+      }
+      .extras-title{
+        margin:0 0 6px;
+        font-size:13px;
+        font-weight:700;
+        color:#9d8665;
+        line-height:18px;              /* matcher linkets line-height */
+      }
+      .extras-list{
+        margin:0;
+        padding:0;
+        list-style:none;
+        font-size:13px;
+        line-height:20px;
+        color:#1c1c1c;
+      }
+      .extras-list li{
+        margin:0;
+        padding:0;
+      }
+      .extras-more{
+        margin:8px 0 0;                /* kun luft OVER linket */
+        font-size:12px;
+        line-height:18px;
+        color:#6a6a6a;
+      }
+      .extras-more a{
+        color:#9d8665;
+        text-decoration:underline;
+      }
 
-/* Mobil */
-@media only screen and (max-width:600px) {
-  /* ... eksisterende mobilregler ... */
-}
+      /* ---------------------------
+         MOBIL (≤600px): luksus + læsbarhed
+         --------------------------- */
+      @media only screen and (max-width:600px){
 
-/* Mobil: spejl samme optik */
-@media only screen and (max-width:600px){
-  .extras{ padding:12px 12px 12px !important; }
-  .extras-title{ line-height:18px !important; }
-  .extras-more{ line-height:18px !important; }
-}
+        /* Container & indrykning */
+        .wrap { width:100% !important; max-width:100% !important; }
+        .px { padding-left:18px !important; padding-right:18px !important; }
+
+        /* Typografi – en tand mere læsbart */
+        .heading{ font-size:24px !important; }
+        .section-title{ font-size:16px !important; }
+        .text{ font-size:15px !important; line-height:23px !important; }
+        .journey-title{ font-size:15px !important; }
+        .times{ font-size:15px !important; }
+        .chip{ font-size:11px !important; }
+        .hotel-cap{ font-size:14px !important; }
+
+        /* Kort: bevar luft, men kompakt */
+        .hotel-long{ padding:18px 18px !important; }
+
+        /* Rate-liste: stack til én kolonne – pris under værelse */
+        .rate-list, .rate-list tr, .rate-list td{
+          display:block !important;
+          width:100% !important;
+        }
+        .rate-list td:first-child{
+          padding-right:0 !important;
+        }
+        .rate-list td:last-child{
+          text-align:left !important;
+          padding-top:8px !important;     /* elegant luft over prisen */
+        }
+
+        /* Meal plan: tillad linjeskift for at undgå horisontal scroll */
+        .mp{
+          white-space:normal !important;
+          margin-top:8px !important;      /* en anelse tættere rytme på mobil */
+        }
+
+        /* Høydepunkter-boks – bevar optisk balance */
+        .extras{ padding:12px 16px 12px !important; }
+        .extras-title{ line-height:18px !important; }
+        .extras-more{ line-height:18px !important; }
+
+        /* Transfer/links – fin, stille luksus-rytme */
+        .hotel-meta{ margin-top:12px !important; }
+        .hotel-link{ margin-top:10px !important; }
+
+        /* Billeder skal aldrig eje bredden */
+        img{ max-width:100% !important; height:auto !important; }
+
+        /* Sikkerhedsnet: undgå utilsigtet vandret scroll */
+        body, table, td{ max-width:100% !important; }
+      }
 
     </style>
   </head>
