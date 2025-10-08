@@ -52,13 +52,36 @@
       .hotel-long { padding:18px 20px; }
       .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
-      /* Galleri / soft carousel – luksuriøs og email-safe */
-      .gallery{ margin-top:12px; }
-      .gallery-strip{ white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:8px; }
-      .gallery-strip a{ display:inline-block; margin-right:8px; }
-      .gallery-strip a:last-child{ margin-right:0; }
-      .gallery-strip img{ display:block; height:170px; width:auto; border-radius:12px; border:1px solid #e7e2da; }
-      .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:4px; text-align:left; }
+      /* ------- Galleri / Karussel ------- */
+      .gallery{ position:relative; margin-top:12px; overflow:hidden; border-radius:12px; }
+      .gallery-strip{
+        display:flex;
+        transition:transform 0.6s ease;
+        will-change:transform;
+      }
+      .gallery-strip a{
+        flex:0 0 100%;
+      }
+      .gallery-strip img{
+        display:block;
+        width:100%;
+        height:280px;
+        object-fit:cover;
+        border-radius:12px;
+        border:1px solid #e7e2da;
+      }
+      .gallery .prev, .gallery .next{
+        position:absolute; top:50%; transform:translateY(-50%);
+        background:rgba(255,255,255,0.9);
+        border:none; border-radius:50%;
+        width:36px; height:36px; cursor:pointer;
+        font-size:18px; line-height:36px; text-align:center;
+        color:#9d8665; box-shadow:0 2px 4px rgba(0,0,0,0.1);
+      }
+      .gallery .prev{ left:10px; }
+      .gallery .next{ right:10px; }
+
+      .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:2px; text-align:left; }
 
       .rate-list { width:100%; margin-top:8px; }
       .rate-list td { vertical-align:top; }
@@ -153,38 +176,43 @@
          --------------------------- */
       @media only screen and (max-width:600px){
 
-        /* Galleri mobil – en tand højere billeder + swipe-hint */
-        .gallery-strip img{ height:180px !important; }
-        .scroll-hint{ display:block !important; }
-
-        /* MOBIL: finjustér luft mellem sidste pris og Høydepunkter-boksen */
-        .rate-list tr:last-child{ 
-          padding-bottom:5px !important;   /* mindre luft fra prisen ned til divideren */
+        /* Mobil: swipe-galleri, mindre luft til hint */
+        .gallery-strip{
+          display:block;
+          white-space:nowrap;
+          overflow-x:auto;
+          -webkit-overflow-scrolling:touch;
+          transition:none;
         }
-        /* Nulstil evt. desktop-regel der gav ekstra td-bundpadding */
+        .gallery-strip a{
+          display:inline-block;
+          width:auto; /* naturlig bredde */
+          margin-right:8px;
+          flex:none;
+        }
+        .gallery-strip img{ height:180px !important; width:auto; }
+        .gallery .prev, .gallery .next{ display:none !important; }
+        .scroll-hint{ display:block !important; margin-top:2px !important; }
+
+        /* MOBIL: finjustér luft mellom siste pris og divider */
+        .rate-list tr:last-child{ 
+          padding-bottom:5px !important;
+        }
         .rate-list tr:last-child td{
           padding-bottom:0 !important;
         }
-
-        /* MOBIL: identisk divider-rytme + LIDT MERE luft ned til Høydepunkter */
         .rate-list::after{
           content:"";
           display:block;
           width:100%;
           height:1px;
-          background:#f0ece4;              /* samme farve som øvrige dividers */
-          margin:8px 0 22px;               /* mindre luft oppe (var 12px 0 22px) */
+          background:#f0ece4;
+          margin:8px 0 22px; /* kompakt over, lidt mere under */
         }
-
-        /* LIDT MERE luft FRA divideren NED til villatypen (ikke første række) */
         .rate-list tr:not(:first-child){
-          padding-top:16px !important;     /* var 12px → lidt mere luft */
+          padding-top:16px !important;
         }
-
-        /* Alternativ/ekstra justering direkte på boksen (beholdt lav) */
-        .extras{
-          margin-top:2px !important;       /* finjustér hvis du vil have endnu mere/mindre */
-        }
+        .extras{ margin-top:2px !important; }
 
         /* Container */
         .wrap { width:100% !important; max-width:100% !important; }
@@ -205,14 +233,10 @@
           display:block !important;
           width:100% !important;
         }
-
-        /* Nulstil cellers padding/border – vi styrer rytmen pr. tr */
         .hotel-long .tight td{ padding:0 !important; border:none !important; }
-
-        /* Divider + padding pr. række (= desktop baseline) */
         .rate-list tr{
           padding:12px 0 16px !important;           /* baseline: 12 top, 16 bund */
-          border-top:1px solid #f0ece4 !important;  /* divider mellem rækker */
+          border-top:1px solid #f0ece4 !important;
         }
         .rate-list tr:first-child{
           border-top:0 !important;
@@ -224,7 +248,7 @@
         .rate-list td:first-child{ padding-right:0 !important; }
         .rate-list td:last-child{
           text-align:left !important;
-          padding-top:8px !important;               /* elegant luft over prisen */
+          padding-top:8px !important;
         }
         .rate-list td:last-child strong{
           display:inline-block !important;
@@ -373,6 +397,8 @@
 
                         <!-- Galleri -->
                         <div class="gallery">
+                          <button class="prev" aria-label="Forrige">‹</button>
+                          <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Six Senses Kanuhura overview"></a>
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
@@ -428,6 +454,8 @@
 
                         <!-- Galleri -->
                         <div class="gallery">
+                          <button class="prev" aria-label="Forrige">‹</button>
+                          <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
@@ -483,6 +511,8 @@
 
                         <!-- Galleri -->
                         <div class="gallery">
+                          <button class="prev" aria-label="Forrige">‹</button>
+                          <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
@@ -539,6 +569,8 @@
 
                         <!-- Galleri -->
                         <div class="gallery">
+                          <button class="prev" aria-label="Forrige">‹</button>
+                          <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
@@ -595,6 +627,8 @@
 
                         <!-- Galleri -->
                         <div class="gallery">
+                          <button class="prev" aria-label="Forrige">‹</button>
+                          <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Resort overview"></a>
                             <a href="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/sip-sand-swimming-pool-1-scaled.jpg" alt="Pool & beach"></a>
@@ -718,5 +752,43 @@
         </td>
       </tr>
     </table>
+
+    <!-- Let, email-safe JS til desktop-karussel (ignoreres af mailklienter) -->
+    <script>
+      (function(){
+        if (typeof window === 'undefined') return;
+
+        function initGallery(g){
+          const strip = g.querySelector('.gallery-strip');
+          const slides = strip ? strip.querySelectorAll('a') : [];
+          if (!strip || !slides.length) return;
+
+          let index = 0;
+          const prev = g.querySelector('.prev');
+          const next = g.querySelector('.next');
+
+          function update(){
+            if (window.matchMedia('(max-width:600px)').matches){
+              strip.style.transform = ''; // ingen transform i mobil-swipe
+              return;
+            }
+            strip.style.transform = 'translateX(' + (-index * 100) + '%)';
+          }
+
+          function go(delta){
+            index = (index + delta + slides.length) % slides.length;
+            update();
+          }
+
+          prev && prev.addEventListener('click', function(e){ e.preventDefault(); go(-1); });
+          next && next.addEventListener('click', function(e){ e.preventDefault(); go(1); });
+
+          window.addEventListener('resize', update);
+          update();
+        }
+
+        document.querySelectorAll('.gallery').forEach(initGallery);
+      })();
+    </script>
   </body>
 </html>
