@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="nb" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reisetilbud</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+      body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+      body { margin:0; padding:0; background:#faf7f2; }
+      table { border-collapse:collapse; }
+      a { color:#1c1c1c; text-decoration:none; }
+
+      .heading { font-family:'Playfair Display', Georgia, serif; color:#1c1c1c; }
+      .text { font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; font-size:15px; line-height:24px; }
+      .gold { color:#9d8665; }
+
+      .card { border:1px solid #e7e2da; border-radius:12px; background:#fff; }
+      .col { vertical-align:top; }
+      .muted { color:#6a6a6a; font-size:12px; line-height:18px; }
+
+      .section-title{
+        font-family:'TeX Gyre Termes','Times New Roman',serif;
+        font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665;
+        position:relative; margin:16px 0 16px; padding-top:16px;
+      }
+      .section-title:before{ content:""; position:absolute; top:0; left:0; width:56px; height:2px; background:#9d8665; }
+
+      /* ---------- Easy spacing knobs (ændr kun tal her) ---------- */
+      .sp-chips-hero { margin-top:8px !important; }       /* chips -> HERO */
+      .sp-hero-divider { margin-top:14px !important; }      /* HERO -> divider (rate-list) */
+      .sp-mp-extras { margin-top:1px !important; }         /* Meal plan -> Høydepunkter */
+      .sp-total-up { padding-top:18px !important; }        /* over totalpris-boks */
+      .sp-total-down { padding-bottom:6px !important; }   /* under totalpris-boks */
+      .sp-includes-top { padding-top:4px !important; }    /* valgfrit: ekstra top-luft før guldstreg */
+
+      /* Fly */
+      .flight-inner { max-width:440px; padding:18px; }
+      .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
+      .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
+      .leg { margin:0 0 14px 0; }
+      .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
+      .flight-meta { display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#6a6a6a; margin-top:2px; }
+
+      .layover { position:relative; margin:0 0 14px 0; }
+      .leg + .layover { margin-top:0; }
+      .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
+      .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
+
+      .journey-sep { margin:14px 0; border-top:1px solid #f0ece4; }
+      .journey-foot { font-size:12px; color:#6a6a6a; margin-top:6px; }
+
+      .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
+
+      /* Hoteller */
+      .hotel-long { padding:18px 20px; }
+      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
+
+      /* Lokasjon + dato (differensiert stil) */
+      .hotel-loc{ margin:6px 0 4px; }
+      .hotel-dates{ margin:0 0 8px; }
+      .loc{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#fff; white-space:nowrap;
+      }
+      .loc:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665;
+        margin-right:6px; vertical-align:middle;
+      }
+      .stay{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #d7cbbb; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#f9f6f0; white-space:nowrap;
+      }
+      .stay:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665;
+        margin-right:6px; vertical-align:middle;
+      }
+
+      /* GALLERI – desktop: ET hero-bilde, mobil: 5-swipe */
+      .gallery-desktop{ border-radius:12px; overflow:hidden; }
+      .gallery-desktop img{
+        display:block; width:100%; height:280px; object-fit:cover;
+        border:1px solid #e7e2da; border-radius:12px;
+      }
+      .gallery-mobile{ display:none; border-radius:12px; overflow:hidden; }
+      .gallery-strip{
+        display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+      }
+      .gallery-strip a{ display:inline-block; width:auto; margin-right:8px; }
+      .gallery-strip img{
+        display:block; height:180px; width:auto; object-fit:cover;
+        border:1px solid #e7e2da; border-radius:12px;
+      }
+      .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:2px; text-align:left; }
+
+      .rate-list { width:100%; }
+      .hotel-long .tight td { padding:12px 0 16px; border-top:1px solid #f0ece4; }
+
+      .mp{
+        display:inline-block; padding:3px 10px; margin:10px 0 0;
+        border:1px solid #9d8665; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#c4dad6; white-space:nowrap;
+      }
+
+      .hotel-link a { color:#9d8665; text-decoration:underline; }
+      .hotel-link { margin-top:10px; }
+      .hotel-long + .hotel-long { margin-top:18px; }
+
+      .hotel-meta{ margin-top:14px; }
+      .tr{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#fff; white-space:nowrap;
+      }
+      .tr:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle;
+      }
+
+      .room-link{ margin-top:4px; font-size:12px; line-height:18px; color:#6a6a6a; }
+      .room-link a{ color:#9d8665; text-decoration:underline; }
+
+      .extras{
+        margin-bottom:8px; padding:12px 12px 12px;
+        border:1px solid #e7e2da; border-radius:10px; background:#f9f6f0;
+      }
+      .extras-title{ margin:0 0 6px; font-size:13px; font-weight:700; color:#9d8665; line-height:18px; }
+      .extras-list{ margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#1c1c1c; }
+
+      /* Totalpris-boks (brand bg) */
+      .totalbox{
+        border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0;
+        padding:14px 18px;
+      }
+      .totalrow{ width:100%; }
+      .totalrow td{ vertical-align:top; }
+      .total-title{
+        font-family:'TeX Gyre Termes','Times New Roman',serif;
+        font-weight:700; text-transform:uppercase; color:#9d8665; font-size:14px;
+      }
+      .total-amt{ font-weight:700; font-size:18px; text-align:right; white-space:nowrap; }
+      .total-note{ margin-top:6px; color:#6a6a6a; font-size:12px; line-height:18px; }
+
+      /* Desktop: vis lokasjon/dato side om side */
+      @media only screen and (min-width:601px){
+        .hotel-loc{ margin-right:6px; display:inline-block; }
+        .hotel-dates{ display:inline-block; }
+      }
+
+      /* MOBIL (≤600px): viser mobil-galleri, skjuler desktop-hero */
+      @media only screen and (max-width:600px){
+        .wrap { width:100% !important; max-width:100% !important; }
+        .px { padding-left:18px !important; padding-right:18px !important; }
+        .heading{ font-size:24px !important; }
+        .section-title{ font-size:16px !important; }
+        .text{ font-size:15px !important; line-height:23px !important; }
+
+        .gallery-desktop{ display:none !important; }
+        .gallery-mobile{ display:block !important; }
+        .scroll-hint{ display:block !important; margin-top:2px !important; }
+
+        .hotel-cap{ font-size:15px !important; }
+        .hotel-long{ padding:18px 18px !important; }
+        .total-amt{ font-size:17px !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <table role="presentation" width="100%" bgcolor="#faf7f2">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table role="presentation" width="680" class="wrap" bgcolor="#ffffff" style="border:1px solid #d7cbbb; border-radius:14px; overflow:hidden;">
+
+            <!-- HEADER -->
+            <tr>
+              <td style="padding:24px 28px; border-bottom:1px solid #e7e2da;">
+                <table role="presentation" width="100%">
+                  <tr>
+                    <td align="left" style="line-height:0;">
+                      <a href="https://www.maldivia.no" target="_blank" style="display:inline-block; text-decoration:none;">
+                        <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png" width="130" alt="Maldivia – Beyond Excellence" style="display:block; border:0; outline:none; text-decoration:none; height:auto;">
+                      </a>
+                    </td>
+                    <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; color:#6a6a6a;">
+                      <span style="font-family:'Playfair Display',serif; color:#9d8665; font-size:13.5px; letter-spacing:1px; text-transform:uppercase;">Travel Designer</span><br>Wendie Pedersen<br>
+                      <a href="mailto:wp@maldivia.no" style="color:#9d8665; text-decoration:underline;">wp@maldivia.no</a><br>
+                      <a href="tel:+4723965171" style="color:#9d8665; text-decoration:underline;">+47&nbsp;23&nbsp;96&nbsp;51&nbsp;71</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- HERO -->
+            <tr>
+              <td style="padding:36px 40px 0;" class="px">
+                <div class="heading" style="font-size:28px; font-weight:700;">REISETILBUD TIL MALDIVENE</div>
+                <div class="text" style="margin-top:6px; color:#6a6a6a;">15. april – 24. april 2026 &nbsp;•&nbsp; 7 netter / 9 dager</div>
+              </td>
+            </tr>
+
+            <!-- FLY -->
+            <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Flyreise</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 0;" class="px">
+                <table role="presentation" width="100%" class="card flight-details">
+                  <tr><td>
+                    <div class="flight-inner">
+                      <div class="journey-title">Utreise – onsdag 15.04.2026</div>
+                      <div class="leg">
+                        <div class="chip">OSL → DXB</div>
+                        <div class="times">14:45 – 23:35</div>
+                        <span class="flight-meta">Emirates • EK 160</span>
+                      </div>
+                      <div class="layover"><span>Mellomlanding i Dubai • 2 t 55 m</span></div>
+                      <div class="leg">
+                        <div class="chip">DXB → MLE</div>
+                        <div class="times">02:30<sup style="font-size:10px; vertical-align:super; color:#9d8665; font-weight:700;">+1</sup>&nbsp;–&nbsp;07:40<sup style="font-size:10px; vertical-align:super; color:#9d8665; font-weight:700;">+1</sup></div>
+                        <span class="flight-meta">Emirates • EK 656</span>
+                      </div>
+                      <div class="journey-foot">Samlet reisetid utreise: 13 t 55 m</div>
+
+                      <div class="journey-sep"></div>
+
+                      <div class="journey-title">Hjemreise – torsdag 23.04.2026</div>
+                      <div class="leg">
+                        <div class="chip">MLE → DXB</div>
+                        <div class="times">22:55 – 02:35<sup style="font-size:10px; vertical-align:super; color:#9d8665; font-weight:700;">+1</sup></div>
+                        <span class="flight-meta">Emirates • EK 653</span>
+                      </div>
+                      <div class="layover"><span>Mellomlanding i Dubai • 4 t 55 m</span></div>
+                      <div class="leg">
+                        <div class="chip">DXB → OSL</div>
+                        <div class="times">07:30<sup style="font-size:10px; vertical-align:super; color:#9d8665; font-weight:700;">+1</sup> – 12:35<sup style="font-size:10px; vertical-align:super; color:#9d8665; font-weight:700;">+1</sup></div>
+                        <span class="flight-meta">Emirates • EK 159</span>
+                      </div>
+                      <div class="journey-foot">Samlet reisetid hjemreise: 16 t 35 m</div>
+                    </div>
+                  </td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- HOTELLER -->
+            <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Hotell</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 0;" class="px">
+                <table role="presentation" width="100%">
+                  <tr>
+                    <td class="stack col">
+
+                      <!-- Hotel 1 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Six Senses Kanuhura 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • Lhaviyani-atollen</span></div>
+                        <div class="hotel-dates"><span class="stay">15.–18. april 2026 • 3 netter</span></div>
+
+                        <!-- Desktop hero -->
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
+                            <img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Six Senses Kanuhura">
+                          </a>
+                        </div>
+                        <!-- Mobile swipe -->
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Beach Villa with Pool
+                              <div class="room-link">
+                                <a href="https://www.sixsenses.com/en/hotels-resorts/asia-the-pacific/maldives/kanuhura/accommodation/" target="_blank">Se villaen →</a>
+                              </div>
+                              <span class="mp">Helpensjon (Dine Around)</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+                            <li>Prisbelønt Six Senses Spa</li>
+                            <li>Moderne bassengvillaer</li>
+                            <li>Bærekraft & barfotluksus</li>
+                            <li>Gratis iskrem – hver dag</li>
+                          </ul>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 40 min.)</span></div>
+                        <div class="hotel-link"><a href="https://www.sixsenses.com/en/hotels-resorts/asia-the-pacific/maldives/kanuhura/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                      <!-- Hotel 2 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Conrad Rangali Island 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • South Ari-atollen</span></div>
+                        <div class="hotel-dates"><span class="stay">18.–20. april 2026 • 2 netter</span></div>
+
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
+                            <img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Conrad Rangali Island">
+                          </a>
+                        </div>
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Sunset Water Pool Villa
+                              <div class="room-link">
+                                <a href="https://www.conradmaldives.com/stay/villas-suites/" target="_blank">Se villaen →</a>
+                              </div>
+                              <span class="mp">Halvpensjon (HB)</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+                            <li>2 øyer (Family & Adults Only Island)</li>
+                            <li>Ithaa – verdens første undervannsrestaurant</li>
+                            <li>Mulighet for hvalhaier året rundt</li>
+                            <li>Eksepsjonell gastronomi</li>
+                          </ul>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 30 min.)</span></div>
+                        <div class="hotel-link"><a href="https://www.conradmaldives.com/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                      <!-- Hotel 3 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Six Senses Laamu 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • Laamu-atollen</span></div>
+                        <div class="hotel-dates"><span class="stay">20.–22. april 2026 • 2 netter</span></div>
+
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
+                            <img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Six Senses Laamu">
+                          </a>
+                        </div>
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Sunset Laamu Water Villa
+                              <div class="room-link">
+                                <a href="https://www.sixsenses.com/en/hotels-resorts/asia-the-pacific/maldives/laamu/accommodation/" target="_blank">Se villaen →</a>
+                              </div>
+                              <span class="mp">Halvpensjon (HB)</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+                            <li>Idyllisk beliggenhet i Laamu-atollen</li>
+                            <li>Bærekraft & barfotluksus</li>
+                            <li>Surfing i verdensklasse</li>
+                            <li>Gratis iskrem – hver dag</li>
+                            <li>Suveren Six Senses Spa</li>
+                          </ul>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 60 min.)</span></div>
+                        <div class="hotel-link"><a href="https://www.sixsenses.com/en/hotels-resorts/asia-the-pacific/maldives/laamu/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                      <!-- Hotel 4 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">Gili Lankanfushi 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • North Malé-atollen</span></div>
+                        <div class="hotel-dates"><span class="stay">22.–24. april 2026 • 2 netter</span></div>
+
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
+                            <img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="Gili Lankanfushi">
+                          </a>
+                        </div>
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Villa Suite
+                              <div class="room-link">
+                                <a href="https://gili-lankanfushi.com/maldives-luxury-resort/overwater-villa-suite/" target="_blank">Se villaen →</a>
+                              </div>
+                              <span class="mp">Helpensjon (Dine Around)</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+                            <li>En av Maldivenes vakreste laguner</li>
+                            <li>Mr. Friday – personlig butler</li>
+                            <li>«No news, no shoes»-filosofi (bærekraftig)</li>
+                            <li>Alle villaer ligger over lagunen</li>
+                            <li>Sublime kulinariske opplevelser</li>
+                          </ul>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Speedbåt (ca. 20 min.)</span></div>
+                        <div class="hotel-link"><a href="https://gili-lankanfushi.com/maldives-luxury-resort/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                      <!-- Hotel 5 -->
+                      <div class="hotel-long card text">
+                        <div class="hotel-cap">InterContinental Maamunagau 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • Raa-atollen</span></div>
+                        <div class="hotel-dates"><span class="stay">24.–27. april 2026 • 3 netter</span></div>
+
+                        <div class="gallery-desktop sp-chips-hero">
+                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
+                            <img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt="InterContinental Maamunagau">
+                          </a>
+                        </div>
+                        <div class="gallery-mobile sp-chips-hero">
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" alt=""></a>
+                          </div>
+                          <div class="scroll-hint">Swipe for flere bilder →</div>
+                        </div>
+
+                        <table class="rate-list sp-hero-divider">
+                          <tr class="tight">
+                            <td>
+                              Overwater Pool Villa
+                              <div class="room-link">
+                                <a href="https://maldives.intercontinental.com/villas-residences/villas/overwater-pool-villas/" target="_blank">Se villaen →</a>
+                              </div>
+                              <span class="mp">All-Inclusive (Dine Around)</span>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="extras sp-mp-extras">
+                          <div class="extras-title">Høydepunkter & fordeler</div>
+                          <ul class="extras-list">
+                            <li>Snorkling med mantarokker</li>
+                            <li>Ikonisk restaurantopplevelse på The Lighthouse</li>
+                            <li>Fortryllende turkisblå lagune</li>
+                            <li>En av Maldivenes vakreste, naturlige øyer</li>
+                          </ul>
+                        </div>
+
+                        <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 45 min.)</span></div>
+                        <div class="hotel-link"><a href="https://maldives.intercontinental.com/" target="_blank">Utforsk hotellet →</a></div>
+                      </div>
+
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- TOTALPRIS-BOKS (under Hotell / over Reisetilbudet inkluderer) -->
+            <tr>
+              <td style="padding:10px 40px 10px;" class="px sp-total-up sp-total-down">
+                <div class="totalbox">
+                  <table class="totalrow" role="presentation">
+                    <tr>
+                      <td class="total-title">Totalpris for 2 voksne</td>
+                      <td class="total-amt">NOK 219.500,-</td>
+                    </tr>
+                  </table>
+                  <div class="total-note">
+                    Inkl. fly t/r, alle nevnte transporter, opphold og måltider iht. reiseplanen samt skatter/avgifter.
+                    Med forbehold om prisendringer og tilgjengelighet.
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- INKLUDERER (original) -->
+            <tr><td style="padding:10px 40px 10px;" class="px sp-includes-top"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
+            <tr>
+              <td style="padding:0 40px 28px;" class="px">
+                <table role="presentation" width="100%" class="card">
+                  <tr><td style="padding:16px 18px;" class="text inclusions">
+                    • Fly mellom Oslo og Malé t/r | Economy Class<br>
+                    • Transfer mellom Malé flyplass og resortet t/r<br>
+                    • 7 netter på valgt resort<br>
+                    • Måltider som vist under "Hotell"<br>
+                    • Obligatoriske skatter og avgifter
+                  </td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- CTA + FOOTER (uendret) -->
+            <tr>
+              <td align="center" style="padding:0 40px 28px;" class="px">
+                <a href="mailto:wp@maldivia.no?subject=Reisetilbud%20til%20Maldivene%20%7C%20Maldivia%20-%20Beyond%20Excellence"
+                   style="background:#e7e2da;border:1px solid #9d8665;border-radius:999px;color:#1c1c1c;display:inline-block;font-family:'TeX Gyre Termes','Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:.6px;line-height:16px;text-transform:uppercase;text-decoration:none;padding:14px 24px;">
+                  Bestill / juster reisetilbudet
+                </a>
+                <div class="muted mobile-only" style="margin-top:8px;">
+                  Fungerer ikke knappen? Skriv til <a href="mailto:wp@maldivia.no">wp@maldivia.no</a>.
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" class="text" style="padding:18px 18px; border-top:1px solid #e7e2da; color:#6a6a6a; font-size:12px; line-height:18px;">
+                <table role="presentation" width="100%" style="border-collapse:collapse;">
+                  <tr><td align="center" style="padding:0 0 8px 0;">
+                    <a href="https://dk.trustpilot.com/review/maldivia.dk?languages=all" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+                      <img src="https://maldivia.dk/wp-content/uploads/2025/10/Trustpilot.png" width="120" alt="Trustpilot – 5 stjerners anmeldelser" style="display:block; border:0; outline:none; height:auto;">
+                    </a>
+                  </td></tr>
+                  <tr><td align="center" style="padding:0 0 8px 0;">
+                    <a href="https://www.maldivia.no" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+                      <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png" width="130" alt="Maldivia – Beyond Excellence" style="display:block; border:0; outline:none; height:auto;">
+                    </a>
+                  </td></tr>
+                  <tr><td align="center" style="padding:0 0 14px 0;">
+                    <a href="https://www.rejsegarantifonden.dk/medlem?s=2688" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+                      <img src="https://maldivia.dk/wp-content/uploads/2025/10/Rejsegarantifonden.png" width="110" alt="Medlem av Reisegarantifondet" style="display:block; border:0; outline:none; height:auto;">
+                    </a>
+                  </td></tr>
+                  <tr><td align="center" style="padding:0;">© Maldivia – En del av The Makai Travel Group</td></tr>
+                </table>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
