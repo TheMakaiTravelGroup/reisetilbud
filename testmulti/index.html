@@ -27,7 +27,7 @@
       .section-title:before{ content:""; position:absolute; top:0; left:0; width:56px; height:2px; background:#9d8665; }
 
       /* ---------- Easy spacing knobs (desktop/global) ---------- */
-      .sp-chips-hero { margin-top:8px !important; }       /* chips -> HERO (global; mobil overstyres nederst) */
+      .sp-chips-hero { margin-top:8px !important; }       /* chips -> HERO (global; mobil overstyrer nederst) */
       .sp-hero-divider { margin-top:14px !important; }    /* HERO -> divider (rate-list) */
       .sp-mp-extras { margin-top:1px !important; }        /* Meal plan -> Høydepunkter */
       .sp-total-up { padding-top:18px !important; }       /* over totalpris-boks */
@@ -35,8 +35,8 @@
       .sp-includes-top { padding-top:4px !important; }    /* ekstra top-luft før guldstreg */
 
       /* Hjælpeklasser */
-      .nowrap{ white-space:nowrap; }      /* brugt i totalpris-titel */
-      .br-m{ display:none; }              /* linjebrud kun på mobil (aktiveres i media query) */
+      .nowrap{ white-space:nowrap; }
+      .br-m{ display:none; }  /* linjebrud kun på mobil (aktiveres i media query) */
 
       /* Fly */
       .flight-inner { max-width:440px; padding:18px; }
@@ -60,7 +60,7 @@
       .hotel-long { padding:18px 20px; overflow:hidden; }
       .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
-      /* Lokasjon + dato (differensiert stil) */
+      /* Lokasjon + dato */
       .hotel-loc{ margin:6px 0 4px; }
       .hotel-dates{ margin:0 0 8px; }
       .loc{
@@ -71,8 +71,7 @@
       }
       .loc:before{
         content:""; display:inline-block; width:6px; height:6px;
-        border-radius:999px; background:#9d8665;
-        margin-right:6px; vertical-align:middle;
+        border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle;
       }
       .stay{
         display:inline-block; padding:3px 10px;
@@ -82,8 +81,7 @@
       }
       .stay:before{
         content:""; display:inline-block; width:6px; height:6px;
-        border-radius:999px; background:#9d8665;
-        margin-right:6px; vertical-align:middle;
+        border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle;
       }
 
       /* GALLERI – desktop: ET hero-bilde, mobil: 5-swipe */
@@ -140,7 +138,7 @@
       .extras-title{ margin:0 0 6px; font-size:13px; font-weight:700; color:#9d8665; line-height:18px; }
       .extras-list{ margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#1c1c1c; }
 
-      /* Totalpris-boks (brand bg) */
+      /* Totalpris-boks */
       .totalbox{
         border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0;
         padding:14px 18px;
@@ -160,18 +158,18 @@
         .hotel-dates{ display:inline-block; }
       }
 
-      /* --------------------------- MOBIL (≤600px): stacked, men samme rytme som desktop --------------------------- */
+      /* --------------------------- MOBIL (≤600px) --------------------------- */
       @media only screen and (max-width:600px){
 
-        /* ----- MOBIL – spacing knobs (ændr kun tal her) ----- */
-        .sp-gap-chips{ margin-top:8px !important; }   /* DESTINATION chip -> DATO chip */
-        .sp-chips-hero{ margin-top:14px !important; } /* DATO chip -> HERO (overstyrer global værdi) */
-        .br-m{ display:inline; }                      /* aktiver linjebrud i totalpris på mobil */
+        /* ----- MOBIL – spacing knobs ----- */
+        .sp-gap-chips{ margin-top:6px !important; }     /* DESTINATION chip -> DATO chip */
+        .sp-chips-hero{ margin-top:10px !important; }   /* DATO chip -> HERO */
+        .br-m{ display:inline; }                        /* aktiver linjebrud i totalpris */
 
-        /* Mobil galleri + hint */
-        .gallery-strip{
-          display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; transition:none; width:100% !important;
-        }
+        /* Mobil: swipe-galleri, mindre luft til hint (KUN mobil) */
+        .gallery-desktop{ display:none !important; }
+        .gallery-mobile{ display:block !important; }
+        .gallery-strip{ display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; transition:none; }
         .gallery-strip a{ display:inline-block; width:auto; margin-right:8px; flex:none; }
         .gallery-strip img{ height:180px !important; width:auto; }
         .gallery .prev, .gallery .next{ display:none !important; }
@@ -531,13 +529,13 @@
               </td>
             </tr>
 
-            <!-- TOTALPRIS-BOKS (under Hotell / over Reisetilbudet inkluderer) -->
+            <!-- TOTALPRIS-BOKS -->
             <tr>
               <td style="padding:10px 40px 10px;" class="px sp-total-up sp-total-down">
                 <div class="totalbox">
                   <table class="totalrow" role="presentation">
                     <tr>
-                      <!-- MOBIL linjebrud efter "Totalpris for" -->
+                      <!-- Mobil: linjebrud efter "Totalpris for" -->
                       <td class="total-title">Totalpris for<span class="br-m"><br></span> <span class="nowrap">2 voksne</span></td>
                       <td class="total-amt">NOK 219.500,-</td>
                     </tr>
@@ -550,7 +548,7 @@
               </td>
             </tr>
 
-            <!-- INKLUDERER (original) -->
+            <!-- INKLUDERER -->
             <tr><td style="padding:10px 40px 10px;" class="px sp-includes-top"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
             <tr>
               <td style="padding:0 40px 28px;" class="px">
@@ -566,7 +564,7 @@
               </td>
             </tr>
 
-            <!-- CTA + FOOTER (uendret) -->
+            <!-- CTA + FOOTER -->
             <tr>
               <td align="center" style="padding:0 40px 28px;" class="px">
                 <a href="mailto:wp@maldivia.no?subject=Reisetilbud%20til%20Maldivene%20%7C%20Maldivia%20-%20Beyond%20Excellence"
