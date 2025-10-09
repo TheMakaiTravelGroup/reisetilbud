@@ -52,7 +52,7 @@
       .hotel-long { padding:18px 20px; }
       .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
-      /* --------- DESTINATIONSCHIP + DATOCHIP (indsat som i den anden skabelon) --------- */
+      /* --------- DESTINATIONSCHIP + DATOCHIP --------- */
       .hotel-loc{ margin:6px 0 4px; }
       .hotel-dates{ margin:0 0 8px; }
       .loc{
@@ -89,9 +89,7 @@
         transition:transform 0.6s ease;
         will-change:transform;
       }
-      .gallery-strip a{
-        flex:0 0 100%;
-      }
+      .gallery-strip a{ flex:0 0 100%; }
       .gallery-strip img{
         display:block;
         width:100%;
@@ -113,6 +111,13 @@
 
       .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:2px; text-align:left; }
 
+      /* --- HERO → DIVIDER → VILLATYPE (mail-safe) --- */
+      .sp-hero-divider{
+        border-top:1px solid #f0ece4;  /* selve divideren */
+        margin-top:12px;               /* luft fra HERO ned til linjen */
+        padding-top:16px;              /* luft fra linjen ned til første villatype */
+      }
+
       .rate-list { width:100%; margin-top:8px; }
       .rate-list td { vertical-align:top; }
       .rate-list td:first-child { padding-right:12px; }
@@ -126,14 +131,14 @@
       .mp{
         display:inline-block;
         padding:3px 10px;
-        margin:10px 0 0;              /* avstand fra “Se villaen” */
-        border:1px solid #9d8665;     /* guldborder 1px */
+        margin:10px 0 0;
+        border:1px solid #9d8665;
         border-radius:999px;
         font-size:12px;
         line-height:16px;
         font-weight:700;
         color:#1c1c1c;
-        background:#c4dad6;           /* ønsket bakgrunn */
+        background:#c4dad6;
         white-space:nowrap;
       }
 
@@ -164,9 +169,9 @@
         padding-bottom:8px !important; /* luft over boksen (fra meal plan) */
       }
       .extras{
-        margin-top:8px;                /* luft over boksen */
-        margin-bottom:8px;             /* luft under boksen */
-        padding:12px 12px 12px;        /* indre luft (top=bottom=12px) */
+        margin-top:8px;
+        margin-bottom:8px;
+        padding:12px 12px 12px;
         border:1px solid #e7e2da;
         border-radius:10px;
         background:#f9f6f0;
@@ -176,30 +181,12 @@
         font-size:13px;
         font-weight:700;
         color:#9d8665;
-        line-height:18px;              /* matcher linkets line-height */
-      }
-      .extras-list{
-        margin:0;
-        padding:0;
-        list-style:none;
-        font-size:13px;
-        line-height:20px;
-        color:#1c1c1c;
-      }
-      .extras-list li{
-        margin:0;
-        padding:0;
-      }
-      .extras-more{
-        margin:8px 0 0;                /* kun luft OVER linket */
-        font-size:12px;
         line-height:18px;
-        color:#6a6a6a;
       }
-      .extras-more a{
-        color:#9d8665;
-        text-decoration:underline;
-      }
+      .extras-list{ margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#1c1c1c; }
+      .extras-list li{ margin:0; padding:0; }
+      .extras-more{ margin:8px 0 0; font-size:12px; line-height:18px; color:#6a6a6a; }
+      .extras-more a{ color:#9d8665; text-decoration:underline; }
 
       /* ---------------------------
          MOBIL (≤600px): stacked med desktop-rytmik
@@ -228,13 +215,17 @@
         .sp-gap-chips{ margin-top:6px !important; }   /* DESTINATION -> DATO */
         .sp-chips-hero{ margin-top:12px !important; } /* DATO -> HERO */
 
+        /* MOBIL: HERO → DIVIDER → VILLATYPE (lidt strammere) */
+        .sp-hero-divider{
+          margin-top:10px !important;  /* HERO -> linje */
+          padding-top:12px !important; /* linje -> første villatype */
+        }
+
         /* MOBIL: finjustér luft mellom siste pris og divider */
-        .rate-list tr:last-child{ 
+        .rate-list tr:last-child{
           padding-bottom:6px !important;
         }
-        .rate-list tr:last-child td{
-          padding-bottom:0 !important;
-        }
+        .rate-list tr:last-child td{ padding-bottom:0 !important; }
         .rate-list::after{
           content:"";
           display:block;
@@ -243,9 +234,7 @@
           background:#f0ece4;
           margin:8px 0 22px; /* kompakt over, lidt mere under */
         }
-        .rate-list tr:not(:first-child){
-          padding-top:16px !important;
-        }
+        .rate-list tr:not(:first-child){ padding-top:16px !important; }
         .extras{ margin-top:2px !important; }
 
         /* Container */
@@ -269,34 +258,23 @@
         }
         .hotel-long .tight td{ padding:0 !important; border:none !important; }
         .rate-list tr{
-          padding:12px 0 16px !important;           /* baseline: 12 top, 16 bund */
+          padding:12px 0 16px !important;
           border-top:1px solid #f0ece4 !important;
         }
         .rate-list tr:first-child{
           border-top:0 !important;
-          padding-top:8px !important;               /* desktop første række */
+          padding-top:8px !important;
           padding-bottom:16px !important;
         }
 
         /* Kolonne-specifik */
         .rate-list td:first-child{ padding-right:0 !important; }
-        .rate-list td:last-child{
-          text-align:left !important;
-          padding-top:8px !important;
-        }
-        .rate-list td:last-child strong{
-          display:inline-block !important;
-          font-size:15px !important;
-          line-height:22px !important;
-        }
+        .rate-list td:last-child{ text-align:left !important; padding-top:8px !important; }
+        .rate-list td:last-child strong{ display:inline-block !important; font-size:15px !important; line-height:22px !important; }
 
         /* Room-link & meal plan – samme optik som desktop */
         .room-link{ margin-top:4px !important; line-height:18px !important; }
-        .mp{
-          white-space:normal !important;            /* undgå horisontal scroll */
-          margin-top:10px !important;               /* = desktop rytme */
-          line-height:16px !important;
-        }
+        .mp{ white-space:normal !important; margin-top:10px !important; line-height:16px !important; }
 
         /* Høydepunkter-boks */
         .extras{ padding:12px 16px 12px !important; }
@@ -452,7 +430,7 @@
                           <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
                         </div>
 
-                        <table class="rate-list">
+                        <table class="rate-list sp-hero-divider">
                           <tr class="tight">
                             <td>
                               Beach Villa with Pool
@@ -511,7 +489,7 @@
                           <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
                         </div>
 
-                        <table class="rate-list">
+                        <table class="rate-list sp-hero-divider">
                           <tr class="tight">
                             <td>
                               Sunset Water Pool Villa (HB)
@@ -570,7 +548,7 @@
                           <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
                         </div>
 
-                        <table class="rate-list">
+                        <table class="rate-list sp-hero-divider">
                           <tr class="tight">
                             <td>
                               Sunset Laamu Water Villa (HB)
@@ -630,7 +608,7 @@
                           <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
                         </div>
 
-                        <table class="rate-list">
+                        <table class="rate-list sp-hero-divider">
                           <tr class="tight">
                             <td>
                               Villa Suite
@@ -690,7 +668,7 @@
                           <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
                         </div>
 
-                        <table class="rate-list">
+                        <table class="rate-list sp-hero-divider">
                           <tr class="tight">
                             <td>
                               Overwater Pool Villa
