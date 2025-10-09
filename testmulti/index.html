@@ -7,9 +7,9 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
       body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
-      body { margin:0; padding:0; background:#faf7f2; }
-      table { border-collapse:collapse; }
-      a { color:#1c1c1c; text-decoration:none; }
+      body { margin:0; padding:0; background:#faf7f2; overflow-x:hidden; }
+      table { border-collapse:collapse; table-layout:fixed; }
+      a { color:#1c1c1c; text-decoration:none; word-break:break-word; }
 
       .heading { font-family:'Playfair Display', Georgia, serif; color:#1c1c1c; }
       .text { font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; font-size:15px; line-height:24px; }
@@ -53,7 +53,7 @@
       .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
 
       /* Hoteller */
-      .hotel-long { padding:18px 20px; }
+      .hotel-long { padding:18px 20px; overflow:hidden; }
       .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
       /* Lokasjon + dato (differensiert stil) */
@@ -82,7 +82,7 @@
         margin-right:6px; vertical-align:middle;
       }
 
-      /* GALLERI – desktop: ET hero-billede, mobil: 5-swipe */
+      /* GALLERI – desktop: ET hero-bilde, mobil: 5-swipe */
       .gallery-desktop{ border-radius:12px; overflow:hidden; }
       .gallery-desktop img{
         display:block; width:100%; height:280px; object-fit:cover;
@@ -90,7 +90,7 @@
       }
       .gallery-mobile{ display:none; border-radius:12px; overflow:hidden; }
       .gallery-strip{
-        display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch;
+        display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; width:100%;
       }
       .gallery-strip a{ display:inline-block; width:auto; margin-right:8px; }
       .gallery-strip img{
@@ -155,42 +155,80 @@
         .hotel-dates{ display:inline-block; }
       }
 
-      /* MOBIL (≤600px): kompakt uden scroll */
+      /* --------------------------- MOBIL (≤600px): stacked med desktop-rytmik --------------------------- */
       @media only screen and (max-width:600px){
-        .wrap { width:100% !important; max-width:100% !important; }
-        .px { padding-left:14px !important; padding-right:14px !important; }
-        .heading{ font-size:20px !important; line-height:24px !important; }
-        .section-title{ font-size:14px !important; margin:12px 0 10px !important; padding-top:12px !important; }
-        .section-title:before{ width:48px !important; }
-        .text{ font-size:13px !important; line-height:19px !important; }
+        /* Mobil: swipe-galleri, mindre luft til hint */
+        .gallery-strip{
+          display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; transition:none; width:100% !important;
+        }
+        .gallery-strip a{
+          display:inline-block; width:auto; /* naturlig bredde */ margin-right:8px; flex:none;
+        }
+        .gallery-strip img{ height:180px !important; width:auto; }
+        .gallery .prev, .gallery .next{ display:none !important; }
+        .scroll-hint{ display:block !important; margin-top:2px !important; }
 
-        /* Gallerier */
-        .gallery-desktop{ display:none !important; }
-        .gallery-mobile{ display:block !important; margin-top:6px !important; }
-        .gallery-strip img{ height:140px !important; } /* lavere højde på mobil */
-        .scroll-hint{ display:block !important; font-size:11px !important; margin-top:2px !important; }
+        /* MOBIL: finjustér luft mellom siste pris og divider */
+        .rate-list tr:last-child{ padding-bottom:6px !important; }
+        .rate-list tr:last-child td{ padding-bottom:0 !important; }
+        .rate-list::after{
+          content:""; display:block; width:100%; height:1px; background:#f0ece4;
+          margin:8px 0 22px; /* kompakt over, lidt mere under */
+        }
+        .rate-list tr:not(:first-child){ padding-top:16px !important; }
+        .extras{ margin-top:2px !important; }
 
-        /* Hoteller / chips / spacing */
-        .hotel-cap{ font-size:14px !important; }
-        .hotel-long{ padding:12px 12px !important; }
-        .hotel-loc{ margin:4px 0 2px !important; }
-        .hotel-dates{ margin:0 0 6px !important; }
-        .loc, .stay{ padding:2px 8px !important; font-size:11px !important; line-height:14px !important; }
+        /* Container */
+        .wrap { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
+        .px { padding-left:18px !important; padding-right:18px !important; }
 
-        /* Lister/tekst mindre luft */
-        .hotel-long .tight td{ padding:8px 0 10px !important; }
-        .extras{ padding:10px !important; margin-bottom:6px !important; }
-        .extras-title{ font-size:12px !important; }
-        .extras-list{ font-size:12px !important; line-height:18px !important; }
+        /* Typografi – læsbart og roligt */
+        .heading{ font-size:24px !important; }
+        .section-title{ font-size:16px !important; }
+        .text{ font-size:15px !important; line-height:23px !important; }
+        .journey-title{ font-size:15px !important; }
+        .times{ font-size:15px !important; }
+        .chip{ font-size:11px !important; }
+        .hotel-cap{ font-size:15px !important; }
+        .hotel-long{ padding:18px 18px !important; }
 
-        /* Totalpris-kompakt */
-        .totalbox{ padding:12px 14px !important; }
-        .total-title{ font-size:13px !important; }
-        .total-amt{ font-size:16px !important; }
-        .total-note{ font-size:11.5px !important; line-height:17px !important; }
+        /* Rate-liste: 1 kolonne – pris under værelse, med desktop-rytmik */
+        .rate-list, .rate-list tr, .rate-list td{ display:block !important; width:100% !important; }
+        .hotel-long .tight td{ padding:0 !important; border:none !important; }
+        .rate-list tr{
+          padding:12px 0 16px !important; /* baseline: 12 top, 16 bund */
+          border-top:1px solid #f0ece4 !important;
+        }
+        .rate-list tr:first-child{
+          border-top:0 !important; padding-top:8px !important; /* desktop første række */
+          padding-bottom:16px !important;
+        }
 
-        /* Footer/CTA kompakt */
-        .muted{ font-size:11px !important; line-height:16px !important; }
+        /* Kolonne-specifik */
+        .rate-list td:first-child{ padding-right:0 !important; }
+        .rate-list td:last-child{ text-align:left !important; padding-top:8px !important; }
+        .rate-list td:last-child strong{ display:inline-block !important; font-size:15px !important; line-height:22px !important; }
+
+        /* Room-link & meal plan – samme optik som desktop */
+        .room-link{ margin-top:4px !important; line-height:18px !important; }
+        .mp{
+          white-space:normal !important; /* undgå horisontal scroll */
+          margin-top:10px !important; /* = desktop rytme */
+          line-height:16px !important;
+        }
+
+        /* Høydepunkter-boks */
+        .extras{ padding:12px 16px 12px !important; }
+        .extras-title{ line-height:18px !important; }
+        .extras-more{ line-height:18px !important; }
+
+        /* Transfer/links */
+        .hotel-meta{ margin-top:14px !important; }
+        .hotel-link{ margin-top:10px !important; }
+
+        /* Billeder & overflow-sikring */
+        img{ max-width:100% !important; height:auto !important; }
+        body, table, td{ max-width:100% !important; }
       }
     </style>
   </head>
