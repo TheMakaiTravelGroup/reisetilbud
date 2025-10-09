@@ -26,13 +26,17 @@
       }
       .section-title:before{ content:""; position:absolute; top:0; left:0; width:56px; height:2px; background:#9d8665; }
 
-      /* ---------- Easy spacing knobs (ændr kun tal her) ---------- */
-      .sp-chips-hero { margin-top:8px !important; }       /* chips -> HERO */
+      /* ---------- Easy spacing knobs (desktop/global) ---------- */
+      .sp-chips-hero { margin-top:8px !important; }       /* chips -> HERO (global; mobil overstyres nederst) */
       .sp-hero-divider { margin-top:14px !important; }    /* HERO -> divider (rate-list) */
       .sp-mp-extras { margin-top:1px !important; }        /* Meal plan -> Høydepunkter */
       .sp-total-up { padding-top:18px !important; }       /* over totalpris-boks */
       .sp-total-down { padding-bottom:6px !important; }   /* under totalpris-boks */
       .sp-includes-top { padding-top:4px !important; }    /* ekstra top-luft før guldstreg */
+
+      /* Hjælpeklasser */
+      .nowrap{ white-space:nowrap; }      /* brugt i totalpris-titel */
+      .br-m{ display:none; }              /* linjebrud kun på mobil (aktiveres i media query) */
 
       /* Fly */
       .flight-inner { max-width:440px; padding:18px; }
@@ -158,6 +162,12 @@
 
       /* --------------------------- MOBIL (≤600px): stacked, men samme rytme som desktop --------------------------- */
       @media only screen and (max-width:600px){
+
+        /* ----- MOBIL – spacing knobs (ændr kun tal her) ----- */
+        .sp-gap-chips{ margin-top:6px !important; }   /* DESTINATION chip -> DATO chip */
+        .sp-chips-hero{ margin-top:10px !important; } /* DATO chip -> HERO (overstyrer global værdi) */
+        .br-m{ display:inline; }                      /* aktiver linjebrud i totalpris på mobil */
+
         /* Mobil galleri + hint */
         .gallery-strip{
           display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; transition:none; width:100% !important;
@@ -275,7 +285,7 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Six Senses Kanuhura 5+★</div>
                         <div class="hotel-loc"><span class="loc">Maldivene • Lhaviyani-atollen</span></div>
-                        <div class="hotel-dates"><span class="stay">15.–18. april 2026 • 3 netter</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">15.–18. april 2026 • 3 netter</span></div>
 
                         <!-- Desktop hero -->
                         <div class="gallery-desktop sp-chips-hero">
@@ -325,7 +335,7 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Conrad Rangali Island 5+★</div>
                         <div class="hotel-loc"><span class="loc">Maldivene • South Ari-atollen</span></div>
-                        <div class="hotel-dates"><span class="stay">18.–20. april 2026 • 2 netter</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">18.–20. april 2026 • 2 netter</span></div>
 
                         <div class="gallery-desktop sp-chips-hero">
                           <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
@@ -373,7 +383,7 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Six Senses Laamu 5+★</div>
                         <div class="hotel-loc"><span class="loc">Maldivene • Laamu-atollen</span></div>
-                        <div class="hotel-dates"><span class="stay">20.–22. april 2026 • 2 netter</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">20.–22. april 2026 • 2 netter</span></div>
 
                         <div class="gallery-desktop sp-chips-hero">
                           <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
@@ -422,7 +432,7 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Gili Lankanfushi 5+★</div>
                         <div class="hotel-loc"><span class="loc">Maldivene • North Malé-atollen</span></div>
-                        <div class="hotel-dates"><span class="stay">22.–24. april 2026 • 2 netter</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">22.–24. april 2026 • 2 netter</span></div>
 
                         <div class="gallery-desktop sp-chips-hero">
                           <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
@@ -471,7 +481,7 @@
                       <div class="hotel-long card text">
                         <div class="hotel-cap">InterContinental Maamunagau 5+★</div>
                         <div class="hotel-loc"><span class="loc">Maldivene • Raa-atollen</span></div>
-                        <div class="hotel-dates"><span class="stay">24.–27. april 2026 • 3 netter</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">24.–27. april 2026 • 3 netter</span></div>
 
                         <div class="gallery-desktop sp-chips-hero">
                           <a href="https://maldivia.dk/wp-content/uploads/2025/10/SSK.jpg" target="_blank">
@@ -527,7 +537,8 @@
                 <div class="totalbox">
                   <table class="totalrow" role="presentation">
                     <tr>
-                      <td class="total-title">Totalpris for 2 voksne</td>
+                      <!-- MOBIL linjebrud efter "Totalpris for" -->
+                      <td class="total-title">Totalpris for<span class="br-m"><br></span> <span class="nowrap">2 voksne</span></td>
                       <td class="total-amt">NOK 219.500,-</td>
                     </tr>
                   </table>
