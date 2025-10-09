@@ -52,6 +52,36 @@
       .hotel-long { padding:18px 20px; }
       .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
+      /* --------- DESTINATIONSCHIP + DATOCHIP (indsat som i den anden skabelon) --------- */
+      .hotel-loc{ margin:6px 0 4px; }
+      .hotel-dates{ margin:0 0 8px; }
+      .loc{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#fff; white-space:nowrap;
+      }
+      .loc:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665;
+        margin-right:6px; vertical-align:middle;
+      }
+      .stay{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #d7cbbb; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#f9f6f0; white-space:nowrap;
+      }
+      .stay:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665;
+        margin-right:6px; vertical-align:middle;
+      }
+
+      /* Easy spacing knobs for chips */
+      .sp-gap-chips{ margin-top:6px !important; }   /* DESTINATION -> DATO (desktop) */
+      .sp-chips-hero{ margin-top:8px !important; }  /* DATO -> HERO (desktop) */
+
       /* ------- Galleri / Karussel ------- */
       .gallery{ position:relative; margin-top:12px; overflow:hidden; border-radius:12px; }
       .gallery-strip{
@@ -193,6 +223,10 @@
         .gallery-strip img{ height:180px !important; width:auto; }
         .gallery .prev, .gallery .next{ display:none !important; }
         .scroll-hint{ display:block !important; margin-top:2px !important; }
+
+        /* MOBIL: spacing knobs for chips */
+        .sp-gap-chips{ margin-top:6px !important; }   /* DESTINATION -> DATO */
+        .sp-chips-hero{ margin-top:10px !important; } /* DATO -> HERO */
 
         /* MOBIL: finjustér luft mellom siste pris og divider */
         .rate-list tr:last-child{ 
@@ -395,9 +429,11 @@
                       <!-- Hotell 1 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Six Senses Kanuhura 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • Lhaviyani-atollen</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">15.–18. april 2026 • 3 netter</span></div>
 
                         <!-- Galleri -->
-                        <div class="gallery">
+                        <div class="gallery sp-chips-hero">
                           <button class="prev" aria-label="Forrige">‹</button>
                           <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
@@ -452,9 +488,11 @@
                       <!-- Hotell 2 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Conrad Rangali Island 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • South Ari-atollen</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">18.–20. april 2026 • 2 netter</span></div>
 
                         <!-- Galleri -->
-                        <div class="gallery">
+                        <div class="gallery sp-chips-hero">
                           <button class="prev" aria-label="Forrige">‹</button>
                           <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
@@ -509,9 +547,11 @@
                       <!-- Hotell 3 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Six Senses Laamu 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • Laamu-atollen</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">20.–22. april 2026 • 2 netter</span></div>
 
                         <!-- Galleri -->
-                        <div class="gallery">
+                        <div class="gallery sp-chips-hero">
                           <button class="prev" aria-label="Forrige">‹</button>
                           <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
@@ -567,9 +607,11 @@
                       <!-- Hotell 4 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">Gili Lankanfushi 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • North Malé-atollen</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">22.–24. april 2026 • 2 netter</span></div>
 
                         <!-- Galleri -->
-                        <div class="gallery">
+                        <div class="gallery sp-chips-hero">
                           <button class="prev" aria-label="Forrige">‹</button>
                           <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
@@ -625,9 +667,11 @@
                       <!-- Hotell 5 -->
                       <div class="hotel-long card text">
                         <div class="hotel-cap">InterContinental Maamunagau 5+★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • Raa-atollen</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">24.–27. april 2026 • 3 netter</span></div>
 
                         <!-- Galleri -->
-                        <div class="gallery">
+                        <div class="gallery sp-chips-hero">
                           <button class="prev" aria-label="Forrige">‹</button>
                           <button class="next" aria-label="Neste">›</button>
                           <div class="gallery-strip">
