@@ -114,8 +114,8 @@
       /* --- HERO → DIVIDER → VILLATYPE (mail-safe) --- */
       .sp-hero-divider{
         border-top:1px solid #f0ece4;  /* selve divideren */
-        margin-top:25px;               /* HERO -> linje (øget) */
-        padding-top:20px;              /* linje -> første villatype (øget) */
+        margin-top:25px;               /* (overstyres på desktop) */
+        padding-top:20px;              /* linje -> første villatype */
       }
 
       .rate-list { width:100%; margin-top:8px; }
@@ -276,10 +276,16 @@
         body, table, td{ max-width:100% !important; }
       }
 
-      /* Desktop: vis destination + dato side om side */
+      /* Desktop: vis destination + dato side om side + korrekt hero-divider spacing */
       @media only screen and (min-width:601px){
         .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; } /* højre luft mellem chips */
         .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }  /* flugter i højden */
+
+        /* HERO -> divider styres af galleriets bund-padding (margin på table ignoreres ofte i mails) */
+        .gallery.sp-chips-hero{ padding-bottom:25px !important; } /* ØG denne for mere luft fra HERO til linjen */
+
+        /* Divider -> første villatype (beholdes) + nulstil margin, så vi ikke er afhængige af table-margin */
+        .sp-hero-divider{ margin-top:0 !important; padding-top:20px !important; }
       }
       
     </style>
