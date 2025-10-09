@@ -31,13 +31,13 @@
       .flight-inner { max-width:440px; padding:18px; }
       .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
       .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
-      .leg { margin:0 0 14px 0; } /* Ens luft etter hver leg */
+      .leg { margin:0 0 14px 0; }
       .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
       .flight-meta { display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#6a6a6a; margin-top:2px; }
 
-      /* Layover – like mye over/under (fjerner dobbel toppluft fra .leg) */
+      /* Layover */
       .layover { position:relative; margin:0 0 14px 0; }
-      .leg + .layover { margin-top:0; } /* over = 14px (fra .leg), under = 14px (her) */
+      .leg + .layover { margin-top:0; }
       .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
       .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
 
@@ -114,20 +114,20 @@
       /* --- HERO → DIVIDER → VILLATYPE (mail-safe) --- */
       .sp-hero-divider{
         border-top:1px solid #f0ece4;  /* selve divideren */
-        margin-top:16px;               /* luft fra HERO ned til linjen */
-        padding-top:16px;              /* luft fra linjen ned til første villatype */
+        margin-top:16px;               /* HERO -> linje (øget) */
+        padding-top:20px;              /* linje -> første villatype (øget) */
       }
 
       .rate-list { width:100%; margin-top:8px; }
       .rate-list td { vertical-align:top; }
       .rate-list td:first-child { padding-right:12px; }
-      .rate-list tr:first-child td { border-top:0; padding-top:8px; padding-bottom:16px; } /* + bundluft på første rad */
+      .rate-list tr:first-child td { border-top:0; padding-top:8px; padding-bottom:16px; }
 
       /* Enhetlig vertikal rytme i hotellrader */
       .hotel-long .tight td { padding:12px 0 16px; border-top:1px solid #f0ece4; }
-      .rate-list tr:last-child td{ padding-bottom:12px !important; } /* samme bunnluft før fordelsboks */
+      .rate-list tr:last-child td{ padding-bottom:12px !important; }
 
-      /* Meal plan chip – VENSTRESTILT, ensartet spacing */
+      /* Meal plan chip */
       .mp{
         display:inline-block;
         padding:3px 10px;
@@ -164,10 +164,8 @@
       .room-link{ margin-top:4px; font-size:12px; line-height:18px; color:#6a6a6a; }
       .room-link a{ color:#9d8665; text-decoration:underline; }
 
-      /* Ens spacing over og under Høydepunkter & fordeler-boksen */
-      .rate-list tr:last-child td{
-        padding-bottom:8px !important; /* luft over boksen (fra meal plan) */
-      }
+      /* Høydepunkter-boks */
+      .rate-list tr:last-child td{ padding-bottom:8px !important; }
       .extras{
         margin-top:8px;
         margin-bottom:8px;
@@ -189,7 +187,7 @@
       .extras-more a{ color:#9d8665; text-decoration:underline; }
 
       /* ---------------------------
-         MOBIL (≤600px): stacked med desktop-rytmik
+         MOBIL (≤600px)
          --------------------------- */
       @media only screen and (max-width:600px){
 
@@ -203,7 +201,7 @@
         }
         .gallery-strip a{
           display:inline-block;
-          width:auto; /* naturlig bredde */
+          width:auto;
           margin-right:8px;
           flex:none;
         }
@@ -212,19 +210,17 @@
         .scroll-hint{ display:block !important; margin-top:2px !important; }
 
         /* MOBIL: spacing knobs for chips */
-        .sp-gap-chips{ margin-top:6px !important; }   /* DESTINATION -> DATO */
-        .sp-chips-hero{ margin-top:12px !important; } /* DATO -> HERO */
+        .sp-gap-chips{ margin-top:6px !important; }
+        .sp-chips-hero{ margin-top:12px !important; }
 
         /* MOBIL: HERO → DIVIDER → VILLATYPE (lidt strammere) */
         .sp-hero-divider{
-          margin-top:10px !important;  /* HERO -> linje */
-          padding-top:12px !important; /* linje -> første villatype */
+          margin-top:12px !important;   /* HERO -> linje */
+          padding-top:16px !important;  /* linje -> første villatype */
         }
 
         /* MOBIL: finjustér luft mellom siste pris og divider */
-        .rate-list tr:last-child{
-          padding-bottom:6px !important;
-        }
+        .rate-list tr:last-child{ padding-bottom:6px !important; }
         .rate-list tr:last-child td{ padding-bottom:0 !important; }
         .rate-list::after{
           content:"";
@@ -232,7 +228,7 @@
           width:100%;
           height:1px;
           background:#f0ece4;
-          margin:8px 0 22px; /* kompakt over, lidt mere under */
+          margin:8px 0 22px;
         }
         .rate-list tr:not(:first-child){ padding-top:16px !important; }
         .extras{ margin-top:2px !important; }
@@ -241,7 +237,7 @@
         .wrap { width:100% !important; max-width:100% !important; }
         .px { padding-left:18px !important; padding-right:18px !important; }
 
-        /* Typografi – læsbart og roligt */
+        /* Typografi */
         .heading{ font-size:24px !important; }
         .section-title{ font-size:16px !important; }
         .text{ font-size:15px !important; line-height:23px !important; }
@@ -251,28 +247,18 @@
         .hotel-cap{ font-size:15px !important; }
         .hotel-long{ padding:18px 18px !important; }
 
-        /* Rate-liste: 1 kolonne – pris under værelse, med desktop-rytmik */
-        .rate-list, .rate-list tr, .rate-list td{
-          display:block !important;
-          width:100% !important;
-        }
+        /* Rate-liste: 1 kolonne */
+        .rate-list, .rate-list tr, .rate-list td{ display:block !important; width:100% !important; }
         .hotel-long .tight td{ padding:0 !important; border:none !important; }
-        .rate-list tr{
-          padding:12px 0 16px !important;
-          border-top:1px solid #f0ece4 !important;
-        }
-        .rate-list tr:first-child{
-          border-top:0 !important;
-          padding-top:8px !important;
-          padding-bottom:16px !important;
-        }
+        .rate-list tr{ padding:12px 0 16px !important; border-top:1px solid #f0ece4 !important; }
+        .rate-list tr:first-child{ border-top:0 !important; padding-top:8px !important; padding-bottom:16px !important; }
 
         /* Kolonne-specifik */
         .rate-list td:first-child{ padding-right:0 !important; }
         .rate-list td:last-child{ text-align:left !important; padding-top:8px !important; }
         .rate-list td:last-child strong{ display:inline-block !important; font-size:15px !important; line-height:22px !important; }
 
-        /* Room-link & meal plan – samme optik som desktop */
+        /* Room-link & meal plan */
         .room-link{ margin-top:4px !important; line-height:18px !important; }
         .mp{ white-space:normal !important; margin-top:10px !important; line-height:16px !important; }
 
@@ -386,7 +372,8 @@
                   <tr>
                     <td style="padding:14px 18px;">
                       <table role="presentation" width="100%" class="text">
-                        <tr class="tight">
+                        <!-- Fjernet class="tight" for at undgå divider -->
+                        <tr>
                           <td>
                             <span class="gold" style="font-weight:700;">Premium Economy</span> – Emirates
                           </td>
@@ -838,5 +825,7 @@
         document.querySelectorAll('.gallery').forEach(initGallery);
       })();
     </script>
+  </td>
+</tr>
   </body>
 </html>
