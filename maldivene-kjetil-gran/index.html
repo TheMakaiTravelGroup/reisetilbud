@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Reisetilbud</title>
+    <title>Reisetilbud til Maldivene | Maldivia - Beyond Excellence</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
       body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
@@ -19,7 +19,7 @@
       .col { vertical-align:top; }
       .muted { color:#6a6a6a; font-size:12px; line-height:18px; }
 
-      /* Seksjonstitler */
+      /* Seksjonstitler (klassisk linje over) */
       .section-title{
         font-family:'TeX Gyre Termes','Times New Roman',serif;
         font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665;
@@ -31,46 +31,123 @@
       .flight-inner { max-width:440px; padding:18px; }
       .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
       .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
-      .leg { margin:0 0 16px 0; }
+      .leg { margin:0 0 14px 0; }
       .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
       .flight-meta { display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#6a6a6a; margin-top:2px; }
-      .layover { position:relative; margin:10px 0 14px 0; }
+
+      /* Layover */
+      .layover { position:relative; margin:0 0 14px 0; }
+      .leg + .layover { margin-top:0; }
       .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
       .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
+
       .journey-sep { margin:14px 0; border-top:1px solid #f0ece4; }
       .journey-foot { font-size:12px; color:#6a6a6a; margin-top:6px; }
       .plus1 { font-size:10px; vertical-align:super; color:#9d8665; font-weight:700; margin-left:2px; }
 
+      /* Global “tight” rader */
+      .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
+
       /* Hoteller — LITT MER LUFT */
       .hotel-long { padding:18px 20px; }
-      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:15px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
+      .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
 
-      .rate-list { width:100%; margin-top:14px; }
+      /* --------- DESTINATIONSCHIP + DATOCHIP --------- */
+      .hotel-loc{ margin:6px 0 4px; }
+      .hotel-dates{ margin:0 0 8px; }
+      .loc{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #e7e2da; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#fff; white-space:nowrap;
+      }
+      .loc:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665;
+        margin-right:6px; vertical-align:middle;
+      }
+      .stay{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #d7cbbb; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700;
+        color:#1c1c1c; background:#f9f6f0; white-space:nowrap;
+      }
+      .stay:before{
+        content:""; display:inline-block; width:6px; height:6px;
+        border-radius:999px; background:#9d8665;
+        margin-right:6px; vertical-align:middle;
+      }
+
+      /* Easy spacing knobs for chips */
+      .sp-gap-chips{ margin-top:6px !important; }   /* DESTINATION -> DATO (desktop) */
+      .sp-chips-hero{ margin-top:8px !important; }  /* DATO -> HERO (desktop) */
+
+      /* ------- Galleri / Karussel ------- */
+      .gallery{ position:relative; margin-top:12px; overflow:hidden; border-radius:12px; }
+      .gallery-strip{
+        display:flex;
+        transition:transform 0.6s ease;
+        will-change:transform;
+      }
+      .gallery-strip a{ flex:0 0 100%; }
+      .gallery-strip img{
+        display:block;
+        width:100%;
+        height:280px;
+        object-fit:cover;
+        border-radius:12px;
+        border:1px solid #e7e2da;
+      }
+      .gallery .prev, .gallery .next{
+        position:absolute; top:50%; transform:translateY(-50%);
+        background:rgba(255,255,255,0.9);
+        border:none; border-radius:50%;
+        width:36px; height:36px; cursor:pointer;
+        font-size:18px; line-height:36px; text-align:center;
+        color:#9d8665; box-shadow:0 2px 4px rgba(0,0,0,0.1);
+      }
+      .gallery .prev{ left:10px; }
+      .gallery .next{ right:10px; }
+
+      .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:2px; text-align:left; }
+
+      /* --- HERO → DIVIDER → VILLATYPE (mail-safe) --- */
+      .sp-hero-divider{
+        border-top:1px solid #f0ece4;  /* selve divideren */
+        margin-top:20px;               /* (overstyres på desktop) */
+        padding-top:20px;              /* linje -> første villatype */
+      }
+
+      .rate-list { width:100%; margin-top:8px; }
       .rate-list td { vertical-align:top; }
       .rate-list td:first-child { padding-right:12px; }
-      .rate-list tr:first-child td { border-top:0; }
+      .rate-list tr:first-child td { border-top:0; padding-top:8px; padding-bottom:16px; }
 
-      /* Kun inne i hotellboksene øker vi vertikal padding i radene litt */
-      .hotel-long .tight td { padding:8px 0; border-top:1px solid #f0ece4; }
+      /* Enhetlig vertikal rytme i hotellrader */
+      .hotel-long .tight td { padding:12px 0 16px; border-top:1px solid #f0ece4; }
+      .rate-list tr:last-child td{ padding-bottom:12px !important; }
+
+      /* Meal plan chip */
+      .mp{
+        display:inline-block;
+        padding:3px 10px;
+        margin:10px 0 0;
+        border:1px solid #9d8665;
+        border-radius:999px;
+        font-size:12px;
+        line-height:16px;
+        font-weight:700;
+        color:#1c1c1c;
+        background:#c4dad6;
+        white-space:nowrap;
+      }
 
       .hotel-link a { color:#9d8665; text-decoration:underline; }
       .hotel-link { margin-top:10px; }
       .hotel-long + .hotel-long { margin-top:18px; }
 
-      /* Måltidsplan */
-      .mp{
-        display:inline-block; padding:3px 10px; margin-left:8px;
-        border:1px solid #e7e2da; border-radius:999px;
-        font-size:12px; line-height:16px; font-weight:700;
-        color:#1c1c1c; white-space:nowrap;
-      }
-      .mp--ai{ background:#c4dad6; border-color:#9d8665; }
-      .mp--hb{ background:#e7e2da; border-color:#9d8665; }
-      .mp--bb{ background:#ffffff; border-color:#e7e2da; }
-      .mp--ro{ background:#1c1c1c; color:#e7e2da; border-color:#1c1c1c; }
-
       /* Transfer-badge */
-      .hotel-meta{ margin-top:10px; }
+      .hotel-meta{ margin-top:14px; }
       .tr{
         display:inline-block; padding:3px 10px;
         border:1px solid #e7e2da; border-radius:999px;
@@ -83,67 +160,140 @@
         margin-right:6px; vertical-align:middle;
       }
 
-      /* Små lenkelinjer under pris */
+      /* Små lenker under pris – ens avstand fra tittel */
       .room-link{ margin-top:4px; font-size:12px; line-height:18px; color:#6a6a6a; }
       .room-link a{ color:#9d8665; text-decoration:underline; }
 
-      .facts-link{ margin-top:8px; font-size:12px; line-height:18px; color:#6a6a6a; }
-      .facts-link a{ color:#9d8665; text-decoration:underline; }
-
-      /* Ekstra fordeler (spa/bryllupsreise m.m.) */
+      /* Høydepunkter-boks */
+      .rate-list tr:last-child td{ padding-bottom:8px !important; }
       .extras{
-        margin-top:12px; padding:12px 14px;
-        border:1px solid #e7e2da; border-radius:10px; background:#f9f6f0;
+        margin-top:8px;
+        margin-bottom:8px;
+        padding:12px 12px 12px;
+        border:1px solid #e7e2da;
+        border-radius:10px;
+        background:#f9f6f0;
       }
       .extras-title{
-        margin:0 0 6px; font-size:13px; font-weight:700; color:#9d8665;
+        margin:0 0 6px;
+        font-size:13px;
+        font-weight:700;
+        color:#9d8665;
+        line-height:18px;
       }
-      .extras-list{
-        margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#1c1c1c;
-      }
+      .extras-list{ margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#1c1c1c; }
       .extras-list li{ margin:0; padding:0; }
+      .extras-more{ margin:8px 0 0; font-size:12px; line-height:18px; color:#6a6a6a; }
+      .extras-more a{ color:#9d8665; text-decoration:underline; }
 
-      .mp-desktop{ display:inline-block; }
-      .mobile-only{ display:none; }
-      .mp-row{ display:none; }
+      /* ---------------------------
+         MOBIL (≤600px)
+         --------------------------- */
+      @media only screen and (max-width:600px){
 
-      @media only screen and (max-width:600px) {
-        .wrap { width:100% !important; }
-        .px { padding-left:20px !important; padding-right:20px !important; }
-        .stack { display:block !important; width:100% !important; }
-        .col { width:100% !important; }
-        .flight-inner { max-width:100%; }
+        /* Mobil: swipe-galleri, mindre luft til hint */
+        .gallery-strip{
+          display:block;
+          white-space:nowrap;
+          overflow-x:auto;
+          -webkit-overflow-scrolling:touch;
+          transition:none;
+        }
+        .gallery-strip a{
+          display:inline-block;
+          width:auto;
+          margin-right:8px;
+          flex:none;
+        }
+        .gallery-strip img{ height:180px !important; width:auto; }
+        .gallery .prev, .gallery .next{ display:none !important; }
+        .scroll-hint{ display:block !important; margin-top:2px !important; }
 
+        /* MOBIL: spacing knobs for chips */
+        .sp-gap-chips{ margin-top:6px !important; }
+        .sp-chips-hero{ margin-top:12px !important; }
+
+        /* MOBIL: HERO → DIVIDER → VILLATYPE (lidt strammere) */
+        .sp-hero-divider{
+          margin-top:12px !important;   /* HERO -> linje */
+          padding-top:8px !important;  /* linje -> første villatype */
+        }
+
+        /* MOBIL: finjustér luft mellom siste pris og divider */
+        .rate-list tr:last-child{ padding-bottom:6px !important; }
+        .rate-list tr:last-child td{ padding-bottom:0 !important; }
+        .rate-list::after{
+          content:"";
+          display:block;
+          width:100%;
+          height:1px;
+          background:#f0ece4;
+          margin:8px 0 22px;
+        }
+        .rate-list tr:not(:first-child){ padding-top:16px !important; }
+        .extras{ margin-top:2px !important; }
+
+        /* Container */
+        .wrap { width:100% !important; max-width:100% !important; }
+        .px { padding-left:18px !important; padding-right:18px !important; }
+
+        /* Typografi */
         .heading{ font-size:24px !important; }
         .section-title{ font-size:16px !important; }
-        .text{ font-size:14px !important; line-height:22px !important; }
+        .text{ font-size:15px !important; line-height:23px !important; }
         .journey-title{ font-size:15px !important; }
-        .times{ font-size:14px !important; }
+        .times{ font-size:15px !important; }
         .chip{ font-size:11px !important; }
-        .hotel-cap{ font-size:14px !important; }
+        .hotel-cap{ font-size:15px !important; }
+        .hotel-long{ padding:18px 18px !important; }
 
-        .hotel-long{ padding:18px 20px !important; }
-        .hotel-cap .mp-desktop{ display:none !important; }
-        .mp-row{ display:block !important; margin:10px 0 0 !important; }
-        .mp-row .mp{
-          margin-left:0 !important;
-          font-size:12px !important;
-          line-height:16px !important;
-          padding:3px 10px !important;
-        }
+        /* Rate-liste: 1 kolonne */
+        .rate-list, .rate-list tr, .rate-list td{ display:block !important; width:100% !important; }
+        .hotel-long .tight td{ padding:0 !important; border:none !important; }
+        .rate-list tr{ padding:12px 0 16px !important; border-top:1px solid #f0ece4 !important; }
+        .rate-list tr:first-child{ border-top:0 !important; padding-top:8px !important; padding-bottom:16px !important; }
 
-        .flight-details,
-        .flight-details .times,
-        .inclusions,
-        .flight-meta {
-          font-size:13px !important;
-          line-height:20px !important;
-        }
+        /* Kolonne-specifik */
+        .rate-list td:first-child{ padding-right:0 !important; }
+        .rate-list td:last-child{ text-align:left !important; padding-top:8px !important; }
+        .rate-list td:last-child strong{ display:inline-block !important; font-size:15px !important; line-height:22px !important; }
 
-        .extras{ padding:12px 14px !important; }
-        .extras-title, .extras-list{ font-size:12px !important; line-height:18px !important; }
-        .mobile-only{ display:block !important; }
+        /* Room-link & meal plan */
+        .room-link{ margin-top:4px !important; line-height:18px !important; }
+        .mp{ white-space:normal !important; margin-top:10px !important; line-height:16px !important; }
+
+        /* Høydepunkter-boks */
+        .extras{ padding:12px 16px 12px !important; }
+        .extras-title{ line-height:18px !important; }
+        .extras-more{ line-height:18px !important; }
+
+        /* Transfer/links */
+        .hotel-meta{ margin-top:14px !important; }
+        .hotel-link{ margin-top:10px !important; }
+
+        /* Billeder & overflow-sikring */
+        img{ max-width:100% !important; height:auto !important; }
+        body, table, td{ max-width:100% !important; }
       }
+
+      /* Desktop: vis destination + dato side om side + korrekt hero-divider spacing */
+      @media only screen and (min-width:601px){
+        .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; } /* højre luft mellem chips */
+        .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }  /* flugter i højden */
+
+        /* HERO -> divider styres af galleriets bund-padding (margin på table ignoreres ofte i mails) */
+        .gallery.sp-chips-hero{ padding-bottom:18px !important; } /* ØG denne for mere luft fra HERO til linjen */
+
+        /* Divider -> første villatype (beholdes) + nulstil margin, så vi ikke er afhængige af table-margin */
+        .sp-hero-divider{ margin-top:0 !important; padding-top:28px !important; }
+      }
+
+      @media only screen and (min-width:601px){
+  /* Divider -> første villatype */
+  .hotel-long .rate-list tr:first-child td{
+    padding-top:12px !important;  /* justér tallet her */
+  }
+      
     </style>
   </head>
   <body>
@@ -157,20 +307,19 @@
               <td style="padding:24px 28px; border-bottom:1px solid #e7e2da;">
                 <table role="presentation" width="100%">
                   <tr>
-                    <!-- VENSTRE: LOGO -->
                     <td align="left" style="line-height:0;">
                       <a href="https://www.maldivia.no" target="_blank" style="display:inline-block; text-decoration:none;">
                         <img
                           src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png"
-                          width="160"
+                          width="130"
                           alt="Maldivia – Beyond Excellence"
                           style="display:block; border:0; outline:none; text-decoration:none; height:auto;">
                       </a>
                     </td>
-                    <!-- HØYRE: Kontakt -->
-                    <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:12px; color:#6a6a6a;">
-                      <span class="gold">Travel designer</span><br>Wendie Pedersen<br>
-                      <a href="mailto:wp@maldivia.no" style="color:#9d8665;">wp@maldivia.no</a>
+                    <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; color:#6a6a6a;">
+                      <span style="font-family:'Playfair Display',serif; color:#9d8665; font-size:13.5px; letter-spacing:1px; text-transform:uppercase;">Travel Designer</span><br>Wendie Pedersen<br>
+                      <a href="mailto:wp@maldivia.no" style="color:#9d8665; text-decoration:underline;">wp@maldivia.no</a><br>
+                      <a href="tel:+4723965171" style="color:#9d8665; text-decoration:underline;">+47&nbsp;23&nbsp;96&nbsp;51&nbsp;71</a>
                     </td>
                   </tr>
                 </table>
@@ -181,73 +330,61 @@
             <tr>
               <td style="padding:36px 40px 0;" class="px">
                 <div class="heading" style="font-size:28px; font-weight:700;">REISETILBUD TIL MALDIVENE</div>
-                <div class="text" style="margin-top:6px; color:#6a6a6a;">26. februar – 06. mars 2026 &nbsp;•&nbsp; 7 netter / 9 dager</div>
+                <div class="text" style="margin-top:6px; color:#6a6a6a;">23. mars – 01. april 2026 &nbsp;•&nbsp; 7 netter / 9 dager</div>
               </td>
             </tr>
 
-            <!-- FLY -->
-            <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Flyreise</div></td></tr>
-            <tr>
-              <td style="padding:0 40px 0;" class="px">
-                <table role="presentation" width="100%" class="card flight-details">
-                  <tr><td>
-                    <div class="flight-inner">
-                      <div class="journey-title">Utreise – torsdag 26.02.2026</div>
-                      <div class="leg">
-                        <div class="chip">OSL → FRA</div>
-                        <div class="times">13:45 – 16:00</div>
-                        <span class="flight-meta">Lufthansa • LH 861</span>
-                      </div>
-                      <div class="layover"><span>Mellomlanding i Frankfurt • 3 t 40 m</span></div>
-                      <div class="leg">
-<div class="times">
-  19:40 – 10:00<sup class="plus1">+1</sup>
-</div>
-                        <span class="flight-meta">Condor • DE 2320</span>
-                      </div>
-                      <div class="journey-foot">Samlet reisetid utreise: 16 t 15 m</div>
-
-                      <div class="journey-sep"></div>
-
-                      <div class="journey-title">Hjemreise – fredag 06.03.2026</div>
-                      <div class="leg">
-                        <div class="chip">MLE → FRA</div>
-                        <div class="times">12:00 – 18:30</div>
-                        <span class="flight-meta">Condor • DE 2321</span>
-                      </div>
-                      <div class="layover"><span>Mellomlanding i Frankfurt • 3 t 10 m</span></div>
-                      <div class="leg">
-                        <div class="chip">FRA → OSL</div>
-                        <div class="times">21:40 – 23:40</div>
-                        <span class="flight-meta">Lufthansa • LH 866</span>
-                      </div>
-                      <div class="journey-foot">Samlet reisetid hjemreise: 15 t 40 m</div>
-                    </div>
-                  </td></tr>
-                </table>
-              </td>
-            </tr>
-
-<!-- FLYOPGRADERINGER / ALTERNATIVER -->
-<tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Flyoppgradering</div></td></tr>
+<!-- FLY -->
+<tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Flyreise</div></td></tr>
 <tr>
-  <td style="padding:0 40px 0px;" class="px">
-    <table role="presentation" width="100%" class="card">
-      <tr>
-        <td style="padding:14px 18px;">
-          <table role="presentation" width="100%" class="text upg-list">
-            <tr class="tight">
-              <td>
-                <span class="gold" style="font-weight:700;">Premium Economy</span> – Emirates
-              </td>
-              <td align="right"><strong>NOK 14.000,-</strong></td>
-            </tr>
-          </table>
-          <div class="muted" style="margin-top:8px;">
-            Tillegget ovenfor er totalt for 2 voksne. Pris og tilgjengelighet kan endre seg frem til endelig bestilling.
-          </div>
-        </td>
-      </tr>
+  <td style="padding:0 40px 0;" class="px">
+    <table role="presentation" width="100%" class="card flight-details">
+      <tr><td>
+<div class="flight-inner">
+  <!-- UTREISE -->
+  <div class="journey-title">Oslo til Malé – 23.02.2026</div>
+
+  <!-- OSL → DXB -->
+  <div class="leg">
+    <div class="chip">OSL → DXB</div>
+    <div class="times">14:00 – 23:55</div>
+    <span class="flight-meta">Emirates • EK 160</span>
+  </div>
+  <div class="layover"><span>Mellomlanding i Dubai • 2 t 35 m</span></div>
+
+  <!-- DXB → MLE -->
+  <div class="leg">
+    <div class="chip">DXB → MLE</div>
+    <div class="times">02:30<sup class="plus1">+1</sup> – 07:35</div>
+    <span class="flight-meta">Emirates • EK 656</span>
+  </div>
+
+  <div class="journey-foot">Total reisetid: 13 t 35 m</div>
+
+  <div class="journey-sep"></div>
+
+  <!-- HJEMREISE -->
+  <div class="journey-title">Malé til Oslo – 03.03.2026</div>
+
+  <!-- MLE → DXB -->
+  <div class="leg">
+    <div class="chip">MLE → DXB</div>
+    <div class="times">23:00 – 02:35</div>
+    <span class="flight-meta">Emirates • EK 653</span>
+  </div>
+  <div class="layover"><span>Mellomlanding i Dubai • 4 t 55 m</span></div>
+
+  <!-- DXB → OSL -->
+  <div class="leg">
+    <div class="chip">DXB → OSL</div>
+    <div class="times">07:30 – 11:55</div>
+    <span class="flight-meta">Emirates • EK 159</span>
+  </div>
+
+  <div class="journey-foot">Total reisetid: 16 t 55 m</div>
+</div>
+
+      </td></tr>
     </table>
   </td>
 </tr>
@@ -260,46 +397,55 @@
                   <tr>
                     <td class="stack col">
 
-                      <!-- Hotell 1 – med 2 villatyper -->
+                                            <!-- Hotell 1 -->
                       <div class="hotel-long card text">
-                        <div class="hotel-cap">
-                          Meyyafushi Maldives 5★
-                          <span class="mp mp--ai mp-desktop">Premium All-Inclusive (Dine Around)</span>
+                        <div class="hotel-cap">Meyyafushi Maldives 5★</div>
+                        <div class="hotel-loc"><span class="loc">Maldivene • Lhaviyani Atoll</span></div>
+                        <div class="hotel-dates sp-gap-chips"><span class="stay">24. februar – 03. mars 2026 • 7 netter</span></div>
+
+                        <!-- Galleri -->
+                        <div class="gallery sp-chips-hero">
+                          <button class="prev" aria-label="Forrige">‹</button>
+                          <button class="next" aria-label="Neste">›</button>
+                          <div class="gallery-strip">
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/BPV-Bedroom.1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/BPV-Bedroom.1.jpg" alt="Meyyafushi - Beach Pool Villa"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/P1-V2.png" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/P1-V2.png" alt="Meyyafushi - Padel Court"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/hero-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/hero-1.jpg" alt="Meyyafushi - Pool"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/7.-Veyoge-Spa.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/7.-Veyoge-Spa.jpg" alt="Meyyafushi - Veyoge Spa"></a>
+                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Alif-–-Asian-Restaurant-1.png" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Alif-–-Asian-Restaurant-1.png" alt="Meyyafushi - Restaurant"></a>
+                          </div>
+                          <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
                         </div>
 
-                        <table class="rate-list">
+                        <table class="rate-list sp-hero-divider">
                           <tr class="tight">
                             <td>
                               Water Pool Villa
                               <div class="room-link">
-                                <a href="https://www.meyyafushi.com/villas-suites/#water-pool-villa" target="_blank">Les om villatypen →</a>
+                                <a href="https://www.meyyafushi.com/villas-suites/#water-pool-villa" target="_blank">Se villaen →</a>
                               </div>
+                              <span class="mp">Premium All-Inclusive (Dine Around)</span>
                             </td>
-                            <td align="right"><strong>NOK 159.900,-</strong></td>
+                            <td align="right"><strong>NOK 174.900,-</strong></td>
                           </tr>
                         </table>
-
-                        <div class="facts-link">
-                          <a href="https://caribiatravels-my.sharepoint.com/:b:/g/personal/caribia_caribia_dk/EdzaDFDfHnxGikvlfjZjIAQBNlRsN_dCJ-FtBFUJnJbihw?e=AY2jAM" target="_blank">Se faktaark (PDF) →</a>
-                        </div>
 
                         <div class="extras">
                           <div class="extras-title">Høydepunkter & fordeler</div>
                           <ul class="extras-list">
-                            <li>24-timers Premium All-Inclusive</li>
-                            <li>Maldivenes første overwater padelbane</li>
-                            <li>Sublim undervannsrestaurant</li>
-                            <li>45 minutters spabehandling per person</li>
-                            <li>2 utflukter per person</li>
+<li>Helt nytt Premium All-Inclusive-resort</li>
+<li>Eksepsjonelt design og moderne poolvillaer</li>
+<li>Maldivenes første overwater padelbane</li>
+<li>45 min. spa og 2 utflukter per person inkl.</li>
+<li>Unike fasiliteter som undervannsrestaurant</li>
                           </ul>
+                          <div class="extras-more"><a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Meyyafushi-Maldives.pdf" target="_blank">Se brosjyre →</a></div>
                         </div>
 
-                        <div class="mp-row"><span class="mp mp--ai">Premium All-Inclusive (Dine Around)</span></div>
-
                         <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 35 min.)</span></div>
-                        <div class="hotel-link"><a href="https://www.meyyafushi.com/" target="_blank">Se resortet →</a></div>
+                        <div class="hotel-link"><a href="https://www.meyyafushi.com/" target="_blank">Utforsk hotellet →</a></div>
                       </div>
-                      
+
                     </td>
                   </tr>
                 </table>
@@ -312,10 +458,10 @@
               <td style="padding:0 40px 28px;" class="px">
                 <table role="presentation" width="100%" class="card">
                   <tr><td style="padding:16px 18px;" class="text inclusions">
-                    • Fly mellom Oslo og Malé t/r | Premium Economy<br>
-                    • Sjøfly-transfer mellom Malé flyplass og resortet t/r<br>
-                    • 7 netter på Meyyafushi Maldives (5*)<br>
-                    • Premium All-Inclusive (Dine Around)<br>
+                    • Fly som angitt i tilbudet | Premium Economy<br>
+                    • Transfer som angitt i tilbudet<br>
+                    • 7 netter på valgt resort<br>
+                    • Måltider som angitt i tilbudet<br>
                     • Obligatoriske skatter og avgifter
                   </td></tr>
                 </table>
@@ -354,32 +500,84 @@
 <tr>
   <td align="center" class="text"
       style="padding:18px 18px; border-top:1px solid #e7e2da; color:#6a6a6a; font-size:12px; line-height:18px;">
-    <a href="https://www.maldivia.no" target="_blank" style="display:inline-block; text-decoration:none; line-height:0;">
-      <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png"
-           width="160" alt="Maldivia – Beyond Excellence"
-           style="display:block; border:0; outline:none; text-decoration:none; height:auto;">
-    </a>
 
-    <!-- Lidt luft mellem logo og badge -->
-    <div style="height:8px; line-height:8px;">&nbsp;</div>
-
-    <!-- RGF badge (helst monokrom i #9d8665) -->
-    <a href="https://www.rejsegarantifonden.dk/medlem?s=2688" target="_blank" style="display:inline-block; text-decoration:none; line-height:0;">
-      <img src="https://maldivia.dk/wp-content/uploads/2025/10/Rejsegarantifonden.png"
-           width="110" alt="Medlem av Reisegarantifondet"
-           style="display:block; border:0; outline:none; text-decoration:none; height:auto;">
-    </a>
-
-    <!-- Lidt luft før ophavsret -->
-    <div style="height:8px; line-height:8px;">&nbsp;</div>
-
-    © Maldivia – En del av The Makai Travel Group
-  </td>
-</tr>
-
-          </table>
+    <!-- Indre tabel for sikker stacking i e-mailklienter -->
+    <table role="presentation" width="100%" style="border-collapse:collapse;">
+      <tr>
+        <td align="center" style="padding:0 0 8px 0;">
+          <!-- TRUSTPILOT (øverst) -->
+          <a href="https://dk.trustpilot.com/review/maldivia.dk?languages=all" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+            <img src="https://maldivia.dk/wp-content/uploads/2025/10/Trustpilot.png"
+                 width="120" alt="Trustpilot – 5 stjerners anmeldelser"
+                 style="display:block; border:0; outline:none; height:auto;">
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:0 0 8px 0;">
+          <!-- MALDIVIA logo -->
+          <a href="https://www.maldivia.no" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+            <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png"
+                 width="130" alt="Maldivia – Beyond Excellence"
+                 style="display:block; border:0; outline:none; height:auto;">
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:0 0 14px 0;">
+          <!-- Rejsegarantifonden -->
+          <a href="https://www.rejsegarantifonden.dk/medlem?s=2688" target="_blank" style="text-decoration:none; line-height:0; display:block;">
+            <img src="https://maldivia.dk/wp-content/uploads/2025/10/Rejsegarantifonden.png"
+                 width="110" alt="Medlem av Reisegarantifondet"
+                 style="display:block; border:0; outline:none; height:auto;">
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding:0;">
+          © Maldivia – En del av The Makai Travel Group
         </td>
       </tr>
     </table>
+
+    <!-- Let, email-safe JS til desktop-karussel (ignoreres af mailklienter) -->
+    <script>
+      (function(){
+        if (typeof window === 'undefined') return;
+
+        function initGallery(g){
+          const strip = g.querySelector('.gallery-strip');
+          const slides = strip ? strip.querySelectorAll('a') : [];
+          if (!strip || !slides.length) return;
+
+          let index = 0;
+          const prev = g.querySelector('.prev');
+          const next = g.querySelector('.next');
+
+          function update(){
+            if (window.matchMedia('(max-width:600px)').matches){
+              strip.style.transform = ''; // ingen transform i mobil-swipe
+              return;
+            }
+            strip.style.transform = 'translateX(' + (-index * 100) + '%)';
+          }
+
+          function go(delta){
+            index = (index + delta + slides.length) % slides.length;
+            update();
+          }
+
+          prev && prev.addEventListener('click', function(e){ e.preventDefault(); go(-1); });
+          next && next.addEventListener('click', function(e){ e.preventDefault(); go(1); });
+
+          window.addEventListener('resize', update);
+          update();
+        }
+
+        document.querySelectorAll('.gallery').forEach(initGallery);
+      })();
+    </script>
+  </td>
+</tr>
   </body>
 </html>
