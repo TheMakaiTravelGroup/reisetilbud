@@ -38,10 +38,18 @@
       .nowrap{ white-space:nowrap; }
       .br-m{ display:none; }  /* linjebrud kun på mobil (aktiveres i media query) */
 
-      /* Fly */
+      /* Fly – NYT layout for leg-chips */
       .flight-inner { max-width:440px; padding:18px; }
       .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
-      .chip { display:block; padding:2px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:18px; margin:0 0 6px 0; }
+      .chip{
+        display:inline-block;           /* inline på desktop */
+        padding:3px 10px;
+        border:1px solid #d7cbbb;       /* tynd guld-kant (som datochip) */
+        border-radius:999px;
+        background:#f9f6f0;             /* samme baggrund som datochip */
+        font-size:12px; line-height:18px; font-weight:700; color:#1c1c1c;
+        margin:0 0 6px 0;
+      }
       .leg { margin:0 0 14px 0; }
       .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
       .flight-meta { display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#6a6a6a; margin-top:2px; }
@@ -170,6 +178,9 @@
         .sp-chips-hero{ margin-top:12px !important; }   /* DATO chip -> HERO */
         .br-m{ display:inline; }                        /* aktiver linjebrud i totalpris */
 
+        /* LEG-chips fuld bredde på mobil */
+        .chip{ display:block !important; }
+
         /* Mobil: swipe-galleri, mindre luft til hint (KUN mobil) */
         .gallery-desktop{ display:none !important; }
         .gallery-mobile{ display:block !important; }
@@ -198,9 +209,8 @@
         body, table, td{ max-width:100% !important; }
 
         @media only screen and (max-width:600px){
-  /* ... your other mobile rules ... */
-  .total-amt{ font-size:16px !important; line-height:1.2; }
-}
+          .total-amt{ font-size:16px !important; line-height:1.2; }
+        }
       }
     </style>
   </head>
@@ -217,7 +227,7 @@
                   <tr>
                     <td align="left" style="line-height:0;">
                       <a href="https://www.maldivia.no" target="_blank" style="display:inline-block; text-decoration:none;">
-                        <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png" width="130" alt="Maldivia – Beyond Excellence" style="display:block; border:0; outline:none; text-decoration:none; height:auto;">
+                        <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png" width="130" alt="Maldivia – Beyond Excellence" style="display:block; border:0; outline:none; height:auto;">
                       </a>
                     </td>
                     <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; color:#6a6a6a;">
@@ -261,26 +271,26 @@
 
                       <div class="journey-sep"></div>
 
-<!-- EKSTRA REISE (MUSCAT → ABU DHABI → MALÉ) -->
-<div class="journey-title">Muscat til Malé – 10.03.2026</div>
+                      <!-- EKSTRA REISE (MUSCAT → ABU DHABI → MALÉ) -->
+                      <div class="journey-title">Muscat til Malé – 10.03.2026</div>
 
-<div class="leg">
-  <div class="chip">MCT → AUH</div>
-  <div class="times">23:55 – 01:00<sup style="font-size:10px; vertical-align:super; color:#9d8665; font-weight:700;">+1</sup></div>
-  <span class="flight-meta">Etihad • EY 697</span>
-</div>
+                      <div class="leg">
+                        <div class="chip">MCT → AUH</div>
+                        <div class="times">23:55 – 01:00<sup style="font-size:10px; vertical-align:super; color:#9d8665; font-weight:700;">+1</sup></div>
+                        <span class="flight-meta">Etihad • EY 697</span>
+                      </div>
 
-<div class="layover"><span>Mellomlanding i Abu Dhabi • 1 t 5 m</span></div>
+                      <div class="layover"><span>Mellomlanding i Abu Dhabi • 1 t 5 m</span></div>
 
-<div class="leg">
-  <div class="chip">AUH → MLE</div>
-  <div class="times">02:05 – 07:25</div>
-  <span class="flight-meta">Etihad • EY 372</span>
-</div>
+                      <div class="leg">
+                        <div class="chip">AUH → MLE</div>
+                        <div class="times">02:05 – 07:25</div>
+                        <span class="flight-meta">Etihad • EY 372</span>
+                      </div>
 
-<div class="journey-foot">Total reisetid: 6 t 30 m</div>
+                      <div class="journey-foot">Total reisetid: 6 t 30 m</div>
 
-<div class="journey-sep"></div>
+                      <div class="journey-sep"></div>
 
                       <div class="journey-title">Malé til Oslo – 16.03.2026</div>
                       <div class="leg">
