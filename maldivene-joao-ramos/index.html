@@ -214,6 +214,31 @@
       .extras-more{ margin:8px 0 0; font-size:12px; line-height:18px; color:#6a6a6a; }
       .extras-more a{ color:#9d8665; text-decoration:underline; }
 
+            /* ---------- INKLUDERER – forbedret kort ---------- */
+      .includes-card{
+        border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0;
+        border-collapse:separate !important; /* overstyr globalt collapse */
+        overflow:hidden;                     /* klip til afrundede hjørner */
+      }
+      .includes-inner{ padding:14px 18px; }
+      .people-pill{
+        display:inline-block; padding:3px 10px;
+        border:1px solid #d7cbbb; border-radius:999px;
+        font-size:12px; line-height:16px; font-weight:700; color:#1c1c1c;
+        background:#fff; white-space:nowrap;
+      }
+      .people-pill:before{
+        content:""; display:inline-block; width:6px; height:6px; margin-right:6px;
+        border-radius:999px; background:#9d8665; vertical-align:middle;
+      }
+      .inc-list{ width:100%; margin-top:8px; }
+      .inc-list td{ width:50%; vertical-align:top; }
+      .inc-item{
+        font-family:'TeX Gyre Termes','Times New Roman',serif;
+        font-size:14px; line-height:22px; color:#1c1c1c; padding:3px 0;
+      }
+      .inc-item .tick{ font-weight:700; color:#9d8665; margin-right:8px; }
+
       /* ---------------------------
          MOBIL (≤600px)
          --------------------------- */
@@ -313,6 +338,11 @@
         /* >>> INDSAT: skjul desktop-hero på mobil */
         .gallery-desktop{ display:none !important; }
         /* <<< SLUT indsætning */
+      }
+
+      /* Mobil: INKLUDERER-liste i én kolonne */
+      @media only screen and (max-width:600px){
+        .inc-list, .inc-list tr, .inc-list td{ display:block !important; width:100% !important; }
       }
 
       /* Desktop: destination + dato side om side + korrekt hero-divider spacing */
@@ -878,14 +908,33 @@
             <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
             <tr>
               <td style="padding:0 40px 28px;" class="px">
-                <table role="presentation" width="100%" class="card">
-                  <tr><td style="padding:16px 18px;" class="text inclusions">
-                    • Fly som angitt i tilbudet | Economy Class<br>
-                    • Transfer som angitt i tilbudet<br>
-                    • 10 netter på valgt hotell<br>
-                    • Måltider som angitt i tilbudet<br>
-                    • Obligatoriske skatter og avgifter
-                  </td></tr>
+                <table role="presentation" width="100%" class="includes-card" style="border-collapse:separate;">
+                  <tr>
+                    <td class="includes-inner">
+                      <table role="presentation" width="100%">
+                        <tr>
+                          <td align="left" style="padding-bottom:6px;">
+                            <span class="people-pill">Gjelder for: 2 voksne</span>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <table role="presentation" class="inc-list">
+                        <tr>
+                          <td>
+                            <div class="inc-item"><span class="tick">✓</span>Fly som angitt i tilbudet | Economy Class</div>
+                            <div class="inc-item"><span class="tick">✓</span>Transfer som angitt i tilbudet</div>
+                            <div class="inc-item"><span class="tick">✓</span>10 netter på valgt hotell</div>
+                          </td>
+                          <td>
+                            <div class="inc-item"><span class="tick">✓</span>Måltider som angitt i tilbudet</div>
+                            <div class="inc-item"><span class="tick">✓</span>Obligatoriske skatter og avgifter</div>
+                          </td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
                 </table>
               </td>
             </tr>
