@@ -217,6 +217,8 @@
       /* ---------- INKLUDERER – forbedret kort ---------- */
       .includes-card{
         border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0;
+        border-collapse:separate !important; /* overstyr globalt collapse */
+        overflow:hidden;                     /* klip til afrundede hjørner */
       }
       .includes-inner{ padding:14px 18px; }
       .people-pill{
@@ -906,7 +908,7 @@
             <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
             <tr>
               <td style="padding:0 40px 28px;" class="px">
-                <table role="presentation" width="100%" class="includes-card">
+                <table role="presentation" width="100%" class="includes-card" style="border-collapse:separate;">
                   <tr>
                     <td class="includes-inner">
                       <table role="presentation" width="100%">
@@ -968,7 +970,7 @@
 <!-- FOOTER -->
 <tr>
   <td align="center" class="text"
-      style="padding:18px 18px; border-top:1px solid #e7e2da; color:#6a6a6a; font-size:12px; line-height:18px;">
+      style="padding:18px 18px; border-top:1px solid #e7e2da; color:#6a6aa; font-size:12px; line-height:18px;">
 
     <!-- Indre tabel for sikker stacking i e-mailklienter -->
     <table role="presentation" width="100%" style="border-collapse:collapse;">
