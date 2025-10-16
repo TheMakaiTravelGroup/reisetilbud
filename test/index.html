@@ -3,828 +3,683 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Reisetilbud til Maldivene | Maldivia - Beyond Excellence</title>
+<title>Maldivia — Signature Preview</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
   body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
-  body { margin:0; padding:0; background:#faf7f2; }
+  body { margin:0; padding:0; background:#0b0b0b; }
   table { border-collapse:collapse; }
-  a { color:#1c1c1c; text-decoration:none; }
+  a { color:#e8e1d5; text-decoration:none; }
 
-  .heading { font-family:'Playfair Display', Georgia, serif; color:#1c1c1c; }
-  .text { font-family:'TeX Gyre Termes','Times New Roman',serif; color:#1c1c1c; font-size:15px; line-height:24px; }
-  .gold { color:#9d8665; }
+  /* Typography */
+  .heading { font-family:'Playfair Display', Georgia, serif; color:#f3eee6; }
+  .text { font-family:'TeX Gyre Termes','Times New Roman',serif; color:#e8e1d5; font-size:15px; line-height:24px; }
+  .muted{ color:#b9b2a7; font-size:12px; line-height:18px; }
+  .gold { color:#d8c5a3; }
 
-  /* Outer luxury frame */
-  .wrap { border:1px solid #d7cbbb; border-radius:16px; overflow:hidden; background:#ffffff; }
-  .wrap-topbar { height:4px; background:linear-gradient(90deg,#9d8665,#d7cbbb,#9d8665); }
+  /* Ultra frame (double, with inner foil line) */
+  .wrap { border-radius:18px; overflow:hidden; background:#121212; }
+  .wrap-outer { border:1px solid #2a2a2a; border-radius:20px; padding:1px; }
+  .wrap-inner { border:1px solid #3a3a3a; border-radius:18px; }
+  .wrap-topbar{ height:5px; background:linear-gradient(90deg,#a68a5a,#e1cfab,#a68a5a); }
 
-  /* Private preview bar */
+  /* VIP ribbon */
   .vip-ribbon{
     font-family:'TeX Gyre Termes','Times New Roman',serif;
-    background:#fff; border-bottom:1px solid #e7e2da; padding:10px 16px;
-    text-transform:uppercase; letter-spacing:.7px; font-size:11px; color:#6a6a6a;
+    background:#121212; border-bottom:1px solid #2e2e2e; padding:10px 16px;
+    text-transform:uppercase; letter-spacing:.7px; font-size:11px; color:#b9b2a7;
   }
   .vip-chip{
     display:inline-block; padding:4px 12px; margin:0 6px 0 0;
-    border:1px solid #d7cbbb; border-radius:999px; background:#f9f6f0; color:#1c1c1c; font-weight:700;
+    border:1px solid #4a4338; border-radius:999px; background:#1a1a1a; color:#e8e1d5; font-weight:700;
   }
 
-  /* Section titles */
+  /* Ornamented section title */
   .section-title{
     font-family:'TeX Gyre Termes','Times New Roman',serif;
-    font-size:18px; font-weight:700; text-transform:uppercase; color:#9d8665;
-    position:relative; margin:18px 0 16px; padding-top:16px;
+    font-size:18px; font-weight:700; text-transform:uppercase; color:#d8c5a3;
+    margin:18px 0 16px; text-align:left; letter-spacing:.6px;
   }
-  .section-title:before{ content:""; position:absolute; top:0; left:0; width:64px; height:2px; background:#9d8665; }
-
-  /* Micro separator */
-  .sep-micro{ height:1px; background:linear-gradient(90deg,#e7e2da,#f0ece4,#e7e2da); }
-
-  /* Icons */
-  .ico{ width:14px; height:14px; vertical-align:-2px; margin-right:6px; }
-  .ico-lg{ width:18px; height:18px; vertical-align:-3px; margin-right:8px; }
-
-  /* Card */
-  .card { border:1px solid #e7e2da; border-radius:12px; background:#fff; }
-
-  /* Watermark (monogram) — safe fallback (no absolute pos needed) */
-  .wm{
-    border-radius:12px; overflow:hidden; position:relative; background:#fff;
+  .orn{
+    height:14px; line-height:14px; text-align:left; margin:8px 0 0;
   }
-  .wm-inner{ position:relative; z-index:2; }
-  .wm svg{ display:block; width:240px; height:auto; opacity:.06; margin: -20px 0 -40px auto; } /* top-right, subtle */
-  .wm .wm-pad{ padding:0 0 0 0; } /* holder for SVG align */
+  .orn svg{ width:140px; height:14px; display:block; }
 
-  /* Flight */
-  .flight-inner { max-width:460px; padding:18px; }
-  .journey-title { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#9d8665; margin:0 0 12px; }
-  .chip {
-    display:inline-block; padding:3px 10px; border:1px solid #d7cbbb; border-radius:999px; background:#f9f6f0;
-    font-size:12px; line-height:18px; font-weight:700; color:#1c1c1c; margin:0 0 6px 0;
-  }
-  .leg { margin:0 0 14px 0; }
-  .times { display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric: tabular-nums; margin:0; }
-  .flight-meta { display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#6a6a6a; margin-top:2px; }
-  .layover { position:relative; margin:0 0 14px 0; }
-  .leg + .layover { margin-top:0; }
-  .layover:before { content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #e9e2d6; }
-  .layover span { position:relative; background:#fff; padding:0 10px 0 0; font-size:12px; color:#6a6a6a; white-space:nowrap; }
-  .journey-sep { margin:14px 0; border-top:1px solid #f0ece4; }
-  .journey-foot { font-size:12px; color:#6a6a6a; margin-top:6px; }
-  .plus1 { font-size:10px; vertical-align:super; color:#9d8665; font-weight:700; margin-left:2px; }
-
-  .tight td { padding:6px 0; border-top:1px solid #f0ece4; }
-
-  /* Hotels */
+  /* Cards — dark luxe */
+  .card { border:1px solid #2e2e2e; border-radius:12px; background:#141414; }
   .hotel-long { padding:18px 20px; }
-  .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#9d8665; letter-spacing:.2px; }
+  .hotel-cap { font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; color:#d8c5a3; letter-spacing:.2px; }
 
-  .hotel-loc{ margin:6px 0 4px; }
-  .hotel-dates{ margin:0 0 8px; }
-  .loc{
-    display:inline-block; padding:3px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:16px; font-weight:700; color:#1c1c1c; background:#fff; white-space:nowrap;
+  /* Watermark scoping (FIXED) */
+  .wm{ position:relative; border-radius:12px; overflow:hidden; background:#141414; }
+  .wm-inner{ position:relative; z-index:2; }
+  .wm .wm-mark{
+    display:block; width:240px; height:auto; opacity:.06; margin:-18px 0 -34px auto;
   }
-  .loc:before{ content:""; display:inline-block; width:6px; height:6px; border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle; }
-  .stay{
-    display:inline-block; padding:3px 10px; border:1px solid #d7cbbb; border-radius:999px; font-size:12px; line-height:16px; font-weight:700; color:#1c1c1c; background:#f9f6f0; white-space:nowrap;
+
+  /* Icon sizing lock */
+  svg.ico{ width:14px !important; height:14px !important; vertical-align:-2px; margin-right:6px; display:inline-block; }
+  svg.ico-lg{ width:18px !important; height:18px !important; vertical-align:-3px; margin-right:8px; display:inline-block; }
+
+  /* Destination/date chips */
+  .loc,.stay,.chip,.people-pill,.tr,.mp{
+    display:inline-block; padding:3px 10px; border-radius:999px; font-size:12px; line-height:16px; font-weight:700; white-space:nowrap;
   }
-  .stay:before{ content:""; display:inline-block; width:6px; height:6px; border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle; }
-  .sp-gap-chips{ margin-top:6px !important; }
-  .sp-chips-hero{ margin-top:8px !important; }
+  .loc{ border:1px solid #3a3a3a; color:#f3eee6; background:#111; }
+  .loc:before{ content:""; display:inline-block; width:6px; height:6px; border-radius:999px; background:#d8c5a3; margin-right:6px; vertical-align:middle; }
+  .stay{ border:1px solid #4a4338; color:#f3eee6; background:#1b1b1b; }
+  .stay:before{ content:""; display:inline-block; width:6px; height:6px; border-radius:999px; background:#a68a5a; margin-right:6px; vertical-align:middle; }
+  .chip{ border:1px solid #4a4338; background:#1b1b1b; color:#f3eee6; line-height:18px; }
+  .people-pill{ border:1px solid #4a4338; background:#111; color:#f3eee6; }
+  .people-pill:before{ content:""; display:inline-block; width:6px; height:6px; border-radius:999px; background:#a68a5a; margin-right:6px; vertical-align:middle; }
+  .tr{ border:1px solid #3a3a3a; background:#111; color:#f3eee6; }
+  .tr:before{ content:""; display:inline-block; width:6px; height:6px; border-radius:999px; background:#a68a5a; margin-right:6px; vertical-align:middle; }
+  .mp{ border:1px solid #d8c5a3; background:#1e2522; color:#f3eee6; }
+
+  /* Flight layout */
+  .flight-inner { max-width:460px; padding:18px; }
+  .journey-title{ font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:16px; font-weight:700; text-transform:uppercase; color:#d8c5a3; margin:0 0 12px; }
+  .leg{ margin:0 0 14px 0; }
+  .times{ display:block; font-weight:700; font-size:15px; line-height:1.4; font-variant-numeric:tabular-nums; color:#f3eee6; }
+  .flight-meta{ display:block; font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; line-height:20px; color:#b9b2a7; margin-top:2px; }
+  .layover{ position:relative; margin:0 0 14px 0; }
+  .layover:before{ content:""; position:absolute; left:0; right:0; top:50%; border-top:1px dashed #333; }
+  .layover span{ position:relative; background:#141414; padding:0 10px 0 0; font-size:12px; color:#b9b2a7; white-space:nowrap; }
+  .journey-sep{ margin:14px 0; border-top:1px solid #2e2e2e; }
+  .journey-foot{ font-size:12px; color:#b9b2a7; margin-top:6px; }
+  .plus1{ font-size:10px; vertical-align:super; color:#d8c5a3; font-weight:700; margin-left:2px; }
 
   /* Gallery */
   .gallery{ position:relative; margin-top:12px; overflow:hidden; border-radius:12px; }
-  .gallery-strip{ display:flex; transition:transform 0.6s ease; will-change:transform; }
+  .gallery-strip{ display:flex; transition:transform .6s ease; will-change:transform; }
   .gallery-strip a{ flex:0 0 100%; }
-  .gallery-strip img{ display:block; width:100%; height:280px; object-fit:cover; border-radius:12px; border:1px solid #e7e2da; }
-
+  .gallery-strip img{ display:block; width:100%; height:280px; object-fit:cover; border-radius:12px; border:1px solid #2a2a2a; }
   .hero-img{ display:block; width:100%; height:280px !important; object-fit:cover; border:0 !important; border-radius:12px 12px 0 0; }
-  @media only screen and (max-width:600px){ .hero-img{ height:180px !important; width:auto; } }
 
   .gallery .prev, .gallery .next{
-    position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.9);
-    border:none; border-radius:50%; width:36px; height:36px; cursor:pointer;
-    font-size:18px; line-height:36px; text-align:center; color:#9d8665; box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:rgba(20,20,20,.9); border:1px solid #4a4338; border-radius:50%; width:36px; height:36px;
+    cursor:pointer; font-size:18px; line-height:36px; text-align:center; color:#d8c5a3; box-shadow:0 2px 6px rgba(0,0,0,.4);
   }
   .gallery .prev{ left:10px; } .gallery .next{ right:10px; }
-  .scroll-hint{ display:none; font-size:12px; color:#6a6a6a; margin-top:2px; text-align:left; }
+  .scroll-hint{ display:none; font-size:12px; color:#b9b2a7; margin-top:2px; text-align:left; }
 
-  /* Hero → divider → rate */
-  .sp-hero-divider{ border-top:1px solid #f0ece4; margin-top:20px; padding-top:20px; }
-
-  .rate-list { width:100%; margin-top:8px; }
-  .rate-list td { vertical-align:top; }
-  .rate-list td:first-child { padding-right:12px; }
-  .rate-list tr:first-child td { border-top:0; padding-top:8px; padding-bottom:16px; }
-  .hotel-long .tight td { padding:12px 0 16px; border-top:1px solid #f0ece4; }
-  .rate-list tr:last-child td{ padding-bottom:8px !important; }
-
-  .mp{
-    display:inline-block; padding:3px 10px; margin:10px 0 0; border:1px solid #9d8665; border-radius:999px;
-    font-size:12px; line-height:16px; font-weight:700; color:#1c1c1c; background:#c4dad6; white-space:nowrap;
-  }
-
-  .hotel-link a { color:#9d8665; text-decoration:underline; }
-  .hotel-link { margin-top:10px; }
-  .hotel-long + .hotel-long { margin-top:18px; }
-
-  .hotel-meta{ margin-top:14px; }
-  .tr{ display:inline-block; padding:3px 10px; border:1px solid #e7e2da; border-radius:999px; font-size:12px; line-height:16px; font-weight:700; color:#1c1c1c; background:#fff; white-space:nowrap; }
-  .tr:before{ content:""; display:inline-block; width:6px; height:6px; border-radius:999px; background:#9d8665; margin-right:6px; vertical-align:middle; }
-
-  .room-link{ margin-top:4px; font-size:12px; line-height:18px; color:#6a6a6a; }
-  .room-link a{ color:#9d8665; text-decoration:underline; }
+  /* Rate table */
+  .rate-list{ width:100%; margin-top:8px; }
+  .rate-list td{ vertical-align:top; }
+  .rate-list td:first-child{ padding-right:12px; }
+  .rate-list tr:first-child td{ border-top:0; padding-top:8px; padding-bottom:16px; }
+  .hotel-long .tight td{ padding:12px 0 16px; border-top:1px solid #2e2e2e; }
 
   /* Highlights */
-  .extras{ margin-top:8px; margin-bottom:8px; padding:12px 12px 12px; border:1px solid #e7e2da; border-radius:10px; background:#f9f6f0; }
-  .extras-title{ margin:0 0 6px; font-size:13px; font-weight:700; color:#9d8665; line-height:18px; text-transform:uppercase; letter-spacing:.4px; }
-  .extras-list{ margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#1c1c1c; }
-  .extras-list li{ margin:0; padding:0; }
-  .extras-more{ margin:8px 0 0; font-size:12px; line-height:18px; color:#6a6a6a; }
-  .extras-more a{ color:#9d8665; text-decoration:underline; }
+  .extras{ margin-top:8px; margin-bottom:8px; padding:12px; border:1px solid #2e2e2e; border-radius:10px; background:#111; }
+  .extras-title{ margin:0 0 6px; font-size:13px; font-weight:700; color:#d8c5a3; line-height:18px; text-transform:uppercase; letter-spacing:.4px; }
+  .extras-list{ margin:0; padding:0; list-style:none; font-size:13px; line-height:20px; color:#e8e1d5; }
+  .extras-more a{ color:#d8c5a3; text-decoration:underline; }
 
-  /* Includes */
-  .includes-card{ border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0; border-collapse:separate !important; overflow:hidden; }
-  .includes-inner{ padding:14px 18px; }
-  .people-pill{
-    display:inline-block; padding:3px 10px; border:1px solid #d7cbbb; border-radius:999px; font-size:12px; line-height:16px; font-weight:700; color:#1c1c1c;
-    background:#fff; white-space:nowrap;
+  /* Includes / Privileges / Assurances */
+  .includes-card, .priv-card, .guar, .concierge{
+    border:1px solid #2e2e2e; border-radius:12px; background:#141414;
   }
-  .people-pill:before{ content:""; display:inline-block; width:6px; height:6px; margin-right:6px; border-radius:999px; background:#9d8665; vertical-align:middle; }
+  .includes-inner, .priv-inner, .guar-inner, .concierge-inner{ padding:14px 18px; }
   .inc-list{ width:100%; margin-top:8px; }
   .inc-list td{ width:50%; vertical-align:top; }
-  .inc-item{ font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:14px; line-height:22px; color:#1c1c1c; padding:3px 0; }
-  .tick{ font-weight:700; color:#9d8665; margin-right:6px; }
+  .inc-item{ font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:14px; line-height:22px; color:#f3eee6; padding:3px 0; }
+  .tick{ font-weight:700; color:#d8c5a3; margin-right:6px; }
 
-  /* Privileges */
-  .priv-card{ border:1px solid #e7e2da; border-radius:12px; background:#fff; }
-  .priv-inner{ padding:14px 18px; }
-  .priv-title{ margin:0 0 6px; font-size:14px; font-weight:700; color:#9d8665; text-transform:uppercase; letter-spacing:.6px; }
-  .priv-row{ font-size:14px; line-height:22px; color:#1c1c1c; padding:6px 0; }
-  .priv-note{ font-size:12px; color:#6a6a6a; margin-top:6px; }
+  .priv-title{ margin:0 0 6px; font-size:14px; font-weight:700; color:#d8c5a3; text-transform:uppercase; letter-spacing:.6px; }
+  .priv-row{ font-size:14px; line-height:22px; color:#e8e1d5; padding:6px 0; }
+  .priv-note{ font-size:12px; color:#b9b2a7; margin-top:6px; }
 
-  /* Concierge */
-  .concierge{ border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0; }
-  .concierge-inner{ padding:14px 18px; }
+  .guar-item{ font-size:13px; line-height:20px; color:#e8e1d5; padding:4px 0; }
+
+  /* CTA */
   .cta-btn{
-    background:#e7e2da;border:1px solid #9d8665;border-radius:999px;color:#1c1c1c;display:inline-block;
+    background:#1a1a1a;border:1px solid #a68a5a;border-radius:999px;color:#f3eee6;display:inline-block;
     font-family:'TeX Gyre Termes','Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:.6px;line-height:16px;
     text-transform:uppercase;text-decoration:none;padding:12px 18px;
   }
 
-  /* Guarantees / press */
-  .guar{ border:1px solid #e7e2da; border-radius:12px; background:#fff; }
-  .guar-inner{ padding:14px 18px; }
-  .guar-item{ font-size:13px; line-height:20px; color:#1c1c1c; padding:4px 0; }
-
-  /* MOBILE */
+  /* Mobile */
   @media only screen and (max-width:600px){
+    .wrap-outer{ padding:0 !important; border-radius:0 !important; }
+    .wrap-inner, .wrap{ border-radius:0 !important; }
+    .px{ padding-left:18px !important; padding-right:18px !important; }
+    .heading{ font-size:24px !important; }
+    .section-title{ font-size:16px !important; }
     .gallery-strip{ display:block; white-space:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; transition:none; }
-    .gallery-strip a{ display:inline-block; width:auto; margin-right:8px; flex:none; }
+    .gallery-strip a{ display:inline-block; width:auto; margin-right:8px; }
     .gallery-strip img{ height:180px !important; width:auto; }
     .gallery .prev, .gallery .next{ display:none !important; }
     .scroll-hint{ display:block !important; margin-top:2px !important; }
-    .sp-gap-chips{ margin-top:6px !important; }
-    .sp-chips-hero{ margin-top:12px !important; }
-    .sp-hero-divider{ margin-top:12px !important; padding-top:8px !important; }
     .chip{ display:block !important; }
-    .rate-list tr:last-child{ padding-bottom:6px !important; }
-    .rate-list tr:last-child td{ padding-bottom:0 !important; }
-    .rate-list::after{ content:""; display:block; width:100%; height:1px; background:#f0ece4; margin:8px 0 22px; }
-    .rate-list tr:not(:first-child){ padding-top:16px !important; }
-    .extras{ margin-top:2px !important; }
-    .rate-list tr:only-child{ margin-bottom:-12px !important; }
-    .rate-list tr:only-child td{ padding-bottom:0 !important; }
-    .wrap { width:100% !important; max-width:100% !important; }
-    .px { padding-left:18px !important; padding-right:18px !important; }
-    .heading{ font-size:24px !important; }
-    .section-title{ font-size:16px !important; }
-    .text{ font-size:15px !important; line-height:23px !important; }
-    .journey-title{ font-size:15px !important; }
-    .times{ font-size:15px !important; }
-    .chip{ font-size:11px !important; }
-    .hotel-cap{ font-size:15px !important; }
-    .hotel-long{ padding:18px 18px !important; }
     .rate-list, .rate-list tr, .rate-list td{ display:block !important; width:100% !important; }
-    .hotel-long .tight td{ padding:0 !important; border:none !important; }
-    .rate-list tr{ padding:12px 0 16px !important; border-top:1px solid #f0ece4 !important; }
-    .rate-list tr:first-child{ border-top:0 !important; padding-top:8px !important; padding-bottom:16px !important; }
-    .rate-list td:first-child{ padding-right:0 !important; }
+    .hotel-long{ padding:18px 18px !important; }
     .rate-list td:last-child{ text-align:left !important; padding-top:8px !important; }
-    .rate-list td:last-child strong{ display:inline-block !important; font-size:15px !important; line-height:22px !important; }
-    .room-link{ margin-top:4px !important; line-height:18px !important; }
-    .mp{ white-space:normal !important; margin-top:10px !important; line-height:16px !important; }
-    img{ max-width:100% !important; height:auto !important; }
-    body, table, td{ max-width:100% !important; }
-    .gallery-desktop{ display:none !important; }
   }
 
-  @media only screen and (max-width:600px){
-    .inc-list, .inc-list tr, .inc-list td{ display:block !important; width:100% !important; }
-  }
-
-  @media only screen and (min-width:601px){
-    .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; }
-    .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }
-    .gallery.sp-chips-hero{ padding-bottom:18px !important; }
-    .sp-hero-divider{ margin-top:0 !important; padding-top:28px !important; }
-    .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
-    .gallery-mobile{ display:none !important; }
-  }
-
-  /* Dark-mode polish */
-  @media (prefers-color-scheme: dark) {
-    body{ background:#111; }
-    .wrap { border-color:#3b3b3b; background:#141414; }
-    .card, .includes-card, .priv-card, .guar, .concierge { background:#1a1a1a; border-color:#2a2a2a; }
-    .text, .hotel-link a, .inc-item, .priv-row, .guar-item { color:#eaeaea; }
-    .muted{ color:#b5b5b5; }
-    .section-title{ color:#c8b59a; }
-    .mp{ background:#24423d; color:#eaeaea; border-color:#c8b59a; }
-    .vip-ribbon{ background:#141414; border-bottom-color:#2a2a2a; color:#b5b5b5; }
+  /* Light-mode fallback clients */
+  @media (prefers-color-scheme: light) {
+    body{ background:#faf7f2; }
   }
 </style>
 </head>
 <body>
-<table role="presentation" width="100%" bgcolor="#faf7f2">
+<table role="presentation" width="100%" bgcolor="#0b0b0b">
   <tr>
     <td align="center" style="padding:32px 16px;">
-
-      <!-- OUTER WRAP -->
-      <table role="presentation" width="680" class="wrap">
-        <tr><td class="wrap-topbar"></td></tr>
-
-        <!-- VIP RIBBON -->
+      <table role="presentation" width="700" class="wrap-outer">
         <tr>
-          <td class="vip-ribbon" align="center">
-            <span class="vip-chip">Private Preview</span>
-            <span class="vip-chip">Skreddersydd luksus</span>
-            <span class="vip-chip">Prioritert concierge 24/7</span>
-          </td>
-        </tr>
+          <td class="wrap-inner">
+            <table role="presentation" width="100%" class="wrap">
+              <tr><td class="wrap-topbar"></td></tr>
 
-        <!-- HEADER -->
-        <tr>
-          <td style="padding:20px 28px 18px; border-bottom:1px solid #e7e2da;">
-            <table role="presentation" width="100%">
+              <!-- VIP RIBBON -->
               <tr>
-                <td align="left" style="line-height:0;">
-                  <a href="https://www.maldivia.no" target="_blank" style="display:inline-block;">
-                    <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png" width="130" alt="Maldivia – Beyond Excellence" style="display:block; height:auto;">
-                  </a>
-                </td>
-                <td align="right" class="center" style="font-family:'TeX Gyre Termes','Times New Roman',serif; font-size:13px; color:#6a6a6a;">
-                  <span style="font-family:'Playfair Display',serif; color:#9d8665; font-size:13.5px; letter-spacing:1px; text-transform:uppercase;">Travel Designer</span><br>Wendie Pedersen<br>
-                  <a href="mailto:wp@maldivia.no" style="color:#9d8665; text-decoration:underline;">wp@maldivia.no</a><br>
-                  <a href="tel:+4723965171" style="color:#9d8665; text-decoration:underline;">+47&nbsp;23&nbsp;96&nbsp;51&nbsp;71</a>
+                <td class="vip-ribbon" align="center">
+                  <span class="vip-chip">Signature Preview</span>
+                  <span class="vip-chip">Haute Voyage</span>
+                  <span class="vip-chip">Concierge 24/7</span>
                 </td>
               </tr>
-            </table>
-          </td>
-        </tr>
 
-        <!-- HERO -->
-        <tr>
-          <td style="padding:28px 40px 0;" class="px">
-            <div class="heading" style="font-size:28px; font-weight:700;">REISETILBUD TIL MALDIVENE</div>
-            <div class="text" style="margin-top:6px; color:#6a6a6a;">22. desember – 31. desember 2025 &nbsp;•&nbsp; 7 netter / 9 dager</div>
-          </td>
-        </tr>
+              <!-- HEADER -->
+              <tr>
+                <td style="padding:20px 28px 18px; border-bottom:1px solid #2e2e2e;">
+                  <table role="presentation" width="100%">
+                    <tr>
+                      <td align="left" style="line-height:0;">
+                        <a href="https://www.maldivia.no" target="_blank" style="display:inline-block;">
+                          <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png" width="130" alt="Maldivia – Beyond Excellence" style="display:block; height:auto; filter:grayscale(10%) brightness(1.1);">
+                        </a>
+                      </td>
+                      <td align="right" class="text" style="color:#b9b2a7;">
+                        <span style="font-family:'Playfair Display',serif; color:#d8c5a3; font-size:13.5px; letter-spacing:1px; text-transform:uppercase;">Travel Designer</span><br>
+                        Wendie Pedersen<br>
+                        <a href="mailto:wp@maldivia.no" style="color:#d8c5a3; text-decoration:underline;">wp@maldivia.no</a><br>
+                        <a href="tel:+4723965171" style="color:#d8c5a3; text-decoration:underline;">+47&nbsp;23&nbsp;96&nbsp;51&nbsp;71</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
 
-        <!-- FLY -->
-        <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Flyreise</div></td></tr>
-        <tr>
-          <td style="padding:0 40px 6px;" class="px">
-            <div class="card wm">
-              <!-- Subtle monogram watermark (top-right) -->
-              <div class="wm-pad">
-                <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#9d8665">M</text>
-                </svg>
-              </div>
-              <div class="wm-inner">
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:separate; border-spacing:0;">
-                  <tr>
-                    <td style="padding:0; line-height:0;">
-                      <img src="https://maldivia.dk/wp-content/uploads/2025/10/Emirates-1.webp"
-                           alt="Emirates" width="600" class="hero-img" style="display:block; width:100%;">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="flight-inner">
-                        <div class="journey-title">
-                          <svg class="ico-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M2 13l1 2 7-1 4 5 2-1-3-6 6-1 1-2-7-1-4-6-2 1 3 7z"/></svg>
-                          Oslo til Malé – 22.12.2025
-                        </div>
-                        <div class="leg">
-                          <div class="chip">OSL → DXB</div>
-                          <div class="times">14:00 – 23:55</div>
-                          <span class="flight-meta">Emirates • EK 160</span>
-                        </div>
-                        <div class="layover"><span>Mellomlanding i Dubai • 2 t 35 m</span></div>
-                        <div class="leg">
-                          <div class="chip">DXB → MLE</div>
-                          <div class="times">02:30<sup class="plus1">+1</sup> – 07:35</div>
-                          <span class="flight-meta">Emirates • EK 656</span>
-                        </div>
-                        <div class="journey-foot">Total reisetid: 13 t 35 m</div>
+              <!-- HERO -->
+              <tr>
+                <td style="padding:28px 40px 0;" class="px">
+                  <div class="heading" style="font-size:28px; font-weight:700;">MALDIVERNE — SIGNATURE EDITION</div>
+                  <div class="text" style="margin-top:6px; color:#b9b2a7;">22. desember – 31. desember 2025 &nbsp;•&nbsp; 7 netter / 9 dager</div>
+                  <div class="orn">
+                    <!-- ornament divider -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 14" fill="#4a4338" aria-hidden="true">
+                      <path d="M0 7h50l5-5 5 5-5 5-5-5M140 7h-50l-5-5-5 5 5 5 5-5"/>
+                    </svg>
+                  </div>
+                </td>
+              </tr>
 
-                        <div class="journey-sep"></div>
-
-                        <div class="journey-title">
-                          <svg class="ico-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M2 13l1 2 7-1 4 5 2-1-3-6 6-1 1-2-7-1-4-6-2 1 3 7z"/></svg>
-                          Malé til Oslo – 30.12.2025
-                        </div>
-                        <div class="leg">
-                          <div class="chip">MLE → DXB</div>
-                          <div class="times">23:00 – 02:35<sup class="plus1">+1</sup></div>
-                          <span class="flight-meta">Emirates • EK 653</span>
-                        </div>
-                        <div class="layover"><span>Mellomlanding i Dubai • 4 t 55 m</span></div>
-                        <div class="leg">
-                          <div class="chip">DXB → OSL</div>
-                          <div class="times">07:30 – 11:55</div>
-                          <span class="flight-meta">Emirates • EK 159</span>
-                        </div>
-                        <div class="journey-foot">Total reisetid: 16 t 55 m</div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding:10px 18px 16px;">
-                      <table role="presentation" cellpadding="0" cellspacing="0">
+              <!-- FLY -->
+              <tr><td style="padding:14px 40px 10px;" class="px"><div class="section-title">Flyreise</div></td></tr>
+              <tr>
+                <td style="padding:0 40px 6px;" class="px">
+                  <div class="card wm">
+                    <!-- Watermark M (scoped) -->
+                    <div class="wm-mark" aria-hidden="true">
+                      <svg class="wm-mark" viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg"><text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#d8c5a3">M</text></svg>
+                    </div>
+                    <div class="wm-inner">
+                      <table role="presentation" width="100%">
                         <tr>
-                          <td style="padding-right:12px;">
-                            <img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Emirats-1.png" alt="Emirates" width="64" style="display:block;">
+                          <td style="padding:0; line-height:0;">
+                            <img src="https://maldivia.dk/wp-content/uploads/2025/10/Emirates-1.webp" alt="Emirates" width="600" class="hero-img">
                           </td>
                         </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </div><!-- /wm-inner -->
-            </div><!-- /card wm -->
-          </td>
-        </tr>
-
-        <!-- OPPGRADER FLY -->
-        <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Oppgrader flyreisen</div></td></tr>
-        <tr>
-          <td style="padding:0 40px 0px;" class="px">
-            <table role="presentation" width="100%" class="card">
-              <tr>
-                <td style="padding:14px 18px;">
-                  <table role="presentation" width="100%" class="text">
-                    <tr>
-                      <td>
-                        <span class="gold" style="font-weight:700;">
-                          <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z"/></svg>
-                          Premium Economy
-                        </span> – Emirates
-                      </td>
-                      <td align="right"><strong>NOK 48.000,-</strong></td>
-                    </tr>
-                  </table>
-                  <div class="muted" style="margin-top:8px;">
-                    Merprisen ovenfor er totalt for 2 voksne og 2 tenåringer. Pris og tilgjengelighet er med forbehold om endringer frem til endelig bestilling.
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- HOTELLER -->
-        <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Hotell</div></td></tr>
-        <tr>
-          <td style="padding:0 40px 0;" class="px">
-            <table role="presentation" width="100%">
-              <tr>
-                <td class="stack col">
-
-                  <!-- Hotel 1 -->
-                  <div class="hotel-long card wm text">
-                    <div class="wm-pad">
-                      <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#9d8665">M</text>
-                      </svg>
-                    </div>
-                    <div class="wm-inner">
-                      <div class="hotel-cap">
-                        <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M3 11h18v10H3zM7 3h10l2 4H5z"/></svg>
-                        Emerald Faarufushi 5★
-                      </div>
-                      <div class="hotel-loc"><span class="loc">Maldivene • Raa Atoll</span></div>
-                      <div class="hotel-dates sp-gap-chips"><span class="stay">23. desember – 30. desember 2025 • 7 netter</span></div>
-
-                      <div class="gallery sp-chips-hero">
-                        <button class="prev" aria-label="Forrige">‹</button>
-                        <button class="next" aria-label="Neste">›</button>
-                        <div class="gallery-strip">
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-7-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-7-scaled.jpg" alt="Emerald Faarufushi - Water Villas with Pool"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-3.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-3.jpg" alt="Emerald Faarufushi - Sunset"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-2.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-2.jpg" alt="Emerald Faarufushi - Aerial"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-6.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-6.jpg" alt="Emerald Faarufushi - Beach"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-10.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-10.jpg" alt="Emerald Faarufushi - Pool bar"></a>
-                        </div>
-                        <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
-                      </div>
-
-                      <table class="rate-list sp-hero-divider">
-                        <tr class="tight">
+                        <tr>
                           <td>
-                            Sunset Water Villa with Pool
-                            <div class="room-link">
-                              <a href="https://www.emerald-faarufushi.com/villas/sunset-water-villas-with-pool" target="_blank">Se villaen →</a>
+                            <div class="flight-inner">
+                              <div class="journey-title">
+                                <svg class="ico-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M2 13l1 2 7-1 4 5 2-1-3-6 6-1 1-2-7-1-4-6-2 1 3 7z"/></svg>
+                                Oslo til Malé – 22.12.2025
+                              </div>
+                              <div class="leg">
+                                <div class="chip">OSL → DXB</div>
+                                <div class="times">14:00 – 23:55</div>
+                                <span class="flight-meta">Emirates • EK 160</span>
+                              </div>
+                              <div class="layover"><span>Mellomlanding i Dubai • 2 t 35 m</span></div>
+                              <div class="leg">
+                                <div class="chip">DXB → MLE</div>
+                                <div class="times">02:30<sup class="plus1">+1</sup> – 07:35</div>
+                                <span class="flight-meta">Emirates • EK 656</span>
+                              </div>
+                              <div class="journey-foot">Total reisetid: 13 t 35 m</div>
+
+                              <div class="journey-sep"></div>
+
+                              <div class="journey-title">
+                                <svg class="ico-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M2 13l1 2 7-1 4 5 2-1-3-6 6-1 1-2-7-1-4-6-2 1 3 7z"/></svg>
+                                Malé til Oslo – 30.12.2025
+                              </div>
+                              <div class="leg">
+                                <div class="chip">MLE → DXB</div>
+                                <div class="times">23:00 – 02:35<sup class="plus1">+1</sup></div>
+                                <span class="flight-meta">Emirates • EK 653</span>
+                              </div>
+                              <div class="layover"><span>Mellomlanding i Dubai • 4 t 55 m</span></div>
+                              <div class="leg">
+                                <div class="chip">DXB → OSL</div>
+                                <div class="times">07:30 – 11:55</div>
+                                <span class="flight-meta">Emirates • EK 159</span>
+                              </div>
+                              <div class="journey-foot">Total reisetid: 16 t 55 m</div>
                             </div>
-                            <span class="mp">Deluxe All-Inclusive (Dine Around)</span>
                           </td>
-                          <td align="right"><strong>NOK 349.900,-</strong></td>
+                        </tr>
+                        <tr>
+                          <td style="padding:10px 18px 16px;">
+                            <table role="presentation" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td style="padding-right:12px;">
+                                  <img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Emirats-1.png" alt="Emirates" width="64" style="display:block;">
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
                         </tr>
                       </table>
-
-                      <div class="extras">
-                        <div class="extras-title">Høydepunkter & fordeler</div>
-                        <ul class="extras-list">
-                          <li>Stilrent luksusresort i frodige Raa Atoll</li>
-                          <li>Padel, tennis, vannsport og eventyr på havet</li>
-                          <li>Moderne villaer med privat basseng</li>
-                          <li>Deluxe All-Inclusive med fem restauranter</li>
-                          <li>Fantastisk husrev og rikt marineliv</li>
-                        </ul>
-                        <div class="extras-more"><a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi.pdf" target="_blank">Se brosjyre →</a></div>
-                      </div>
-
-                      <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 45 min.)</span></div>
-                      <div class="hotel-link"><a href="https://www.emerald-faarufushi.com/" target="_blank">Utforsk hotellet →</a></div>
                     </div><!-- /wm-inner -->
-                  </div>
-
-                  <!-- Hotel 2 -->
-                  <div class="hotel-long card wm text">
-                    <div class="wm-pad">
-                      <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#9d8665">M</text>
-                      </svg>
-                    </div>
-                    <div class="wm-inner">
-                      <div class="hotel-cap">
-                        <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M3 11h18v10H3zM7 3h10l2 4H5z"/></svg>
-                        Meyyafushi Maldives 5★
-                      </div>
-                      <div class="hotel-loc"><span class="loc">Maldivene • Lhaviyani Atoll</span></div>
-                      <div class="hotel-dates sp-gap-chips"><span class="stay">23. desember – 30. desember 2025 • 7 netter</span></div>
-
-                      <div class="gallery sp-chips-hero">
-                        <button class="prev" aria-label="Forrige">‹</button>
-                        <button class="next" aria-label="Neste">›</button>
-                        <div class="gallery-strip">
-                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Meyyafushi-10.webp" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Meyyafushi-10.webp" alt="Meyyafushi - Two Bedroom Water Pool Villa with Slide"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/P1-V2.png" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/P1-V2.png" alt="Meyyafushi - Padel Court"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/hero-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/hero-1.jpg" alt="Meyyafushi - Pool"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/BPV-Bedroom.1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/BPV-Bedroom.1.jpg" alt="Meyyafushi - Beach Pool Villa"></a>
-                          <a href="https://maldivia.dk/wp-content/uploads/2025/10/Alif-–-Asian-Restaurant-1.png" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Alif-–-Asian-Restaurant-1.png" alt="Meyyafushi - Restaurant"></a>
-                        </div>
-                        <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
-                      </div>
-
-                      <table class="rate-list sp-hero-divider">
-                        <tr class="tight">
-                          <td>
-                            Two Bedroom Water Pool Villa with Slide
-                            <div class="room-link">
-                              <a href="https://www.meyyafushi.com/villas-suites/" target="_blank">Se villaen →</a>
-                            </div>
-                            <span class="mp">Premium All-Inclusive (Dine Around)</span>
-                          </td>
-                          <td align="right"><strong>NOK 444.500,-</strong></td>
-                        </tr>
-                      </table>
-
-                      <div class="extras">
-                        <div class="extras-title">Høydepunkter & fordeler</div>
-                        <ul class="extras-list">
-                          <li>Helt nytt Premium All-Inclusive-resort</li>
-                          <li>Eksepsjonelt design og moderne poolvillaer</li>
-                          <li>Maldivenes første overwater padelbane</li>
-                          <li>60 min. spa (voksne) og 3 utflukter per person</li>
-                          <li>Unike fasiliteter som undervannsrestaurant</li>
-                        </ul>
-                        <div class="extras-more"><a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Meyyafushi-Maldives.pdf" target="_blank">Se brosjyre →</a></div>
-                      </div>
-
-                      <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 35 min.)</span></div>
-                      <div class="hotel-link"><a href="https://www.meyyafushi.com/" target="_blank">Utforsk hotellet →</a></div>
-                    </div>
-                  </div>
-
-                  <!-- Hotel 3 -->
-                  <div class="hotel-long card wm text">
-                    <div class="wm-pad">
-                      <svg viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#9d8665">M</text>
-                      </svg>
-                    </div>
-                    <div class="wm-inner">
-                      <div class="hotel-cap">
-                        <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M3 11h18v10H3zM7 3h10l2 4H5z"/></svg>
-                        InterContinental Maamunagau 5+★
-                      </div>
-                      <div class="hotel-loc"><span class="loc">Maldivene • Raa Atoll</span></div>
-                      <div class="hotel-dates sp-gap-chips"><span class="stay">23. desember – 30. desember 2025 • 7 netter</span></div>
-
-                      <div class="gallery sp-chips-hero">
-                        <button class="prev" aria-label="Forrige">‹</button>
-                        <button class="next" aria-label="Neste">›</button>
-                        <div class="gallery-strip">
-                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-2.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-2.jpg" alt="InterContinental Maamunagau - Aerial"></a>
-                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-1.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-1.jpg" alt="InterContinental Maamunagau - Overwater Pool Villa"></a>
-                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-4.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-4.jpg" alt="InterContinental Maamunagau - Snorkeling"></a>
-                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-5.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-5.jpg" alt="InterContinental Maamunagau - Sunset Bar"></a>
-                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-3.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-3.jpg" alt="InterContinental Maamunagau - Dine by Design"></a>
-                        </div>
-                        <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
-                      </div>
-
-                      <table class="rate-list sp-hero-divider">
-                        <tr class="tight">
-                          <td>
-                            One Bedroom Lagoon Pool Villa
-                            <div class="room-link">
-                              <a href="https://maldives.intercontinental.com/villas-residences/villas/1-bedroom-lagoon-pool-villas/" target="_blank">Se villaen →</a>
-                            </div>
-                            <span class="mp">All-Inclusive (Dine Around)</span>
-                          </td>
-                          <td align="right"><strong>NOK 479.900,-</strong></td>
-                        </tr>
-                      </table>
-
-                      <div class="extras">
-                        <div class="extras-title">Høydepunkter & fordeler</div>
-                        <ul class="extras-list">
-                          <li>Unik beliggenhet i Raa Atoll</li>
-                          <li>Snorkling og dykking med manta rays</li>
-                          <li>Villaer med basseng og maldivisk design</li>
-                          <li>Prisbelønte restauranter som The Lighthouse</li>
-                          <li>Overwater spa og yoga med havutsikt</li>
-                        </ul>
-                        <div class="extras-more"><a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives.pdf" target="_blank">Se brosjyre →</a></div>
-                      </div>
-
-                      <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 40 min.)</span></div>
-                      <div class="hotel-link"><a href="https://maldives.intercontinental.com/" target="_blank">Utforsk hotellet →</a></div>
-                    </div>
-                  </div>
-
+                  </div><!-- /card -->
                 </td>
               </tr>
-            </table>
-          </td>
-        </tr>
 
-        <!-- INKLUDERER -->
-        <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
-        <tr>
-          <td style="padding:0 40px 18px;" class="px">
-            <table role="presentation" width="100%" class="includes-card" style="border-collapse:separate;">
+              <!-- UPGRADE -->
+              <tr><td style="padding:14px 40px 10px;" class="px"><div class="section-title">Oppgrader flyreisen</div></td></tr>
               <tr>
-                <td class="includes-inner">
+                <td style="padding:0 40px 0px;" class="px">
+                  <table role="presentation" width="100%" class="card">
+                    <tr>
+                      <td style="padding:14px 18px;">
+                        <table role="presentation" width="100%" class="text">
+                          <tr>
+                            <td>
+                              <span class="gold" style="font-weight:700;">
+                                <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z"/></svg>
+                                Premium Economy
+                              </span> – Emirates
+                            </td>
+                            <td align="right"><strong style="color:#f3eee6;">NOK 48.000,-</strong></td>
+                          </tr>
+                        </table>
+                        <div class="muted" style="margin-top:8px;">
+                          Merprisen ovenfor er totalt for 2 voksne og 2 tenåringer. Pris og tilgjengelighet er med forbehold om endringer frem til endelig bestilling.
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- HOTELS -->
+              <tr><td style="padding:14px 40px 10px;" class="px"><div class="section-title">Hotell</div></td></tr>
+              <tr>
+                <td style="padding:0 40px 0;" class="px">
                   <table role="presentation" width="100%">
                     <tr>
-                      <td align="left" style="padding-bottom:6px;">
-                        <span class="people-pill">Gjelder for: 2 voksne og 2 tenåringer</span>
+                      <td class="stack col">
+
+                        <!-- HOTEL 1 -->
+                        <div class="hotel-long card wm text">
+                          <div aria-hidden="true">
+                            <svg class="wm-mark" viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg"><text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#d8c5a3">M</text></svg>
+                          </div>
+                          <div class="wm-inner">
+                            <div class="hotel-cap">
+                              <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M3 11h18v10H3zM7 3h10l2 4H5z"/></svg>
+                              Emerald Faarufushi 5★
+                            </div>
+                            <div class="hotel-loc"><span class="loc">Maldivene • Raa Atoll</span></div>
+                            <div class="hotel-dates" style="margin-top:6px;"><span class="stay">23. desember – 30. desember 2025 • 7 netter</span></div>
+
+                            <div class="gallery" style="margin-top:10px;">
+                              <button class="prev" aria-label="Forrige">‹</button>
+                              <button class="next" aria-label="Neste">›</button>
+                              <div class="gallery-strip">
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-7-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-7-scaled.jpg" alt="Water Villas with Pool"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-3.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-3.jpg" alt="Sunset"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-2.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-2.jpg" alt="Aerial"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-6.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-6.jpg" alt="Beach"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-10.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi-10.jpg" alt="Pool bar"></a>
+                              </div>
+                              <div class="scroll-hint">Swipe for flere bilder →</div>
+                            </div>
+
+                            <table class="rate-list" style="border-top:1px solid #2e2e2e; margin-top:18px; padding-top:18px;">
+                              <tr class="tight">
+                                <td>
+                                  Sunset Water Villa with Pool
+                                  <div class="muted room-link" style="margin-top:4px;">
+                                    <a href="https://www.emerald-faarufushi.com/villas/sunset-water-villas-with-pool" target="_blank" style="color:#d8c5a3; text-decoration:underline;">Se villaen →</a>
+                                  </div>
+                                  <span class="mp">Deluxe All-Inclusive (Dine Around)</span>
+                                </td>
+                                <td align="right"><strong style="color:#f3eee6;">NOK 349.900,-</strong></td>
+                              </tr>
+                            </table>
+
+                            <div class="extras">
+                              <div class="extras-title">Høydepunkter & fordeler</div>
+                              <ul class="extras-list">
+                                <li>Stilrent luksusresort i frodige Raa Atoll</li>
+                                <li>Padel, tennis, vannsport og eventyr på havet</li>
+                                <li>Moderne villaer med privat basseng</li>
+                                <li>Deluxe All-Inclusive med fem restauranter</li>
+                                <li>Fantastisk husrev og rikt marineliv</li>
+                              </ul>
+                              <div class="extras-more"><a href="https://maldivia.dk/wp-content/uploads/2025/10/Emerald-Faarufushi.pdf" target="_blank">Se brosjyre →</a></div>
+                            </div>
+
+                            <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 45 min.)</span></div>
+                            <div class="hotel-link" style="margin-top:10px;"><a href="https://www.emerald-faarufushi.com/" target="_blank" style="color:#d8c5a3; text-decoration:underline;">Utforsk hotellet →</a></div>
+                          </div>
+                        </div>
+
+                        <!-- HOTEL 2 -->
+                        <div class="hotel-long card wm text" style="margin-top:18px;">
+                          <div aria-hidden="true">
+                            <svg class="wm-mark" viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg"><text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#d8c5a3">M</text></svg>
+                          </div>
+                          <div class="wm-inner">
+                            <div class="hotel-cap">
+                              <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M3 11h18v10H3zM7 3h10l2 4H5z"/></svg>
+                              Meyyafushi Maldives 5★
+                            </div>
+                            <div class="hotel-loc"><span class="loc">Maldivene • Lhaviyani Atoll</span></div>
+                            <div class="hotel-dates" style="margin-top:6px;"><span class="stay">23. desember – 30. desember 2025 • 7 netter</span></div>
+
+                            <div class="gallery" style="margin-top:10px;">
+                              <button class="prev" aria-label="Forrige">‹</button>
+                              <button class="next" aria-label="Neste">›</button>
+                              <div class="gallery-strip">
+                                <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Meyyafushi-10.webp" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Meyyafushi-10.webp" alt="Two Bedroom Water Pool Villa with Slide"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/P1-V2.png" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/P1-V2.png" alt="Padel Court"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/hero-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/hero-1.jpg" alt="Pool"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/BPV-Bedroom.1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/BPV-Bedroom.1.jpg" alt="Beach Pool Villa"></a>
+                                <a href="https://maldivia.dk/wp-content/uploads/2025/10/Alif-–-Asian-Restaurant-1.png" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Alif-–-Asian-Restaurant-1.png" alt="Restaurant"></a>
+                              </div>
+                              <div class="scroll-hint">Swipe for flere bilder →</div>
+                            </div>
+
+                            <table class="rate-list" style="border-top:1px solid #2e2e2e; margin-top:18px; padding-top:18px;">
+                              <tr class="tight">
+                                <td>
+                                  Two Bedroom Water Pool Villa with Slide
+                                  <div class="muted room-link" style="margin-top:4px;">
+                                    <a href="https://www.meyyafushi.com/villas-suites/" target="_blank" style="color:#d8c5a3; text-decoration:underline;">Se villaen →</a>
+                                  </div>
+                                  <span class="mp">Premium All-Inclusive (Dine Around)</span>
+                                </td>
+                                <td align="right"><strong style="color:#f3eee6;">NOK 444.500,-</strong></td>
+                              </tr>
+                            </table>
+
+                            <div class="extras">
+                              <div class="extras-title">Høydepunkter & fordeler</div>
+                              <ul class="extras-list">
+                                <li>Helt nytt Premium All-Inclusive-resort</li>
+                                <li>Eksepsjonelt design og moderne poolvillaer</li>
+                                <li>Maldivenes første overwater padelbane</li>
+                                <li>60 min. spa (voksne) og 3 utflukter per person</li>
+                                <li>Unike fasiliteter som undervannsrestaurant</li>
+                              </ul>
+                              <div class="extras-more"><a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Meyyafushi-Maldives.pdf" target="_blank">Se brosjyre →</a></div>
+                            </div>
+
+                            <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 35 min.)</span></div>
+                            <div class="hotel-link" style="margin-top:10px;"><a href="https://www.meyyafushi.com/" target="_blank" style="color:#d8c5a3; text-decoration:underline;">Utforsk hotellet →</a></div>
+                          </div>
+                        </div>
+
+                        <!-- HOTEL 3 -->
+                        <div class="hotel-long card wm text" style="margin-top:18px;">
+                          <div aria-hidden="true">
+                            <svg class="wm-mark" viewBox="0 0 150 60" xmlns="http://www.w3.org/2000/svg"><text x="100%" y="50%" text-anchor="end" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-size="56" fill="#d8c5a3">M</text></svg>
+                          </div>
+                          <div class="wm-inner">
+                            <div class="hotel-cap">
+                              <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M3 11h18v10H3zM7 3h10l2 4H5z"/></svg>
+                              InterContinental Maamunagau 5+★
+                            </div>
+                            <div class="hotel-loc"><span class="loc">Maldivene • Raa Atoll</span></div>
+                            <div class="hotel-dates" style="margin-top:6px;"><span class="stay">23. desember – 30. desember 2025 • 7 netter</span></div>
+
+                            <div class="gallery" style="margin-top:10px;">
+                              <button class="prev" aria-label="Forrige">‹</button>
+                              <button class="next" aria-label="Neste">›</button>
+                              <div class="gallery-strip">
+                                <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-2.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-2.jpg" alt="Aerial"></a>
+                                <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-1.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-1.jpg" alt="Overwater Pool Villa"></a>
+                                <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-4.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-4.jpg" alt="Snorkeling"></a>
+                                <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-5.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-5.jpg" alt="Sunset Bar"></a>
+                                <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-3.jpg" target="_blank"><img src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives-3.jpg" alt="Dine by Design"></a>
+                              </div>
+                              <div class="scroll-hint">Swipe for flere bilder →</div>
+                            </div>
+
+                            <table class="rate-list" style="border-top:1px solid #2e2e2e; margin-top:18px; padding-top:18px;">
+                              <tr class="tight">
+                                <td>
+                                  One Bedroom Lagoon Pool Villa
+                                  <div class="muted room-link" style="margin-top:4px;">
+                                    <a href="https://maldives.intercontinental.com/villas-residences/villas/1-bedroom-lagoon-pool-villas/" target="_blank" style="color:#d8c5a3; text-decoration:underline;">Se villaen →</a>
+                                  </div>
+                                  <span class="mp">All-Inclusive (Dine Around)</span>
+                                </td>
+                                <td align="right"><strong style="color:#f3eee6;">NOK 479.900,-</strong></td>
+                              </tr>
+                            </table>
+
+                            <div class="extras">
+                              <div class="extras-title">Høydepunkter & fordeler</div>
+                              <ul class="extras-list">
+                                <li>Unik beliggenhet i Raa Atoll</li>
+                                <li>Snorkling og dykking med manta rays</li>
+                                <li>Villaer med basseng og maldivisk design</li>
+                                <li>Prisbelønte restauranter som The Lighthouse</li>
+                                <li>Overwater spa og yoga med havutsikt</li>
+                              </ul>
+                              <div class="extras-more"><a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maldives.pdf" target="_blank">Se brosjyre →</a></div>
+                            </div>
+
+                            <div class="hotel-meta"><span class="tr">Transfer: Sjøfly (ca. 40 min.)</span></div>
+                            <div class="hotel-link" style="margin-top:10px;"><a href="https://maldives.intercontinental.com/" target="_blank" style="color:#d8c5a3; text-decoration:underline;">Utforsk hotellet →</a></div>
+                          </div>
+                        </div>
+
                       </td>
                     </tr>
                   </table>
+                </td>
+              </tr>
 
-                  <table role="presentation" class="inc-list">
+              <!-- INCLUDES -->
+              <tr><td style="padding:14px 40px 10px;" class="px"><div class="section-title">Reisetilbudet inkluderer</div></td></tr>
+              <tr>
+                <td style="padding:0 40px 18px;" class="px">
+                  <table role="presentation" width="100%" class="includes-card">
                     <tr>
-                      <td>
-                        <div class="inc-item"><span class="tick">✓</span>Fly som angitt i tilbudet | Economy Class</div>
-                        <div class="inc-item"><span class="tick">✓</span>Transfer som angitt i tilbudet</div>
-                        <div class="inc-item"><span class="tick">✓</span>7 netter på valgt hotell</div>
-                      </td>
-                      <td>
-                        <div class="inc-item"><span class="tick">✓</span>Måltider som angitt i tilbudet</div>
-                        <div class="inc-item"><span class="tick">✓</span>Obligatoriske skatter og avgifter</div>
+                      <td class="includes-inner">
+                        <table role="presentation" width="100%"><tr><td align="left" style="padding-bottom:6px;"><span class="people-pill">Gjelder for: 2 voksne og 2 tenåringer</span></td></tr></table>
+                        <table role="presentation" class="inc-list">
+                          <tr>
+                            <td>
+                              <div class="inc-item"><span class="tick">✓</span>Fly som angitt i tilbudet | Economy Class</div>
+                              <div class="inc-item"><span class="tick">✓</span>Transfer som angitt i tilbudet</div>
+                              <div class="inc-item"><span class="tick">✓</span>7 netter på valgt hotell</div>
+                            </td>
+                            <td>
+                              <div class="inc-item"><span class="tick">✓</span>Måltider som angitt i tilbudet</div>
+                              <div class="inc-item"><span class="tick">✓</span>Obligatoriske skatter og avgifter</div>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                     </tr>
                   </table>
-
                 </td>
               </tr>
-            </table>
-          </td>
-        </tr>
 
-        <!-- PRIVILEGES -->
-        <tr><td style="padding:0 40px;" class="px"><div class="sep-micro"></div></td></tr>
-        <tr><td style="padding:16px 40px 10px;" class="px"><div class="section-title">Maldivia Privileges</div></td></tr>
-        <tr>
-          <td style="padding:0 40px 8px;" class="px">
-            <table role="presentation" width="100%" class="priv-card">
+              <!-- PRIVILEGES -->
+              <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Maldivia Privileges</div></td></tr>
               <tr>
-                <td class="priv-inner text">
-                  <div class="priv-title">Eksklusive fordeler når du bestiller gjennom oss</div>
-
-                  <div class="priv-row">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-                    Dedikert reiseplan i PDF + delbar mobilversjon
-                  </div>
-                  <div class="priv-row">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0v1H5v-1z"/></svg>
-                    Personlig concierge 24/7 under hele oppholdet
-                  </div>
-                  <div class="priv-row">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M12 2l9 4-9 4-9-4 9-4zm0 6l9 4-9 4-9-4 9-4zm0 6l9 4-9 4-9-4 9-4z"/></svg>
-                    VIP-ankomst i Malé (rådgivning for raskeste transfer)
-                  </div>
-                  <div class="priv-row">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M4 4h16v2H4zm0 7h16v2H4zm0 7h10v2H4z"/></svg>
-                    Ønskehåndtering: bordreservasjoner, spa & utflukter
-                  </div>
-                  <div class="priv-row">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm-1-5l7-7-1.41-1.41L11 14.17l-2.59-2.58L7 13l4 4z"/></svg>
-                    Prioritert support før og under reisen
-                  </div>
-
-                  <div class="priv-note">* Fordeler kan variere etter hotell og tilgjengelighet, men vi prioriterer alltid det lille ekstra.</div>
+                <td style="padding:0 40px 8px;" class="px">
+                  <table role="presentation" width="100%" class="priv-card">
+                    <tr>
+                      <td class="priv-inner text">
+                        <div class="priv-title">Eksklusive fordeler når du bestiller gjennom oss</div>
+                        <div class="priv-row"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Dedikert reiseplan i PDF + delbar mobilversjon</div>
+                        <div class="priv-row"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0v1H5v-1z"/></svg> Personlig concierge 24/7 under hele oppholdet</div>
+                        <div class="priv-row"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M12 2l9 4-9 4-9-4 9-4zm0 6l9 4-9 4-9-4 9-4zm0 6l9 4-9 4-9-4 9-4z"/></svg> VIP-ankomst i Malé (rådgivning for raskeste transfer)</div>
+                        <div class="priv-row"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M4 4h16v2H4zm0 7h16v2H4zm0 7h10v2H4z"/></svg> Ønskehåndtering: bordreservasjoner, spa & utflukter</div>
+                        <div class="priv-row"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm-1-5l7-7-1.41-1.41L11 14.17l-2.59-2.58L7 13l4 4z"/></svg> Prioritert support før og under reisen</div>
+                        <div class="priv-note">* Fordeler kan variere etter hotell og tilgjengelighet, men vi prioriterer alltid det lille ekstra.</div>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
-            </table>
-          </td>
-        </tr>
 
-        <!-- CONCIERGE -->
-        <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Kontakt & neste steg</div></td></tr>
-        <tr>
-          <td style="padding:0 40px 8px;" class="px">
-            <table role="presentation" width="100%" class="concierge">
+              <!-- CONTACT -->
+              <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Kontakt & neste steg</div></td></tr>
               <tr>
-                <td class="concierge-inner">
+                <td style="padding:0 40px 8px;" class="px">
+                  <table role="presentation" width="100%" class="concierge">
+                    <tr>
+                      <td class="concierge-inner">
+                        <table role="presentation" width="100%">
+                          <tr><td class="text" style="padding-bottom:10px;"><strong class="gold">Spørsmål på direkten?</strong><br>Svar på denne e-posten, eller bruk vår prioriterte WhatsApp-linje.</td></tr>
+                          <tr>
+                            <td>
+                              <a class="cta-btn" href="https://wa.me/4799999999?text=Hei%20Maldivia%2C%20vi%20vil%20gjerne%20tilpasse%20reisetilbudet" target="_blank">
+                                <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1fa855" style="margin-right:8px;"><path d="M20.52 3.48A11.94 11.94 0 0012.06 0C5.46 0 .06 5.4.06 12a11.9 11.9 0 001.6 6l-1.66 6 6.2-1.62a12 12 0 005.86 1.54h.01c6.6 0 12-5.4 12-12a11.9 11.9 0 00-3.55-8.45zm-8.46 18.4a9.88 9.88 0 01-5.02-1.38l-.36-.21-3.69.96.99-3.59-.24-.37A9.87 9.87 0 012.17 12c0-5.43 4.45-9.86 9.93-9.86 2.65 0 5.15 1.03 7.03 2.9a9.86 9.86 0 012.9 6.96c0 5.43-4.45 9.88-9.96 9.88zm5.73-7.4c-.31-.16-1.83-.9-2.11-1-.28-.1-.49-.16-.7.16-.2.31-.8 1-.98 1.21-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.47-1.54-.91-.8-1.52-1.78-1.7-2.08-.18-.31-.02-.47.14-.62.14-.14.31-.36.46-.54.16-.18.2-.31.31-.52.1-.2.05-.39-.03-.54-.09-.16-.7-1.68-.95-2.3-.25-.6-.5-.52-.7-.52h-.6c-.2 0-.52.08-.8.39-.27.31-1.05 1.03-1.05 2.5s1.07 2.9 1.22 3.1c.16.2 2.1 3.2 5.06 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.83-.75 2.09-1.47.26-.72.26-1.34.18-1.47-.07-.13-.26-.2-.57-.36z"/></svg>
+                                WhatsApp – prioritet
+                              </a>
+                              <a class="cta-btn" href="mailto:wp@maldivia.no?subject=Book%20uforpliktende%2015%20min%20samtale" style="margin-left:8px;">
+                                <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm13 8H6v10h14V10z"/></svg>
+                                Book 15 min. prat
+                              </a>
+                              <a class="cta-btn" href="mailto:?subject=Se%20dette%20reisetilbudet%20fra%20Maldivia&body=Se%20dette%20vilde%20luksusoppsettet%20fra%20Maldivia.%20Jeg%20elsker%20det!" style="margin-left:8px;">
+                                <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M12 3l10 6-10 6-10-6 10-6zm0 8l10 6-10 6-10-6 10-6z"/></svg>
+                                Del med partner
+                              </a>
+                            </td>
+                          </tr>
+                          <tr><td class="muted" style="padding-top:10px;">Svarstider: normalt innen 2 timer i kontortid. Utenom åpningstid – bruk WhatsApp.</td></tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- ASSURANCE -->
+              <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Trygghet & garanti</div></td></tr>
+              <tr>
+                <td style="padding:0 40px 22px;" class="px">
+                  <table role="presentation" width="100%" class="guar">
+                    <tr>
+                      <td class="guar-inner">
+                        <div class="guar-item"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M12 2l7 4v6c0 5-3.5 9.7-7 10-3.5-.3-7-5-7-10V6l7-4z"/></svg> Medlem av Rejsegarantifonden (DK) – økonomisk trygghet</div>
+                        <div class="guar-item"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M21 7l-9 9-5-5 1.5-1.5L12 13l7.5-7.5z"/></svg> Alle skatter og avgifter inkludert i tilbudsprisen</div>
+                        <div class="guar-item"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#d8c5a3"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10zM11 6h2v6h-2V6zm0 8h2v2h-2v-2z"/></svg> Transparent vilkår – ingen skjulte tillegg</div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- CTA -->
+              <tr>
+                <td align="center" style="padding:0 40px 28px;" class="px">
+                  <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="mailto:wp@maldivia.no?subject=Reisetilbud%20til%20Maldivene%20%7C%20Maldivia%20-%20Signature"
+                      style="height:44px;v-text-anchor:middle;width:360px;" arcsize="50%" strokeweight="1px" strokecolor="#a68a5a" fillcolor="#1a1a1a">
+                      <w:anchorlock/>
+                      <center style="color:#f3eee6;font-family:'Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;">
+                        Bestill / tilpass reisetilbudet
+                      </center>
+                    </v:roundrect>
+                  <![endif]-->
+                  <!--[if !mso]><!-- -->
+                    <a href="mailto:wp@maldivia.no?subject=Reisetilbud%20til%20Maldivene%20%7C%20Maldivia%20-%20Signature" class="cta-btn">
+                      Bestill / tilpass reisetilbudet
+                    </a>
+                  <!--<![endif]-->
+
+                  <div class="muted" style="margin-top:8px;">
+                    Fungerer ikke knappen? Skriv til <a href="mailto:wp@maldivia.no" style="color:#d8c5a3; text-decoration:underline;">wp@maldivia.no</a>.
+                  </div>
+                </td>
+              </tr>
+
+              <!-- FOOTER -->
+              <tr>
+                <td align="center" class="text" style="padding:18px 18px; border-top:1px solid #2e2e2e; color:#b9b2a7; font-size:12px; line-height:18px;">
                   <table role="presentation" width="100%">
                     <tr>
-                      <td class="text" style="padding-bottom:10px;">
-                        <strong class="gold">Spørsmål på direkten?</strong><br>
-                        Svar på denne e-posten, eller bruk vår prioriterte WhatsApp-linje.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a class="cta-btn" href="https://wa.me/4799999999?text=Hei%20Maldivia%2C%20vi%20vil%20gjerne%20tilpasse%20reisetilbudet" target="_blank">
-                          <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1fa855" style="margin-right:8px;"><path d="M20.52 3.48A11.94 11.94 0 0012.06 0C5.46 0 .06 5.4.06 12a11.9 11.9 0 001.6 6l-1.66 6 6.2-1.62a12 12 0 005.86 1.54h.01c6.6 0 12-5.4 12-12a11.9 11.9 0 00-3.55-8.45zm-8.46 18.4a9.88 9.88 0 01-5.02-1.38l-.36-.21-3.69.96.99-3.59-.24-.37A9.87 9.87 0 012.17 12c0-5.43 4.45-9.86 9.93-9.86 2.65 0 5.15 1.03 7.03 2.9a9.86 9.86 0 012.9 6.96c0 5.43-4.45 9.88-9.96 9.88zm5.73-7.4c-.31-.16-1.83-.9-2.11-1-.28-.1-.49-.16-.7.16-.2.31-.8 1-.98 1.21-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.47-1.54-.91-.8-1.52-1.78-1.7-2.08-.18-.31-.02-.47.14-.62.14-.14.31-.36.46-.54.16-.18.2-.31.31-.52.1-.2.05-.39-.03-.54-.09-.16-.7-1.68-.95-2.3-.25-.6-.5-.52-.7-.52h-.6c-.2 0-.52.08-.8.39-.27.31-1.05 1.03-1.05 2.5s1.07 2.9 1.22 3.1c.16.2 2.1 3.2 5.06 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.83-.75 2.09-1.47.26-.72.26-1.34.18-1.47-.07-.13-.26-.2-.57-.36z"/></svg>
-                          WhatsApp – prioritet
-                        </a>
-                        <a class="cta-btn" href="mailto:wp@maldivia.no?subject=Book%20uforpliktende%2015%20min%20samtale" style="margin-left:8px;">
-                          <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm13 8H6v10h14V10z"/></svg>
-                          Book 15 min. prat
-                        </a>
-                        <a class="cta-btn" href="mailto:?subject=Se%20dette%20reisetilbudet%20fra%20Maldivia&body=Jeg%20elsker%20dette%20oppsettet%20%E2%80%93%20se%20vedlagt%20lenke%20eller%20videresend%20denne%20e-posten%20til%20deg%20selv." style="margin-left:8px;">
-                          <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M12 3l10 6-10 6-10-6 10-6zm0 8l10 6-10 6-10-6 10-6z"/></svg>
-                          Del med partner
+                      <td align="center" style="padding:0 0 8px 0;">
+                        <a href="https://no.trustpilot.com/review/maldivia.dk?languages=all" target="_blank" style="display:block;">
+                          <img src="https://maldivia.dk/wp-content/uploads/2025/10/Trustpilot.png" width="120" alt="Trustpilot – 5 stjerners anmeldelser" style="display:block; height:auto; filter:grayscale(100%) brightness(1.2);">
                         </a>
                       </td>
                     </tr>
                     <tr>
-                      <td class="muted" style="padding-top:10px;">
-                        Svarstider: normalt innen 2 timer i kontortid. Utenom åpningstid – bruk WhatsApp.
+                      <td align="center" style="padding:0 0 8px 0;">
+                        <a href="https://www.maldivia.no" target="_blank" style="display:block;">
+                          <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png" width="130" alt="Maldivia – Beyond Excellence" style="display:block; height:auto; filter:grayscale(10%) brightness(1.1);">
+                        </a>
                       </td>
                     </tr>
+                    <tr>
+                      <td align="center" style="padding:0 0 14px 0;">
+                        <a href="https://www.rejsegarantifonden.dk/medlem?s=2688" target="_blank" style="display:block;">
+                          <img src="https://maldivia.dk/wp-content/uploads/2025/10/Rejsegarantifonden.png" width="110" alt="Medlem av den danske Rejsegarantifonden" style="display:block; height:auto; filter:grayscale(100%) brightness(1.2);">
+                        </a>
+                      </td>
+                    </tr>
+                    <tr><td align="center">© Maldivia – En del av The Makai Travel Group</td></tr>
                   </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
 
-        <!-- TRYGGHET & PRESS -->
-        <tr><td style="padding:10px 40px 10px;" class="px"><div class="section-title">Trygghet & anerkjennelser</div></td></tr>
-        <tr>
-          <td style="padding:0 40px 22px;" class="px">
-            <table role="presentation" width="100%" class="guar">
-              <tr>
-                <td class="guar-inner">
-                  <div class="guar-item">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M12 2l7 4v6c0 5-3.5 9.7-7 10-3.5-.3-7-5-7-10V6l7-4z"/></svg>
-                    Medlem av Rejsegarantifonden (DK) – økonomisk trygghet
-                  </div>
-                  <div class="guar-item">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M21 7l-9 9-5-5 1.5-1.5L12 13l7.5-7.5z"/></svg>
-                    Alle skatter og avgifter inkludert i tilbudsprisen
-                  </div>
-                  <div class="guar-item">
-                    <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#9d8665"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10zM11 6h2v6h-2V6zm0 8h2v2h-2v-2z"/></svg>
-                    Transparent vilkår – ingen skjulte tillegg
-                  </div>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- CTA -->
-        <tr>
-          <td align="center" style="padding:0 40px 28px;" class="px">
-            <!--[if mso]>
-              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="mailto:wp@maldivia.no?subject=Reisetilbud%20til%20Maldivene%20%7C%20Maldivia%20-%20Beyond%20Excellence"
-                style="height:44px;v-text-anchor:middle;width:360px;" arcsize="50%" strokeweight="1px" strokecolor="#9d8665" fillcolor="#e7e2da">
-                <w:anchorlock/>
-                <center style="color:#1c1c1c;font-family:'TeX Gyre Termes','Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;">
-                  Bestill / tilpass reisetilbudet
-                </center>
-              </v:roundrect>
-            <![endif]-->
-            <!--[if !mso]><!-- -->
-              <a href="mailto:wp@maldivia.no?subject=Reisetilbud%20til%20Maldivene%20%7C%20Maldivia%20-%20Beyond%20Excellence"
-                 style="background:#e7e2da;border:1px solid #9d8665;border-radius:999px;color:#1c1c1c;display:inline-block;font-family:'TeX Gyre Termes','Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:.6px;line-height:16px;text-transform:uppercase;text-decoration:none;padding:14px 24px;">
-                Bestill / tilpass reisetilbudet
-              </a>
-            <!--<![endif]-->
-
-            <div class="muted mobile-only" style="margin-top:8px;">
-              Fungerer ikke knappen? Skriv til
-              <a href="mailto:wp@maldivia.no">wp@maldivia.no</a>.
-            </div>
-          </td>
-        </tr>
-
-        <!-- FOOTER -->
-        <tr>
-          <td align="center" class="text"
-              style="padding:18px 18px; border-top:1px solid #e7e2da; color:#6a6a6a; font-size:12px; line-height:18px;">
-
-            <table role="presentation" width="100%" style="border-collapse:collapse;">
-              <tr>
-                <td align="center" style="padding:0 0 8px 0;">
-                  <a href="https://no.trustpilot.com/review/maldivia.dk?languages=all" target="_blank" style="text-decoration:none; line-height:0; display:block;">
-                    <img src="https://maldivia.dk/wp-content/uploads/2025/10/Trustpilot.png"
-                         width="120" alt="Trustpilot – 5 stjerners anmeldelser"
-                         style="display:block; height:auto;">
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td align="center" style="padding:0 0 8px 0;">
-                  <a href="https://www.maldivia.no" target="_blank" style="text-decoration:none; line-height:0; display:block;">
-                    <img src="https://maldivia.dk/wp-content/uploads/2025/10/LOGO-PNG-04-scaled.png"
-                         width="130" alt="Maldivia – Beyond Excellence" style="display:block; height:auto;">
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td align="center" style="padding:0 0 14px 0;">
-                  <a href="https://www.rejsegarantifonden.dk/medlem?s=2688" target="_blank" style="text-decoration:none; line-height:0; display:block;">
-                    <img src="https://maldivia.dk/wp-content/uploads/2025/10/Rejsegarantifonden.png"
-                         width="110" alt="Medlem av den danske Rejsegarantifonden"
-                         style="display:block; height:auto;">
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td align="center" style="padding:0;">
-                  © Maldivia – En del av The Makai Travel Group
-                </td>
-              </tr>
-            </table>
-
-            <!-- Desktop gallery JS -->
-            <script>
-              (function(){
-                if (typeof window === 'undefined') return;
-                function initGallery(g){
-                  const strip = g.querySelector('.gallery-strip');
-                  const slides = strip ? strip.querySelectorAll('a') : [];
-                  if (!strip || !slides.length) return;
-                  let index = 0;
-                  const prev = g.querySelector('.prev');
-                  const next = g.querySelector('.next');
-                  function update(){
-                    if (window.matchMedia('(max-width:600px)').matches){
-                      strip.style.transform = '';
-                      return;
+                  <!-- Desktop gallery JS (ignored by most email clients, harmless) -->
+                  <script>
+                  (function(){
+                    if (typeof window === 'undefined') return;
+                    function initGallery(g){
+                      const strip = g.querySelector('.gallery-strip');
+                      const slides = strip ? strip.querySelectorAll('a') : [];
+                      if (!strip || !slides.length) return;
+                      let index = 0;
+                      const prev = g.querySelector('.prev');
+                      const next = g.querySelector('.next');
+                      function update(){
+                        if (window.matchMedia('(max-width:600px)').matches){ strip.style.transform=''; return; }
+                        strip.style.transform = 'translateX(' + (-index * 100) + '%)';
+                      }
+                      function go(d){ index = (index + d + slides.length) % slides.length; update(); }
+                      prev && prev.addEventListener('click', function(e){ e.preventDefault(); go(-1); });
+                      next && next.addEventListener('click', function(e){ e.preventDefault(); go(1); });
+                      window.addEventListener('resize', update);
+                      update();
                     }
-                    strip.style.transform = 'translateX(' + (-index * 100) + '%)';
-                  }
-                  function go(delta){
-                    index = (index + delta + slides.length) % slides.length;
-                    update();
-                  }
-                  prev && prev.addEventListener('click', function(e){ e.preventDefault(); go(-1); });
-                  next && next.addEventListener('click', function(e){ e.preventDefault(); go(1); });
-                  window.addEventListener('resize', update);
-                  update();
-                }
-                document.querySelectorAll('.gallery').forEach(initGallery);
-              })();
-            </script>
+                    document.querySelectorAll('.gallery').forEach(initGallery);
+                  })();
+                  </script>
+                </td>
+              </tr>
+
+            </table>
           </td>
         </tr>
-
       </table>
-      <!-- /OUTER WRAP -->
-
     </td>
   </tr>
 </table>
