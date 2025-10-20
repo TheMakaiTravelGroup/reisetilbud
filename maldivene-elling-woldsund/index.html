@@ -148,12 +148,13 @@
 
 .gallery .prev, .gallery .next{
   position:absolute; top:50%; transform:translateY(-50%);
+  display:flex; align-items:center; justify-content:center; /* NYT */
   background:rgba(255,255,255,0.9);
   border:none; border-radius:50%;
   width:36px; height:36px; cursor:pointer;
-  font-size:18px; line-height:36px; text-align:center;
+  font-size:18px; text-align:center;
   color:#9d8665; box-shadow:0 2px 4px rgba(0,0,0,0.1);
-  z-index:5; /* was 2 */
+  z-index:5;
 }
       .gallery .prev{ left:10px; }
       .gallery .next{ right:10px; }
