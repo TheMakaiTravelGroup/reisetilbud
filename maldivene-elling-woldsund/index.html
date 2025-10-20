@@ -419,7 +419,20 @@
       @media only screen and (min-width:601px){
         .gallery-pdf + .sp-hero-divider{ padding-top:6px !important; }
       }
-      
+      /* =======================
+   DESKTOP-ONLY SPACING
+   ======================= */
+@media only screen and (min-width:601px){
+
+  /* (1) Billede → PDF-link
+     Summen af disse to = afstanden fra galleriet ned til "Se bildegalleri (PDF) →" */
+  .gallery.sp-chips-hero{ padding-bottom:10px !important; } /* grovknap */
+  .gallery-pdf{ margin-top:4px !important; }                /* fintrim */
+
+  /* (2) PDF-link → divider
+     Denne ene værdi = afstanden fra PDF-link til den horisontale linje */
+  .gallery-pdf + .sp-hero-divider{ padding-top:10px !important; }
+}      
     </style>
   </head>
   <body>
