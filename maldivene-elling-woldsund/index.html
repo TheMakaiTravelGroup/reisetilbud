@@ -341,6 +341,37 @@
       }
 
       /* (FJERNET: tidligere .gallery-pdf spacing-regler – nu styres det inline) */
+      /* =========================================
+   MOBIL (≤600px): Genskab tidligere spacing + stil
+   ========================================= */
+@media only screen and (max-width:600px){
+
+  /* Galleriets bund-padding og divider-spacing som før */
+  .gallery.sp-chips-hero{ padding-bottom:18px !important; }
+  .sp-hero-divider{ margin-top:12px !important; padding-top:8px !important; }
+
+  /* PDF-linket under galleriet: tilbage til 12/18 + grå tekst */
+  .room-link.gallery-pdf{
+    margin-top:4px !important;
+    font-size:12px !important;
+    line-height:18px !important;
+    color:#6a6a6a !important;   /* samme som før */
+  }
+  .room-link.gallery-pdf a{
+    color:#9d8665 !important;   /* guldfarven */
+    text-decoration:underline !important;
+    font-size:12px !important;
+    line-height:18px !important;
+  }
+
+  /* PDF-link → divider = 4px som før */
+  .room-link.gallery-pdf + .sp-hero-divider{
+    padding-top:4px !important;
+  }
+
+  /* Hvis du bruger desktop-spacers, sørg for de er helt væk på mobil */
+  .desk-spacer-10, .desk-spacer-14{ display:none !important; height:0 !important; line-height:0 !important; font-size:0 !important; }
+}
     </style>
   </head>
   <body>
