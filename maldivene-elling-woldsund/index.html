@@ -235,6 +235,33 @@
       .extras-list li{ margin:0; padding:0; }
       .extras-more{ margin:8px 0 0; font-size:12px; line-height:18px; color:#6a6a6a; }
       .extras-more a{ color:#9d8665; text-decoration:underline; }
+      /* ---------- INKLUDERER – forbedret kort (GENINDSAT) ---------- */
+.includes-card{
+  border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0;
+  border-collapse:separate !important; /* overstyr globalt collapse */
+  overflow:hidden;                     /* klip til afrundede hjørner */
+}
+.includes-inner{ padding:14px 18px; }
+
+.people-pill{
+  display:inline-block; padding:3px 10px;
+  border:1px solid #d7cbbb; border-radius:999px;
+  font-size:12px; line-height:16px; font-weight:700; color:#1c1c1c;
+  background:#fff; white-space:nowrap;
+}
+.people-pill:before{
+  content:""; display:inline-block; width:6px; height:6px; margin-right:6px;
+  border-radius:999px; background:#9d8665; vertical-align:middle;
+}
+
+.inc-list{ width:100%; margin-top:8px; }
+.inc-list td{ width:50%; vertical-align:top; }
+
+.inc-item{
+  font-family:'TeX Gyre Termes','Times New Roman',serif;
+  font-size:14px; line-height:22px; color:#1c1c1c; padding:3px 0;
+}
+.inc-item .tick{ font-weight:700; color:#9d8665; margin-right:8px; }
 
       /* ---------------------------
          MOBIL (≤600px)
