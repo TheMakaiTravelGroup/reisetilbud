@@ -400,6 +400,25 @@
         .gallery-mobile{ display:none !important; }
         /* <<< SLUT indsætning */
       }
+
+      /* ================================
+         PDF under gallery (link + spacing)
+         ================================ */
+      .gallery-pdf{ margin-top:4px; font-size:12px; line-height:18px; color:#6a6a6a; }
+      .gallery-pdf a{ color:#9d8665; text-decoration:underline; }
+
+      /* Default trim når PDF-link ligger før divideren */
+      .gallery-pdf + .sp-hero-divider{ padding-top:6px !important; }
+
+      @media only screen and (max-width:600px){
+        .gallery-pdf{ margin-top:4px !important; line-height:18px !important; }
+        .gallery-pdf + .sp-hero-divider{ padding-top:4px !important; }
+      }
+
+      /* Desktop override EFTER tidligere regler, så den vinder over 28px */
+      @media only screen and (min-width:601px){
+        .gallery-pdf + .sp-hero-divider{ padding-top:6px !important; }
+      }
       
     </style>
   </head>
@@ -565,6 +584,13 @@
                           <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
                         </div>
 
+                        <!-- PDF-link under galleriet -->
+                        <div class="gallery-pdf">
+                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maamunagau-Maldivia-NO.pdf" target="_blank">
+                            Se bildegalleri (PDF) →
+                          </a>
+                        </div>
+
                         <!-- ENKELT rate-list for begge rækker (FIXER SPACING) -->
                         <table class="rate-list sp-hero-divider">
                           <tr class="tight">
@@ -577,7 +603,7 @@
                             </td>
                             <td align="right"><strong>NOK 113.900,-</strong></td>
                           </tr>
-                                                    <tr class="tight">
+                          <tr class="tight">
                             <td>
                               Water Villa
                               <div class="room-link">
@@ -592,11 +618,11 @@
                         <div class="extras">
                           <div class="extras-title">Høydepunkter & fordeler</div>
                           <ul class="extras-list">
-<li>Snorkling med hvalhaier (South Ari Atoll)</li>
-<li>Fantastisk dykking nær resortet</li>
-<li>Autentisk, avslappet barfotluksus</li>
-<li>Virkelig god mat og drikke</li>
-<li>Liten og romantisk øy</li>
+                            <li>Snorkling med hvalhaier (South Ari Atoll)</li>
+                            <li>Fantastisk dykking nær resortet</li>
+                            <li>Autentisk, avslappet barfotluksus</li>
+                            <li>Virkelig god mat og drikke</li>
+                            <li>Liten og romantisk øy</li>
                           </ul>
                           <div class="extras-more"><a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-Thudufushi.pdf" target="_blank">Se brosjyre →</a></div>
                         </div>
