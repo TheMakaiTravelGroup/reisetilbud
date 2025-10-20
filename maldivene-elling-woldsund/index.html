@@ -491,50 +491,57 @@
                         <div class="hotel-loc"><span class="loc">Maldivene • South Ari Atoll</span></div>
                         <div class="hotel-dates sp-gap-chips"><span class="stay">17. juli – 27. juli 2026 • 10 netter</span></div>
 
-                        <!-- Galleri -->
-                        <div class="gallery sp-chips-hero" style="padding-bottom:10px;"><!-- desktop spacing inline -->
-                          <button class="prev" aria-label="Forrige">‹</button>
-                          <button class="next" aria-label="Neste">›</button>
-                          <div class="gallery-strip">
-                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-1.jpg" alt="Diamonds Thudufushi - Beach"></a>
-                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-4.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-4.jpg" alt="Diamonds Thudufushi - Water Villa"></a>
-                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-6-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-6-scaled.jpg" alt="Diamonds Thudufushi - Beach Junior Suite"></a>
-                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-2.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-2.jpg" alt="Diamonds Thudufushi - Aerial"></a>
-                            <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-3.webp" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-3.webp" alt="Diamonds Thudufushi - Lush Island"></a>
-                          </div>
-                          <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
-                        </div>
+<!-- Galleri -->
+<div class="gallery sp-chips-hero" style="padding-bottom:0;"><!-- desktop spacing flyttes til spacer -->
+  <button class="prev" aria-label="Forrige">‹</button>
+  <button class="next" aria-label="Neste">›</button>
+  <div class="gallery-strip">
+    <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-1.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-1.jpg" alt="Diamonds Thudufushi - Beach"></a>
+    <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-4.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-4.jpg" alt="Diamonds Thudufushi - Water Villa"></a>
+    <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-6-scaled.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-6-scaled.jpg" alt="Diamonds Thudufushi - Beach Junior Suite"></a>
+    <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-2.jpg" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-2.jpg" alt="Diamonds Thudufushi - Aerial"></a>
+    <a href="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-3.webp" target="_blank"><img src="https://maldivia.dk/wp-content/uploads/2025/10/Diamonds-3.webp" alt="Diamonds Thudufushi - Lush Island"></a>
+  </div>
+  <div class="scroll-hint mobile-only">Swipe for flere bilder →</div>
+</div>
 
-                        <!-- PDF-link under galleriet -->
-                        <div class="gallery-pdf" style="margin-top:4px; line-height:18px;">
-                          <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maamunagau-Maldivia-NO.pdf" target="_blank">
-                            Se bildegalleri (PDF) →
-                          </a>
-                        </div>
+<!-- SPACER: Billede → PDF-link (10px) -->
+<div style="height:10px; line-height:10px; font-size:0;">&nbsp;</div>
 
-                        <!-- ENKELT rate-list for begge rækker (FIXER SPACING) -->
-                        <table class="rate-list sp-hero-divider" style="padding-top:14px;">
-                          <tr class="tight">
-                            <td>
-                              Beach Junior Suite
-                              <div class="room-link">
-                                <a href="https://thudufushibeach.diamondsresorts.com/rooms-suites/" target="_blank">Se villaen →</a>
-                              </div>
-                              <span class="mp">All-Inclusive</span>
-                            </td>
-                            <td align="right"><strong>NOK 113.900,-</strong></td>
-                          </tr>
-                          <tr class="tight">
-                            <td>
-                              Water Villa
-                              <div class="room-link">
-                                <a href="https://thudufushibeach.diamondsresorts.com/rooms-suites/" target="_blank">Se villaen →</a>
-                              </div>
-                              <span class="mp">All-Inclusive</span>
-                            </td>
-                            <td align="right"><strong>NOK 119.900,-</strong></td>
-                          </tr>
-                        </table>
+<!-- PDF-link under galleriet -->
+<div class="gallery-pdf" style="margin-top:0; line-height:18px;">
+  <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/InterContinental-Maamunagau-Maldivia-NO.pdf" target="_blank"
+     style="color:#9d8665; text-decoration:underline; font-weight:700;">
+    Se bildegalleri (PDF) →
+  </a>
+</div>
+
+<!-- SPACER: PDF-link → divider (14px) -->
+<div style="height:14px; line-height:14px; font-size:0;">&nbsp;</div>
+
+<!-- ENKELT rate-list for begge rækker (FIXER SPACING) -->
+<table class="rate-list sp-hero-divider"><!-- ingen padding-top her; spacer gør jobbet -->
+  <tr class="tight">
+    <td>
+      Beach Junior Suite
+      <div class="room-link">
+        <a href="https://thudufushibeach.diamondsresorts.com/rooms-suites/" target="_blank">Se villaen →</a>
+      </div>
+      <span class="mp">All-Inclusive</span>
+    </td>
+    <td align="right"><strong>NOK 113.900,-</strong></td>
+  </tr>
+  <tr class="tight">
+    <td>
+      Water Villa
+      <div class="room-link">
+        <a href="https://thudufushibeach.diamondsresorts.com/rooms-suites/" target="_blank">Se villaen →</a>
+      </div>
+      <span class="mp">All-Inclusive</span>
+    </td>
+    <td align="right"><strong>NOK 119.900,-</strong></td>
+  </tr>
+</table>
 
                         <div class="extras">
                           <div class="extras-title">Høydepunkter & fordeler</div>
