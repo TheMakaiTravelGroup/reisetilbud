@@ -392,6 +392,31 @@
   .hotel-long .rate-list tr:first-child{
     padding-top: 6px !important;   /* ← justér fx 4–12px */
   }
+  /* === MOBIL (≤600px) — normalisér KUN fly-hero (begge fly-sektioner) === */
+@media only screen and (max-width:600px){
+  /* Fjern mellemrum mellem slides og gør hvert slide fuldbredde */
+  .gallery.fly-hero .gallery-strip a{
+    display:block !important;
+    width:100% !important;
+    margin-right:0 !important;
+    flex:none !important; /* overstyrer evt. flex fra desktop */
+  }
+
+  /* Billedet skal helt ud til guldrammen og have samme højde som i Fly til/fra */
+  .gallery.fly-hero .gallery-strip img{
+    width:100% !important;
+    height:180px !important;
+    object-fit:cover !important;
+    border:0 !important;
+    border-radius:12px 12px 0 0 !important;
+    display:block !important;
+  }
+
+  /* Samme lille bundluft som i Fly til/fra */
+  .gallery.fly-hero{ padding-bottom:6px !important; }
+
+  /* Sikkerhed: sidste slide uden margin */
+  .gallery.fly-hero .gallery-strip a:last-child{ margin-right:0 !important; }
 }
     </style>
   </head>
