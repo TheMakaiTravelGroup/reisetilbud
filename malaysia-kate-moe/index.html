@@ -342,7 +342,7 @@
   /* 1) Hotel: Billede → "Swipe for flere billeder"
      - Giv selve galleriet lidt bund-padding (ellers bliver teksten “klemt” af overflow:hidden)
      - Finjustér tekstens afstand/linjehøjde */
-  .hotel-long .gallery.sp-chips-hero{ padding-bottom:14px !important; }
+  .hotel-long .gallery.sp-chips-hero{ padding-bottom:8px !important; }
   .hotel-long .gallery .scroll-hint{
     margin-top:4px !important;
     line-height:18px !important;
@@ -368,13 +368,17 @@
   /* (bevarer dit eksisterende fix for sidste slide, hvis det ikke allerede står sidst) */
   .gallery-strip a:last-child{ margin-right:0 !important; }
 }
-      /* MOBIL (≤600px) – læg dette SIDST */
+/* MOBIL (≤600px) — Hero → divider spacing (PLACERES HELT TIL SIDST) */
 @media only screen and (max-width:600px){
-  .hotel-long .gallery.sp-chips-hero{ padding-bottom:4px !important; }
-  .hotel-long .gallery .scroll-hint{ margin-top:2px !important; line-height:14px !important; }
+  /* Luft under hotel-hero når PDF-link er væk */
+  .hotel-long .gallery.sp-chips-hero{ padding-bottom:10px !important; } /* justér evt. 8–14px */
 
-  /* Giv PDF-linket en bund-margin og lad spacere/divider være */
-  .hotel-long .gallery-pdf{ margin-bottom:10px !important; }
+  /* Lidt plads til “Swipe for flere bilder” */
+  .hotel-long .gallery .scroll-hint{
+    margin-top:6px !important;
+    line-height:18px !important;
+    display:block !important;
+  }
 }
       /* MOBIL (≤600px) — Divider ned til første villatype (KUN i hoteller) */
 @media only screen and (max-width:600px){
