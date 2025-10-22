@@ -392,6 +392,28 @@
   .hotel-long .rate-list tr:first-child{
     padding-top: 6px !important;   /* ← justér fx 4–12px */
   }
+/* MOBIL (≤600px) — fix fly-hero i OPPGRADER FLYREISEN */
+@media only screen and (max-width:600px){
+  /* Gør hvert slide fuld bredde, så billedets radius rammer kortets hjørner */
+  .gallery.fly-hero .gallery-strip a{
+    display:block !important;
+    width:100% !important;
+    margin-right:6px !important;      /* lidt mindre mellemrum end standard 8px */
+    flex:none !important;
+  }
+  .gallery.fly-hero .gallery-strip a:last-child{
+    margin-right:0 !important;         /* ingen ekstra luft efter sidste slide */
+  }
+
+  /* Sørg for at hvert billede faktisk “smelter” med guldrammen */
+  .gallery.fly-hero .gallery-strip img{
+    display:block !important;
+    width:100% !important;
+    height:180px !important;
+    object-fit:cover !important;
+    border:0 !important;
+    border-radius:12px 12px 0 0 !important; /* runde top-hjørner på ALLE slides */
+  }
 }
     </style>
   </head>
