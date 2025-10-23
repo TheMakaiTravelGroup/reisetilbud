@@ -392,6 +392,41 @@
   .hotel-long .rate-list tr:first-child{
     padding-top: 6px !important;   /* ← justér fx 4–12px */
   }
+  /* === ENSART .fly-hero PÅ TVÆRS AF BEGGE SEKTIONS (DESKTOP + MOBIL) === */
+.gallery.fly-hero{
+  margin:0 !important;
+  border-radius:12px 12px 0 0 !important;
+  overflow:hidden !important;
+}
+
+/* Ingen mellemrum mellem slides, og hvert slide er fuld bredde */
+.gallery.fly-hero .gallery-strip{
+  gap:0 !important;
+}
+.gallery.fly-hero .gallery-strip a{
+  display:block !important;
+  flex:0 0 100% !important;  /* desktop */
+  margin:0 !important;       /* nul mellemrum mellem 1. og 2. billede */
+}
+
+/* Billedet smelter med guldrammen (samme højde/radius som i FLY) */
+.gallery.fly-hero .gallery-strip img{
+  display:block !important;
+  width:100% !important;
+  height:280px !important;          /* DESKTOP-højde som i FLY */
+  object-fit:cover !important;
+  border:0 !important;
+  border-radius:12px 12px 0 0 !important;
+}
+
+/* MOBIL: samme logik, blot lavere højde */
+@media only screen and (max-width:600px){
+  .gallery.fly-hero .gallery-strip a{
+    width:100% !important;
+  }
+  .gallery.fly-hero .gallery-strip img{
+    height:180px !important;        /* MOBIL-højde som i FLY */
+  }
 }
     </style>
   </head>
