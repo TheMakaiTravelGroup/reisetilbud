@@ -380,19 +380,20 @@
     display:block !important;
   }
 }
-      /* MOBIL (≤600px) — Divider ned til første villatype (KUN i hoteller) */
+/* MOBIL (≤600px) — Divider ned til første villatype (KUN i hoteller) */
 @media only screen and (max-width:600px){
   /* Reducér/øge luft i selve divideren efter PDF’en */
   .hotel-long .gallery-pdf + div + .sp-hero-divider{
-    padding-top: 6px !important;   /* ← justér fx 4–12px */
+    padding-top: 6px !important;
     margin-top: 0 !important;
   }
-
   /* Finjustér top-padding på første række i rate-list */
   .hotel-long .rate-list tr:first-child{
-    padding-top: 6px !important;   /* ← justér fx 4–12px */
+    padding-top: 6px !important;
   }
-/* === NORMALISÉR ALLE .fly-hero (DESKTOP + MOBIL) — PLACERES FØR </style> === */
+} /* ← LUKKER den eksisterende MOBIL-@media før vi tilføjer fly-hero-blokken */
+
+/* === NORMALISÉR ALLE .fly-hero (DESKTOP + MOBIL) — PLACERES LIGE FØR </style> === */
 .gallery.fly-hero{
   margin:0 !important;
   border-radius:12px 12px 0 0 !important;
@@ -417,19 +418,18 @@
 
 /* MOBIL: identisk opførsel, lavere højde og nul mellemrum mellem slides */
 @media only screen and (max-width:600px){
-  /* Lad ikke den generelle mobilregel (inline-block/width:auto/margin-right:8px)
-     gælde for .fly-hero */
+  /* neutralisér den generelle mobilregel (inline-block/width:auto/margin-right:8px) for .fly-hero */
   .gallery.fly-hero .gallery-strip{
     display:block !important;
-    white-space:normal !important;   /* ingen vandret rulning for hero */
+    white-space:normal !important;   /* ingen vandret rulning i hero */
   }
   .gallery.fly-hero .gallery-strip a{
     display:block !important;
     width:100% !important;
-    margin:0 !important;             /* fjern mellemrum mellem første og andet billede */
+    margin:0 !important;             /* fjern mellemrum mellem slides */
   }
   .gallery.fly-hero .gallery-strip img{
-    height:180px !important;         /* mobil-højde som i fly-hero */
+    height:180px !important;         /* mobil-højde */
   }
 }
     </style>
