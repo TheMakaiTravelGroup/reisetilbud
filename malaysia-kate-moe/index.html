@@ -392,40 +392,44 @@
   .hotel-long .rate-list tr:first-child{
     padding-top: 6px !important;   /* ← justér fx 4–12px */
   }
-  /* === ENSART .fly-hero PÅ TVÆRS AF BEGGE SEKTIONS (DESKTOP + MOBIL) === */
+/* === NORMALISÉR ALLE .fly-hero (DESKTOP + MOBIL) — PLACERES FØR </style> === */
 .gallery.fly-hero{
   margin:0 !important;
   border-radius:12px 12px 0 0 !important;
   overflow:hidden !important;
 }
 
-/* Ingen mellemrum mellem slides, og hvert slide er fuld bredde */
-.gallery.fly-hero .gallery-strip{
-  gap:0 !important;
-}
+/* Sørg for at hvert slide “holder” radius selv */
 .gallery.fly-hero .gallery-strip a{
-  display:block !important;
-  flex:0 0 100% !important;  /* desktop */
-  margin:0 !important;       /* nul mellemrum mellem 1. og 2. billede */
+  border-radius:12px 12px 0 0 !important;
+  overflow:hidden !important;
 }
 
-/* Billedet smelter med guldrammen (samme højde/radius som i FLY) */
+/* Billederne skal smelte med guldrammen (ingen border) */
 .gallery.fly-hero .gallery-strip img{
   display:block !important;
   width:100% !important;
-  height:280px !important;          /* DESKTOP-højde som i FLY */
+  height:280px !important;          /* desktop-højde */
   object-fit:cover !important;
   border:0 !important;
   border-radius:12px 12px 0 0 !important;
 }
 
-/* MOBIL: samme logik, blot lavere højde */
+/* MOBIL: identisk opførsel, lavere højde og nul mellemrum mellem slides */
 @media only screen and (max-width:600px){
+  /* Lad ikke den generelle mobilregel (inline-block/width:auto/margin-right:8px)
+     gælde for .fly-hero */
+  .gallery.fly-hero .gallery-strip{
+    display:block !important;
+    white-space:normal !important;   /* ingen vandret rulning for hero */
+  }
   .gallery.fly-hero .gallery-strip a{
+    display:block !important;
     width:100% !important;
+    margin:0 !important;             /* fjern mellemrum mellem første og andet billede */
   }
   .gallery.fly-hero .gallery-strip img{
-    height:180px !important;        /* MOBIL-højde som i FLY */
+    height:180px !important;         /* mobil-højde som i fly-hero */
   }
 }
     </style>
