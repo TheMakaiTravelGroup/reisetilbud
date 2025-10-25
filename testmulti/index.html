@@ -386,30 +386,28 @@
       /* (dine øvrige mobile finjusteringer bevares uændret) */
       /* Hotel-gallerier (ikke fly-hero) – match FLY HERO på mobil */
 @media only screen and (max-width:600px){
-  .gallery:not(.fly-hero){
-    padding-bottom:6px !important; /* samme som fly-hero */
+  /* HOTEL-gallerier (ikke fly-hero) – match FLY HERO */
+  .hotel-long .gallery:not(.fly-hero){
+    margin-top:0 !important;
+    padding-bottom:6px !important;   /* samme som fly-hero */
   }
-  .gallery:not(.fly-hero) .gallery-strip img{
-    width:100% !important;         /* <- override tidligere width:auto; */
-    height:180px !important;        /* samme højde som nu */
-    border:0 !important;            /* ingen kant, som fly-hero */
+
+  .hotel-long .gallery:not(.fly-hero) .gallery-strip img{
+    width:100% !important;           /* override width:auto */
+    height:180px !important;         /* samme højde som fly-hero */
+    border:0 !important;
     border-radius:12px 12px 0 0 !important;
   }
-  .gallery:not(.fly-hero) .scroll-hint{
-    padding-left:18px !important;   /* samme indryk som fly-hero */
+
+  .hotel-long .gallery:not(.fly-hero) .scroll-hint{
+    display:block !important;
+    padding-left:18px !important;    /* samme indryk som fly-hero */
     padding-right:18px !important;
-    margin-top:6px !important;      /* samme afstand som fly-hero */
+    margin-top:6px !important;       /* samme afstand som fly-hero */
+    line-height:18px !important;
     text-align:left !important;
   }
-        /* 1) Hotel: Billede → "Swipe for flere billeder"
-     - Giv selve galleriet lidt bund-padding (ellers bliver teksten “klemt” af overflow:hidden)
-     - Finjustér tekstens afstand/linjehøjde */
-  .hotel-long .gallery.sp-chips-hero{ padding-bottom:8px !important; }
-  .hotel-long .gallery .scroll-hint{
-    margin-top:4px !important;
-    line-height:18px !important;
-    display:block !important;
-  }
+}
     </style>
   </head>
     <body>
