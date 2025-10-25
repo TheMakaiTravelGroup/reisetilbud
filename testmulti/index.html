@@ -345,22 +345,22 @@
         .inc-list, .inc-list tr, .inc-list td{ display:block !important; width:100% !important; }
       }
 
-      /* Desktop: destination + dato side om side + korrekt hero-divider spacing */
-      @media only screen and (min-width:601px){
-        .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; }
-        .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }
-        .sp-hero-divider{ margin-top:0 !important; }
-        .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
-        .gallery-mobile{ display:none !important; }
-        /* ▼ Mindre TOTALPRIS kun på desktop */
+/* Desktop: destination + dato side om side + korrekt hero-divider spacing */
 @media only screen and (min-width:601px){
-  .total-amt{
-    font-size:16px;   /* justér fx 15–18px */
-    line-height:1.2;
-  }
-}
+  .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; }
+  .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }
+  .sp-hero-divider{ margin-top:0 !important; }
+  .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
+  .gallery-mobile{ display:none !important; }
+
+  /* ▼ Mindre TOTALPRIS kun på desktop */
+  .total-amt{ font-size:16px; line-height:1.2; }
+}  /* ← CLOSE the desktop block */
+
 /* ===== MOBIL (≤600px) — KUN de to ønskede steder. Sæt DENNE blok HELT TIL SIDST ===== */
 @media only screen and (max-width:600px){
+  /* ... your mobile rules ... */
+}
 
   /* 1) Hotel: Billede → "Swipe for flere billeder"
      - Giv selve galleriet lidt bund-padding (ellers bliver teksten “klemt” af overflow:hidden)
