@@ -27,7 +27,7 @@
       }
       .section-title:before{ content:""; position:absolute; top:0; left:0; width:56px; height:2px; background:#9d8665; }
 
-      /* >>> TOTALPRIS-BOKS (tilføjet) */
+            /* >>> TOTALPRIS-BOKS (tilføjet) */
       .totalbox{
         border:1px solid #e7e2da; border-radius:12px; background:#f9f6f0;
         padding:14px 18px;
@@ -133,22 +133,6 @@
         border-radius:12px 12px 0 0 !important;
       }
 
-/* Hotel-gallerier (ikke fly-hero) – mobil */
-@media only screen and (max-width:600px){
-  .gallery:not(.fly-hero){
-    padding-bottom:6px !important;     /* samme som fly-hero */
-  }
-  .gallery:not(.fly-hero) .scroll-hint{
-    padding-left:18px !important;      /* samme indryk som fly-hero */
-    padding-right:18px !important;
-    margin-top:6px !important;         /* <- var 4px: gør den til 6px som fly-hero */
-    text-align:left !important;
-  }
-  .gallery:not(.fly-hero) .gallery-strip img{
-    border:0 !important;               /* matcher fly-hero (ingen kant) */
-  }
-}
-
       /* Pile */
       .gallery .prev, .gallery .next{
         position:absolute; top:50%; transform:translateY(-50%);
@@ -185,10 +169,6 @@
         .gallery.fly-hero .scroll-hint{
           padding-left:18px !important; padding-right:18px !important; text-align:left !important;
         }
-
-        /* TOTALPRIS – mobil */
-        .total-amt{ font-size:15px !important; }
-        .br-m{ display:inline; }
       }
 
       /* --- HERO → DIVIDER → VILLATYPE (mail-safe) --- */
@@ -300,7 +280,7 @@
         .sp-gap-chips{ margin-top:6px !important; }
         .sp-chips-hero{ margin-top:12px !important; }
 
-        .sp-hero-divider{ margin-top:8px !important; padding-top:4px !important; }
+        .sp-hero-divider{ margin-top:12px !important; padding-top:8px !important; }
 
         .chip{ display:block !important; }
 
@@ -313,7 +293,7 @@
           width:100%;
           height:1px;
           background:#f0ece4;
-          margin:16px 0 22px;
+          margin:8px 0 22px;
         }
         .rate-list tr:not(:first-child){ padding-top:16px !important; }
         .extras{ margin-top:2px !important; }
@@ -355,7 +335,8 @@
         img{ max-width:100% !important; height:auto !important; }
         body, table, td{ max-width:100% !important; }
 
-        /* total-amt mobil-størrelse flyttet tidligere */
+        .total-amt{ font-size:15px !important; }
+
         .gallery-desktop{ display:none !important; }
       }
 
@@ -365,93 +346,65 @@
       }
 
       /* Desktop: destination + dato side om side + korrekt hero-divider spacing */
-@media only screen and (min-width:601px){
-  .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; }
-  .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }
-  .sp-hero-divider{ margin-top:0 !important; }
-  .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
-  .gallery-mobile{ display:none !important; }
-
-  /* ▼ Mindre TOTALPRIS kun på desktop */
-  .total-amt{ font-size:16px; line-height:1.2; }
-    /* Linjeskift kun på desktop efter ordet "derfor" */
-  .total-note br.desktop-break { display:inline; }
-}
-
-@media only screen and (max-width:600px){
-  /* Skjul linjeskiftet på mobil */
-  .total-note br.desktop-break { display:none; }
-}
-
-      /* (dine øvrige mobile finjusteringer bevares uændret) */
-      /* Hotel-gallerier (ikke fly-hero) – match FLY HERO på mobil */
-@media only screen and (max-width:600px){
-  /* HOTEL-gallerier (ikke fly-hero) – match FLY HERO */
-  .hotel-long .gallery:not(.fly-hero){
-    margin-top:0 !important;
-    padding-bottom:6px !important;   /* samme som fly-hero */
-  }
-
-  .hotel-long .gallery:not(.fly-hero) .gallery-strip img{
-    width:100% !important;           /* override width:auto */
-    height:180px !important;         /* samme højde som fly-hero */
-    border:0 !important;
-    border-radius:12px 12px 0 0 !important;
-  }
-
-  .hotel-long .gallery:not(.fly-hero) .scroll-hint{
-    display:block !important;
-    padding-left:18px !important;    /* samme indryk som fly-hero */
-    padding-right:18px !important;
-    margin-top:6px !important;       /* samme afstand som fly-hero */
-    line-height:18px !important;
-    text-align:left !important;
-  }
-
-/* === MOBILE (≤600px) — HOTEL galleries identical to fly-hero (PLACE LAST) === */
+      @media only screen and (min-width:601px){
+        .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; }
+        .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }
+        .sp-hero-divider{ margin-top:0 !important; }
+        .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
+        .gallery-mobile{ display:none !important; }
+      }
+/* ===== MOBIL (≤600px) — KUN de to ønskede steder. Sæt DENNE blok HELT TIL SIDST ===== */
 @media only screen and (max-width:600px){
 
-  /* Hotel gallery container */
-  .hotel-long .gallery{
-    padding-bottom:6px !important;   /* same as fly-hero */
-    margin-top:0 !important;
-  }
-
-  /* Images: override the earlier width:auto */
-  .hotel-long .gallery .gallery-strip img{
-    width:100% !important;
-    height:180px !important;
-    border:0 !important;
-    border-radius:12px 12px 0 0 !important;
-  }
-
-  /* “Swipe for flere bilder” */
+  /* 1) Hotel: Billede → "Swipe for flere billeder"
+     - Giv selve galleriet lidt bund-padding (ellers bliver teksten “klemt” af overflow:hidden)
+     - Finjustér tekstens afstand/linjehøjde */
+  .hotel-long .gallery.sp-chips-hero{ padding-bottom:8px !important; }
   .hotel-long .gallery .scroll-hint{
-    display:block !important;
-    padding-left:18px !important;
-    padding-right:18px !important;
-    margin-top:6px !important;
+    margin-top:4px !important;
     line-height:18px !important;
-    text-align:left !important;
+    display:block !important;
   }
 
-  /* PDF link → divider spacing */
-  .hotel-long .gallery-pdf{ margin-bottom:8px !important; }
-
-  /* If spacer DIVs are present, shrink them on mobile */
-  .hotel-long .gallery-pdf + div[style*="height:10px"],
+  /* 2) Hotel: "Se flere billeder fra paradis her" → divider
+     Din +-selector ramte ikke, fordi der ligger en spacer-div imellem.
+     Sænk højden på den spacer på mobil, og nul stil divider-padding. */
+  /* sænk spacer lige EFTER PDF-linket (10px-varianten) */
+  .hotel-long .gallery-pdf + div[style*="height:10px"]{
+    height:6px !important; line-height:6px !important;
+  }
+  /* sænk spacer lige FØR .sp-hero-divider (14px-varianten) */
   .hotel-long .gallery-pdf + div[style*="height:14px"]{
     height:6px !important; line-height:6px !important;
   }
-
-  /* Divider just below PDF link */
+  /* og sørg for at selve divideren ikke lægger ekstra luft oveni */
   .hotel-long .gallery-pdf + div + .sp-hero-divider{
-    margin-top:0 !important;
-    padding-top:6px !important;
+    padding-top:0 !important; margin-top:0 !important;
   }
 
-  /* No extra gap on last slide */
+  /* (bevarer dit eksisterende fix for sidste slide, hvis det ikke allerede står sidst) */
   .gallery-strip a:last-child{ margin-right:0 !important; }
+}
+      /* MOBIL (≤600px) – læg dette SIDST */
+@media only screen and (max-width:600px){
+  .hotel-long .gallery.sp-chips-hero{ padding-bottom:4px !important; }
+  .hotel-long .gallery .scroll-hint{ margin-top:2px !important; line-height:14px !important; }
+
+  /* Giv PDF-linket en bund-margin og lad spacere/divider være */
+  .hotel-long .gallery-pdf{ margin-bottom:10px !important; }
+}
+      /* MOBIL (≤600px) — Divider ned til første villatype (KUN i hoteller) */
+@media only screen and (max-width:600px){
+  /* Reducér/øge luft i selve divideren efter PDF’en */
+  .hotel-long .gallery-pdf + div + .sp-hero-divider{
+    padding-top: 6px !important;   /* ← justér fx 4–12px */
+    margin-top: 0 !important;
+  }
+
+  /* Finjustér top-padding på første række i rate-list */
+  .hotel-long .rate-list tr:first-child{
+    padding-top: 6px !important;   /* ← justér fx 4–12px */
+  }
 }
     </style>
   </head>
