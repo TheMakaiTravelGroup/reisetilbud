@@ -401,7 +401,15 @@
     margin-top:6px !important;      /* samme afstand som fly-hero */
     text-align:left !important;
   }
-}
+        /* 1) Hotel: Billede → "Swipe for flere billeder"
+     - Giv selve galleriet lidt bund-padding (ellers bliver teksten “klemt” af overflow:hidden)
+     - Finjustér tekstens afstand/linjehøjde */
+  .hotel-long .gallery.sp-chips-hero{ padding-bottom:8px !important; }
+  .hotel-long .gallery .scroll-hint{
+    margin-top:4px !important;
+    line-height:18px !important;
+    display:block !important;
+  }
     </style>
   </head>
     <body>
