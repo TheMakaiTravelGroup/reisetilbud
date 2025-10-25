@@ -358,6 +358,13 @@
 
   /* ▼ Mindre TOTALPRIS kun på desktop */
   .total-amt{ font-size:16px; line-height:1.2; }
+    /* Linjeskift kun på desktop efter ordet "derfor" */
+  .total-note br.desktop-break { display:inline; }
+}
+
+@media only screen and (max-width:600px){
+  /* Skjul linjeskiftet på mobil */
+  .total-note br.desktop-break { display:none; }
 }
 
       /* (dine øvrige mobile finjusteringer bevares uændret) */
@@ -454,9 +461,11 @@
                       <td class="total-amt">NOK 122.500,-</td>
                     </tr>
                   </table>
-                  <div class="total-note">
-                    Reiseforslaget er basert på dagens priser og ledighet, og prisene kan derfor både øke og bli utsolgt før endelig bestilling. Reisetilbudet gjelder for 2 voksne.
-                  </div>
+<div class="total-note">
+  Reiseforslaget er basert på dagens priser og ledighet, og prisene kan derfor
+  <br class="desktop-break">
+  både øke og bli utsolgt før endelig bestilling. Reisetilbudet gjelder for 2 voksne.
+</div>
                 </div>
               </td>
             </tr>
