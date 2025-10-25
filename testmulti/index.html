@@ -134,17 +134,19 @@
       }
 
 /* Hotel-gallerier (ikke fly-hero) – mobil */
-.gallery:not(.fly-hero){
-  padding-bottom:6px !important;   /* forhindrer at teksten klippes i rundingen */
-}
-.gallery:not(.fly-hero) .scroll-hint{
-  padding-left:18px !important;     /* samme indryk som fly-hero */
-  padding-right:18px !important;
-  margin-top:6px !important;        /* samme afstand som fly-hero */
-  text-align:left !important;
-}
-.gallery:not(.fly-hero) .gallery-strip img{
-  border:0 !important;              /* matcher fly-hero uden kant */
+@media only screen and (max-width:600px){
+  .gallery:not(.fly-hero){
+    padding-bottom:6px !important;     /* samme som fly-hero */
+  }
+  .gallery:not(.fly-hero) .scroll-hint{
+    padding-left:18px !important;      /* samme indryk som fly-hero */
+    padding-right:18px !important;
+    margin-top:6px !important;         /* <- var 4px: gør den til 6px som fly-hero */
+    text-align:left !important;
+  }
+  .gallery:not(.fly-hero) .gallery-strip img{
+    border:0 !important;               /* matcher fly-hero (ingen kant) */
+  }
 }
 
       /* Pile */
