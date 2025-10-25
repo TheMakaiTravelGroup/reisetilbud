@@ -349,13 +349,16 @@
       }
 
       /* Desktop: destination + dato side om side + korrekt hero-divider spacing */
-      @media only screen and (min-width:601px){
-        .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; }
-        .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }
-        .sp-hero-divider{ margin-top:0 !important; }
-        .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
-        .gallery-mobile{ display:none !important; }
-      }
+@media only screen and (min-width:601px){
+  .hotel-loc{ display:inline-block; margin:6px 6px 4px 0; }
+  .hotel-dates{ display:inline-block; margin:6px 0 8px 0; }
+  .sp-hero-divider{ margin-top:0 !important; }
+  .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
+  .gallery-mobile{ display:none !important; }
+
+  /* ▼ Mindre TOTALPRIS kun på desktop */
+  .total-amt{ font-size:14px; line-height:1.2; }
+}
 
       /* (dine øvrige mobile finjusteringer bevares uændret) */
     </style>
