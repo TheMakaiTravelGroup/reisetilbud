@@ -407,6 +407,51 @@
     line-height:18px !important;
     text-align:left !important;
   }
+
+/* === MOBILE (≤600px) — HOTEL galleries identical to fly-hero (PLACE LAST) === */
+@media only screen and (max-width:600px){
+
+  /* Hotel gallery container */
+  .hotel-long .gallery{
+    padding-bottom:6px !important;   /* same as fly-hero */
+    margin-top:0 !important;
+  }
+
+  /* Images: override the earlier width:auto */
+  .hotel-long .gallery .gallery-strip img{
+    width:100% !important;
+    height:180px !important;
+    border:0 !important;
+    border-radius:12px 12px 0 0 !important;
+  }
+
+  /* “Swipe for flere bilder” */
+  .hotel-long .gallery .scroll-hint{
+    display:block !important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+    margin-top:6px !important;
+    line-height:18px !important;
+    text-align:left !important;
+  }
+
+  /* PDF link → divider spacing */
+  .hotel-long .gallery-pdf{ margin-bottom:8px !important; }
+
+  /* If spacer DIVs are present, shrink them on mobile */
+  .hotel-long .gallery-pdf + div[style*="height:10px"],
+  .hotel-long .gallery-pdf + div[style*="height:14px"]{
+    height:6px !important; line-height:6px !important;
+  }
+
+  /* Divider just below PDF link */
+  .hotel-long .gallery-pdf + div + .sp-hero-divider{
+    margin-top:0 !important;
+    padding-top:6px !important;
+  }
+
+  /* No extra gap on last slide */
+  .gallery-strip a:last-child{ margin-right:0 !important; }
 }
     </style>
   </head>
