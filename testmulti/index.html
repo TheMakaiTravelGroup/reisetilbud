@@ -384,6 +384,24 @@
 }
 
       /* (dine øvrige mobile finjusteringer bevares uændret) */
+      /* Hotel-gallerier (ikke fly-hero) – match FLY HERO på mobil */
+@media only screen and (max-width:600px){
+  .gallery:not(.fly-hero){
+    padding-bottom:6px !important; /* samme som fly-hero */
+  }
+  .gallery:not(.fly-hero) .gallery-strip img{
+    width:100% !important;         /* <- override tidligere width:auto; */
+    height:180px !important;        /* samme højde som nu */
+    border:0 !important;            /* ingen kant, som fly-hero */
+    border-radius:12px 12px 0 0 !important;
+  }
+  .gallery:not(.fly-hero) .scroll-hint{
+    padding-left:18px !important;   /* samme indryk som fly-hero */
+    padding-right:18px !important;
+    margin-top:6px !important;      /* samme afstand som fly-hero */
+    text-align:left !important;
+  }
+}
     </style>
   </head>
     <body>
