@@ -352,7 +352,13 @@
         .sp-hero-divider{ margin-top:0 !important; }
         .hotel-long .rate-list tr:first-child td{ padding-top:12px !important; }
         .gallery-mobile{ display:none !important; }
-      }
+        /* ▼ Mindre TOTALPRIS kun på desktop */
+@media only screen and (min-width:601px){
+  .total-amt{
+    font-size:16px;   /* justér fx 15–18px */
+    line-height:1.2;
+  }
+}
 /* ===== MOBIL (≤600px) — KUN de to ønskede steder. Sæt DENNE blok HELT TIL SIDST ===== */
 @media only screen and (max-width:600px){
 
