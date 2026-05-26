@@ -1483,6 +1483,15 @@ LUX* Grand Baie er et lekent og toppmoderne luksusresort på nordkysten av Mauri
   <div class="section-rule"></div>
 </div>
 
+<style>
+  /* Route stop labels — switch til IATA på mobil */
+  .stop-short{display:none;}
+  @media(max-width:640px){
+    .stop-long{display:none;}
+    .stop-short{display:inline;}
+  }
+</style>
+
 <div class="flight-card reveal">
   <div class="flight-hero">
     <button type="button" class="gallery-btn prev">‹</button><button type="button" class="gallery-btn next">›</button>
@@ -1505,11 +1514,11 @@ LUX* Grand Baie er et lekent og toppmoderne luksusresort på nordkysten av Mauri
         <div style="flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--sand-deep) 0,var(--sand-deep) 5px,transparent 5px,transparent 10px);"></div>
         <div style="position:absolute;left:33.33%;top:50%;transform:translate(-50%,-50%);background:var(--sand);padding:0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;">
           <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--white);box-shadow:0 0 0 1px var(--gold);"></div>
-          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;">Via København</div>
+          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;"><span class="stop-long">Via København</span><span class="stop-short">Via CPH</span></div>
         </div>
         <div style="position:absolute;left:66.66%;top:50%;transform:translate(-50%,-50%);background:var(--sand);padding:0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;">
           <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--white);box-shadow:0 0 0 1px var(--gold);"></div>
-          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;">Via Istanbul</div>
+          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;"><span class="stop-long">Via Istanbul</span><span class="stop-short">Via IST</span></div>
         </div>
       </div>
       <div class="route-airport">
@@ -1568,11 +1577,11 @@ LUX* Grand Baie er et lekent og toppmoderne luksusresort på nordkysten av Mauri
         <div style="flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--sand-deep) 0,var(--sand-deep) 5px,transparent 5px,transparent 10px);"></div>
         <div style="position:absolute;left:33.33%;top:50%;transform:translate(-50%,-50%);background:var(--sand);padding:0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;">
           <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--white);box-shadow:0 0 0 1px var(--gold);"></div>
-          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;">Via Istanbul</div>
+          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;"><span class="stop-long">Via Istanbul</span><span class="stop-short">Via IST</span></div>
         </div>
         <div style="position:absolute;left:66.66%;top:50%;transform:translate(-50%,-50%);background:var(--sand);padding:0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;">
           <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--white);box-shadow:0 0 0 1px var(--gold);"></div>
-          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;">Via Hamburg</div>
+          <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;"><span class="stop-long">Via Hamburg</span><span class="stop-short">Via HAM</span></div>
         </div>
       </div>
       <div class="route-airport">
