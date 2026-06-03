@@ -2964,7 +2964,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
         <div class="v138-range-detail">LUX* Grand Gaube · Superior Room</div>
       </div>
     </div>
-    <div class="v138-range-foot">2 hoteller · 4 villatyper · <a href="#hotels-section">se alle nedenfor ↓</a></div>
+    <div class="v138-range-foot">2 hoteller · <a href="#hotels-section">se alle nedenfor ↓</a></div>
     <div class="v138-trust-row">
       <div class="v138-trust-card">
         <span class="ck">✓</span>
@@ -3086,13 +3086,13 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 
   <div class="section-header reveal" id="section-inkludert">
     <span class="section-num">03</span>
-    <span class="section-title-label">Hva er inkludert</span>
+    <span class="section-title-label">Inkludert i reisen</span>
     <div class="section-rule"></div>
   </div>
 
   <div class="v129-incl-wrap reveal">
     <h2 class="v129-incl-title">Ingen tilkjøp. <span class="accent">Ingen overraskelser.</span></h2>
-    <p class="v129-incl-intro">Prisen ovenfor dekker alt det herunder. Vi har lagt det hele synlig frem, så dere vet nøyaktig hva dere betaler for.</p>
+    <p class="v129-incl-intro">Prisen ovenfor dekker alt som er spesifisert nedenfor. Vi ønsker at alt skal være tydelig og oversiktlig fra start — uten skjulte kostnader, uventede tillegg eller overraskelser underveis.</p>
     <div class="v129-incl-grid">
       <div class="v129-incl-item">
         <div class="num">01</div>
@@ -3110,7 +3110,6 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
         <div class="num">03</div>
         <div class="body">
           <h3 class="ititle">7 netter på det valgte hotellet</h3>
-          <p class="idesc">I jeres valgte villatype med daglig service</p>
         </div>
       </div>
       <div class="v129-incl-item">
@@ -3383,7 +3382,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           <div class="ival">Privat bil · ca. 60 min.</div>
         </div>
         <div class="v133-hp-info-col">
-          <div class="ilbl">Hotellets side</div>
+          <div class="ilbl">Website</div>
           <div class="ival"><a href="https://www.luxresorts.com/en/mauritius/hotel/luxgrandgaube" target="_blank">Utforsk LUX* Grand Gaube</a></div>
         </div>
       </div>
@@ -3536,7 +3535,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 <div id="mldv-booking-modal" class="mldv-bm" hidden role="dialog" aria-modal="true" aria-labelledby="mldv-bm-title">
   <div class="mldv-bm-backdrop" data-mldv-close></div>
   <div class="mldv-bm-card" id="mldv-bm-card-content">
-    <button type="button" class="mldv-bm-close" data-mldv-close aria-label="Luk">×</button>
+    <button type="button" class="mldv-bm-close" data-mldv-close aria-label="Lukk">×</button>
     <div class="mldv-bm-head">
       <div class="eyebrow-gold">Send booking-forespørsel</div>
       <h2 id="mldv-bm-title">Et skritt unna <span class="accent">drømme-rejsen</span></h2>
@@ -3757,7 +3756,8 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     }
     lines.push("");
     lines.push("== KONTAKT ==");
-    lines.push("Navn (fra tilbud): " + (DATA.customerName || "(ej angivet)"));
+    var notSetLbl = DATA.language === "no" ? "(ikke oppgitt)" : (DATA.language === "en" ? "(not specified)" : "(ej angivet)");
+    lines.push("Navn (fra tilbud): " + (DATA.customerName || notSetLbl));
     lines.push("Email: " + data.get("email"));
     lines.push("Telefon: " + data.get("phone"));
     lines.push("Adresse: " + data.get("address"));
@@ -3779,7 +3779,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     // Replace form with success state
     setTimeout(function(){
       var card = document.getElementById("mldv-bm-card-content");
-      card.innerHTML = '<button type="button" class="mldv-bm-close" data-mldv-close aria-label="Luk">×</button><div class="mldv-bm-success"><div class="check-icon">✓</div><h2>' + L.successTitle + '</h2><p>' + L.successBody + '</p><button type="button" class="ok-btn" data-mldv-close>' + L.successClose + '</button></div>';
+      card.innerHTML = '<button type="button" class="mldv-bm-close" data-mldv-close aria-label="Lukk">×</button><div class="mldv-bm-success"><div class="check-icon">✓</div><h2>' + L.successTitle + '</h2><p>' + L.successBody + '</p><button type="button" class="ok-btn" data-mldv-close>' + L.successClose + '</button></div>';
       card.querySelectorAll("[data-mldv-close]").forEach(function(el){ el.addEventListener("click", close); });
     }, 600);
     return false;
