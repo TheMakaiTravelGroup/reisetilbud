@@ -826,7 +826,12 @@ header{
   margin:0 0 32px;padding:28px 32px;
   background:var(--sand);border:1px solid var(--sand-deep);border-radius:4px;
 }
-.route-airport{text-align:center;flex-shrink:0;}
+/* V147.13: fixed min-width on route-airport so "VIA DUBAI" label aligns
+   vertically across multiple flights. Without this, longer city names
+   ("MAURITIUS") made route-airport wider than shorter ones ("OSLO"), which
+   shifted the route-line center → top "VIA DUBAI" wouldn't align with the
+   bottom one. 110px fits the longest 9-character city name comfortably. */
+.route-airport{text-align:center;flex-shrink:0;min-width:110px;}
 .route-iata{font-family:var(--ff-display);font-size:28px;font-weight:700;color:var(--ink);line-height:1;}
 .route-city{font-family:var(--ff-ui);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-lt);margin-top:3px;}
 .route-line{flex:1;position:relative;margin:0 18px;display:flex;align-items:center;flex-direction:column;gap:6px;}
@@ -1069,7 +1074,7 @@ footer::after{
 .footer-copy{font-family:var(--ff-ui);font-size:10.5px;letter-spacing:0.1em;color:rgba(253,252,249,0.25);}
 
 /* ═════════════════════════════════════════════════════
-   CURATOR'S NOTE — Wendie' personal reflection per hotel
+   CURATOR'S NOTE — Rasmus' personal reflection per hotel
    ═════════════════════════════════════════════════════ */
 /* ── CURATOR NOTE — refined pull-quote ─────────────────────────────
    Minimal, editorial. Single thin gold left border (no background card,
@@ -1331,6 +1336,9 @@ footer::after{
 
   /* Route graphic */
   .route-graphic{padding:18px 14px;margin-bottom:26px;}
+  /* V147.13: reduce min-width on mobile so the airport boxes don't crowd
+     the route-line. Still wide enough to keep the VIA label aligned. */
+  .route-airport{min-width:80px;}
   .route-iata{font-size:22px;}
   .route-city{font-size:8px;}
   .route-line{margin:0 12px !important;}
@@ -2270,6 +2278,11 @@ html{scroll-behavior:smooth;}
 .v129-vrow.incl{background:var(--white);margin:0 -14px;padding:14px;border-radius:2px;}
 .v129-vrow .vinfo{}
 .v129-vrow .vname{font-family:var(--ff-display);font-weight:500;font-size:17px;color:var(--ink);letter-spacing:-0.005em;}
+/* V147.15: meal plan sub-line under villa name in alt-card price box —
+   differentiates rows where the villa name is identical but the meal
+   plan differs. Without this, two "Bang on Beach Room" rows looked
+   identical and customers couldn't see why prices differed. */
+.v129-vrow .vmeal{display:block;font-family:var(--ff-ui);font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-top:4px;}
 .v129-vrow .vtag{font-family:var(--ff-ui);font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-left:10px;}
 .v129-vrow .vprice{font-family:var(--ff-display);font-size:16px;font-weight:500;color:var(--ink);white-space:nowrap;letter-spacing:-0.005em;font-weight:500;text-align:right;line-height:1.15;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum","tnum";}
 .v129-vrow .vprice .add{font-family:var(--ff-ui);color:var(--gold);font-size:10px;display:block;margin-top:3px;letter-spacing:0.08em;font-weight:500;text-transform:uppercase;}
@@ -2373,7 +2386,7 @@ html{scroll-behavior:smooth;}
 .v133-hp.compact .v133-hp-villa-action{display:flex;align-items:center;justify-content:flex-end;flex:0 0 auto;}
 .v133-hp.compact .v133-hp-villa-book{margin:0;white-space:nowrap;}
 .v133-hp.compact .v133-hp-villa-links{flex:1 1 100%;width:100%;padding-top:14px;margin-top:0;border-top:1px solid var(--sand-deep);grid-row:auto;display:none;}
-/* V145.3: rundrejse villa-links hidden by default — Wendie prefers the
+/* V145.3: rundrejse villa-links hidden by default — Rasmus prefers the
    ultra-simple Village Cottage layout. Villa-links would clutter the
    compact box, and rundrejse villas are all included in the package
    anyway (kunden vælger ikke villaen, de booker hele rejsen). */
@@ -2501,8 +2514,11 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 .v133-hp-villa-price .add{
   font-family:var(--ff-ui);font-size:10.5px;
   color:var(--ink-lt);
-  letter-spacing:0.1em;text-transform:uppercase;
+  letter-spacing:0.06em;text-transform:uppercase;
   display:block;margin-top:8px;font-weight:500;
+  /* V147.15: allow wrap if the surcharge text is long, preventing the
+     left-column villa-name from wrapping to 3 lines. */
+  white-space:normal;line-height:1.35;
 }
 /* V141: rundrejse "included" pill stays in place */
 .v141-included-pill{
@@ -2604,7 +2620,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 .v133-hp-curator-mini .csign .ctext .cname{font-family:var(--ff-display);font-size:15px;font-weight:500;color:var(--ink);letter-spacing:-0.005em;}
 .v133-hp-curator-mini .csign .ctext .crole{font-family:var(--ff-ui);font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:3px;}
 
-/* V140: trip-level Wendie' anbefaling — now matches hotel-panel edges
+/* V140: trip-level Rasmus' anbefaling — now matches hotel-panel edges
    (no max-width constraint), with a gold accent top stripe + more
    editorial breathing room. Used for rundrejse to summarise the whole
    journey beneath all hotels. */
@@ -2886,9 +2902,9 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     <div class="curator-letter-eyebrow">Skreddersydd for deg</div>
     <h1 class="curator-letter-title">Kjære Kristin</h1>
     <div class="curator-letter-body">
-      <p>Jeg gleder meg til å presentere et skreddersydd reiseforslag til dere, og håper at det faller i smak.</p>
-      <p>Jeg har håndplukket mulighetene nedenfor, som gir absolutt best kvalitet og verdi for pengene ut fra dine ønsker. Hos Maldivia tror vi ikke på standardløsninger. Vi viser deg utelukkende steder vi selv kjenner, og som garanterer fantastisk hotellkvalitet i de vakreste omgivelser, og garanterer alt fra beliggenhet i særklasse, nydelige rom og villaer til personlig service og gastronomi som er second to none.</p>
-      <p>De utvalgte hotellene og destinasjonene har hver sitt unike særpreg, men deler alle den samme høye standarden. Ettersom priser og tilgjengelighet på de beste flyreisene og resortene endrer seg raskt, anbefaler jeg at du ser gjennom mulighetene snarest.</p>
+      <p>Vi gleder oss over muligheten til å hjelpe dere av sted på en fantastisk reise med Maldivia.</p>
+      <p>Vi har håndplukket mulighetene nedenfor, som gir absolutt best kvalitet og value for money ut fra ditt budsjett og dine ønsker. Hos Maldivia tror vi ikke på standardløsninger. Vi viser deg utelukkende steder vi selv kjenner, og som garanterer alt fra fantastisk hotellkvalitet til de vakreste omgivelser, beliggenhet i særklasse, nydelige rom og villaer samt personlig service og gastronomi som er second to none.</p>
+      <p>De utvalgte hotellene og destinasjonene har hver sitt unike særpreg, men deler alle den samme høye standarden. Da priser og tilgjengelighet på de beste flyreisene og resortene endrer seg raskt, anbefaler vi at du ser gjennom mulighetene snarest.</p>
       <p>Jeg sitter klar på både telefon og e-post, så snart du har funnet din favoritt og er klar til å bestille reisen.</p>
     </div>
     <div class="curator-letter-sig">
@@ -3019,12 +3035,12 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 
   <div class="v129-hotel-grid-wrap reveal">
     <div class="v129-featured">
-      <span class="v129-pill-badge">★ Curated pick</span>
+      <span class="v129-pill-badge">★ Fantastisk verdi</span>
       <div class="v129-feat-img">
         <img loading="eager" decoding="async" src="https://maldivia.dk/wp-content/uploads/2025/12/SOP-1.jpg" alt="">
         <div class="v129-img-meta">
           <div class="loc">Palmar Beach</div>
-          <div class="meta">★★★★★ · Helpensjon — Dine Around</div>
+          <div class="meta">★★★★★</div>
         </div>
       </div>
       <div class="v129-feat-body">
@@ -3038,12 +3054,12 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
         <div class="v129-villa-box">
           <div class="vlbl">Villatyper på dette hotellet</div>
           <div class="v129-vrow incl">
-            <div class="vinfo"><span class="vname">Bang on Beach Room</span><span class="vtag">Inkludert i prisen</span></div>
+            <div class="vinfo"><span class="vname">Bang on Beach Room</span><span class="vtag">Inkludert i prisen</span><span class="vmeal">Helpensjon — Dine Around</span></div>
             <span class="vprice">NOK 67.000</span>
           </div>
           <div class="v129-vrow">
-            <div class="vinfo"><span class="vname">Bang on Beach Room</span></div>
-            <span class="vprice">NOK 78.000<span class="add">+ NOK 11.000</span></span>
+            <div class="vinfo"><span class="vname">Bang on Beach Room</span><span class="vmeal">All-Inclusive — Dine Around</span></div>
+            <span class="vprice">NOK 78.000<span class="add">Inkl. NOK 11.000 tillegg</span></span>
           </div>
         </div>
         <div class="v129-feat-btns">
@@ -3055,7 +3071,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     <div class="v129-alts-lbl">Eller velg et alternativ</div>
     <div class="v129-alts-grid">
       <div class="v129-alt recommended">
-        <span class="v129-pill-badge green">Vår anbefaling</span>
+        <span class="v129-pill-badge green">Rasmus&#39; anbefaling</span>
         <div class="v129-alt-img">
           <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2025/12/LGG-1.jpg" alt="">
         </div>
@@ -3073,11 +3089,11 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
             <div class="lbl">Fra</div>
             <div class="pr"><span class="cur">NOK</span>76.500</div>
             <div class="vname">Superior Room</div>
-            <div class="diff">+ NOK 9.500 vs. billigste</div>
+            <div class="diff">Inkl. NOK 9.500 tillegg</div>
           </div>
           <div class="v129-alt-btns">
             <button type="button" class="v129-alt-btn-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
-            <a href="#hotel-lux-grand-gaube" class="v129-alt-btn-link">Se hotel →</a>
+            <a href="#hotel-lux-grand-gaube" class="v129-alt-btn-link">Se hotell →</a>
           </div>
         </div>
       </div>
@@ -3091,7 +3107,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
   </div>
 
   <div class="v129-incl-wrap reveal">
-    <h2 class="v129-incl-title">Ingen tilkjøp. <span class="accent">Ingen overraskelser.</span></h2>
+    <h2 class="v129-incl-title">Prisen er endelig. <span class="accent">Ingen overraskelser underveis.</span></h2>
     <p class="v129-incl-intro">Prisen ovenfor dekker alt som er spesifisert nedenfor. Vi ønsker at alt skal være tydelig og oversiktlig fra start — uten skjulte kostnader, uventede tillegg eller overraskelser underveis.</p>
     <div class="v129-incl-grid">
       <div class="v129-incl-item">
@@ -3232,7 +3248,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
       </div>
       <div class="v133-hp-body">
         <div class="v133-hp-booking">
-          <div class="v133-hp-eyebrow">Velg villatype</div>
+          <div class="v133-hp-eyebrow">Velg villatype &amp; forpleining</div>
           <div class="v133-hp-villa">
             <div class="v133-hp-villa-info">
               <div class="v133-hp-villa-name">Bang on Beach Room</div>
@@ -3241,7 +3257,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>67.000<span class="add">BILLIGSTE VALG</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>67.000<span class="add">FANTASTISK VERDI</span></div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
@@ -3257,7 +3273,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>78.000<span class="add">+ NOK 11.000</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>78.000<span class="add">Inkl. NOK 11.000 tillegg</span></div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:1})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
@@ -3274,7 +3290,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           <div class="v133-hp-hl-item">Spa, basseng og wellness direkte på stranden</div>
           <div class="v133-hp-hl-item">En del av prestisjefylte DESIGN HOTELS™</div>
           <div class="v133-hp-curator-mini">
-            <div class="ceyebrow">Wendie&#39; anbefaling</div>
+            <div class="ceyebrow">Wendies anbefaling</div>
             <p class="cquote">SALT of Palmar er et fargerikt boutiquehotell kun for voksne, beliggende direkte ved en av Mauritius’ vakreste strender — <em>her handler det om design, lokal kultur og gastronomi i toppklasse</em>. Atmosfæren er avslappet, kreativ og langt mer intim enn på de klassiske store resortene, med fokus på ekte opplevelser og gjennomført estetikk. Jeg anbefaler klart Bang on Beach eller Best on Beach for den ultimate følelsen av å bo helt nede ved havet.</p>
             <div class="csign">
               <img src="https://maldivia.no/wp-content/uploads/sites/2/2026/05/thumbnail_image002-1-1.jpg" alt="Wendie Pedersen">
@@ -3293,7 +3309,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
         </div>
         <div class="v133-hp-info-col">
           <div class="ilbl">Transfer</div>
-          <div class="ival">Privat bil · ca. 60 min.</div>
+          <div class="ival">Inkludert · ca. 60 min.</div>
         </div>
         <div class="v133-hp-info-col">
           <div class="ilbl">Website</div>
@@ -3318,7 +3334,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
       </div>
       <div class="v133-hp-body">
         <div class="v133-hp-booking">
-          <div class="v133-hp-eyebrow">Velg villatype</div>
+          <div class="v133-hp-eyebrow">Velg villatype &amp; forpleining</div>
           <div class="v133-hp-villa">
             <div class="v133-hp-villa-info">
               <div class="v133-hp-villa-name">Superior Room</div>
@@ -3327,7 +3343,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>76.500<span class="add">+ NOK 9.500</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>76.500<span class="add">Inkl. NOK 9.500 tillegg</span></div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
@@ -3343,7 +3359,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>90.000<span class="add">+ NOK 23.000</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>90.000<span class="add">Inkl. NOK 23.000 tillegg</span></div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:1})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
@@ -3360,7 +3376,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           <div class="v133-hp-hl-item">Gastronomi i særklasse på tvers av resortet</div>
           <div class="v133-hp-hl-item">LUX* Me Spa med bassenger og wellnessområde</div>
           <div class="v133-hp-curator-mini">
-            <div class="ceyebrow">Wendie&#39; anbefaling</div>
+            <div class="ceyebrow">Wendies anbefaling</div>
             <p class="cquote">LUX* Grand Gaube er et resort vi ofte anbefaler til gjester som ønsker Mauritius med mer personlighet og atmosfære — <em>her møtes retro-chic design, avslappet luksus og en av øyas vakreste beliggenheter mellom to rolige bukter</em>. Stemningen er levende uten å bli hektisk, restaurantene er gjennomførte helt ned til minste detalj, og steder som INTI og Bisou skaper en energi man sjelden finner på klassiske strandresorts.</p>
             <div class="csign">
               <img src="https://maldivia.no/wp-content/uploads/sites/2/2026/05/thumbnail_image002-1-1.jpg" alt="Wendie Pedersen">
@@ -3507,8 +3523,8 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     <div class="v129-cta-btns">
       <button type="button" class="v129-cta-btn primary" onclick="if(window.mldvOpenBooking)mldvOpenBooking()">Send booking-forespørsel →</button>
       <a href="tel:+4723965171" class="v129-cta-btn secondary">Ring +47 23 96 51 71</a>
+    </div>
   </div>
-      </div>
 
   <div class="terms-box reveal">
     Ved skriftlig eller muntlig aksept, samt ved innbetaling av depositum bekrefter dere samtidig at dere har lest og forstått reisevilkårene — <a href="https://maldivia.no/informasjon-og-reisevilkar-vedrorende-din-reise-til-maldivene/" target="_blank">les dem her →</a>
@@ -3528,7 +3544,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 
 </section><!-- /trip-section #mauritius -->
 
-<script type="application/json" id="mldv-booking-data">{"customerName":"Kristin Wathne Løkke","customerEmail":"kristinwathnelokke@gmail.com","customerPhone":"93049555","adults":2,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","trips":[{"idx":0,"destination":"Mauritius","monthYear":"november 2026","dateRange":"12. november 2026 — 21. november 2026","nights":"7 netter / 9 dager","currency":"NOK","isRoundTrip":false,"priceTotal":"67.000","priceTotalFmt":"67.000","route":[],"hotels":[{"id":"hotel-1780478653235-fag86","name":"SALT of Palmar","location":"Palmar Beach","rates":[{"idx":0,"room":"Bang on Beach Room","mealPlan":"Helpensjon — Dine Around","total":"67000","totalFmt":"67.000","included":true},{"idx":1,"room":"Bang on Beach Room","mealPlan":"All-Inclusive — Dine Around","total":"78000","totalFmt":"78.000","included":false}]},{"id":"hotel-1780478713842-47cg9","name":"LUX* Grand Gaube","location":"Grand Gaube","rates":[{"idx":0,"room":"Superior Room","mealPlan":"All-Inclusive — Dine Around","total":"76500","totalFmt":"76.500","included":false},{"idx":1,"room":"Superior Room","mealPlan":"Halvpensjon — Dine Around","total":"90000","totalFmt":"90.000","included":false}]}]}]}</script>
+<script type="application/json" id="mldv-booking-data">{"customerName":"Kristin Wathne Løkke","customerEmail":"kristinwathnelokke@gmail.com","customerPhone":"93049555","adults":2,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Mauritius","monthYear":"november 2026","dateRange":"12. november 2026 — 21. november 2026","nights":"7 netter / 9 dager","currency":"NOK","isRoundTrip":false,"priceTotal":"67.000","priceTotalFmt":"67.000","route":[],"hotels":[{"id":"hotel-1780478653235-fag86","name":"SALT of Palmar","location":"Palmar Beach","rates":[{"idx":0,"room":"Bang on Beach Room","mealPlan":"Helpensjon — Dine Around","total":"67000","totalFmt":"67.000","included":true},{"idx":1,"room":"Bang on Beach Room","mealPlan":"All-Inclusive — Dine Around","total":"78000","totalFmt":"78.000","included":false}]},{"id":"hotel-1780478713842-47cg9","name":"LUX* Grand Gaube","location":"Grand Gaube","rates":[{"idx":0,"room":"Superior Room","mealPlan":"All-Inclusive — Dine Around","total":"76500","totalFmt":"76.500","included":false},{"idx":1,"room":"Superior Room","mealPlan":"Halvpensjon — Dine Around","total":"90000","totalFmt":"90.000","included":false}]}]}]}</script>
 
 <!-- ════ V130 BOOKING MODAL ════ -->
 <div id="mldv-booking-modal" class="mldv-bm" hidden role="dialog" aria-modal="true" aria-labelledby="mldv-bm-title">
@@ -3770,17 +3786,70 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     }
     lines.push("---");
     lines.push("Sendt fra Maldivias tilbuds-side.");
-    var subject = "Booking-anmodning: " + (DATA.customerName || "kunde") + " — " + hotel.name;
+    var subject = "Booking-anmodning: " + (DATA.customerName || "kunde") + " — " + emailHotelTag;
     var body = lines.join("\n");
-    var mailto = "mailto:" + DATA.sigEmail + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    // Open mailto (user mail client takes over)
-    window.location.href = mailto;
-    // Replace form with success state
-    setTimeout(function(){
+
+    // V147.18: Server-side submission via configurable endpoint
+    // (Formspree / Web3Forms / custom). Falls back to mailto if
+    // no endpoint configured. Auto-detects service from URL so
+    // Maldivia can switch providers without code changes.
+    var endpoint = DATA.bookingEndpoint || "";
+    var submitBtn = form.querySelector(".mldv-bm-submit");
+    var sendingTxt = DATA.language === "no" ? "Sender…" : (DATA.language === "en" ? "Sending…" : "Sender…");
+    var errorTxt = DATA.language === "no" ? "Noe gikk galt. Send forespørselen til" : (DATA.language === "en" ? "Something went wrong. Please send the request to" : "Noget gik galt. Send venligst anmodningen til");
+
+    function showSuccess() {
       var card = document.getElementById("mldv-bm-card-content");
       card.innerHTML = '<button type="button" class="mldv-bm-close" data-mldv-close aria-label="Lukk">×</button><div class="mldv-bm-success"><div class="check-icon">✓</div><h2>' + L.successTitle + '</h2><p>' + L.successBody + '</p><button type="button" class="ok-btn" data-mldv-close>' + L.successClose + '</button></div>';
       card.querySelectorAll("[data-mldv-close]").forEach(function(el){ el.addEventListener("click", close); });
-    }, 600);
+    }
+
+    function fallbackMailto() {
+      // Open prefilled mail client as final-resort fallback
+      var mailto = "mailto:" + DATA.sigEmail + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = mailto;
+      setTimeout(showSuccess, 600);
+    }
+
+    if (endpoint) {
+      // Build payload — common field names that work with most
+      // form services (Formspree, Web3Forms, FormSubmit, etc.).
+      var payload = new FormData();
+      payload.append("subject", subject);
+      payload.append("_subject", subject);  // Formspree-specific
+      payload.append("message", body);
+      payload.append("name", DATA.customerName || data.get("email") || "");
+      payload.append("email", data.get("email") || "");
+      payload.append("_replyto", data.get("email") || "");
+      payload.append("phone", data.get("phone") || "");
+      payload.append("hotel", emailHotelTag);
+      payload.append("destination", trip.destination);
+      // Disable button + visual feedback
+      if (submitBtn) { submitBtn.disabled = true; var oldTxt = submitBtn.textContent; submitBtn.textContent = sendingTxt; }
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: payload
+      }).then(function(res) {
+        if (res.ok) {
+          showSuccess();
+        } else {
+          // Server returned 4xx/5xx — fall back to mailto so the
+          // customer can still reach Maldivia. Reset button.
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = oldTxt; }
+          alert(errorTxt + " " + DATA.sigEmail);
+          fallbackMailto();
+        }
+      }).catch(function() {
+        // Network error — fall back to mailto
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = oldTxt; }
+        alert(errorTxt + " " + DATA.sigEmail);
+        fallbackMailto();
+      });
+    } else {
+      // No endpoint configured — use mailto (legacy behavior).
+      fallbackMailto();
+    }
     return false;
   };
 })();
