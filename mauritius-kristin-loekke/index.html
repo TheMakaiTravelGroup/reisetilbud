@@ -2282,7 +2282,7 @@ html{scroll-behavior:smooth;}
 /* Featured villa-box rows — clean 2-col INFO display (no per-row buttons).
    Per-villa booking happens at the hotel-detail panel below. This card's
    primary CTA "Book denne →" handles featured booking via the modal. */
-.v129-vrow{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:18px;padding:14px 0;border-bottom:1px solid var(--sand-deep);}
+.v129-vrow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px;padding:14px 0;border-bottom:1px solid var(--sand-deep);}
 .v129-vrow:last-child{border-bottom:none;}
 .v129-vrow.incl{background:var(--white);margin:0 -14px;padding:14px;border-radius:2px;}
 .v129-vrow .vinfo{}
@@ -2443,7 +2443,10 @@ html{scroll-behavior:smooth;}
   grid-template-columns:1fr auto;
   column-gap:32px;
   row-gap:20px;
-  align-items:start;
+  /* V147.25: center-align (was start) — surcharge sub-line removed so
+     the right-side price is just one number; centering it relative to
+     the left-side villa-info (name + meal) gives visual balance. */
+  align-items:center;
   position:relative;
   transition:border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
@@ -2881,6 +2884,97 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
   .mldv-bm-grid,.mldv-bm-grid-3{grid-template-columns:1fr;}
 }
 
+/* V147.23: COMPREHENSIVE RESPONSIVE POLISH
+   ─────────────────────────────────────────────
+   Targeted fixes for responsive gaps found in audit:
+   - Global iOS zoom-prevention on inputs (16px min font-size)
+   - Global text-size-adjust to stop iOS auto-enlarging
+   - Stack hp-info (Location/Transfer/Website) on tablets/phones
+   - Booking modal trip/hotel/villa selects respect narrow phones
+   - Sticky CTA bar height-safe (mobile browser chrome)
+   - Touch targets ≥44px on key interactive elements at mobile
+   - Prevent horizontal overflow from long room/villa names
+   - Range section price scales down on narrow phones */
+
+/* iOS form-field zoom prevention: any input/textarea/select with font-size
+   < 16px causes iOS Safari to auto-zoom on focus. 16px = no zoom. */
+@media(max-width:760px){
+  input[type="text"],input[type="email"],input[type="tel"],input[type="number"],
+  input[type="date"],input[type="url"],input[type="password"],textarea,select{
+    font-size:16px !important;
+  }
+}
+
+/* Global iOS text-size-adjust — prevents Safari from inflating type on
+   orientation change. Already in many places but doesn't hurt to be explicit. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+
+/* Stack v133-hp-info 3-column row (LOCATION / TRANSFER / WEBSITE) on
+   tablets and phones. Was repeat(3,1fr) at all widths → narrow viewports
+   crowd the labels. */
+@media(max-width:760px){
+  .v133-hp-info{grid-template-columns:1fr 1fr;gap:20px;}
+}
+@media(max-width:480px){
+  .v133-hp-info{grid-template-columns:1fr;gap:16px;padding-top:24px;}
+}
+
+/* Narrow phones (<380px) — extra-tight adjustments */
+@media(max-width:380px){
+  /* Hero title: clamp min was 48px, very tight on 320-360px phones */
+  .hero-title{font-size:clamp(36px,11vw,52px);letter-spacing:-0.005em;}
+  /* V145 favorit name */
+  .v145-favorit-name{font-size:26px;}
+  .v145-favorit-content{padding:22px 18px;}
+  .v145-favorit-image{min-height:200px;}
+  /* V129 price-hero hotel name */
+  .v129-ph-hotel{font-size:24px;}
+  /* CTA */
+  .v129-cta-title{font-size:20px;line-height:1.2;}
+  .v129-cta{padding:32px 14px;}
+  /* Villa price box now simpler — surcharge sub-line removed in V147.25
+     so only price + currency remain on this line. */
+  .v133-hp-villa-price{font-size:17px;}
+  /* Booking modal form readability on iPhone SE */
+  .mldv-bm-head,.mldv-bm-form,.mldv-bm-trust{padding-left:18px !important;padding-right:18px !important;}
+  /* Range section — prices need to fit in narrow column */
+  .v138-range-price{font-size:22px;}
+}
+
+/* Touch target enforcement — buttons must be at least 44×44px on mobile
+   per WCAG / Apple HIG. Several inline rate-book and small pills were
+   ~30-34px tall — fine on desktop, hard to tap on phone. */
+@media(max-width:760px){
+  .rate-book,.v129-book-btn{padding:12px 18px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+  .v129-alt-btn-book{padding:14px 18px;min-height:44px;}
+  .v136-jump-pill{padding:11px 16px;min-height:44px;display:inline-flex;align-items:center;}
+  .v145-favorit-readmore{padding:10px 0;min-height:36px;}
+  /* Booking modal close button — easier tap target */
+  .mldv-bm-close{width:44px;height:44px;font-size:20px;}
+}
+
+/* Sticky bottom CTA — make sure content above isn't hidden behind it
+   (mobile browsers add ~80px chrome+CTA combined). */
+@media(max-width:760px){
+  body{padding-bottom:env(safe-area-inset-bottom);}
+  .v129-cta-section,.v129-cta-wrap{padding-bottom:80px;}
+}
+
+/* Prevent horizontal overflow caused by very long unbreakable text
+   (hotel/villa names with concatenated words). Allows break-word as a
+   last resort. */
+.v133-hp-villa-name,.v145-favorit-name,.v129-feat-name,.v129-ph-hotel,
+.v133-hp-hero-content .name,.v129-alt-name{overflow-wrap:break-word;word-break:break-word;hyphens:auto;}
+
+/* Container — ensure no element bleeds outside viewport horizontally.
+   V147.24 FIX: only apply overflow-x:clip to body level (which catches
+   any rogue overflow without changing widths). DO NOT touch .container,
+   .v145-favorit, .v133-hp widths — they have desktop max-widths that
+   constrain content layout (e.g. .container max-width:920px). Setting
+   max-width:100% on them broke desktop layout (everything went
+   full-width). overflow-x on body alone is the safe approach. */
+body{overflow-x:clip;}
+
 </style>
 </head>
 <body id="top">
@@ -2911,9 +3005,9 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     <div class="curator-letter-eyebrow">Skreddersydd for deg</div>
     <h1 class="curator-letter-title">Kjære Kristin</h1>
     <div class="curator-letter-body">
-      <p>Vi gleder oss over muligheten til å hjelpe dere av sted på en fantastisk reise med Maldivia.</p>
+      <p>Jeg gleder meg til å presentere et skreddersydd reiseforslag til dere, og håper at det faller i smak.</p>
       <p>Vi har håndplukket mulighetene nedenfor, som gir absolutt best kvalitet og value for money ut fra ditt budsjett og dine ønsker. Hos Maldivia tror vi ikke på standardløsninger. Vi viser deg utelukkende steder vi selv kjenner, og som garanterer alt fra fantastisk hotellkvalitet til de vakreste omgivelser, beliggenhet i særklasse, nydelige rom og villaer samt personlig service og gastronomi som er second to none.</p>
-      <p>De utvalgte hotellene og destinasjonene har hver sitt unike særpreg, men deler alle den samme høye standarden. Da priser og tilgjengelighet på de beste flyreisene og resortene endrer seg raskt, anbefaler vi at du ser gjennom mulighetene snarest.</p>
+      <p>De utvalgte hotellene og destinasjonene har hver sitt unike særpreg, men deler alle den samme høye standarden. Ettersom priser og tilgjengelighet på de beste flyreisene og resortene endrer seg raskt, anbefaler jeg at du ser gjennom mulighetene snarest.</p>
       <p>Jeg sitter klar på både telefon og e-post, så snart du har funnet din favoritt og er klar til å bestille reisen.</p>
     </div>
     <div class="curator-letter-sig">
@@ -2985,7 +3079,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
       </div>
       <div class="v138-range-arrow">→</div>
       <div class="v138-range-col">
-        <div class="v138-range-lbl">Op til</div>
+        <div class="v138-range-lbl">Opp til</div>
         <div class="v138-range-price"><span class="cur">NOK</span>90.000</div>
         <div class="v138-range-detail">LUX* Grand Gaube · Superior Room</div>
       </div>
@@ -3069,7 +3163,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           </div>
           <div class="v129-vrow">
             <div class="vinfo"><span class="vname">Bang on Beach Room</span><span class="vmeal">All-Inclusive — Dine Around</span></div>
-            <span class="vprice">NOK 78.000<span class="add">Inkl. NOK 11.000 tillegg</span></span>
+            <span class="vprice">NOK 78.000</span>
           </div>
         </div>
         <div class="v129-feat-btns">
@@ -3081,7 +3175,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
     <div class="v129-alts-lbl">Eller velg et alternativ</div>
     <div class="v129-alts-grid">
       <div class="v129-alt recommended">
-        <span class="v129-pill-badge green">Wendie&#39; anbefaling</span>
+        <span class="v129-pill-badge green">Wendies anbefaling</span>
         <div class="v129-alt-img">
           <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2025/12/LGG-1.jpg" alt="">
         </div>
@@ -3098,8 +3192,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           <div class="v129-alt-pricebox">
             <div class="lbl">Fra</div>
             <div class="pr"><span class="cur">NOK</span>76.500</div>
-            <div class="vname">Superior Room</div>
-            <div class="diff">Inkl. NOK 9.500 tillegg</div>
+            <div class="vname">Superior Room · Halvpensjon</div>
           </div>
           <div class="v129-alt-btns">
             <button type="button" class="v129-alt-btn-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
@@ -3267,7 +3360,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>67.000<span class="add">FANTASTISK VERDI</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>67.000</div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
@@ -3283,7 +3376,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>78.000<span class="add">Inkl. NOK 11.000 tillegg</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>78.000</div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:1})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
@@ -3353,7 +3446,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>76.500<span class="add">Inkl. NOK 9.500 tillegg</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>76.500</div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
@@ -3369,7 +3462,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>90.000<span class="add">Inkl. NOK 23.000 tillegg</span></div>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>90.000</div>
               <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:1})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
