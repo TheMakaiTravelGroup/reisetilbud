@@ -2071,6 +2071,15 @@ html{scroll-behavior:smooth;}
 .v145-favorit-villa{font-family:var(--ff-ui);font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;}
 .v145-favorit-quote{background:linear-gradient(135deg,#fdfcf9 0%,#faf6ed 100%);border-left:2px solid var(--gold);padding:20px 24px 20px 22px;margin:0 0 28px;font-family:var(--ff-body);font-size:15.5px;line-height:1.65;color:var(--ink-mid);font-style:normal;border-radius:0 3px 3px 0;}
 .v145-favorit-quote .qlbl{display:block;font-family:var(--ff-ui);font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);font-style:normal;margin-bottom:9px;letter-spacing:0.26em;}
+/* V147.20: "Les hele anbefalingen →" link appears when the favorit
+   curator-note was truncated. Lives inside the gold-bordered quote
+   block, sits on its own line below the "…" so it reads as a clear
+   continuation prompt rather than competing with the body text.
+   V147.21: font-size reduced from 11px → 9.5px to match the surrounding
+   small UI labels (qlbl is 9px, villa is 10.5px) — it should be a
+   subtle continuation prompt, not a competing button. */
+.v145-favorit-quote .v145-favorit-readmore{display:inline-block;margin-top:14px;font-family:var(--ff-ui);font-size:9.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;}
+.v145-favorit-quote .v145-favorit-readmore:hover{color:var(--gold-dk);border-bottom-color:var(--gold-dk);}
 .v145-favorit-divider{height:1px;background:var(--sand-deep);margin:0 0 22px;}
 .v145-favorit-meta{display:flex;align-items:center;gap:12px;font-family:var(--ff-ui);font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-lt);margin-bottom:18px;flex-wrap:wrap;}
 .v145-favorit-meta .sep{color:var(--gold);opacity:0.6;}
@@ -2956,7 +2965,8 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
         <div class="v145-favorit-villa">Superior Room · All-Inclusive — Dine Around</div>
         <div class="v145-favorit-quote">
           <span class="qlbl">Hvorfor vi anbefaler dette</span>
-          LUX* Grand Gaube er et resort vi ofte anbefaler til gjester som ønsker Mauritius med mer personlighet og atmosfære — <em>her møtes retro-chic design, avslappet luksus og en av øyas vakreste…
+          Hotellet er en av mine personlige favoritter - spesielt med tanke på det retro-chic design og små kreative detaljer som øyblikkelig gir byr på en wow-opplevelse. Et annet høydepunkt ved LUX hotellene…
+          <a href="#hotel-lux-grand-gaube" class="v145-favorit-readmore">Les hele anbefalingen →</a>
         </div>
         <div class="v145-favorit-divider"></div>
         <div class="v145-favorit-meta"><span>7 netter</span><span class="sep">·</span><span>2 voksne</span><span class="sep">·</span><span>Mauritius</span></div>
@@ -3093,7 +3103,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           </div>
           <div class="v129-alt-btns">
             <button type="button" class="v129-alt-btn-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
-            <a href="#hotel-lux-grand-gaube" class="v129-alt-btn-link">Se hotell →</a>
+            <a href="#hotel-lux-grand-gaube" class="v129-alt-btn-link">Se reiseforslag →</a>
           </div>
         </div>
       </div>
@@ -3291,7 +3301,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           <div class="v133-hp-hl-item">En del av prestisjefylte DESIGN HOTELS™</div>
           <div class="v133-hp-curator-mini">
             <div class="ceyebrow">Wendies anbefaling</div>
-            <p class="cquote">SALT of Palmar er et fargerikt boutiquehotell kun for voksne, beliggende direkte ved en av Mauritius’ vakreste strender — <em>her handler det om design, lokal kultur og gastronomi i toppklasse</em>. Atmosfæren er avslappet, kreativ og langt mer intim enn på de klassiske store resortene, med fokus på ekte opplevelser og gjennomført estetikk. Jeg anbefaler klart Bang on Beach eller Best on Beach for den ultimate følelsen av å bo helt nede ved havet.</p>
+            <p class="cquote">Salt of Palmar er et lite, lekkert boutique-hotell hvor du blir tatt varmt imot og føler deg hjemme med en gang. Stort sett alt du tar i her, fra interiøret og servicet til råvarene i maten, er håndplukket fra lokale produsenter på Mauritius. Det er utrolig inspirerende hvordan de løfter frem lokalsamfunnet, og de hjelper deg mer enn gjerne med å finne frem til kunstnerne, slik at du selv kan dra på besøk og kjøpe med unike skatter hjem. Rett og slett en unik perle som alltid er verdt å unne seg noen dager på.</p>
             <div class="csign">
               <img src="https://maldivia.no/wp-content/uploads/sites/2/2026/05/thumbnail_image002-1-1.jpg" alt="Wendie Pedersen">
               <div class="ctext">
@@ -3377,7 +3387,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
           <div class="v133-hp-hl-item">LUX* Me Spa med bassenger og wellnessområde</div>
           <div class="v133-hp-curator-mini">
             <div class="ceyebrow">Wendies anbefaling</div>
-            <p class="cquote">LUX* Grand Gaube er et resort vi ofte anbefaler til gjester som ønsker Mauritius med mer personlighet og atmosfære — <em>her møtes retro-chic design, avslappet luksus og en av øyas vakreste beliggenheter mellom to rolige bukter</em>. Stemningen er levende uten å bli hektisk, restaurantene er gjennomførte helt ned til minste detalj, og steder som INTI og Bisou skaper en energi man sjelden finner på klassiske strandresorts.</p>
+            <p class="cquote">Hotellet er en av mine personlige favoritter - spesielt med tanke på det retro-chic design og små kreative detaljer som øyblikkelig gir byr på en wow-opplevelse. Et annet høydepunkt ved LUX hotellene er dessuten det skøyhøye gastronomiske fokus. Jeg har bodd på flere av verdens beste hoteller - men det er fortsatt ingen som overgår frokosten på LUX*.</p>
             <div class="csign">
               <img src="https://maldivia.no/wp-content/uploads/sites/2/2026/05/thumbnail_image002-1-1.jpg" alt="Wendie Pedersen">
               <div class="ctext">
@@ -3395,7 +3405,7 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
         </div>
         <div class="v133-hp-info-col">
           <div class="ilbl">Transfer</div>
-          <div class="ival">Privat bil · ca. 60 min.</div>
+          <div class="ival">Inkludert · ca. 60 min.</div>
         </div>
         <div class="v133-hp-info-col">
           <div class="ilbl">Website</div>
