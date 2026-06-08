@@ -2081,8 +2081,12 @@ html{scroll-behavior:smooth;}
 .v145-favorit-quote .v145-favorit-readmore{display:inline-block;margin-top:14px;font-family:var(--ff-ui);font-size:9.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;}
 .v145-favorit-quote .v145-favorit-readmore:hover{color:var(--gold-dk);border-bottom-color:var(--gold-dk);}
 .v145-favorit-divider{height:1px;background:var(--sand-deep);margin:0 0 22px;}
-.v145-favorit-meta{display:flex;align-items:center;gap:12px;font-family:var(--ff-ui);font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-lt);margin-bottom:18px;flex-wrap:wrap;}
+.v145-favorit-meta{display:flex;align-items:center;gap:12px;font-family:var(--ff-ui);font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-lt);margin-bottom:8px;flex-wrap:wrap;}
 .v145-favorit-meta .sep{color:var(--gold);opacity:0.6;}
+/* V148.15: destination on its own line. V148.16: match meta-line styling
+   exactly (UI font, 10.5px, uppercase, gold-tinted) but in bold weight
+   (700) and the ink color so it reads as the trip's name/heading. */
+.v145-favorit-destination{font-family:var(--ff-ui);font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink);margin-bottom:18px;}
 .v145-favorit-price-row{display:flex;align-items:baseline;gap:14px;margin-bottom:28px;}
 .v145-favorit-price-lbl{font-family:var(--ff-ui);font-style:normal;font-size:10.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-lt);}
 .v145-favorit-price-num{font-family:var(--ff-display);font-style:normal;font-size:32px;font-weight:500;color:var(--ink);line-height:1;letter-spacing:-0.005em;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum","tnum";}
@@ -2428,6 +2432,11 @@ html{scroll-behavior:smooth;}
 
 .v133-hp-body{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;margin-top:48px;}
 .v133-hp-eyebrow{font-family:var(--ff-ui);font-size:10.5px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+/* V149: stay-dates linje parallel til ratesTitle eyebrow */
+.v133-hp-eyebrow-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px;}
+.v133-hp-eyebrow-row .v133-hp-eyebrow{margin-bottom:0;}
+.v133-hp-stay{font-family:var(--ff-display);font-size:14px;font-weight:400;color:var(--ink-mid);line-height:1;letter-spacing:0.01em;}
+@media (max-width:640px){.v133-hp-stay{font-size:12.5px;letter-spacing:0;}}
 
 .v133-hp-booking{}
 /* V136: villa cards restructured as 2x2 grid using display:contents on
@@ -2811,9 +2820,19 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 .mldv-bm-journey .jstops{display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid var(--sand-deep);}
 .mldv-bm-journey .jstop{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:baseline;}
 .mldv-bm-journey .jstop .num{font-family:var(--ff-display);font-size:16px;color:var(--gold);}
-.mldv-bm-journey .jstop .hname{font-family:var(--ff-display);font-size:14.5px;font-weight:500;color:var(--ink);}
+/* V148.24: jstop-info wraps hotel name + villa name in a column so both
+   show under the same column when villa is present. */
+.mldv-bm-journey .jstop .jstop-info{display:flex;flex-direction:column;gap:1px;min-width:0;}
+.mldv-bm-journey .jstop .hname{font-family:var(--ff-display);font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.2;}
+.mldv-bm-journey .jstop .vname{font-family:var(--ff-body);font-size:11.5px;color:var(--ink-mid);font-style:italic;line-height:1.3;}
 .mldv-bm-journey .jstop .nights{font-family:var(--ff-ui);font-size:10.5px;color:var(--ink-lt);letter-spacing:0.08em;text-transform:uppercase;}
 .mldv-bm-journey .jtotal{margin-top:16px;padding-top:14px;border-top:1px solid var(--sand-deep);display:flex;justify-content:space-between;align-items:baseline;}
+/* V148.26: italic hint shown below the journey box pointing customers to
+   "Special requests" field if they want an upgrade. V148.27: weightier
+   (medium 500) for better visibility, ink (not ink-mid) for contrast,
+   and no bottom padding — fieldset's own margin-bottom (32px) handles
+   the space down to the next step. */
+.mldv-bm-upgrade-hint{font-family:var(--ff-body);font-size:13px;font-style:italic;font-weight:500;color:var(--ink);line-height:1.55;padding:12px 4px 0;margin:0;}
 .mldv-bm-journey .jtotal .lbl{font-family:var(--ff-ui);font-size:10.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);}
 .mldv-bm-journey .jtotal .amt{font-family:var(--ff-display);font-size:24px;color:var(--ink);font-weight:500;}
 .mldv-bm-journey .jtotal .amt .cur{font-family:var(--ff-ui);font-size:11px;color:var(--gold);margin-right:4px;font-weight:500;letter-spacing:0.06em;}
@@ -3088,9 +3107,15 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 
 /* Prevent horizontal overflow caused by very long unbreakable text
    (hotel/villa names with concatenated words). Allows break-word as a
-   last resort. */
+   last resort.
+   V148.28: removed hyphens:auto — Rasmus reported "Water Pool Villa -
+   La-goon view" being split mid-word. Browser was auto-hyphenating
+   "Lagoon" → "La-goon". Now we ONLY allow break at natural whitespace
+   (the space after "-" or between words). Mid-word break still possible
+   via overflow-wrap:break-word if a word is wider than container, but
+   no more hyphenation. */
 .v133-hp-villa-name,.v145-favorit-name,.v129-feat-name,.v129-ph-hotel,
-.v133-hp-hero-content .name,.v129-alt-name{overflow-wrap:break-word;word-break:break-word;hyphens:auto;}
+.v133-hp-hero-content .name,.v129-alt-name{overflow-wrap:break-word;word-break:normal;hyphens:none;}
 
 /* Container — ensure no element bleeds outside viewport horizontally.
    V147.24 FIX: only apply overflow-x:clip to body level (which catches
@@ -3189,7 +3214,8 @@ body{overflow-x:clip;}
           <a href="#hotel-kagi-island-maldives" class="v145-favorit-readmore">Les hele anbefalingen →</a>
         </div>
         <div class="v145-favorit-divider"></div>
-        <div class="v145-favorit-meta"><span>10 netter</span><span class="sep">·</span><span>2 voksne</span><span class="sep">·</span><span>Maldivene</span></div>
+        <div class="v145-favorit-meta"><span>10 netter</span><span class="sep">·</span><span>2 voksne</span></div>
+        <div class="v145-favorit-destination">Maldivene</div>
         <div class="v145-favorit-price-row">
           <div class="v145-favorit-price-lbl">Pris fra</div>
           <div class="v145-favorit-price-num"><span class="v145-favorit-price-cur">NOK</span>84.000</div>
@@ -3312,7 +3338,10 @@ body{overflow-x:clip;}
       </div>
       <div class="v133-hp-body">
         <div class="v133-hp-booking">
-          <div class="v133-hp-eyebrow">Velg romtype &amp; forpleining</div>
+          <div class="v133-hp-eyebrow-row">
+            <div class="v133-hp-eyebrow">Velg romtype &amp; forpleining</div>
+            <div class="v133-hp-stay">15. okt — 25. okt 2026 · 10 netter</div>
+          </div>
           <div class="v133-hp-villa">
             <div class="v133-hp-villa-info">
               <div class="v133-hp-villa-name">Ocean Pool Villa</div>
@@ -3472,7 +3501,7 @@ body{overflow-x:clip;}
 (function(){
   var DATA = null;
   try { DATA = JSON.parse(document.getElementById("mldv-booking-data").textContent); } catch(e) { return; }
-  var L = {"adult":"Voksen","teen":"Teenager","child":"Barn","infant":"Spedbarn","fullName":"Fullt navn","birthDate":"Fødselsdato","successTitle":"Forespørselen er sendt","successBody":"Vi har mottatt din booking-forespørsel. Vi sjekker pris og tilgjengelighet og sender bekreftelse på mail.","successClose":"Lukk","journeyEyebrow":"Du booker","journeyTotal":"Hele rundreisen","nightsWordSingular":"natt","nightsWordPlural":"netter"};
+  var L = {"adult":"Voksen","teen":"Teenager","child":"Barn","infant":"Spedbarn","fullName":"Fullt navn","birthDate":"Fødselsdato","successTitle":"Forespørselen er sendt","successBody":"Vi har mottatt din booking-forespørsel. Vi sjekker pris og tilgjengelighet og sender bekreftelse på mail.","successClose":"Lukk","journeyEyebrow":"Dere bestiller","journeyTotal":"Hele rundreisen","journeyUpgradeHint":"Ønsker dere et av tilleggene fra tilbudet (annen villatype eller meal plan)? Skriv det i feltet \"Spesielle ønsker\" lenger nede.","nightsWordSingular":"natt","nightsWordPlural":"netter"};
   var modal = document.getElementById("mldv-booking-modal");
   if (!modal) return;
 
@@ -3507,17 +3536,40 @@ body{overflow-x:clip;}
       html += "<div class=\"jtitle\">" + trip.destination + "</div>";
       html += "<div class=\"jmeta\">" + trip.dateRange + " &middot; " + trip.nights + "</div>";
       html += "<div class=\"jstops\">";
+      // V148.24: always read hotel name from trip.hotels[i] (the
+      // canonical data), not route[i].hotel (often empty since user
+      // only filled in city + nights in the route editor). Also show
+      // the included villa type so the customer sees what they get.
       var stops = trip.route && trip.route.length > 0 ? trip.route : trip.hotels.map(function(h){return {hotel:h.name,nights:""};});
       stops.forEach(function(s, i){
         var n = String(i+1).padStart ? String(i+1).padStart(2,"0") : (i+1<10?"0"+(i+1):(i+1));
         var nl = s.nights ? s.nights + " " + (s.nights==1 ? L.nightsWordSingular : L.nightsWordPlural) : "";
-        html += '<div class="jstop"><span class="num">' + n + '</span><span class="hname">' + (s.hotel||"") + '</span><span class="nights">' + nl + '</span></div>';
+        // Index-aligned hotel + first/included villa lookup
+        var h = (trip.hotels && trip.hotels[i]) || {};
+        var hotelName = h.name || s.hotel || "";
+        var villaName = "";
+        if (h.rates && h.rates.length) {
+          var included = h.rates.find(function(r){ return r.included; }) || h.rates[0];
+          if (included) {
+            villaName = included.room || "";
+            // V148.25: villa + meal plan separated by "·" so customer
+            // sees BOTH villatype and the included meal plan (BB/HP/AI).
+            if (included.mealPlan) villaName += " · " + included.mealPlan;
+          }
+        }
+        var hotelHtml = hotelName ? '<span class="hname">' + hotelName + '</span>' : "";
+        var villaHtml = villaName ? '<span class="vname">' + villaName + '</span>' : "";
+        html += '<div class="jstop"><span class="num">' + n + '</span><div class="jstop-info">' + hotelHtml + villaHtml + '</div><span class="nights">' + nl + '</span></div>';
       });
       html += "</div>";
       if (trip.priceTotalFmt) {
         html += '<div class="jtotal"><span class="lbl">' + L.journeyTotal + '</span><span class="amt"><span class="cur">' + trip.currency + '</span>' + trip.priceTotalFmt + '</span></div>';
       }
       html += "</div>";
+      // V148.26: upgrade hint below the journey box — italic note
+      // pointing customers to the special-wishes field if they want
+      // an upgrade (different villa or meal plan) as shown in offer.
+      html += '<div class="mldv-bm-upgrade-hint">' + L.journeyUpgradeHint + '</div>';
       summary.innerHTML = html;
       summary.style.display = "block";
       picker.style.display = "none";
