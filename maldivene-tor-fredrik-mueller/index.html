@@ -156,6 +156,17 @@ body::before{
 .reveal-delay-1{transition-delay:0.12s;}
 .reveal-delay-2{transition-delay:0.24s;}
 .reveal-delay-3{transition-delay:0.36s;}
+</style>
+<noscript><style>
+/* V148.41: if JavaScript is disabled, fail open — show all .reveal content
+   immediately. Without this, .reveal { opacity:0 } would leave entire
+   sections invisible to users with JS off (browser setting, broken script
+   tag, network-blocked CDN, ad blocker false positive, etc.). Critical
+   defense: a luxury travel offer must never silently hide its content. */
+.reveal{opacity:1 !important;transform:none !important;}
+</style></noscript>
+<style>
+
 
 /* ── HEADER ── */
 header{
@@ -2033,6 +2044,49 @@ html{scroll-behavior:smooth;}
   .route-stop-city{font-size:12px;}
   .route-stop-nights{font-size:8.5px;}
 }
+/* V148.39: very narrow mobile — stack stops VERTICALLY so cities never
+   collide or wrap one-word-per-line. The horizontal layout fundamentally
+   can't fit 3 multi-word city names + dot + nights labels under 520px
+   without text overlap. Switch the dashed connector line from horizontal
+   (top) to vertical (left), so stops read top-to-bottom like an itinerary. */
+@media(max-width:520px){
+  .route-timeline{
+    flex-direction:column;
+    align-items:stretch;
+    padding:6px 6px 6px 0;
+    overflow:visible;
+  }
+  .route-timeline::before{
+    top:18px;bottom:18px;
+    left:14px;right:auto;
+    width:1px;height:auto;
+    background:repeating-linear-gradient(180deg, var(--sand-deep) 0, var(--sand-deep) 5px, transparent 5px, transparent 10px);
+  }
+  .route-stop{
+    flex-direction:row;
+    align-items:center;
+    width:100%;
+    min-width:0;
+    padding:8px 8px 8px 8px;
+    gap:14px;
+  }
+  .route-stop-dot{margin-top:0;flex-shrink:0;}
+  .route-stop-city{
+    margin-top:0;
+    white-space:normal;
+    text-align:left;
+    font-size:14px;
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .route-stop-nights{
+    margin-top:0;
+    margin-left:auto;
+    font-size:9px;
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+}
 
 /* ════════════════════════════════════════════════════════════════
    V129 / V130 — Conversion-focused offer layout
@@ -2339,6 +2393,51 @@ html{scroll-behavior:smooth;}
 .v129-rs-stop .info .hdates{font-family:var(--ff-body);font-size:13px;color:var(--ink-mid);margin-top:6px;letter-spacing:0;}
 .v129-rs-stop .seelink{font-family:var(--ff-ui);font-size:10.5px;color:var(--gold);text-decoration:none;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;white-space:nowrap;}
 .v129-rs-stop .seelink:hover{color:var(--gold-dk);text-decoration:underline;text-underline-offset:3px;}
+/* V148.39: mobile redesign for the rundrejse compact hotel cards. The
+   desktop layout (60px step + 110px thumb + 1fr info + auto seelink) blows
+   past mobile viewport width — info column gets crushed to ~30-50px, so
+   hotel names wrap one word per line, KOH YAO NOI splits across 3 lines,
+   and "Se detaljer" gets clipped at the right edge. Restructured grid:
+     row 1: [step 38px] [thumb 80px] [info 1fr]
+     row 2: [───── full-width seelink with hairline divider ─────]
+   This gives info enough room for the hotel name on 1-2 lines, location
+   stays on one line, and the see-details link becomes a proper full-width
+   tap target with a clean visual separator. Also tightens header
+   letter-spacing so "DIN SKRÆDDERSYEDE REJSE" eyebrow fits without
+   getting clipped at the right edge. */
+@media(max-width:640px){
+  .v129-rs-head{padding:22px 18px 16px;}
+  .v129-rs-eyebrow{font-size:9px;letter-spacing:0.14em;}
+  .v129-rs-title{font-size:22px;line-height:1.18;}
+  .v129-rs-meta{font-size:12.5px;}
+  .v129-rs-stops{padding:4px 0;}
+  .v129-rs-stop{
+    grid-template-columns:38px 80px 1fr;
+    grid-template-areas:
+      "step thumb info"
+      "see  see   see ";
+    column-gap:12px;
+    row-gap:6px;
+    padding:14px 18px;
+    align-items:center;
+  }
+  .v129-rs-stop .step{grid-area:step;font-size:18px;text-align:center;}
+  .v129-rs-stop .thumb{grid-area:thumb;width:80px;height:60px;}
+  .v129-rs-stop .info{grid-area:info;min-width:0;}
+  .v129-rs-stop .info .hdest{font-size:8.5px;letter-spacing:0.14em;margin-bottom:3px;}
+  .v129-rs-stop .info .hname{font-size:15px;line-height:1.18;margin-bottom:2px;}
+  .v129-rs-stop .info .hloc{font-size:9.5px;letter-spacing:0.1em;}
+  .v129-rs-stop .info .hdates{font-size:11px;margin-top:3px;}
+  .v129-rs-stop .seelink{
+    grid-area:see;
+    text-align:right;
+    font-size:9.5px;
+    letter-spacing:0.12em;
+    padding-top:8px;
+    border-top:1px solid var(--sand-mid);
+    white-space:nowrap;
+  }
+}
 .v129-rs-foot{padding:24px 36px;border-top:1px solid var(--sand-deep);background:#faf6ed;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
 .v129-rs-foot .total-lbl{font-family:var(--ff-ui);font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
 .v129-rs-foot .total-pr{font-family:var(--ff-display);font-size:24px;font-weight:500;font-variant-numeric:lining-nums tabular-nums;color:var(--ink);line-height:1;}
@@ -2438,7 +2537,19 @@ html{scroll-behavior:smooth;}
 .v133-hp-stay{font-family:var(--ff-display);font-size:14px;font-weight:400;color:var(--ink-mid);line-height:1;letter-spacing:0.01em;}
 @media (max-width:640px){.v133-hp-stay{font-size:12.5px;letter-spacing:0;}}
 
-.v133-hp-booking{}
+.v133-hp-booking{display:flex;flex-direction:column;}
+/* V148.34/36/37/38: balance-image fills the whitespace below booking content,
+   ending at the last highlight TEXT (descender) baseline.
+   flex:1 1 0 + min-height:0: image grows to fill available space without
+   ever pushing the column past where highlights naturally end.
+   margin-bottom:17px: highlight items have margin-bottom:14px AND a
+   half-leading of ~3px below the descender (from line-height:1.6 on 15px
+   text = 24px line-box, leaving ~4.5px below the glyph, of which ~1-2px is
+   actual descender depth). 14+3 ≈ 17px lines the image up with the visible
+   text bottom of "spektakulære udkigspunkter" etc. */
+.v133-hp-whitespace-img{margin-top:28px;margin-bottom:17px;flex:1 1 0;min-height:0;overflow:hidden;border-radius:4px;background:var(--sand-deep);}
+.v133-hp-whitespace-img img{width:100%;height:100%;object-fit:cover;display:block;}
+@media (max-width:900px){.v133-hp-whitespace-img{display:none;}}
 /* V136: villa cards restructured as 2x2 grid using display:contents on
    inner wrappers. Row 1: villa-name | price. Row 2: meta (pill) | BOOK.
    This puts the meal-plan pill on the same horizontal axis as the BOOK
@@ -3011,9 +3122,18 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
   .v129-cta-btn{text-align:center;}
   .v138-jump-fab{bottom:78px;}
   .v138-jump-fab-btn{padding:10px 16px;font-size:10px;}
-  .v138-rr-route{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:8px;}
-  .v138-rr-route::-webkit-scrollbar{display:none;}
-  .v138-rr-stop{flex:0 0 80px;}
+  /* V148.42: removed three rules that were overriding V145.5's vertical
+     stack design for .v138-rr-route on iPhone SE (320-414px) widths:
+       .v138-rr-route{flex-wrap:nowrap;overflow-x:auto;...}
+       .v138-rr-route::-webkit-scrollbar{display:none;}
+       .v138-rr-stop{flex:0 0 80px;}
+     The override forced horizontal layout with only 80px per stop — too
+     narrow for "Koh Yao Noi" (~95px), causing text to wrap one-word-per-
+     line and city labels to overlap into adjacent stops' circles. Both
+     blocks were inside @media(max-width:480px), so the later one (this
+     one) was winning the cascade and silently breaking the timeline.
+     V145.5's vertical stack (number-left, city-center, nights-right per
+     row) at line 16741 is now the only rule and works correctly. */
   .section-num{font-size:11px;}
   .section-title-label{font-size:9px;letter-spacing:0.16em;}
   .v133-hp-villa-name{font-size:18px;}
@@ -3933,7 +4053,7 @@ body{overflow-x:clip;}
           <span class="leg-code">BGO→OSL</span>
           <div>
             <div class="leg-times">11:55 – 12:50</div>
-            <div class="leg-meta">SAS · Business Class</div>
+            <div class="leg-meta">Qatar Airways · Business Class Lite</div>
           </div>
         </div>
         <div class="flight-connector">
@@ -4012,7 +4132,7 @@ body{overflow-x:clip;}
           <span class="leg-code">OSL→BGO</span>
           <div>
             <div class="leg-times">10:10 – 11:00</div>
-            <div class="leg-meta">SAS · Business Class</div>
+            <div class="leg-meta">Qatar Airways · Business Class Lite</div>
           </div>
         </div>
         <div class="journey-total">Total reisetid · 17 t 55 m</div>
@@ -4581,10 +4701,69 @@ body{overflow-x:clip;}
 
 /* ── SCROLL REVEAL ── */
 (function(){
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
-  },{threshold:0.07});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // V148.41: DEFENSE-IN-DEPTH against content disappearing on mobile.
+  //
+  // History: V148.40 fixed a specific symptom (threshold:0.07 unreachable
+  // for tall sections on small viewports), but the deeper architectural
+  // problem remained: .reveal { opacity:0 } means "hidden until JS fires"
+  // with NO FALLBACK. If anything goes wrong in this IIFE — observer not
+  // supported, threshold misconfig, exception thrown, JS blocked — entire
+  // sections vanish permanently and silently. Rasmus reported the "04
+  // HOTELLERNES DETALJER" section being completely invisible on mobile,
+  // and the bug had likely been shipping in customer-facing offers for
+  // an unknown time. Unacceptable.
+  //
+  // Three layers of defense now:
+  //   1. NO-JS FALLBACK: a <noscript> CSS rule (see <style> below) makes
+  //      .reveal fully visible if JS is off. Covers users with JS disabled,
+  //      blocked, or failed-to-load.
+  //   2. SAFETY-NET TIMER: regardless of observer behaviour, force all
+  //      .reveal elements visible after 2 seconds. Worst case: a slight
+  //      delay before some content appears, but it ALWAYS appears.
+  //   3. THRESHOLD:0 OBSERVER: fires the moment any pixel enters viewport,
+  //      reliable for elements of any size. This is the primary path —
+  //      gives the intended smooth fade-in for almost all visits.
+  //
+  // If steps 1+2 ever activate, content shows up. The observer (step 3)
+  // is now an ENHANCEMENT, not a requirement.
+  var revealEls = document.querySelectorAll('.reveal');
+
+  // Safety-net: unconditionally reveal everything after 2s. This catches
+  // (a) Observer not firing for any reason, (b) JS errors elsewhere that
+  // interrupt this script, (c) future regressions where someone re-breaks
+  // the threshold without realising.
+  var safetyTimer = setTimeout(function(){
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }, 2000);
+
+  // Primary path: IntersectionObserver with threshold:0 (any pixel visible
+  // triggers reveal). Works on iOS Safari 12.2+ and every modern browser.
+  if (!('IntersectionObserver' in window)) {
+    // Old browser without IntersectionObserver — reveal everything now,
+    // skip the animation. Cancel the safety-net (no longer needed).
+    clearTimeout(safetyTimer);
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+    return;
+  }
+
+  try {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } catch (err) {
+    // Anything weird with IntersectionObserver setup — reveal everything,
+    // log so we know it happened. Safety-net would catch this too but
+    // immediate reveal is faster.
+    if (window.console && console.warn) console.warn('Reveal observer failed, falling back to immediate:', err);
+    clearTimeout(safetyTimer);
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
 })();
 
 /* ── HOTEL TABS — supports multiple independent hotel-strips per page ── */
