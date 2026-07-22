@@ -156,6 +156,17 @@ body::before{
 .reveal-delay-1{transition-delay:0.12s;}
 .reveal-delay-2{transition-delay:0.24s;}
 .reveal-delay-3{transition-delay:0.36s;}
+</style>
+<noscript><style>
+/* V148.41: if JavaScript is disabled, fail open — show all .reveal content
+   immediately. Without this, .reveal { opacity:0 } would leave entire
+   sections invisible to users with JS off (browser setting, broken script
+   tag, network-blocked CDN, ad blocker false positive, etc.). Critical
+   defense: a luxury travel offer must never silently hide its content. */
+.reveal{opacity:1 !important;transform:none !important;}
+</style></noscript>
+<style>
+
 
 /* ── HEADER ── */
 header{
@@ -2033,6 +2044,49 @@ html{scroll-behavior:smooth;}
   .route-stop-city{font-size:12px;}
   .route-stop-nights{font-size:8.5px;}
 }
+/* V148.39: very narrow mobile — stack stops VERTICALLY so cities never
+   collide or wrap one-word-per-line. The horizontal layout fundamentally
+   can't fit 3 multi-word city names + dot + nights labels under 520px
+   without text overlap. Switch the dashed connector line from horizontal
+   (top) to vertical (left), so stops read top-to-bottom like an itinerary. */
+@media(max-width:520px){
+  .route-timeline{
+    flex-direction:column;
+    align-items:stretch;
+    padding:6px 6px 6px 0;
+    overflow:visible;
+  }
+  .route-timeline::before{
+    top:18px;bottom:18px;
+    left:14px;right:auto;
+    width:1px;height:auto;
+    background:repeating-linear-gradient(180deg, var(--sand-deep) 0, var(--sand-deep) 5px, transparent 5px, transparent 10px);
+  }
+  .route-stop{
+    flex-direction:row;
+    align-items:center;
+    width:100%;
+    min-width:0;
+    padding:8px 8px 8px 8px;
+    gap:14px;
+  }
+  .route-stop-dot{margin-top:0;flex-shrink:0;}
+  .route-stop-city{
+    margin-top:0;
+    white-space:normal;
+    text-align:left;
+    font-size:14px;
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .route-stop-nights{
+    margin-top:0;
+    margin-left:auto;
+    font-size:9px;
+    flex-shrink:0;
+    white-space:nowrap;
+  }
+}
 
 /* ════════════════════════════════════════════════════════════════
    V129 / V130 — Conversion-focused offer layout
@@ -2238,7 +2292,7 @@ html{scroll-behavior:smooth;}
 
 .v129-hotel-grid-wrap{margin:0 0 56px;}
 .v129-featured{background:var(--white);border:2px solid var(--gold);border-radius:3px;overflow:hidden;display:grid;grid-template-columns:320px 1fr;position:relative;margin-bottom:32px;}
-.v129-pill-badge{position:absolute;top:16px;left:16px;z-index:4;display:inline-block;font-family:var(--ff-ui);font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:7px 14px;border-radius:99px;background:var(--gold);color:var(--white);}
+.v129-pill-badge{position:absolute;top:16px;left:16px;z-index:4;display:inline-block;font-family:var(--ff-ui);font-size:9px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:var(--gold);color:var(--white);}
 .v129-pill-badge.green{background:#2c4a3e;color:var(--gold-lt);left:auto;right:16px;}
 .v129-feat-img{position:relative;overflow:hidden;background:var(--sand-deep);min-height:460px;}
 .v129-feat-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
@@ -2339,6 +2393,51 @@ html{scroll-behavior:smooth;}
 .v129-rs-stop .info .hdates{font-family:var(--ff-body);font-size:13px;color:var(--ink-mid);margin-top:6px;letter-spacing:0;}
 .v129-rs-stop .seelink{font-family:var(--ff-ui);font-size:10.5px;color:var(--gold);text-decoration:none;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;white-space:nowrap;}
 .v129-rs-stop .seelink:hover{color:var(--gold-dk);text-decoration:underline;text-underline-offset:3px;}
+/* V148.39: mobile redesign for the rundrejse compact hotel cards. The
+   desktop layout (60px step + 110px thumb + 1fr info + auto seelink) blows
+   past mobile viewport width — info column gets crushed to ~30-50px, so
+   hotel names wrap one word per line, KOH YAO NOI splits across 3 lines,
+   and "Se detaljer" gets clipped at the right edge. Restructured grid:
+     row 1: [step 38px] [thumb 80px] [info 1fr]
+     row 2: [───── full-width seelink with hairline divider ─────]
+   This gives info enough room for the hotel name on 1-2 lines, location
+   stays on one line, and the see-details link becomes a proper full-width
+   tap target with a clean visual separator. Also tightens header
+   letter-spacing so "DIN SKRÆDDERSYEDE REJSE" eyebrow fits without
+   getting clipped at the right edge. */
+@media(max-width:640px){
+  .v129-rs-head{padding:22px 18px 16px;}
+  .v129-rs-eyebrow{font-size:9px;letter-spacing:0.14em;}
+  .v129-rs-title{font-size:22px;line-height:1.18;}
+  .v129-rs-meta{font-size:12.5px;}
+  .v129-rs-stops{padding:4px 0;}
+  .v129-rs-stop{
+    grid-template-columns:38px 80px 1fr;
+    grid-template-areas:
+      "step thumb info"
+      "see  see   see ";
+    column-gap:12px;
+    row-gap:6px;
+    padding:14px 18px;
+    align-items:center;
+  }
+  .v129-rs-stop .step{grid-area:step;font-size:18px;text-align:center;}
+  .v129-rs-stop .thumb{grid-area:thumb;width:80px;height:60px;}
+  .v129-rs-stop .info{grid-area:info;min-width:0;}
+  .v129-rs-stop .info .hdest{font-size:8.5px;letter-spacing:0.14em;margin-bottom:3px;}
+  .v129-rs-stop .info .hname{font-size:15px;line-height:1.18;margin-bottom:2px;}
+  .v129-rs-stop .info .hloc{font-size:9.5px;letter-spacing:0.1em;}
+  .v129-rs-stop .info .hdates{font-size:11px;margin-top:3px;}
+  .v129-rs-stop .seelink{
+    grid-area:see;
+    text-align:right;
+    font-size:9.5px;
+    letter-spacing:0.12em;
+    padding-top:8px;
+    border-top:1px solid var(--sand-mid);
+    white-space:nowrap;
+  }
+}
 .v129-rs-foot{padding:24px 36px;border-top:1px solid var(--sand-deep);background:#faf6ed;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
 .v129-rs-foot .total-lbl{font-family:var(--ff-ui);font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
 .v129-rs-foot .total-pr{font-family:var(--ff-display);font-size:24px;font-weight:500;font-variant-numeric:lining-nums tabular-nums;color:var(--ink);line-height:1;}
@@ -2357,11 +2456,13 @@ html{scroll-behavior:smooth;}
    floating in page background. */
 .v133-hp{background:var(--white);border:1px solid var(--sand-deep);border-radius:3px;overflow:hidden;margin-bottom:48px;}
 .v133-hp .v133-hp-body{padding:36px 40px 28px;}
-/* V147.72: tighter bottom padding on rundrejse panels — without per-villa
-   BOOK buttons + alt-rate cards, there's less content in the booking
-   column and 28px felt floaty between "Se innkvartering" and the panel
-   border. 14px keeps clean breathing room without dead space. */
-.v133-hp--rundrejse .v133-hp-body{padding-bottom:14px;}
+/* V147.72 / V148.55: rundrejse used to have padding-bottom:14px — that was
+   set when rundrejse panels had no per-villa BOOK buttons or curator-mini
+   (just "Se innkvartering"). V148.48 brought per-stop curator-mini back,
+   and the 14px feels cramped between the curator box and the LOKATION/
+   TRANSFER/WEBSITE info row that follows. Bumped to 28px to match the
+   per-hotel default and give the curator-mini breathing room below. */
+.v133-hp--rundrejse .v133-hp-body{padding-bottom:28px;}
 .v133-hp .v133-hp-info{margin:0;padding:22px 40px;background:var(--sand);border-top:1px solid var(--sand-deep);}
 .v133-hp-hero{position:relative;height:380px;overflow:hidden;border-radius:4px;background:var(--sand-deep);}
 .v133-hp-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
@@ -2438,7 +2539,13 @@ html{scroll-behavior:smooth;}
 .v133-hp-stay{font-family:var(--ff-display);font-size:14px;font-weight:400;color:var(--ink-mid);line-height:1;letter-spacing:0.01em;}
 @media (max-width:640px){.v133-hp-stay{font-size:12.5px;letter-spacing:0;}}
 
-.v133-hp-booking{}
+.v133-hp-booking{display:flex;flex-direction:column;}
+/* V148.43/44: .v133-hp-booking is a flex column so the curator-mini (when
+   present) can naturally stack below booking content with its own margin.
+   The V148.34 balance-image (.v133-hp-whitespace-img) feature was removed
+   in V148.44 — its role is now filled by the curator-mini for per-hotel
+   offers, and rundrejse stops intentionally leave the bottom whitespace
+   empty (trip-level curator at journey's end covers them). */
 /* V136: villa cards restructured as 2x2 grid using display:contents on
    inner wrappers. Row 1: villa-name | price. Row 2: meta (pill) | BOOK.
    This puts the meal-plan pill on the same horizontal axis as the BOOK
@@ -3011,9 +3118,18 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
   .v129-cta-btn{text-align:center;}
   .v138-jump-fab{bottom:78px;}
   .v138-jump-fab-btn{padding:10px 16px;font-size:10px;}
-  .v138-rr-route{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:8px;}
-  .v138-rr-route::-webkit-scrollbar{display:none;}
-  .v138-rr-stop{flex:0 0 80px;}
+  /* V148.42: removed three rules that were overriding V145.5's vertical
+     stack design for .v138-rr-route on iPhone SE (320-414px) widths:
+       .v138-rr-route{flex-wrap:nowrap;overflow-x:auto;...}
+       .v138-rr-route::-webkit-scrollbar{display:none;}
+       .v138-rr-stop{flex:0 0 80px;}
+     The override forced horizontal layout with only 80px per stop — too
+     narrow for "Koh Yao Noi" (~95px), causing text to wrap one-word-per-
+     line and city labels to overlap into adjacent stops' circles. Both
+     blocks were inside @media(max-width:480px), so the later one (this
+     one) was winning the cascade and silently breaking the timeline.
+     V145.5's vertical stack (number-left, city-center, nights-right per
+     row) at line 16741 is now the only rule and works correctly. */
   .section-num{font-size:11px;}
   .section-title-label{font-size:9px;letter-spacing:0.16em;}
   .v133-hp-villa-name{font-size:18px;}
@@ -3126,6 +3242,194 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
    full-width). overflow-x on body alone is the safe approach. */
 body{overflow-x:clip;}
 
+/* ════════════════════════════════════════════════════════════════════════
+   V148.50 — REJSEBEKRÆFTELSE
+   Applies when <section class="trip-section is-confirmation"> is present.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Hide all BESTIL-style buttons in confirmation mode — customer has already
+   booked, so the call-to-action is gone. We hide rather than removing in
+   the generator to keep the generator output simpler and let CSS handle
+   the visibility per mode. The :not(.v148-confirm-close) keeps the new
+   "Tak fordi I valgte Maldivia" closing block visible — it reuses
+   .cta-section styling but is NOT the offer's bestil-CTA. */
+.trip-section.is-confirmation .v133-hp-villa-book,
+.trip-section.is-confirmation .v129-book-btn,
+.trip-section.is-confirmation .v145-favorit-cta,
+.trip-section.is-confirmation .v129-cta-btns,
+.trip-section.is-confirmation .cta-section:not(.v148-confirm-close){
+  display:none !important;
+}
+
+/* Sticky-CTA is OUTSIDE .trip-section (body-level). Hide it when ANY trip
+   on the page is a confirmation. The is-confirmation-mode body class is
+   added in JS (see embedded init below). For multi-trip pages where SOME
+   are confirmations and some aren't, we keep the sticky CTA visible since
+   it can still apply to the non-confirmation trips. */
+body.is-confirmation-mode .sticky-cta{
+  display:none !important;
+}
+
+/* PAYMENT PLAN — two-card layout, editorial luxury */
+.v148-payplan{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:18px;
+  margin:0 0 24px;
+}
+.v148-pp-card{
+  position:relative;
+  padding:32px 28px 28px;
+  background:linear-gradient(135deg, #fdfcf9 0%, #faf6ed 100%);
+  border:1px solid var(--sand-deep);
+  border-radius:4px;
+  overflow:hidden;
+}
+.v148-pp-card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:3px;
+  background:var(--gold);
+}
+.v148-pp-card.is-paid::before{background:#1a3028;}
+.v148-pp-eyebrow{
+  font-family:var(--ff-ui);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:14px;
+}
+.v148-pp-amount{
+  font-family:var(--ff-display);
+  font-size:30px;
+  font-weight:400;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.v148-pp-amount .cur{
+  font-family:var(--ff-ui);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:0.1em;
+  color:var(--ink-lt);
+  vertical-align:middle;
+  margin-right:6px;
+}
+.v148-pp-due{
+  font-family:var(--ff-body);
+  font-size:13px;
+  color:var(--ink-mid);
+  line-height:1.5;
+  margin-bottom:16px;
+}
+.v148-pp-status{
+  display:inline-block;
+  font-family:var(--ff-ui);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  padding:6px 12px;
+  border-radius:99px;
+}
+.v148-pp-status.paid{
+  background:#1a3028;
+  color:#f6f1e8;
+}
+.v148-pp-status.pending{
+  background:transparent;
+  color:var(--ink-lt);
+  border:1px solid var(--sand-deep);
+}
+
+/* BOOKING REFERENCE — diskret under payment plan */
+.v148-bookingref{
+  font-family:var(--ff-ui);
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ink-lt);
+  text-align:center;
+  margin:8px 0 16px;
+  padding:10px 14px;
+  background:var(--sand);
+  border-radius:4px;
+}
+.v148-bookingref strong{
+  color:var(--ink);
+  font-weight:600;
+  letter-spacing:0.06em;
+}
+
+/* BANK DETAILS — editorial table */
+.v148-bank{
+  background:#1a3028;
+  color:#ede5d1;
+  padding:32px 32px 28px;
+  border-radius:4px;
+  margin-bottom:24px;
+}
+.v148-bank-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:18px 32px;
+  margin-bottom:18px;
+}
+.v148-bank-row{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(196,180,154,0.18);
+}
+.v148-bank-row .lbl{
+  font-family:var(--ff-ui);
+  font-size:9.5px;
+  font-weight:500;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.v148-bank-row .val{
+  font-family:var(--ff-display);
+  font-size:18px;
+  font-weight:400;
+  color:#f6f1e8;
+  letter-spacing:0.01em;
+}
+.v148-bank-note{
+  font-family:var(--ff-body);
+  font-size:12.5px;
+  font-style:italic;
+  color:#c4b49a;
+  line-height:1.6;
+  padding-top:6px;
+  border-top:1px solid rgba(196,180,154,0.18);
+}
+
+/* MOBILE — preserve responsiveness across all screen sizes */
+@media (max-width:760px){
+  .v148-pp-card{padding:26px 22px 22px;}
+  .v148-pp-amount{font-size:26px;}
+  .v148-bank{padding:26px 22px 22px;}
+  .v148-bank-row .val{font-size:16px;}
+}
+@media (max-width:480px){
+  .v148-payplan{gap:14px;}
+  .v148-pp-card{padding:22px 20px 20px;}
+  .v148-pp-amount{font-size:24px;}
+  .v148-pp-eyebrow{font-size:9.5px;letter-spacing:0.2em;}
+  .v148-bank{padding:22px 20px 20px;}
+  .v148-bank-grid{grid-template-columns:1fr;gap:14px;}
+  .v148-bank-row .val{font-size:15px;}
+  .v148-bank-note{font-size:12px;}
+  .v148-bookingref{font-size:10px;letter-spacing:0.1em;}
+}
 </style>
 </head>
 <body id="top">
@@ -3156,10 +3460,10 @@ body{overflow-x:clip;}
     <div class="curator-letter-eyebrow">Skreddersydd for deg</div>
     <h1 class="curator-letter-title">Kjære Beate</h1>
     <div class="curator-letter-body">
-      <p>Jeg gleder meg til å presentere et skreddersydd reiseforslag til dere, og håper at det faller i smak.</p>
-      <p>Jeg har håndplukket mulighetene nedenfor, som gir absolutt best kvalitet og verdi for pengene ut fra dine ønsker. Hos Maldivia tror vi ikke på standardløsninger. Vi viser deg utelukkende steder vi selv kjenner, og som garanterer fantastisk hotellkvalitet i de vakreste omgivelser, og garanterer alt fra beliggenhet i særklasse, nydelige rom og villaer til personlig service og gastronomi som er second to none.</p>
-      <p>De utvalgte hotellene og destinasjonene har hver sitt unike særpreg, men deler alle den samme høye standarden. Ettersom priser og tilgjengelighet på de beste flyreisene og resortene endrer seg raskt, anbefaler jeg at du ser gjennom mulighetene snarest.</p>
-      <p>Jeg sitter klar på både telefon og e-post, så snart du har funnet din favoritt og er klar til å bestille reisen.</p>
+      <p>Jeg har her gleden av å presentere et skreddersydd reiseforslag til dere, som jeg håper er et godt bud på deres ultimate drømmereise. Jeg er veldig spent på å høre hva dere synes om det.</p>
+      <p>Hos Maldivia tror vi ikke på standardløsninger. Dere vil derfor kun bli presentert for steder vi selv kjenner, og som garanterer alt fra nydelige hotell med beliggenhet i særklasse og fantastiske opplevelser, til genuin, personlig service og en gastronomi som bortskjemmer sansene.</p>
+      <p>Jeg har valgt å foreslå mulighetene nedenfor, da jeg mener det er nettopp disse som gir dere absolutt best kvalitet og verdi for pengene ut fra deres ønsker. Hotellene og destinasjonene har hvert sitt unike særpreg, men har den samme høye standarden til felles. Ettersom ledighet, priser og kampanjer på de beste flyreisene og resortene endrer seg raskt, anbefaler jeg at dere ser gjennom mulighetene om kort tid.</p>
+      <p>Jeg er tilgjengelig på både telefon og e-post, alle ukens dager, hvis dere har spørsmål eller ønsker justeringer, og selvfølgelig når dere er klare for å bestille deres neste reiseeventyr. Riktig god fornøyelse med lesingen.</p>
     </div>
     <div class="curator-letter-sig">
       <div class="curator-letter-sig-img">
@@ -3180,7 +3484,7 @@ body{overflow-x:clip;}
     <div class="hero-content">
       <div class="hero-eyebrow">Skreddersydd reisetilbud</div>
       <h1 class="hero-title">Den Dom. Republikk<br><em>jan / feb 2027</em></h1>
-      <div class="hero-meta"><span class="nowrap">26. januar 2027 — 06. februar 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">10 netter / 12 dager</span></div>
+      <div class="hero-meta"><span class="nowrap">27. januar 2027 — 08. februar 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">12 netter</span></div>
     </div>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
@@ -3198,55 +3502,48 @@ body{overflow-x:clip;}
   </div>
 
   <div class="v129-price-overview reveal">
-    <h2 class="v129-pr-title">Skreddersydde reisetilbud til Beate — <span class="accent">3 hoteller</span></h2>
-    <p class="v129-pre-intro">Jeg har foreslått deg de 3 hotellene basert på høy kvalitet, gunstige spesialtilbud og value for money.</p>
+    <h2 class="v129-pr-title">Skreddersydde reisetilbud til Beate — <span class="accent">1 hotell</span></h2>
+    <p class="v129-pre-intro">Jeg har foreslått deg hotellet basert på høy kvalitet, gunstige spesialtilbud og value for money.</p>
     <div class="v145-favorit">
-      <div class="v145-favorit-image" style="background-image:url('https://maldivia.dk/wp-content/uploads/2026/06/EPC-3.jpg')">
+      <div class="v145-favorit-image" style="background-image:url('https://maldivia.dk/wp-content/uploads/2026/06/EEC-1.webp')">
         <div class="v145-favorit-loc">Punta Cana</div>
       </div>
       <div class="v145-favorit-content">
         <div class="v145-favorit-stars">★★★★★</div>
-        <h3 class="v145-favorit-name">Excellence Punta Cana</h3>
-        <div class="v145-favorit-villa">Junior Suite Garden View · All-Inclusive — Dine Around</div>
+        <h3 class="v145-favorit-name">Excellence El Carmen</h3>
+        <div class="v145-favorit-villa">Excellence Club Honeymoon Two-Story Rooftop Terrace Suite with Plunge Pool Ocean View · All-Inclusive — Dine Around</div>
         <div class="v145-favorit-quote">
           <span class="qlbl">Hvorfor vi anbefaler dette</span>
-          Excellence Punta Cana er et eksklusivt, femstjerners &quot;adults-only&quot; luksusresort i Den dominikanske republikk, som emmer av klassisk karibisk romantikk og uforstyrret kolonialstil. Jeg elsker resortet…
-          <a href="#hotel-excellence-punta-cana" class="v145-favorit-readmore">Les hele anbefalingen →</a>
+          Excellence El Carmen er et toppmoderne, ultra-stilig &quot;adults-only&quot; luksusresort i Punta Cana, som setter en helt ny standard for moderne, karibisk luksus. Jeg elsker resortet for dets dristige…
+          <a href="#hotel-excellence-el-carmen" class="v145-favorit-readmore">Les hele anbefalingen →</a>
         </div>
         <div class="v145-favorit-divider"></div>
-        <div class="v145-favorit-meta"><span>10 netter</span><span class="sep">·</span><span>2 voksne</span></div>
+        <div class="v145-favorit-meta"><span>12 netter</span><span class="sep">·</span><span>2 voksne</span></div>
         <div class="v145-favorit-destination">Den Dom. Republikk</div>
         <div class="v145-favorit-price-row">
           <div class="v145-favorit-price-lbl">Reisens pris</div>
-          <div class="v145-favorit-price-num"><span class="v145-favorit-price-cur">NOK</span>94.500</div>
+          <div class="v145-favorit-price-num"><span class="v145-favorit-price-cur">NOK</span>103.000</div>
         </div>
-        <button type="button" class="v145-favorit-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
+        <button type="button" class="v145-favorit-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
       </div>
     </div>
     <div class="v138-range">
       <div class="v138-range-col">
         <div class="v138-range-lbl">Fra</div>
-        <div class="v138-range-price"><span class="cur">NOK</span>90.500</div>
-        <div class="v138-range-detail"><span class="v138-range-hotel">Finest Punta Cana</span> · Junior Suite Garden View</div>
+        <div class="v138-range-price"><span class="cur">NOK</span>103.000</div>
+        <div class="v138-range-detail"><span class="v138-range-hotel">Excellence El Carmen</span> · Excellence Club Honeymoon Two-Story Rooftop Terrace Suite with Plunge Pool Ocean View</div>
         <div class="v138-range-meal">All-Inclusive — Dine Around</div>
       </div>
       <div class="v138-range-arrow">→</div>
       <div class="v138-range-col">
         <div class="v138-range-lbl">Opp til</div>
-        <div class="v138-range-price"><span class="cur">NOK</span>100.500</div>
-        <div class="v138-range-detail"><span class="v138-range-hotel">Finest Punta Cana</span> · Excellence Club Junior Suite Garden View</div>
+        <div class="v138-range-price"><span class="cur">NOK</span>111.000</div>
+        <div class="v138-range-detail"><span class="v138-range-hotel">Excellence El Carmen</span> · Excellence Club Beachfront Honeymoon Two-Story Rooftop Terrace Suite with Plunge Pool</div>
         <div class="v138-range-meal">All-Inclusive — Dine Around</div>
       </div>
     </div>
-    <div class="v138-range-foot">3 hoteller · <a href="#section-hoteller">se alle nedenfor ↓</a></div>
+    <div class="v138-range-foot">1 hotell · <a href="#section-hoteller">se alle nedenfor ↓</a></div>
     <div class="v138-trust-row">
-      <div class="v138-trust-card">
-        <span class="ck">✓</span>
-        <div class="ttext">
-          <div class="ttitle">Fly med 1 mellomlanding</div>
-          <div class="tsub">Discover Airlines · Forpleining (mat og drikke) og bagasje inkludert</div>
-        </div>
-      </div>
       <div class="v138-trust-card">
         <span class="ck">✓</span>
         <div class="ttext">
@@ -3285,105 +3582,6 @@ body{overflow-x:clip;}
     </div>
   </div>
 
-  <div class="section-header reveal">
-    <span class="section-num">02</span>
-    <span class="section-title-label">De utvalgte hotellene</span>
-    <div class="section-rule"></div>
-  </div>
-
-  <div class="v129-hotel-grid-wrap reveal">
-    <div class="v129-featured">
-      <span class="v129-pill-badge">★ Fantastisk verdi</span>
-      <div class="v129-feat-img">
-        <img loading="eager" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/FPC-6.webp" alt="">
-        <div class="v129-img-meta">
-          <div class="loc">Punta Cana</div>
-          <div class="meta">★★★★★</div>
-        </div>
-      </div>
-      <div class="v129-feat-body">
-        <h3 class="v129-feat-name">Finest Punta Cana</h3>
-        <div class="v129-feat-stars">★★★★★ · Punta Cana</div>
-        <div class="v129-feat-hl">
-          <div class="hlrow">Genialt oppdelt konsept med egne, rendyrkede soner og bassenger for kun voksne og egne områder for familier</div>
-          <div class="hlrow">All Inclusive på gourmetnivå med fri tilgang til over 10 internasjonale restauranter helt uten krav om bordbestilling</div>
-          <div class="hlrow">Lekre swim-up-suiter og oppgraderte klubb-rom med tilgang til private lounger, egne strandsoner og concierge-service</div>
-        </div>
-        <div class="v129-villa-box">
-          <div class="vlbl">Romtyper på dette hotellet</div>
-          <div class="v129-vrow incl">
-            <div class="vinfo"><span class="vname">Junior Suite Garden View</span><span class="vmeal">All-Inclusive — Dine Around</span></div>
-            <span class="vprice">NOK 90.500</span>
-          </div>
-          <div class="v129-vrow">
-            <div class="vinfo"><span class="vname">Excellence Club Junior Suite Garden View</span><span class="vmeal">All-Inclusive — Dine Around</span></div>
-            <span class="vprice">NOK 100.500</span>
-          </div>
-        </div>
-        <div class="v129-feat-btns">
-          <button type="button" class="v129-feat-btn-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
-          <a href="#hotel-finest-punta-cana" class="v129-feat-btn-detail">Les mer om reiseforslaget ↓</a>
-        </div>
-      </div>
-    </div>
-    <div class="v129-alts-lbl">Eller velg et alternativ</div>
-    <div class="v129-alts-grid">
-      <div class="v129-alt recommended">
-        <span class="v129-pill-badge green">Wendies anbefaling</span>
-        <div class="v129-alt-img">
-          <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EPC-3.jpg" alt="">
-        </div>
-        <div class="v129-alt-body">
-          <h4 class="v129-alt-name">Excellence Punta Cana</h4>
-          <div class="v129-alt-loc-row">
-            <span class="v129-alt-loc">Punta Cana</span>
-            <span class="v129-alt-stars-inline">★★★★★</span>
-          </div>
-          <div class="v129-alt-hl">
-            <div class="hlrow">Rendyrket voksenluksus med en fredelig, romantisk og helt uforstyrret atmosfære for par</div>
-            <div class="hlrow">Gourmet All Inclusive med fri tilgang til 10 fantastiske restauranter og 12 barer uten krav om bordbestilling</div>
-          </div>
-          <div class="v129-alt-pricebox">
-            <div class="lbl">Fra</div>
-            <div class="pr"><span class="cur">NOK</span>94.500</div>
-            <div class="vname">Junior Suite Garden View</div>
-            <div class="vmeal">All-Inclusive — Dine Around</div>
-          </div>
-          <div class="v129-alt-btns">
-            <button type="button" class="v129-alt-btn-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
-            <a href="#hotel-excellence-punta-cana" class="v129-alt-btn-link">Se reiseforslag →</a>
-          </div>
-        </div>
-      </div>
-      <div class="v129-alt">
-        <div class="v129-alt-img">
-          <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EEC-1.webp" alt="">
-        </div>
-        <div class="v129-alt-body">
-          <h4 class="v129-alt-name">Excellence El Carmen</h4>
-          <div class="v129-alt-loc-row">
-            <span class="v129-alt-loc">Punta Cana</span>
-            <span class="v129-alt-stars-inline">★★★★★</span>
-          </div>
-          <div class="v129-alt-hl">
-            <div class="hlrow">Moderne arkitektur og design med lyse, åpne rom, glassdetaljer og en gjennomført luksuriøs jetset-vibe</div>
-            <div class="hlrow">Gourmet All Inclusive med 12 internasjonale restauranter og 16 barer, hvor alt er inkludert og ingen bordbestilling kreves</div>
-          </div>
-          <div class="v129-alt-pricebox">
-            <div class="lbl">Fra</div>
-            <div class="pr"><span class="cur">NOK</span>100.000</div>
-            <div class="vname">Junior Suite Pool View</div>
-            <div class="vmeal">All-Inclusive — Dine Around</div>
-          </div>
-          <div class="v129-alt-btns">
-            <button type="button" class="v129-alt-btn-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:2,rate:0})">Bestill →</button>
-            <a href="#hotel-excellence-el-carmen" class="v129-alt-btn-link">Se reiseforslag →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="section-header reveal" id="section-inkludert">
     <span class="section-num">03</span>
     <span class="section-title-label">Inkludert i reisen</span>
@@ -3397,35 +3595,23 @@ body{overflow-x:clip;}
       <div class="v129-incl-item">
         <div class="num">01</div>
         <div class="body">
-          <h3 class="ititle">Fly mellom Bergen og Punta Cana (T/R)</h3>
+          <h3 class="ititle">Transfer til/fra resortet</h3>
         </div>
       </div>
       <div class="v129-incl-item">
         <div class="num">02</div>
         <div class="body">
-          <h3 class="ititle">Transfer til/fra resortet</h3>
+          <h3 class="ititle">12 netter på Excellence El Carmen</h3>
         </div>
       </div>
       <div class="v129-incl-item">
         <div class="num">03</div>
         <div class="body">
-          <h3 class="ititle">10 netter på det valgte resort</h3>
+          <h3 class="ititle">Opphold og forpleining som angitt</h3>
         </div>
       </div>
       <div class="v129-incl-item">
         <div class="num">04</div>
-        <div class="body">
-          <h3 class="ititle">Opphold i romtype som angitt</h3>
-        </div>
-      </div>
-      <div class="v129-incl-item">
-        <div class="num">05</div>
-        <div class="body">
-          <h3 class="ititle">All-Inclusive (Dine Around)</h3>
-        </div>
-      </div>
-      <div class="v129-incl-item">
-        <div class="num">06</div>
         <div class="body">
           <h3 class="ititle">Alle obligatoriske skatter/avgifter</h3>
         </div>
@@ -3443,242 +3629,7 @@ body{overflow-x:clip;}
 <div class="v129-hotel-details-wrap reveal">
   <div class="v129-hotel-details">
 
-    <nav class="v136-hotel-jump" aria-label="Hopp til hotell">
-      <div class="v136-jump-inner">
-        <span class="v136-jump-lbl">Hopp til</span>
-        <div class="v136-jump-pills">
-          <a href="#hotel-finest-punta-cana" class="v136-jump-pill" data-target="hotel-finest-punta-cana">Finest Punta Cana</a>
-          <a href="#hotel-excellence-punta-cana" class="v136-jump-pill" data-target="hotel-excellence-punta-cana">Excellence Punta Cana</a>
-          <a href="#hotel-excellence-el-carmen" class="v136-jump-pill" data-target="hotel-excellence-el-carmen">Excellence El Carmen</a>
-        </div>
-      </div>
-    </nav>
-
-    <script>
-    (function(){
-      var nav = document.querySelector(".v136-hotel-jump");
-      if (!nav) return;
-      var pills = nav.querySelectorAll(".v136-jump-pill");
-      if (!pills.length) return;
-      // Smooth scroll with offset for sticky header
-      pills.forEach(function(pill){
-        pill.addEventListener("click", function(e){
-          var href = pill.getAttribute("href");
-          if (!href || href.charAt(0) !== "#") return;
-          var target = document.getElementById(href.slice(1));
-          if (!target) return;
-          e.preventDefault();
-          var navH = nav.offsetHeight;
-          var y = target.getBoundingClientRect().top + window.pageYOffset - navH - 16;
-          window.scrollTo({ top: y, behavior: "smooth" });
-          history.replaceState(null, "", href);
-        });
-      });
-      // Active state via IntersectionObserver
-      if (!("IntersectionObserver" in window)) return;
-      var panels = nav.parentNode.querySelectorAll(".hotel-panel");
-      if (!panels.length) return;
-      var pillByHref = {};
-      pills.forEach(function(p){ pillByHref[p.getAttribute("href")] = p; });
-      var active = null;
-      var observer = new IntersectionObserver(function(entries){
-        var visible = [];
-        entries.forEach(function(e){
-          if (e.isIntersecting) visible.push({ id: e.target.id, ratio: e.intersectionRatio, top: e.boundingClientRect.top });
-        });
-        // Pick the topmost visible panel
-        panels.forEach(function(p){
-          var rect = p.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.4 && rect.bottom > window.innerHeight * 0.2) {
-            if (!visible.find(function(v){ return v.id === p.id; })) visible.push({ id: p.id, ratio: 0.5, top: rect.top });
-          }
-        });
-        if (!visible.length) return;
-        visible.sort(function(a,b){ return a.top - b.top; });
-        var topId = visible[0].id;
-        if (topId === active) return;
-        active = topId;
-        pills.forEach(function(p){ p.classList.remove("active"); });
-        var ap = pillByHref["#" + topId];
-        if (ap) {
-          ap.classList.add("active");
-          // Auto-scroll the nav horizontally to keep active pill visible
-          var inner = nav.querySelector(".v136-jump-inner");
-          if (inner && ap.offsetLeft != null) {
-            var pillLeft = ap.offsetLeft - inner.offsetLeft;
-            var pillRight = pillLeft + ap.offsetWidth;
-            if (pillLeft < inner.scrollLeft) inner.scrollTo({ left: pillLeft - 20, behavior: "smooth" });
-            else if (pillRight > inner.scrollLeft + inner.clientWidth) inner.scrollTo({ left: pillRight - inner.clientWidth + 20, behavior: "smooth" });
-          }
-        }
-      }, { rootMargin: "-20% 0% -40% 0%", threshold: [0, 0.25, 0.5, 0.75, 1] });
-      panels.forEach(function(p){ observer.observe(p); });
-    })();
-    </script>
-
-    <div class="hotel-panel v133-hp" data-panel="0" id="hotel-finest-punta-cana">
-      <div class="v133-hp-hero">
-        <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/FPC-6.webp" alt="Finest Punta Cana">
-        <div class="v133-hp-hero-content">
-          <div class="loc">Punta Cana</div>
-          <h2 class="name">Finest Punta Cana</h2>
-          <div class="meta">★★★★★ <span class="sep">·</span> 455 rom</div>
-        </div>
-      </div>
-      <div class="v133-hp-gallery">
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/FPC-1.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/FPC-1.jpg" alt=""></a>
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/FPC-2.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/FPC-2.jpg" alt=""></a>
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/FPC-4.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/FPC-4.jpg" alt=""></a>
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/FPC-5.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/FPC-5.jpg" alt=""></a>
-      </div>
-      <div class="v133-hp-body">
-        <div class="v133-hp-booking">
-          <div class="v133-hp-eyebrow-row">
-            <div class="v133-hp-eyebrow">Velg romtype &amp; forpleining</div>
-            <div class="v133-hp-stay">26. jan — 5. feb 2027 · 10 netter</div>
-          </div>
-          <div class="v133-hp-villa">
-            <div class="v133-hp-villa-info">
-              <div class="v133-hp-villa-name">Junior Suite Garden View</div>
-              <div class="v133-hp-villa-meta">
-                <span class="meal">All-Inclusive — Dine Around</span>
-              </div>
-            </div>
-            <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>90.500</div>
-              <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
-            </div>
-            <div class="v133-hp-villa-links">
-              <a href="https://www.finestresorts.com/punta-cana/finest-punta-cana/rooms/junior-suite-pool-view/" target="_blank" rel="noopener">Se innkvartering →</a>
-              <a href="https://www.finestresorts.com/punta-cana/finest-punta-cana/" target="_blank" rel="noopener">Les mer om hotellet →</a>
-            </div>
-          </div>
-          <div class="v133-hp-villa">
-            <div class="v133-hp-villa-info">
-              <div class="v133-hp-villa-name">Excellence Club Junior Suite Garden View</div>
-              <div class="v133-hp-villa-meta">
-                <span class="meal">All-Inclusive — Dine Around</span>
-              </div>
-            </div>
-            <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>100.500</div>
-              <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:1})">Bestill →</button>
-            </div>
-            <div class="v133-hp-villa-links">
-              <a href="https://www.finestresorts.com/punta-cana/finest-punta-cana/rooms/excellence-club-junior-suite-pool-view/" target="_blank" rel="noopener">Se innkvartering →</a>
-              <a href="https://www.finestresorts.com/punta-cana/finest-punta-cana/" target="_blank" rel="noopener">Les mer om hotellet →</a>
-            </div>
-          </div>
-        </div>
-        <div class="v133-hp-highlights">
-          <div class="v133-hp-eyebrow">Høydepunkter</div>
-          <div class="v133-hp-hl-item">Genialt oppdelt konsept med egne, rendyrkede soner og bassenger for kun voksne og egne områder for familier</div>
-          <div class="v133-hp-hl-item">All Inclusive på gourmetnivå med fri tilgang til over 10 internasjonale restauranter helt uten krav om bordbestilling</div>
-          <div class="v133-hp-hl-item">Lekre swim-up-suiter og oppgraderte klubb-rom med tilgang til private lounger, egne strandsoner og concierge-service</div>
-          <div class="v133-hp-hl-item">Enormt barne- og ungdomskonsept med et fantastisk badeland, barneklubb og egne aktivitetssoner for tenåringer</div>
-          <div class="v133-hp-hl-item">ONE Spa – et gigantisk og prisvinnende velværesenter med et spektakulært hydroterapi-anlegg og egne behandlinger for barn</div>
-          <div class="v133-hp-curator-mini">
-            <div class="ceyebrow">Wendies anbefaling</div>
-            <p class="cquote">Finest Punta Cana er et toppmoderne og stilrent luksusresort i Den dominikanske republikk, som på genialt vis klarer kunststykket å tilfredsstille både barnefamilier og par på jakt etter voksentid. Jeg elsker resortet for dets unike oppbygning, der området er delt inn i en familievennlig del og en eksklusiv voksendel (Excellence Club), slik at alle får nøyaktig den ferien de drømmer om. Her får du et fabelaktig All Inclusive-konsept med førsteklasses gastronomi uten bordbestilling, lekre swim-up-suiter og en enorm, kridthvit sandstrand kantet med kokospalmer.</p>
-            <div class="csign">
-              <img src="https://maldivia.no/wp-content/uploads/sites/2/2026/05/thumbnail_image002-1-1.jpg" alt="Wendie Pedersen">
-              <div class="ctext">
-                <div class="cname">Wendie Pedersen</div>
-                <div class="crole">Travel Designer · Maldivia</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="v133-hp-info">
-        <div class="v133-hp-info-col">
-          <div class="ilbl">Lokasjon</div>
-          <div class="ival">Punta Cana</div>
-        </div>
-        <div class="v133-hp-info-col">
-          <div class="ilbl">Transfer</div>
-          <div class="ival">Inkluderet · 50 min.</div>
-        </div>
-        <div class="v133-hp-info-col">
-          <div class="ilbl">Website</div>
-          <div class="ival"><a href="https://www.finestresorts.com/punta-cana/finest-punta-cana/" target="_blank">Utforsk Finest Punta Cana</a></div>
-        </div>
-      </div>
-    </div>
-    <div class="hotel-panel v133-hp" data-panel="1" id="hotel-excellence-punta-cana">
-      <div class="v133-hp-hero">
-        <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EPC-3.jpg" alt="Excellence Punta Cana">
-        <div class="v133-hp-hero-content">
-          <div class="loc">Punta Cana</div>
-          <h2 class="name">Excellence Punta Cana</h2>
-          <div class="meta">★★★★★ <span class="sep">·</span> 461 rom</div>
-        </div>
-      </div>
-      <div class="v133-hp-gallery">
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/EPC-4.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EPC-4.jpg" alt=""></a>
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/EPC-5-scaled.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EPC-5-scaled.jpg" alt=""></a>
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/EPC-1.webp" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EPC-1.webp" alt=""></a>
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/EPC-2.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EPC-2.jpg" alt=""></a>
-      </div>
-      <div class="v133-hp-body">
-        <div class="v133-hp-booking">
-          <div class="v133-hp-eyebrow-row">
-            <div class="v133-hp-eyebrow">Velg romtype &amp; forpleining</div>
-            <div class="v133-hp-stay">26. jan — 5. feb 2027 · 10 netter</div>
-          </div>
-          <div class="v133-hp-villa">
-            <div class="v133-hp-villa-info">
-              <div class="v133-hp-villa-name">Junior Suite Garden View</div>
-              <div class="v133-hp-villa-meta">
-                <span class="meal">All-Inclusive — Dine Around</span>
-              </div>
-            </div>
-            <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>94.500</div>
-              <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
-            </div>
-            <div class="v133-hp-villa-links">
-              <a href="https://www.excellenceresorts.com/punta-cana/excellence-punta-cana/rooms/junior-suite-garden-or-mountain-view/" target="_blank" rel="noopener">Se innkvartering →</a>
-              <a href="https://www.excellenceresorts.com/punta-cana/excellence-punta-cana/" target="_blank" rel="noopener">Les mer om hotellet →</a>
-            </div>
-          </div>
-        </div>
-        <div class="v133-hp-highlights">
-          <div class="v133-hp-eyebrow">Høydepunkter</div>
-          <div class="v133-hp-hl-item">Rendyrket voksenluksus med en fredelig, romantisk og helt uforstyrret atmosfære for par</div>
-          <div class="v133-hp-hl-item">Gourmet All Inclusive med fri tilgang til 10 fantastiske restauranter og 12 barer uten krav om bordbestilling</div>
-          <div class="v133-hp-hl-item">Kilometervis med uberørt strand kranset av tusenvis av svaiende kokospalmer, ideell for lange gåturer</div>
-          <div class="v133-hp-hl-item">Lekre swim-up-suiter med direkte tilgang til resortets private, svingete bassenglaguner fra din egen terrasse</div>
-          <div class="v133-hp-hl-item">Miilé Spa – et prisvinnende og gigantisk velværesenter med et spektakulært hydroterapi-anlegg under åpen himmel</div>
-          <div class="v133-hp-curator-mini">
-            <div class="ceyebrow">Wendies anbefaling</div>
-            <p class="cquote">Excellence Punta Cana er et eksklusivt, femstjerners &quot;adults-only&quot; luksusresort i Den dominikanske republikk, som emmer av klassisk karibisk romantikk og uforstyrret kolonialstil. Jeg elsker resortet for dets fullstendig kompromissløse All Inclusive-konsept, der alt fra førsteklasses brennevin til fantastiske gourmetmåltider er inkludert – helt uten at du behøver å tenke på bordbestillinger. Her er atmosfæren rolig, sofistikert og avslappet, og resortet ligger gjemt bort i en frodig palmepark direkte ut mot en kilometervis lang, gyllen sandstrand og det ville, vakre havet.</p>
-            <div class="csign">
-              <img src="https://maldivia.no/wp-content/uploads/sites/2/2026/05/thumbnail_image002-1-1.jpg" alt="Wendie Pedersen">
-              <div class="ctext">
-                <div class="cname">Wendie Pedersen</div>
-                <div class="crole">Travel Designer · Maldivia</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="v133-hp-info">
-        <div class="v133-hp-info-col">
-          <div class="ilbl">Lokasjon</div>
-          <div class="ival">Punta Cana</div>
-        </div>
-        <div class="v133-hp-info-col">
-          <div class="ilbl">Transfer</div>
-          <div class="ival">Inkluderet · 50 min.</div>
-        </div>
-        <div class="v133-hp-info-col">
-          <div class="ilbl">Website</div>
-          <div class="ival"><a href="https://www.excellenceresorts.com/punta-cana/excellence-punta-cana/" target="_blank">Utforsk Excellence Punta Cana</a></div>
-        </div>
-      </div>
-    </div>
-    <div class="hotel-panel v133-hp" data-panel="2" id="hotel-excellence-el-carmen">
+    <div class="hotel-panel v133-hp" data-panel="0" id="hotel-excellence-el-carmen">
       <div class="v133-hp-hero">
         <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/EEC-1.webp" alt="Excellence El Carmen">
         <div class="v133-hp-hero-content">
@@ -3697,32 +3648,40 @@ body{overflow-x:clip;}
         <div class="v133-hp-booking">
           <div class="v133-hp-eyebrow-row">
             <div class="v133-hp-eyebrow">Velg romtype &amp; forpleining</div>
-            <div class="v133-hp-stay">26. jan — 5. feb 2027 · 10 netter</div>
+            <div class="v133-hp-stay">27. jan — 8. feb 2027 · 12 netter</div>
           </div>
           <div class="v133-hp-villa">
             <div class="v133-hp-villa-info">
-              <div class="v133-hp-villa-name">Junior Suite Pool View</div>
+              <div class="v133-hp-villa-name">Excellence Club Honeymoon Two-Story Rooftop Terrace Suite with Plunge Pool Ocean View</div>
               <div class="v133-hp-villa-meta">
                 <span class="meal">All-Inclusive — Dine Around</span>
               </div>
             </div>
             <div class="v133-hp-villa-action">
-              <div class="v133-hp-villa-price"><span class="cur">NOK</span>100.000</div>
-              <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:2,rate:0})">Bestill →</button>
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>103.000</div>
+              <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
             </div>
             <div class="v133-hp-villa-links">
-              <a href="https://www.excellenceresorts.com/punta-cana/excellence-el-carmen/rooms/junior-suite-pool-view/" target="_blank" rel="noopener">Se innkvartering →</a>
+              <a href="https://www.excellenceresorts.com/punta-cana/excellence-el-carmen/rooms/excellence-club-honeymoon-two-story-rooftop-terrace-suite-with-plunge-pool-ocean-view/" target="_blank" rel="noopener">Se innkvartering →</a>
               <a href="https://www.excellenceresorts.com/punta-cana/excellence-el-carmen/" target="_blank" rel="noopener">Les mer om hotellet →</a>
             </div>
           </div>
-        </div>
-        <div class="v133-hp-highlights">
-          <div class="v133-hp-eyebrow">Høydepunkter</div>
-          <div class="v133-hp-hl-item">Moderne arkitektur og design med lyse, åpne rom, glassdetaljer og en gjennomført luksuriøs jetset-vibe</div>
-          <div class="v133-hp-hl-item">Gourmet All Inclusive med 12 internasjonale restauranter og 16 barer, hvor alt er inkludert og ingen bordbestilling kreves</div>
-          <div class="v133-hp-hl-item">Spektakulære takterrasser i Excellence Club-suitene med private plunge-pools og milelang utsikt over det karibiske havet</div>
-          <div class="v133-hp-hl-item">Miilé Spa – et verdensklasse velværesenter som tilbyr avanserte behandlinger og et toppmoderne hydroterapi-anlegg</div>
-          <div class="v133-hp-hl-item">Enestående strandbeliggenhet på en roligere og mer eksklusiv del av Punta Cana, omkranset av en vill og vakker palmeskog</div>
+          <div class="v133-hp-villa">
+            <div class="v133-hp-villa-info">
+              <div class="v133-hp-villa-name">Excellence Club Beachfront Honeymoon Two-Story Rooftop Terrace Suite with Plunge Pool</div>
+              <div class="v133-hp-villa-meta">
+                <span class="meal">All-Inclusive — Dine Around</span>
+              </div>
+            </div>
+            <div class="v133-hp-villa-action">
+              <div class="v133-hp-villa-price"><span class="cur">NOK</span>111.000</div>
+              <button type="button" class="v133-hp-villa-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:1})">Bestill →</button>
+            </div>
+            <div class="v133-hp-villa-links">
+              <a href="https://www.excellenceresorts.com/punta-cana/excellence-el-carmen/rooms/excellence-club-beachfront-honeymoon-two-story-rooftop-terrace-suite-with-plunge-pool/" target="_blank" rel="noopener">Se innkvartering →</a>
+              <a href="https://www.excellenceresorts.com/punta-cana/excellence-el-carmen/" target="_blank" rel="noopener">Les mer om hotellet →</a>
+            </div>
+          </div>
           <div class="v133-hp-curator-mini">
             <div class="ceyebrow">Wendies anbefaling</div>
             <p class="cquote">Excellence El Carmen er et toppmoderne, ultra-stilig &quot;adults-only&quot; luksusresort i Punta Cana, som setter en helt ny standard for moderne, karibisk luksus. Jeg elsker resortet for dets dristige arkitektur med rene linjer, glassvegger og spektakulære takterrasser, som står i vakker kontrast til de svaiende kokospalmer og det turkise havet. Her får du det velkjente, kompromissløse All Inclusive-konseptet på gourmetnivå, et enormt utvalg av private bassenger og en sofistikert, levende atmosfære som passer perfekt for par som vil ha både romantikk og stil.</p>
@@ -3734,6 +3693,14 @@ body{overflow-x:clip;}
               </div>
             </div>
           </div>
+        </div>
+        <div class="v133-hp-highlights">
+          <div class="v133-hp-eyebrow">Høydepunkter</div>
+          <div class="v133-hp-hl-item">Moderne arkitektur og design med lyse, åpne rom, glassdetaljer og en gjennomført luksuriøs jetset-vibe</div>
+          <div class="v133-hp-hl-item">Gourmet All Inclusive med 12 internasjonale restauranter og 16 barer, hvor alt er inkludert og ingen bordbestilling kreves</div>
+          <div class="v133-hp-hl-item">Spektakulære takterrasser i Excellence Club-suitene med private plunge-pools og milelang utsikt over det karibiske havet</div>
+          <div class="v133-hp-hl-item">Miilé Spa – et verdensklasse velværesenter som tilbyr avanserte behandlinger og et toppmoderne hydroterapi-anlegg</div>
+          <div class="v133-hp-hl-item">Enestående strandbeliggenhet på en roligere og mer eksklusiv del av Punta Cana, omkranset av en vill og vakker palmeskog</div>
         </div>
       </div>
       <div class="v133-hp-info">
@@ -3757,112 +3724,6 @@ body{overflow-x:clip;}
 </div><!-- /container -->
 
 <div class="container">
-
-  <div class="section-header reveal" id="section-fly">
-    <span class="section-num">03</span>
-    <span class="section-title-label">Flyreise til Den Dom. Republikk</span>
-    <div class="section-rule"></div>
-  </div>
-
-  <div class="flight-card reveal">
-    <div class="flight-hero">
-      <button type="button" class="gallery-btn prev">‹</button><button type="button" class="gallery-btn next">›</button>
-      <div class="flight-hero-track">
-        <a href="https://maldivia.dk/wp-content/uploads/2025/10/Discover-1-1-scaled.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2025/10/Discover-1-1-scaled.jpg" alt="Discover Airlines"></a>
-        <a href="https://maldivia.dk/wp-content/uploads/2026/06/PE-2-scaled.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/PE-2-scaled.jpg" alt="Discover Airlines"></a>
-      </div>
-    </div>
-    <div class="flight-body">
-
-      <div class="route-graphic">
-        <div class="route-airport">
-          <div class="route-iata">BGO</div>
-          <div class="route-city">Bergen</div>
-        </div>
-        <div class="route-line" style="flex:1;margin:0 20px;position:relative;display:flex;align-items:center;">
-          <div style="flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--sand-deep) 0,var(--sand-deep) 5px,transparent 5px,transparent 10px);"></div>
-          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--sand);padding:0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--white);box-shadow:0 0 0 1px var(--gold);"></div>
-            <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;">Via Frankfurt</div>
-          </div>
-        </div>
-        <div class="route-airport">
-          <div class="route-iata">PUJ</div>
-          <div class="route-city">Punta Cana</div>
-        </div>
-      </div>
-      <div class="journey">
-        <div class="journey-header">Bergen til Punta Cana — 26.01.2027</div>
-        <div class="flight-leg">
-          <span class="leg-code">BGO→FRA</span>
-          <div>
-            <div class="leg-times">06:10 – 08:20</div>
-            <div class="leg-meta">Discover Airlines · Economy</div>
-          </div>
-        </div>
-        <div class="flight-connector">
-          <div class="connector-line"></div>
-          <span class="connector-label">Mellomlanding Frankfurt · 1 t 55 m</span>
-          <div class="connector-line"></div>
-        </div>
-        <div class="flight-leg">
-          <span class="leg-code">FRA→PUJ</span>
-          <div>
-            <div class="leg-times">10:15 – 15:40</div>
-            <div class="leg-meta">Discover Airlines · Premium Economy</div>
-          </div>
-        </div>
-        <div class="journey-total">Total reisetid · 14 t 30 m</div>
-      </div>
-
-      <hr class="journey-sep">
-
-      <div class="route-graphic">
-        <div class="route-airport">
-          <div class="route-iata">PUJ</div>
-          <div class="route-city">Punta Cana</div>
-        </div>
-        <div class="route-line" style="flex:1;margin:0 20px;position:relative;display:flex;align-items:center;">
-          <div style="flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--sand-deep) 0,var(--sand-deep) 5px,transparent 5px,transparent 10px);"></div>
-          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--sand);padding:0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--white);box-shadow:0 0 0 1px var(--gold);"></div>
-            <div style="font-family:var(--ff-ui);font-size:8px;letter-spacing:0.1em;color:var(--ink-lt);text-transform:uppercase;white-space:nowrap;">Via München</div>
-          </div>
-        </div>
-        <div class="route-airport">
-          <div class="route-iata">BGO</div>
-          <div class="route-city">Bergen</div>
-        </div>
-      </div>
-      <div class="journey">
-        <div class="journey-header">Punta Cana til Bergen — 05.02.2027</div>
-        <div class="flight-leg">
-          <span class="leg-code">PUJ→MUC</span>
-          <div>
-            <div class="leg-times">19:35 – 10:10<span class="plus1">+1 (neste dag)</span></div>
-            <div class="leg-meta">Discover Airlines · Premium Economy</div>
-          </div>
-        </div>
-        <div class="flight-connector">
-          <div class="connector-line"></div>
-          <span class="connector-label">Mellomlanding München · 3 t 45 m</span>
-          <div class="connector-line"></div>
-        </div>
-        <div class="flight-leg">
-          <span class="leg-code">MUC→BGO</span>
-          <div>
-            <div class="leg-times">13:55 – 16:30</div>
-            <div class="leg-meta">Discover Airlines · Economy</div>
-          </div>
-        </div>
-        <div class="journey-total">Total reisetid · 15 t 55 m</div>
-      </div>
-
-      <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--sand-mid);">
-        <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2025/10/Discover-Logo.png" alt="Discover Airlines" style="height:26px;width:auto;opacity:0.55;">
-      </div>
-    </div>
-  </div>
 
   <div class="v129-cta reveal" id="section-bookning">
     <div class="v129-cta-eyebrow">Neste skritt</div>
@@ -3892,7 +3753,7 @@ body{overflow-x:clip;}
 
 </section><!-- /trip-section #den-dom-republikk -->
 
-<script type="application/json" id="mldv-booking-data">{"customerName":"Beate Karstad","customerEmail":"beatenk@hotmail.com","customerPhone":"","adults":2,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Den Dom. Republikk","monthYear":"jan / feb 2027","dateRange":"26. januar 2027 — 06. februar 2027","nights":"10 netter / 12 dager","currency":"NOK","isRoundTrip":false,"priceTotal":"90.500","priceTotalFmt":"90.500","route":[],"hotels":[{"id":"hotel-1780930633521-m1jhj","name":"Finest Punta Cana","location":"Punta Cana","rates":[{"idx":0,"room":"Junior Suite Garden View","mealPlan":"All-Inclusive — Dine Around","total":"90500","totalFmt":"90.500","included":true},{"idx":1,"room":"Excellence Club Junior Suite Garden View","mealPlan":"All-Inclusive — Dine Around","total":"100500","totalFmt":"100.500","included":false}]},{"id":"hotel-1780931143059-h2zhd","name":"Excellence Punta Cana","location":"Punta Cana","rates":[{"idx":0,"room":"Junior Suite Garden View","mealPlan":"All-Inclusive — Dine Around","total":"94500","totalFmt":"94.500","included":false}]},{"id":"hotel-1780931508188-f0v1a","name":"Excellence El Carmen","location":"Punta Cana","rates":[{"idx":0,"room":"Junior Suite Pool View","mealPlan":"All-Inclusive — Dine Around","total":"100000","totalFmt":"100.000","included":false}]}]}]}</script>
+<script type="application/json" id="mldv-booking-data">{"customerName":"Beate Karstad","customerEmail":"beatenk@hotmail.com","customerPhone":"","adults":2,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Den Dom. Republikk","monthYear":"jan / feb 2027","dateRange":"27. januar 2027 — 08. februar 2027","nights":"12 netter","currency":"NOK","isRoundTrip":false,"priceTotal":"103.000","priceTotalFmt":"103.000","route":[],"hotels":[{"id":"hotel-1780931508188-f0v1a","name":"Excellence El Carmen","location":"Punta Cana","rates":[{"idx":0,"room":"Excellence Club Honeymoon Two-Story Rooftop Terrace Suite with Plunge Pool Ocean View","mealPlan":"All-Inclusive — Dine Around","total":"103000","totalFmt":"103.000","included":true},{"idx":1,"room":"Excellence Club Beachfront Honeymoon Two-Story Rooftop Terrace Suite with Plunge Pool","mealPlan":"All-Inclusive — Dine Around","total":"111000","totalFmt":"111.000","included":false}]}]}]}</script>
 
 <!-- ════ V130 BOOKING MODAL ════ -->
 <div id="mldv-booking-modal" class="mldv-bm" hidden role="dialog" aria-modal="true" aria-labelledby="mldv-bm-title">
@@ -4395,10 +4256,69 @@ body{overflow-x:clip;}
 
 /* ── SCROLL REVEAL ── */
 (function(){
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
-  },{threshold:0.07});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  // V148.41: DEFENSE-IN-DEPTH against content disappearing on mobile.
+  //
+  // History: V148.40 fixed a specific symptom (threshold:0.07 unreachable
+  // for tall sections on small viewports), but the deeper architectural
+  // problem remained: .reveal { opacity:0 } means "hidden until JS fires"
+  // with NO FALLBACK. If anything goes wrong in this IIFE — observer not
+  // supported, threshold misconfig, exception thrown, JS blocked — entire
+  // sections vanish permanently and silently. Rasmus reported the "04
+  // HOTELLERNES DETALJER" section being completely invisible on mobile,
+  // and the bug had likely been shipping in customer-facing offers for
+  // an unknown time. Unacceptable.
+  //
+  // Three layers of defense now:
+  //   1. NO-JS FALLBACK: a <noscript> CSS rule (see <style> below) makes
+  //      .reveal fully visible if JS is off. Covers users with JS disabled,
+  //      blocked, or failed-to-load.
+  //   2. SAFETY-NET TIMER: regardless of observer behaviour, force all
+  //      .reveal elements visible after 2 seconds. Worst case: a slight
+  //      delay before some content appears, but it ALWAYS appears.
+  //   3. THRESHOLD:0 OBSERVER: fires the moment any pixel enters viewport,
+  //      reliable for elements of any size. This is the primary path —
+  //      gives the intended smooth fade-in for almost all visits.
+  //
+  // If steps 1+2 ever activate, content shows up. The observer (step 3)
+  // is now an ENHANCEMENT, not a requirement.
+  var revealEls = document.querySelectorAll('.reveal');
+
+  // Safety-net: unconditionally reveal everything after 2s. This catches
+  // (a) Observer not firing for any reason, (b) JS errors elsewhere that
+  // interrupt this script, (c) future regressions where someone re-breaks
+  // the threshold without realising.
+  var safetyTimer = setTimeout(function(){
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }, 2000);
+
+  // Primary path: IntersectionObserver with threshold:0 (any pixel visible
+  // triggers reveal). Works on iOS Safari 12.2+ and every modern browser.
+  if (!('IntersectionObserver' in window)) {
+    // Old browser without IntersectionObserver — reveal everything now,
+    // skip the animation. Cancel the safety-net (no longer needed).
+    clearTimeout(safetyTimer);
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+    return;
+  }
+
+  try {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } catch (err) {
+    // Anything weird with IntersectionObserver setup — reveal everything,
+    // log so we know it happened. Safety-net would catch this too but
+    // immediate reveal is faster.
+    if (window.console && console.warn) console.warn('Reveal observer failed, falling back to immediate:', err);
+    clearTimeout(safetyTimer);
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
 })();
 
 /* ── HOTEL TABS — supports multiple independent hotel-strips per page ── */
