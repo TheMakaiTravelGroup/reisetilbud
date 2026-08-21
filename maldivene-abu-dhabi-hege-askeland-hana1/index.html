@@ -2180,19 +2180,31 @@ html{scroll-behavior:smooth;}
    numbered dots connected by a thin gold line, with city + nights under
    each. Lifts the rundrejse hero from "single price" to "this is the
    journey" — instant conversion clarity. */
-.v138-rr-route{display:flex;align-items:flex-start;gap:0;margin:0 0 28px;padding:6px 0 2px;}
-.v138-rr-stop{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:0;}
-.v138-rr-num{width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:10px;background:var(--white);font-variant-numeric:lining-nums tabular-nums;line-height:1;}
-.v138-rr-city{font-family:var(--ff-display);font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.15;margin-bottom:3px;letter-spacing:-0.005em;padding:0 4px;}
+/* V148.64: max 3 stops per row. At 5 stops the equal-flex columns were too
+   narrow, so neighbouring city names touched ("AnuradhapurKandy"). Wrapping
+   to thirds gives each label a full third of the width + a real horizontal
+   gap, so 3 sit on line 1 and the rest flow to line 2. The connector dashes
+   are hidden here since a wrapped grid has no continuous horizontal line. */
+.v138-rr-route{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:22px 0;margin:0 0 28px;padding:6px 0 2px;}
+.v138-rr-stop{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;flex:0 0 32%;min-width:0;padding:0 6px;}
+.v138-rr-line{display:none;}
+.v138-rr-num{width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:10px;background:var(--white);font-variant-numeric:lining-nums tabular-nums;line-height:1;flex-shrink:0;}
+/* V148.61: allow long multi-word city names to wrap (e.g. "North Ari Atoll")
+   instead of forcing nowrap that pushed text into the neighbouring stop and
+   made labels collide. word-break keeps a very long single token contained. */
+/* V148.63: never break a city name mid-word (was "Anur/adha/pura"). Words
+   stay whole; wrapping only happens at spaces (so "North Ari Atoll" can use
+   2-3 lines but a single long word like "Anuradhapura" stays on one line).
+   Font trimmed so the longest single words fit inside a stop column. */
+.v138-rr-city{font-family:var(--ff-display);font-size:14px;font-weight:500;color:var(--ink);line-height:1.18;margin-bottom:4px;letter-spacing:-0.005em;padding:0 2px;white-space:normal;overflow-wrap:normal;word-break:keep-all;hyphens:none;max-width:100%;}
 .v138-rr-nights{font-family:var(--ff-ui);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-lt);}
-.v138-rr-line{flex:0 0 18px;height:1px;background:var(--gold);opacity:0.45;margin-top:15px;align-self:flex-start;}
-/* V145.5: Route-timeline responsive — at narrow widths the equal-flex
-   stops crush text, so we wrap to 2-up grid for tablet and stack vertical
-   on phones. Numbered dots stay centered for hierarchical clarity. */
-@media(max-width:760px){
-  .v138-rr-route{flex-wrap:wrap;gap:18px 0;}
-  .v138-rr-stop{flex:0 0 calc(50% - 9px);min-width:0;}
-  .v138-rr-line{display:none;}
+/* V148.64: connector removed — the wrapped 3-per-row grid has no continuous
+   horizontal line, so the dashes are hidden globally (see base rule above). */
+/* V148.65: keep the 3-per-row grid all the way down to phone width. The old
+   2-per-row tablet rule left an odd centred column with 5 stops. At ≤480px we
+   switch to the vertical itinerary list below (verified on 320/390px). */
+@media(max-width:520px){
+  .v138-rr-route{gap:16px 0;}
 }
 @media(max-width:480px){
   .v138-rr-stop{flex:0 0 100%;flex-direction:row;text-align:left;gap:14px;justify-content:flex-start;}
@@ -3484,7 +3496,7 @@ body.is-confirmation-mode .sticky-cta{
     <div class="hero-content">
       <div class="hero-eyebrow">Skreddersydd reisetilbud</div>
       <h1 class="hero-title">Maldivene &amp; Abu Dhabi<br><em>mars 2027</em></h1>
-      <div class="hero-meta"><span class="nowrap">04. mars 2027 — 16. mars 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">11 netter / 13 dager</span></div>
+      <div class="hero-meta"><span class="nowrap">04. mars 2027 — 18. mars 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">13 netter / 15 dager</span></div>
     </div>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
@@ -3503,7 +3515,7 @@ body.is-confirmation-mode .sticky-cta{
 
   <div class="v129-price-overview reveal">
     <h2 class="v129-pr-title">Skreddersydde reisetilbud til Hege — <span class="accent">Maldivene &amp; Abu Dhabi</span></h2>
-    <p class="v129-pre-intro">En skreddersydd kombinasjonsreise med 2 stopp på 11 netter / 13 dager. Vi har inkludert alt fra flyreiser til hoteller og transfer. Gled deg til et fantastisk eventyr.</p>
+    <p class="v129-pre-intro">En skreddersydd kombinasjonsreise med 2 stopp på 13 netter / 15 dager. Vi har inkludert alt fra flyreiser til hoteller og transfer. Gled deg til et fantastisk eventyr.</p>
     <div class="v145-favorit">
       <div class="v145-favorit-image" style="background-image:url('https://maldivia.dk/wp-content/uploads/2026/05/GL-HERO.jpg')">
         <div class="v145-favorit-loc">Maldivene &amp; Abu Dhabi</div>
@@ -3525,10 +3537,10 @@ body.is-confirmation-mode .sticky-cta{
           </div>
         </div>
         <div class="v145-favorit-divider"></div>
-        <div class="v145-favorit-meta"><span>11 netter</span><span class="sep">·</span><span>5 voksne</span></div>
+        <div class="v145-favorit-meta"><span>13 netter</span><span class="sep">·</span><span>5 voksne</span></div>
         <div class="v145-favorit-destination">Maldivene &amp; Abu Dhabi</div>
         <div class="v145-favorit-price-row">
-          <div class="v145-favorit-price-num"><span class="v145-favorit-price-cur">NOK</span>469.500</div>
+          <div class="v145-favorit-price-num"><span class="v145-favorit-price-cur">NOK</span>539.000</div>
         </div>
         <button type="button" class="v145-favorit-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
       </div>
@@ -3589,7 +3601,7 @@ body.is-confirmation-mode .sticky-cta{
     <div class="v129-rs-head">
       <div class="v129-rs-eyebrow">Din skreddersydde reise</div>
       <h3 class="v129-rs-title">Maldivene &amp; Abu Dhabi — mars 2027</h3>
-      <div class="v129-rs-meta">2 stopp · 11 netter / 13 dager</div>
+      <div class="v129-rs-meta">2 stopp · 13 netter / 15 dager</div>
     </div>
     <div class="v129-rs-stops">
       <a href="#hotel-ananea-madivaru" class="v129-rs-stop" style="text-decoration:none;color:inherit;">
@@ -3607,8 +3619,9 @@ body.is-confirmation-mode .sticky-cta{
         <div class="step">02</div>
         <div class="thumb"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/CAD-9.webp" alt=""></div>
         <div class="info">
-          <div class="hdest">Abu Dhabi</div>
+          <div class="hdest">Abu Dhabi &amp; Maldiverne</div>
           <div class="hname">Conrad Abu Dhabi</div>
+          <div class="hloc">Abu Dhabi</div>
           <div class="hdates">13.–16. mar. · 3 netter</div>
         </div>
         <span class="seelink">Se detaljer →</span>
@@ -3617,7 +3630,7 @@ body.is-confirmation-mode .sticky-cta{
     <div class="v129-rs-foot">
       <div>
         <div class="total-lbl">Total rundreise</div>
-        <div class="total-pr"><span class="cur">NOK</span>469.500</div>
+        <div class="total-pr"><span class="cur">NOK</span>539.000</div>
       </div>
       <button type="button" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
     </div>
@@ -3648,7 +3661,7 @@ body.is-confirmation-mode .sticky-cta{
       <div class="v129-incl-item">
         <div class="num">03</div>
         <div class="body">
-          <h3 class="ititle">8 netter på Ananea Madivaru</h3>
+          <h3 class="ititle">10 netter på Ananea Madivaru</h3>
         </div>
       </div>
       <div class="v129-incl-item">
@@ -3778,14 +3791,46 @@ body.is-confirmation-mode .sticky-cta{
         <div class="v133-hp-booking">
           <div class="v133-hp-eyebrow-row">
             <div class="v133-hp-eyebrow">Detaljer for oppholdet</div>
-            <div class="v133-hp-stay">5. mar — 13. mar 2027 · 8 netter</div>
+            <div class="v133-hp-stay">5. mar — 15. mar 2027 · 10 netter</div>
           </div>
           <div class="v133-hp-villa--stay">
-            <div class="stay-name">2-Bedroom Water Pool Residence</div>
+            <div class="stay-name">3x Water Pool Villa</div>
             <div class="stay-meal">All-Inclusive — Dine Around</div>
             <div class="stay-meta">8 netter · 5. – 13. mars</div>
             <div class="stay-links">
-              <a href="https://www.ananeamadivaru.com/villas/2-bedroom-water-residences-with-private-pool" target="_blank" rel="noopener">Se innkvartering →</a>
+              <a href="https://www.ananeamadivaru.com/villas/water-pool-villas" target="_blank" rel="noopener">Se innkvartering →</a>
+              <a href="https://maldivia.dk/wp-content/uploads/2026/04/Ananea-MP.pdf" target="_blank" rel="noopener">Se forpleining →</a>
+            </div>
+          </div>
+          <div class="v133-hp-villa--stay v133-hp-villa--alt">
+            <div class="stay-row">
+              <div class="stay-row-info">
+                <div class="stay-name">3x Water Pool Villa — Lagoon View</div>
+                <div class="stay-meal">All-Inclusive — Dine Around</div>
+              </div>
+              <div class="stay-surcharge">
+                <span class="surcharge-amt">+ NOK 14.000</span>
+                <span class="surcharge-lbl">Tillegg</span>
+              </div>
+            </div>
+            <div class="stay-links">
+              <a href="https://www.ananeamadivaru.com/villas/water-pool-villa-lagoon-view" target="_blank" rel="noopener">Se innkvartering →</a>
+              <a href="https://maldivia.dk/wp-content/uploads/2026/04/Ananea-MP.pdf" target="_blank" rel="noopener">Se forpleining →</a>
+            </div>
+          </div>
+          <div class="v133-hp-villa--stay v133-hp-villa--alt">
+            <div class="stay-row">
+              <div class="stay-row-info">
+                <div class="stay-name">3-Bedroom Water Pool Residence</div>
+                <div class="stay-meal">All-Inclusive — Dine Around</div>
+              </div>
+              <div class="stay-surcharge">
+                <span class="surcharge-amt">+ NOK 299.000</span>
+                <span class="surcharge-lbl">Tillegg</span>
+              </div>
+            </div>
+            <div class="stay-links">
+              <a href="https://www.ananeamadivaru.com/villas/3-bedroom-water-residence-with-private-pool" target="_blank" rel="noopener">Se innkvartering →</a>
               <a href="https://maldivia.dk/wp-content/uploads/2026/04/Ananea-MP.pdf" target="_blank" rel="noopener">Se forpleining →</a>
             </div>
           </div>
@@ -3844,10 +3889,10 @@ body.is-confirmation-mode .sticky-cta{
         <div class="v133-hp-booking">
           <div class="v133-hp-eyebrow-row">
             <div class="v133-hp-eyebrow">Detaljer for oppholdet</div>
-            <div class="v133-hp-stay">13. mar — 16. mar 2027 · 3 netter</div>
+            <div class="v133-hp-stay">15. mar — 18. mar 2027 · 3 netter</div>
           </div>
           <div class="v133-hp-villa--stay">
-            <div class="stay-name">2x Grand Premier Sea View Room</div>
+            <div class="stay-name">3x Grand Premier Sea View Room</div>
             <div class="stay-meal">Frokost</div>
             <div class="stay-meta">3 netter · 13. – 16. mars</div>
             <div class="stay-links">
@@ -3987,7 +4032,7 @@ body.is-confirmation-mode .sticky-cta{
         </div>
       </div>
       <div class="journey">
-        <div class="journey-header">Malé til Abu Dhabi — 13.03.2027</div>
+        <div class="journey-header">Malé til Abu Dhabi — 15.03.2027</div>
         <div class="flight-leg">
           <span class="leg-code">MLE→AUH</span>
           <div>
@@ -4018,7 +4063,7 @@ body.is-confirmation-mode .sticky-cta{
         </div>
       </div>
       <div class="journey">
-        <div class="journey-header">Malé til Stavanger — 16.03.2027</div>
+        <div class="journey-header">Malé til Stavanger — 18.03.2027</div>
         <div class="flight-leg">
           <span class="leg-code">AUH→CPH</span>
           <div>
@@ -4075,7 +4120,7 @@ body.is-confirmation-mode .sticky-cta{
 
 </section><!-- /trip-section #maldivene-abu-dhabi -->
 
-<script type="application/json" id="mldv-booking-data">{"customerName":"Hege Askeland Hana","customerEmail":"hegeaskelandhana@gmail.com","customerPhone":"41448480","adults":5,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Maldivene & Abu Dhabi","monthYear":"mars 2027","dateRange":"04. mars 2027 — 16. mars 2027","nights":"11 netter / 13 dager","currency":"NOK","isRoundTrip":true,"priceTotal":"469.500","priceTotalFmt":"469.500","route":[{"hotel":"","city":"Maldivene","nights":8},{"hotel":"","city":"Abu Dhabi","nights":3}],"hotels":[{"id":"hotel-1787154775724-iv21r","name":"Ananea Madivaru","location":"North Ari Atoll","rates":[{"idx":0,"room":"2-Bedroom Water Pool Residence","mealPlan":"All-Inclusive — Dine Around","total":"469500","totalFmt":"469.500","included":true}]},{"id":"hotel-1787153962152-4l9ba","name":"Conrad Abu Dhabi","location":"Abu Dhabi","rates":[{"idx":0,"room":"2x Grand Premier Sea View Room","mealPlan":"Frokost","total":"469500","totalFmt":"469.500","included":true}]}]}]}</script>
+<script type="application/json" id="mldv-booking-data">{"customerName":"Hege Askeland Hana","customerEmail":"hegeaskelandhana@gmail.com","customerPhone":"41448480","adults":5,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Maldivene & Abu Dhabi","monthYear":"mars 2027","dateRange":"04. mars 2027 — 18. mars 2027","nights":"13 netter / 15 dager","currency":"NOK","isRoundTrip":true,"priceTotal":"539.000","priceTotalFmt":"539.000","route":[{"hotel":"","city":"Maldivene","nights":8},{"hotel":"","city":"Abu Dhabi","nights":3}],"hotels":[{"id":"hotel-1787154775724-iv21r","name":"Ananea Madivaru","location":"North Ari Atoll","rates":[{"idx":0,"room":"3x Water Pool Villa","mealPlan":"All-Inclusive — Dine Around","total":"539000","totalFmt":"539.000","included":true},{"idx":1,"room":"3x Water Pool Villa — Lagoon View","mealPlan":"All-Inclusive — Dine Around","total":"553000","totalFmt":"553.000","included":false},{"idx":2,"room":"3-Bedroom Water Pool Residence","mealPlan":"All-Inclusive — Dine Around","total":"838000","totalFmt":"838.000","included":false}]},{"id":"hotel-1787153962152-4l9ba","name":"Conrad Abu Dhabi","location":"Abu Dhabi","rates":[{"idx":0,"room":"3x Grand Premier Sea View Room","mealPlan":"Frokost","total":"539000","totalFmt":"539.000","included":true}]}]}]}</script>
 
 <!-- ════ V130 BOOKING MODAL ════ -->
 <div id="mldv-booking-modal" class="mldv-bm" hidden role="dialog" aria-modal="true" aria-labelledby="mldv-bm-title">
