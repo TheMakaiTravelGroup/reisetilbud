@@ -2180,19 +2180,31 @@ html{scroll-behavior:smooth;}
    numbered dots connected by a thin gold line, with city + nights under
    each. Lifts the rundrejse hero from "single price" to "this is the
    journey" — instant conversion clarity. */
-.v138-rr-route{display:flex;align-items:flex-start;gap:0;margin:0 0 28px;padding:6px 0 2px;}
-.v138-rr-stop{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:0;}
-.v138-rr-num{width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:10px;background:var(--white);font-variant-numeric:lining-nums tabular-nums;line-height:1;}
-.v138-rr-city{font-family:var(--ff-display);font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.15;margin-bottom:3px;letter-spacing:-0.005em;padding:0 4px;}
+/* V148.64: max 3 stops per row. At 5 stops the equal-flex columns were too
+   narrow, so neighbouring city names touched ("AnuradhapurKandy"). Wrapping
+   to thirds gives each label a full third of the width + a real horizontal
+   gap, so 3 sit on line 1 and the rest flow to line 2. The connector dashes
+   are hidden here since a wrapped grid has no continuous horizontal line. */
+.v138-rr-route{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:22px 0;margin:0 0 28px;padding:6px 0 2px;}
+.v138-rr-stop{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;flex:0 0 32%;min-width:0;padding:0 6px;}
+.v138-rr-line{display:none;}
+.v138-rr-num{width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:10px;background:var(--white);font-variant-numeric:lining-nums tabular-nums;line-height:1;flex-shrink:0;}
+/* V148.61: allow long multi-word city names to wrap (e.g. "North Ari Atoll")
+   instead of forcing nowrap that pushed text into the neighbouring stop and
+   made labels collide. word-break keeps a very long single token contained. */
+/* V148.63: never break a city name mid-word (was "Anur/adha/pura"). Words
+   stay whole; wrapping only happens at spaces (so "North Ari Atoll" can use
+   2-3 lines but a single long word like "Anuradhapura" stays on one line).
+   Font trimmed so the longest single words fit inside a stop column. */
+.v138-rr-city{font-family:var(--ff-display);font-size:14px;font-weight:500;color:var(--ink);line-height:1.18;margin-bottom:4px;letter-spacing:-0.005em;padding:0 2px;white-space:normal;overflow-wrap:normal;word-break:keep-all;hyphens:none;max-width:100%;}
 .v138-rr-nights{font-family:var(--ff-ui);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-lt);}
-.v138-rr-line{flex:0 0 18px;height:1px;background:var(--gold);opacity:0.45;margin-top:15px;align-self:flex-start;}
-/* V145.5: Route-timeline responsive — at narrow widths the equal-flex
-   stops crush text, so we wrap to 2-up grid for tablet and stack vertical
-   on phones. Numbered dots stay centered for hierarchical clarity. */
-@media(max-width:760px){
-  .v138-rr-route{flex-wrap:wrap;gap:18px 0;}
-  .v138-rr-stop{flex:0 0 calc(50% - 9px);min-width:0;}
-  .v138-rr-line{display:none;}
+/* V148.64: connector removed — the wrapped 3-per-row grid has no continuous
+   horizontal line, so the dashes are hidden globally (see base rule above). */
+/* V148.65: keep the 3-per-row grid all the way down to phone width. The old
+   2-per-row tablet rule left an odd centred column with 5 stops. At ≤480px we
+   switch to the vertical itinerary list below (verified on 320/390px). */
+@media(max-width:520px){
+  .v138-rr-route{gap:16px 0;}
 }
 @media(max-width:480px){
   .v138-rr-stop{flex:0 0 100%;flex-direction:row;text-align:left;gap:14px;justify-content:flex-start;}
@@ -3484,7 +3496,7 @@ body.is-confirmation-mode .sticky-cta{
     <div class="hero-content">
       <div class="hero-eyebrow">Skreddersydd reisetilbud</div>
       <h1 class="hero-title">Maldivene &amp; Abu Dhabi<br><em>mars 2027</em></h1>
-      <div class="hero-meta"><span class="nowrap">04. mars 2027 — 16. mars 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">11 netter / 13 dager</span></div>
+      <div class="hero-meta"><span class="nowrap">04. mars 2027 — 18. mars 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">13 netter / 15 dager</span></div>
     </div>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
@@ -3503,7 +3515,7 @@ body.is-confirmation-mode .sticky-cta{
 
   <div class="v129-price-overview reveal">
     <h2 class="v129-pr-title">Skreddersydde reisetilbud til Hege — <span class="accent">Maldivene &amp; Abu Dhabi</span></h2>
-    <p class="v129-pre-intro">En skreddersydd kombinasjonsreise med 2 stopp på 11 netter / 13 dager. Vi har inkludert alt fra flyreiser til hoteller og transfer. Gled deg til et fantastisk eventyr.</p>
+    <p class="v129-pre-intro">En skreddersydd kombinasjonsreise med 2 stopp på 13 netter / 15 dager. Vi har inkludert alt fra flyreiser til hoteller og transfer. Gled deg til et fantastisk eventyr.</p>
     <div class="v145-favorit">
       <div class="v145-favorit-image" style="background-image:url('https://maldivia.dk/wp-content/uploads/2026/05/GL-HERO.jpg')">
         <div class="v145-favorit-loc">Maldivene &amp; Abu Dhabi</div>
@@ -3515,7 +3527,7 @@ body.is-confirmation-mode .sticky-cta{
           <div class="v138-rr-stop">
             <div class="v138-rr-num">1</div>
             <div class="v138-rr-city">Maldivene</div>
-            <div class="v138-rr-nights">8 netter</div>
+            <div class="v138-rr-nights">10 netter</div>
           </div>
           <div class="v138-rr-line"></div>
           <div class="v138-rr-stop">
@@ -3525,10 +3537,10 @@ body.is-confirmation-mode .sticky-cta{
           </div>
         </div>
         <div class="v145-favorit-divider"></div>
-        <div class="v145-favorit-meta"><span>11 netter</span><span class="sep">·</span><span>5 voksne</span></div>
+        <div class="v145-favorit-meta"><span>13 netter</span><span class="sep">·</span><span>5 voksne</span></div>
         <div class="v145-favorit-destination">Maldivene &amp; Abu Dhabi</div>
         <div class="v145-favorit-price-row">
-          <div class="v145-favorit-price-num"><span class="v145-favorit-price-cur">NOK</span>345.000</div>
+          <div class="v145-favorit-price-num"><span class="v145-favorit-price-cur">NOK</span>448.000</div>
         </div>
         <button type="button" class="v145-favorit-book" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:1,rate:0})">Bestill →</button>
       </div>
@@ -3589,17 +3601,17 @@ body.is-confirmation-mode .sticky-cta{
     <div class="v129-rs-head">
       <div class="v129-rs-eyebrow">Din skreddersydde reise</div>
       <h3 class="v129-rs-title">Maldivene &amp; Abu Dhabi — mars 2027</h3>
-      <div class="v129-rs-meta">2 stopp · 11 netter / 13 dager</div>
+      <div class="v129-rs-meta">2 stopp · 13 netter / 15 dager</div>
     </div>
     <div class="v129-rs-stops">
-      <a href="#hotel-ayada-maldives" class="v129-rs-stop" style="text-decoration:none;color:inherit;">
+      <a href="#hotel-ja-manafaru" class="v129-rs-stop" style="text-decoration:none;color:inherit;">
         <div class="step">01</div>
-        <div class="thumb"><img loading="lazy" decoding="async" src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-4-scaled.jpg" alt=""></div>
+        <div class="thumb"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2023/01/JA-Manafaru-Arial-Shot.1-min.jpg" alt=""></div>
         <div class="info">
           <div class="hdest">Maldivene</div>
-          <div class="hname">Ayada Maldives</div>
-          <div class="hloc">Gaafu Dhaalu Atoll</div>
-          <div class="hdates">5.–13. mar. · 8 netter</div>
+          <div class="hname">JA Manafaru</div>
+          <div class="hloc">Haa Alifu Atoll</div>
+          <div class="hdates">5.–15. mar. · 10 netter</div>
         </div>
         <span class="seelink">Se detaljer →</span>
       </a>
@@ -3609,7 +3621,8 @@ body.is-confirmation-mode .sticky-cta{
         <div class="info">
           <div class="hdest">Abu Dhabi</div>
           <div class="hname">Conrad Abu Dhabi</div>
-          <div class="hdates">13.–16. mar. · 3 netter</div>
+          <div class="hloc">Abu Dhabi</div>
+          <div class="hdates">15.–18. mar. · 3 netter</div>
         </div>
         <span class="seelink">Se detaljer →</span>
       </a>
@@ -3617,7 +3630,7 @@ body.is-confirmation-mode .sticky-cta{
     <div class="v129-rs-foot">
       <div>
         <div class="total-lbl">Total rundreise</div>
-        <div class="total-pr"><span class="cur">NOK</span>345.000</div>
+        <div class="total-pr"><span class="cur">NOK</span>448.000</div>
       </div>
       <button type="button" onclick="if(window.mldvOpenBooking)mldvOpenBooking({trip:0,hotel:0,rate:0})">Bestill →</button>
     </div>
@@ -3648,7 +3661,7 @@ body.is-confirmation-mode .sticky-cta{
       <div class="v129-incl-item">
         <div class="num">03</div>
         <div class="body">
-          <h3 class="ititle">8 netter på Ayada Maldives</h3>
+          <h3 class="ititle">10 netter på JA Manafaru</h3>
         </div>
       </div>
       <div class="v129-incl-item">
@@ -3691,7 +3704,7 @@ body.is-confirmation-mode .sticky-cta{
       <div class="v136-jump-inner">
         <span class="v136-jump-lbl">Hopp til</span>
         <div class="v136-jump-pills">
-          <a href="#hotel-ayada-maldives" class="v136-jump-pill" data-target="hotel-ayada-maldives">Ayada Maldives</a>
+          <a href="#hotel-ja-manafaru" class="v136-jump-pill" data-target="hotel-ja-manafaru">JA Manafaru</a>
           <a href="#hotel-conrad-abu-dhabi" class="v136-jump-pill" data-target="hotel-conrad-abu-dhabi">Conrad Abu Dhabi</a>
         </div>
       </div>
@@ -3759,71 +3772,55 @@ body.is-confirmation-mode .sticky-cta{
     })();
     </script>
 
-    <div class="hotel-panel v133-hp v133-hp--rundrejse" data-panel="0" id="hotel-ayada-maldives">
+    <div class="hotel-panel v133-hp v133-hp--rundrejse" data-panel="0" id="hotel-ja-manafaru">
       <div class="v133-hp-hero">
-        <img loading="lazy" decoding="async" src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-4-scaled.jpg" alt="Ayada Maldives">
+        <img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2023/01/JA-Manafaru-Arial-Shot.1-min.jpg" alt="JA Manafaru">
         <div class="v133-hp-hero-content">
-          <div class="loc">Gaafu Dhaalu Atoll</div>
-          <h2 class="name">Ayada Maldives</h2>
-          <div class="meta">★★★★★ <span class="sep">·</span> 122 villaer</div>
+          <div class="loc">Haa Alifu Atoll</div>
+          <h2 class="name">JA Manafaru</h2>
+          <div class="meta">★★★★★ <span class="sep">·</span> 84 villaer</div>
         </div>
       </div>
       <div class="v133-hp-gallery">
-        <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-6.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-6.jpg" alt=""></a>
-        <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-8.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-8.jpg" alt=""></a>
-        <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-1.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-1.jpg" alt=""></a>
-        <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-HERO-2.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-HERO-2.jpg" alt=""></a>
+        <a href="https://maldivia.dk/wp-content/uploads/2026/06/JAM-1-scaled.webp" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/JAM-1-scaled.webp" alt=""></a>
+        <a href="https://maldivia.dk/wp-content/uploads/2026/06/IMG_3042-scaled.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/IMG_3042-scaled.jpg" alt=""></a>
+        <a href="https://maldivia.dk/wp-content/uploads/2026/06/JAM-6-scaled.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/JAM-6-scaled.jpg" alt=""></a>
+        <a href="https://maldivia.dk/wp-content/uploads/2026/06/JAM-3.jpg" target="_blank"><img loading="lazy" decoding="async" src="https://maldivia.dk/wp-content/uploads/2026/06/JAM-3.jpg" alt=""></a>
       </div>
       <div class="v133-hp-body">
         <div class="v133-hp-booking">
           <div class="v133-hp-eyebrow-row">
             <div class="v133-hp-eyebrow">Detaljer for oppholdet</div>
-            <div class="v133-hp-stay">5. mar — 13. mar 2027 · 8 netter</div>
+            <div class="v133-hp-stay">5. mar — 15. mar 2027 · 10 netter</div>
           </div>
           <div class="v133-hp-villa--stay">
-            <div class="stay-name">2-Bedroom Sunset Family Ocean Suite with Pool</div>
-            <div class="stay-meal">Helpensjon</div>
-            <div class="stay-meta">8 netter · 5. – 13. mars</div>
+            <div class="stay-name">3x Sunrise Pool Water Villa</div>
+            <div class="stay-meal">Halvpensjon — Dine Around</div>
+            <div class="stay-meta">10 netter · 5. – 15. mars</div>
             <div class="stay-links">
-              <a href="https://www.ayadamaldives.com/sunset-ocean-family-suite" target="_blank" rel="noopener">Se innkvartering →</a>
-              <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/Ayada-Maldives.pdf" target="_blank" rel="noopener">Les mer om hotellet →</a>
+              <a href="https://www.jaresortshotels.com/accommodation-detail/maldives/ja-manafaru/sunrise-water-villa-with-infinity-pool" target="_blank" rel="noopener">Se innkvartering →</a>
+              <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/JA-Manafaru.pdf" target="_blank" rel="noopener">Les mer om hotellet →</a>
             </div>
           </div>
           <div class="v133-hp-villa--stay v133-hp-villa--alt">
             <div class="stay-row">
               <div class="stay-row-info">
-                <div class="stay-name">2-Bedroom Sunset Family Ocean Suite with Pool</div>
-                <div class="stay-meal">Crystal All-Inclusive</div>
+                <div class="stay-name">3x Sunrise Pool Water Villa</div>
+                <div class="stay-meal">All-Inclusive — Dine Around</div>
               </div>
               <div class="stay-surcharge">
-                <span class="surcharge-amt">+ NOK 24.000</span>
+                <span class="surcharge-amt">+ NOK 122.500</span>
                 <span class="surcharge-lbl">Tillegg</span>
               </div>
             </div>
             <div class="stay-links">
-              <a href="https://www.ayadamaldives.com/sunset-ocean-family-suite" target="_blank" rel="noopener">Se innkvartering →</a>
-              <a href="https://maldivia.dk/wp-content/uploads/2026/04/Crystal-All-Inclusive-Ayada.pdf" target="_blank" rel="noopener">Se forpleining →</a>
-            </div>
-          </div>
-          <div class="v133-hp-villa--stay v133-hp-villa--alt">
-            <div class="stay-row">
-              <div class="stay-row-info">
-                <div class="stay-name">2-Bedroom Sunset Family Ocean Suite with Pool</div>
-                <div class="stay-meal">Diamond All-Inclusive — Dine Around</div>
-              </div>
-              <div class="stay-surcharge">
-                <span class="surcharge-amt">+ NOK 66.000</span>
-                <span class="surcharge-lbl">Tillegg</span>
-              </div>
-            </div>
-            <div class="stay-links">
-              <a href="https://www.ayadamaldives.com/sunset-ocean-family-suite" target="_blank" rel="noopener">Se innkvartering →</a>
-              <a href="https://maldivia.dk/wp-content/uploads/2026/04/Diamond-All-Inclusive-Ayada.pdf" target="_blank" rel="noopener">Se forpleining →</a>
+              <a href="https://www.jaresortshotels.com/accommodation-detail/maldives/ja-manafaru/sunrise-water-villa-with-infinity-pool" target="_blank" rel="noopener">Se innkvartering →</a>
+              <a href="https://maldivia.no/wp-content/uploads/sites/2/2025/10/JA-Manafaru.pdf" target="_blank" rel="noopener">Les mer om hotellet →</a>
             </div>
           </div>
           <div class="v133-hp-curator-mini">
             <div class="ceyebrow">Wendies anbefaling</div>
-            <p class="cquote">Ayada er for meg selve bildet på det uforstyrrede Maldivene. Øya ligger i den sørlige Gaafu Dhaalu-atollen, omkranset av ubebodde, palmedekte øyer, og gir dere den ekte følelsen av å ha et stykke Indiahav helt for dere selv. Snorkleturene og utfluktene herfra er blant de fineste jeg har vært på, med et yrende rev rett utenfor stranden. Gastronomien hører til det aller beste jeg har smakt på øyene, og jeg anbefaler alltid en av all-inclusive-pakkene, så man virkelig kan lene seg tilbake og nyte. Og for dere som står på brett, byr Ayada på gode bølger avhengig av sesong. En reise verdt hver kilometer.</p>
+            <p class="cquote">Manafaru er Maldivenes nordligste resortøy, i en atoll som først åpnet for turisme i 2005 og fortsatt bare huser to resorter. Det merkes på alt: revene er urørte, dykkerplassene er folketomme, og skogen på øya er gammel og tett etter maldivisk målestokk, med banyantrær som skygger over sandstiene. Hver eneste villa har sitt eget private basseng, gjemt i hver sin lomme av grønt. Maten er noe av det jeg husker aller best herfra, og nivået holder seg gjennomgående høyt på tvers av restaurantene, fra fersk sjømat ved havet til den asiatiske White Orchid over vannet. Vil man unne seg noe helt spesielt, finnes også The Cellar, en vinkjeller bygget inn i vulkansk stein under havnivå. Og om kvelden samler ammehaiene seg ved bryggen, helt av seg selv. For dere som vil lengst bort, uten å gi avkall på noe som helst.</p>
             <div class="csign">
               <img src="https://maldivia.no/wp-content/uploads/sites/2/2026/05/thumbnail_image002-1-1.jpg" alt="Wendie Pedersen">
               <div class="ctext">
@@ -3835,25 +3832,25 @@ body.is-confirmation-mode .sticky-cta{
         </div>
         <div class="v133-hp-highlights">
           <div class="v133-hp-eyebrow">Høydepunkter</div>
-          <div class="v133-hp-hl-item">Samtlige 122 rom og villaer – både de som ligger gjemt i den frodige strandkanten og de som svever over den turkise lagunen – forkjæler gjestene med et helt eget, privat svømmebasseng og en dedikert 24-timers butler-service (Butler Show).</div>
-          <div class="v133-hp-hl-item">Øyas levende og uberørte husrev er et eldorado for undervanns-entusiaster, der du kan tre direkte ut i det krystallklare vannet og snorkle blant fargerike korallhager, havskilpadder og ufarlige revhaier.</div>
-          <div class="v133-hp-hl-item">Det kulinariske universet teller åtte prisvinnende restauranter og barer, inkludert signaturrestauranten Ocean Breeze over vannet, samt Ottoman Lounge, som serverer autentisk tyrkisk kaffe og vannpipe i enestående omgivelser.</div>
-          <div class="v133-hp-hl-item">Det prisvinnende AySpa strekker seg over 3500 kvadratmeter i hjertet av øya og er berømt for sitt grandiose, tyrkiske hammam, sine marmorbelagte baderom og skreddersydde, holistiske ritualer under trækronene.</div>
-          <div class="v133-hp-hl-item">Aktivitetsnivået er eksepsjonelt høyt med et fullt utstyrt dykkesenter, surfemuligheter på noen av Maldivenes beste bølger rett i nærheten, samt opplyste tennis- og fotballbaner midt i den tropiske jungelen.</div>
+          <div class="v133-hp-hl-item">Alle de frittstående villaene og suitene er ekstremt romslige, ligger gjemt i sin egen private oase av tropisk natur, og har alle sitt eget private svømmebasseng.</div>
+          <div class="v133-hp-hl-item">Resortet har en av Maldivenes mest unike vinkjellere, The Cellar, som ligger to meter under havoverflaten. Her kan du oppleve eksklusive vinsmakinger og private middager i en helt spesiell atmosfære.</div>
+          <div class="v133-hp-hl-item">Det kulinariske nivået er skyhøyt med syv forskjellige restauranter og barer, der du kan nyte alt fra tradisjonelle maldiviske smaker på Kakuni til asiatisk-inspirert sjømat på overvannsrestauranten Ocean Grill.</div>
+          <div class="v133-hp-hl-item">Husrevet er lett tilgjengelig fra stranden og vrimler av liv, takket være øyas nordlige beliggenhet som tiltrekker seg store mengder fargerik koralfisk, havskildpadder og harmløse revhaier.</div>
+          <div class="v133-hp-hl-item">Det prisvinnende Calm Spa Sanctuary ligger gjemt inne i den tette jungelen og tilbyr holistiske ayurvediske behandlinger i vakre, private utendørs-paviljonger preget av beroligende vannbassin.</div>
         </div>
       </div>
       <div class="v133-hp-info">
         <div class="v133-hp-info-col">
           <div class="ilbl">Lokasjon</div>
-          <div class="ival">Gaafu Dhaalu Atoll</div>
+          <div class="ival">Haa Alifu Atoll</div>
         </div>
         <div class="v133-hp-info-col">
           <div class="ilbl">Transfer</div>
-          <div class="ival">Fly &amp; Båt · ca. 120 min.</div>
+          <div class="ival">Sjøfly · 70 min.</div>
         </div>
         <div class="v133-hp-info-col">
           <div class="ilbl">Website</div>
-          <div class="ival"><a href="https://www.ayadamaldives.com/" target="_blank">Utforsk Ayada</a></div>
+          <div class="ival"><a href="https://www.jaresortshotels.com/maldives/ja-manafaru" target="_blank">Utforsk JA Manafaru</a></div>
         </div>
       </div>
     </div>
@@ -3876,12 +3873,12 @@ body.is-confirmation-mode .sticky-cta{
         <div class="v133-hp-booking">
           <div class="v133-hp-eyebrow-row">
             <div class="v133-hp-eyebrow">Detaljer for oppholdet</div>
-            <div class="v133-hp-stay">13. mar — 16. mar 2027 · 3 netter</div>
+            <div class="v133-hp-stay">15. mar — 18. mar 2027 · 3 netter</div>
           </div>
           <div class="v133-hp-villa--stay">
-            <div class="stay-name">2x Grand Premier Sea View Room</div>
+            <div class="stay-name">3x Grand Premier Sea View Room</div>
             <div class="stay-meal">Frokost</div>
-            <div class="stay-meta">3 netter · 13. – 16. mars</div>
+            <div class="stay-meta">3 netter · 15. – 18. mars</div>
             <div class="stay-links">
               <a href="https://www.hilton.com/en/hotels/auhetci-conrad-abu-dhabi-etihad-towers/rooms/" target="_blank" rel="noopener">Se innkvartering →</a>
               <a href="https://www.hilton.com/en/hotels/auhetci-conrad-abu-dhabi-etihad-towers/" target="_blank" rel="noopener">Les mer om hotellet →</a>
@@ -4019,7 +4016,7 @@ body.is-confirmation-mode .sticky-cta{
         </div>
       </div>
       <div class="journey">
-        <div class="journey-header">Malé til Abu Dhabi — 13.03.2027</div>
+        <div class="journey-header">Malé til Abu Dhabi — 15.03.2027</div>
         <div class="flight-leg">
           <span class="leg-code">MLE→AUH</span>
           <div>
@@ -4050,7 +4047,7 @@ body.is-confirmation-mode .sticky-cta{
         </div>
       </div>
       <div class="journey">
-        <div class="journey-header">Malé til Stavanger — 16.03.2027</div>
+        <div class="journey-header">Malé til Stavanger — 18.03.2027</div>
         <div class="flight-leg">
           <span class="leg-code">AUH→CPH</span>
           <div>
@@ -4107,7 +4104,7 @@ body.is-confirmation-mode .sticky-cta{
 
 </section><!-- /trip-section #maldivene-abu-dhabi -->
 
-<script type="application/json" id="mldv-booking-data">{"customerName":"Hege Askeland Hana","customerEmail":"hegeaskelandhana@gmail.com","customerPhone":"41448480","adults":5,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Maldivene & Abu Dhabi","monthYear":"mars 2027","dateRange":"04. mars 2027 — 16. mars 2027","nights":"11 netter / 13 dager","currency":"NOK","isRoundTrip":true,"priceTotal":"345.000","priceTotalFmt":"345.000","route":[{"hotel":"","city":"Maldivene","nights":8},{"hotel":"","city":"Abu Dhabi","nights":3}],"hotels":[{"id":"hotel-1787155102306-b8vr7","name":"Ayada Maldives","location":"Gaafu Dhaalu Atoll","rates":[{"idx":0,"room":"2-Bedroom Sunset Family Ocean Suite with Pool","mealPlan":"Helpensjon","total":"345000","totalFmt":"345.000","included":true},{"idx":1,"room":"2-Bedroom Sunset Family Ocean Suite with Pool","mealPlan":"Crystal All-Inclusive","total":"369000","totalFmt":"369.000","included":false},{"idx":2,"room":"2-Bedroom Sunset Family Ocean Suite with Pool","mealPlan":"Diamond All-Inclusive — Dine Around","total":"411000","totalFmt":"411.000","included":false}]},{"id":"hotel-1787153962152-4l9ba","name":"Conrad Abu Dhabi","location":"Abu Dhabi","rates":[{"idx":0,"room":"2x Grand Premier Sea View Room","mealPlan":"Frokost","total":"345000","totalFmt":"345.000","included":true}]}]}]}</script>
+<script type="application/json" id="mldv-booking-data">{"customerName":"Hege Askeland Hana","customerEmail":"hegeaskelandhana@gmail.com","customerPhone":"41448480","adults":5,"teenagers":0,"children":0,"infants":0,"teenagerAges":"","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Maldivene & Abu Dhabi","monthYear":"mars 2027","dateRange":"04. mars 2027 — 18. mars 2027","nights":"13 netter / 15 dager","currency":"NOK","isRoundTrip":true,"priceTotal":"448.000","priceTotalFmt":"448.000","route":[{"hotel":"","city":"Maldivene","nights":10},{"hotel":"","city":"Abu Dhabi","nights":3}],"hotels":[{"id":"hotel-1787304427850-j6fn2","name":"JA Manafaru","location":"Haa Alifu Atoll","rates":[{"idx":0,"room":"3x Sunrise Pool Water Villa","mealPlan":"Halvpensjon — Dine Around","total":"448000","totalFmt":"448.000","included":true},{"idx":1,"room":"3x Sunrise Pool Water Villa","mealPlan":"All-Inclusive — Dine Around","total":"570500","totalFmt":"570.500","included":false}]},{"id":"hotel-1787153962152-4l9ba","name":"Conrad Abu Dhabi","location":"Abu Dhabi","rates":[{"idx":0,"room":"3x Grand Premier Sea View Room","mealPlan":"Frokost","total":"448000","totalFmt":"448.000","included":true}]}]}]}</script>
 
 <!-- ════ V130 BOOKING MODAL ════ -->
 <div id="mldv-booking-modal" class="mldv-bm" hidden role="dialog" aria-modal="true" aria-labelledby="mldv-bm-title">
