@@ -2180,31 +2180,19 @@ html{scroll-behavior:smooth;}
    numbered dots connected by a thin gold line, with city + nights under
    each. Lifts the rundrejse hero from "single price" to "this is the
    journey" — instant conversion clarity. */
-/* V148.64: max 3 stops per row. At 5 stops the equal-flex columns were too
-   narrow, so neighbouring city names touched ("AnuradhapurKandy"). Wrapping
-   to thirds gives each label a full third of the width + a real horizontal
-   gap, so 3 sit on line 1 and the rest flow to line 2. The connector dashes
-   are hidden here since a wrapped grid has no continuous horizontal line. */
-.v138-rr-route{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:22px 0;margin:0 0 28px;padding:6px 0 2px;}
-.v138-rr-stop{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;flex:0 0 32%;min-width:0;padding:0 6px;}
-.v138-rr-line{display:none;}
-.v138-rr-num{width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:10px;background:var(--white);font-variant-numeric:lining-nums tabular-nums;line-height:1;flex-shrink:0;}
-/* V148.61: allow long multi-word city names to wrap (e.g. "North Ari Atoll")
-   instead of forcing nowrap that pushed text into the neighbouring stop and
-   made labels collide. word-break keeps a very long single token contained. */
-/* V148.63: never break a city name mid-word (was "Anur/adha/pura"). Words
-   stay whole; wrapping only happens at spaces (so "North Ari Atoll" can use
-   2-3 lines but a single long word like "Anuradhapura" stays on one line).
-   Font trimmed so the longest single words fit inside a stop column. */
-.v138-rr-city{font-family:var(--ff-display);font-size:14px;font-weight:500;color:var(--ink);line-height:1.18;margin-bottom:4px;letter-spacing:-0.005em;padding:0 2px;white-space:normal;overflow-wrap:normal;word-break:keep-all;hyphens:none;max-width:100%;}
+.v138-rr-route{display:flex;align-items:flex-start;gap:0;margin:0 0 28px;padding:6px 0 2px;}
+.v138-rr-stop{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:0;}
+.v138-rr-num{width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:10px;background:var(--white);font-variant-numeric:lining-nums tabular-nums;line-height:1;}
+.v138-rr-city{font-family:var(--ff-display);font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.15;margin-bottom:3px;letter-spacing:-0.005em;padding:0 4px;}
 .v138-rr-nights{font-family:var(--ff-ui);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-lt);}
-/* V148.64: connector removed — the wrapped 3-per-row grid has no continuous
-   horizontal line, so the dashes are hidden globally (see base rule above). */
-/* V148.65: keep the 3-per-row grid all the way down to phone width. The old
-   2-per-row tablet rule left an odd centred column with 5 stops. At ≤480px we
-   switch to the vertical itinerary list below (verified on 320/390px). */
-@media(max-width:520px){
-  .v138-rr-route{gap:16px 0;}
+.v138-rr-line{flex:0 0 18px;height:1px;background:var(--gold);opacity:0.45;margin-top:15px;align-self:flex-start;}
+/* V145.5: Route-timeline responsive — at narrow widths the equal-flex
+   stops crush text, so we wrap to 2-up grid for tablet and stack vertical
+   on phones. Numbered dots stay centered for hierarchical clarity. */
+@media(max-width:760px){
+  .v138-rr-route{flex-wrap:wrap;gap:18px 0;}
+  .v138-rr-stop{flex:0 0 calc(50% - 9px);min-width:0;}
+  .v138-rr-line{display:none;}
 }
 @media(max-width:480px){
   .v138-rr-stop{flex:0 0 100%;flex-direction:row;text-align:left;gap:14px;justify-content:flex-start;}
@@ -2462,6 +2450,82 @@ html{scroll-behavior:smooth;}
 .v129-hotel-details .hotel-panel{display:block !important;opacity:1 !important;visibility:visible !important;position:static !important;}
 .v129-hotel-details .hotel-panel + .hotel-panel{margin-top:80px;}
 
+/* V153 — Resort-positionerings-diagram. Sidder mellem hotel-body og info-række.
+   Luft over/under + divider-linje. Gold-markør, aktiv ende mørk, passiv dæmpet. */
+.v153-pos{padding:26px 40px 34px;border-top:1px solid var(--sand-deep);}
+.v153-pos-head{font-family:var(--ff-display);font-weight:500;font-size:22px;color:var(--ink);margin-bottom:26px;letter-spacing:-0.005em;line-height:1.1;}
+.v153-pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px 56px;}
+.v153-ax-ends{display:flex;justify-content:space-between;margin-bottom:0;}
+/* V153.2: grå kategori-overskrift over hver akse — adskiller "hvad måles" fra
+   guld-labels "hvor ligger det". Grå (ikke guld) giver hierarki. */
+.v153-ax-cat{font-family:var(--ff-ui);font-size:9.5px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-lt);margin-bottom:8px;}
+/* V5: guld-serif labels — matcher hotelsidens eksklusive DNA */
+.v153-ax-end{font-family:var(--ff-display);font-size:15.5px;font-weight:600;letter-spacing:0.005em;color:var(--gold-dk);}
+.v153-ax-end.r{text-align:right;}
+/* D2: forfinet bar + prik — hårfin bar, gradient-fill, blød guldring */
+.v153-bar{position:relative;height:1.5px;background:#e0d6c5;border-radius:2px;margin-top:15px;}
+.v153-fill{position:absolute;left:0;top:0;height:1.5px;background:linear-gradient(90deg,var(--gold-lt),var(--gold));border-radius:2px;}
+.v153-marker{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%);box-shadow:0 0 0 4px var(--white),0 0 0 5px rgba(157,134,101,0.35);}
+@media(max-width:640px){
+  .v153-pos{padding:22px 24px 28px;}
+  .v153-pos-grid{grid-template-columns:1fr;gap:22px;}
+  .v153-ax-end{font-size:10px;}
+}
+
+/* V154 — Samlet sammenlignings-oversigt. Desktop = tabel, mobil = stablet.
+   Deler design-sprog med per-hotel-diagrammet (grå kategorier, guld-serif
+   ender, D2-prikker). */
+.v154-cmp{background:linear-gradient(135deg,#1f3329 0%,#1a2823 100%);border:none;border-radius:3px;padding:44px 48px;margin:0 0 56px;}
+.v154-eyebrow{font-family:var(--ff-ui);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-lt);font-weight:600;margin-bottom:14px;}
+.v154-title{font-family:var(--ff-display);font-weight:400;font-size:30px;color:#ede5d1;margin:0 0 30px;letter-spacing:-0.005em;}
+/* Desktop table */
+.v154-table-wrap{width:100%;}
+.v154-table{border-collapse:collapse;width:100%;table-layout:fixed;}
+.v154-table th{padding:0 20px 20px;vertical-align:bottom;}
+.v154-table th.v154-th-name{padding:0 14px 20px 0;width:21%;}
+/* V154.5: kategori-overskrifter i dæmpet guld (matcher paletten) frem for
+   grøn-grå — træder stadig i baggrunden ift. de lyse hotelnavne. */
+.v154-th-cat{font-family:var(--ff-ui);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-lt);opacity:0.75;margin-bottom:14px;text-align:center;white-space:nowrap;}
+/* V154.1: ender på én linje via nowrap + kompakt skrift/spacing (IKKE fast
+   kolonnebredde, som fik tabellen til at flyde ud over containeren).
+   V154.4: mere kolonne-padding (20px) + mindre ende-skrift så lange ord som
+   "Superb"/"Good" i nabo-kolonner ikke støder sammen. */
+/* V154.6: ender centreret med gap (ikke space-between) — så kategori-
+   overskrift + begge ord + prik deler samme centrum og "hænger sammen". */
+.v154-th-ends{display:flex;justify-content:center;font-family:var(--ff-display);font-size:10px;font-weight:600;color:var(--gold-lt);gap:22px;white-space:nowrap;}
+.v154-th-ends span{white-space:nowrap;}
+.v154-table td{padding:16px 20px;}
+.v154-table tbody tr:nth-child(odd){background:transparent;}
+.v154-table tbody tr:nth-child(even){background:rgba(255,255,255,0.03);}
+/* V154.3: navne-kolonne bredere + mindre skrift så lange navne står fuldt.
+   Cream-farve så navnene lyser op mod den mørke grønne bund. */
+.v154-td-name{padding:16px 16px 16px 0 !important;font-family:var(--ff-display);font-size:14px;font-weight:600;color:#ede5d1;white-space:nowrap;line-height:1.25;}
+.v154-bar{position:relative;height:1.5px;background:rgba(196,180,154,0.22);border-radius:2px;width:100%;}
+.v154-bar--empty{opacity:0.4;}
+.v154-fill{position:absolute;left:0;top:0;height:1.5px;background:linear-gradient(90deg,rgba(196,180,154,0.5),var(--gold-lt));border-radius:2px;}
+.v154-mk{position:absolute;top:50%;width:8px;height:8px;border-radius:50%;background:var(--gold-lt);transform:translate(-50%,-50%);box-shadow:0 0 0 2px #1a2823;}
+/* V154.7: signatur-prik — resortets mest udprægede akse. Større + gylden glød,
+   så kunden ser "det er DET her stedet er kendt for" på et øjeblik. */
+.v154-mk--sig{width:11px;height:11px;background:#e6d3a3;box-shadow:0 0 0 2px #1a2823, 0 0 8px 2px rgba(230,211,163,0.65);}
+/* Mobile stacked — hidden on desktop */
+.v154-stack{display:none;}
+.v154-card{padding:20px 22px;background:rgba(255,255,255,0.04);border:1px solid rgba(196,180,154,0.18);border-radius:2px;margin-bottom:14px;}
+.v154-card:last-child{margin-bottom:0;}
+.v154-card-name{font-family:var(--ff-display);font-size:19px;font-weight:600;color:#ede5d1;margin-bottom:16px;}
+.v154-card-ax{margin-bottom:14px;}
+.v154-card-ax:last-child{margin-bottom:0;}
+.v154-card-cat{font-family:var(--ff-ui);font-size:8.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-lt);opacity:0.75;margin-bottom:9px;}
+.v154-card-ends{display:flex;justify-content:space-between;font-family:var(--ff-display);font-size:12px;font-weight:600;color:var(--gold-lt);margin-bottom:9px;}
+/* Switch: table → stacked at 1200px. Tabellen vises KUN på brede skærme hvor
+   selv de længste ord (Non-existing, Sophisticated, Ultra-luxury) har rigelig
+   plads — ellers den lodrette stak, hvor pladsen altid er der. Ingen ord
+   afkortes nogensinde. */
+@media(max-width:1200px){
+  .v154-cmp{padding:28px 22px;}
+  .v154-title{font-size:23px;margin-bottom:20px;}
+  .v154-table-wrap{display:none;}
+  .v154-stack{display:block;}
+}
 /* V133 — Hotel detail panel redesign. Hero image + curator + gallery + booking + info */
 /* V142: ALL hotel-panels (perhotel + rundrejse) are now unified cards so
    the LOKATION info row anchors visually to its parent hotel instead of
@@ -3470,7 +3534,7 @@ body.is-confirmation-mode .sticky-cta{
   </div>
   <div class="curator-letter-inner reveal">
     <div class="curator-letter-eyebrow">Skreddersydd for deg</div>
-    <h1 class="curator-letter-title">Kjære Ann Kristin</h1>
+    <h1 class="curator-letter-title">Kjære Ann</h1>
     <div class="curator-letter-body">
       <p>Jeg har her gleden av å presentere et skreddersydd reiseforslag til dere, som jeg håper er et godt bud på deres ultimate drømmereise. Jeg er veldig spent på å høre hva dere synes om det.</p>
       <p>Hos Maldivia tror vi ikke på standardløsninger. Dere vil derfor kun bli presentert for steder vi selv kjenner, og som garanterer alt fra nydelige hotell med beliggenhet i særklasse og fantastiske opplevelser, til genuin, personlig service og en gastronomi som bortskjemmer sansene.</p>
@@ -3496,7 +3560,7 @@ body.is-confirmation-mode .sticky-cta{
     <div class="hero-content">
       <div class="hero-eyebrow">Skreddersydd reisetilbud</div>
       <h1 class="hero-title">Maldivene<br><em>april 2027</em></h1>
-      <div class="hero-meta"><span class="nowrap">09. april 2027 — 20. april 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">9 netter / 11 dager</span></div>
+      <div class="hero-meta"><span class="nowrap">09. april 2027 — 20. april 2027</span> <span class="hero-meta-sep">·</span> <span class="nowrap">9 netter / 11 dager</span> <span class="hero-meta-sep">·</span> <span class="nowrap">2 voksne</span></div>
     </div>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
@@ -3756,6 +3820,175 @@ body.is-confirmation-mode .sticky-cta{
     </div>
   </div>
 
+      <section class="v154-cmp">
+        <div class="v154-eyebrow">Resort comparison</div>
+        <h3 class="v154-title">Which resort is right for you?</h3>
+        <div class="v154-table-wrap">
+          <table class="v154-table">
+            <thead><tr>
+              <th class="v154-th-name"></th>
+              <th><div class="v154-th-cat">Luxury level</div><div class="v154-th-ends"><span>Moderate</span><span>Ultra-luxury</span></div></th>
+              <th><div class="v154-th-cat">Fit for</div><div class="v154-th-ends"><span>Couples</span><span>Families</span></div></th>
+              <th><div class="v154-th-cat">House reef</div><div class="v154-th-ends"><span>Non-existing</span><span>Superb</span></div></th>
+              <th><div class="v154-th-cat">Gastronomy</div><div class="v154-th-ends"><span>Good</span><span>Outstanding</span></div></th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td class="v154-td-name">VARU by Atmosphere</td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:40%"></div><div class="v154-mk" style="left:40%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:45%"></div><div class="v154-mk" style="left:45%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:0%"></div><div class="v154-mk v154-mk--sig" style="left:0%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:65%"></div><div class="v154-mk" style="left:65%"></div></div></td>
+              </tr>
+              <tr>
+                <td class="v154-td-name">Anantara Veli</td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:70%"></div><div class="v154-mk" style="left:70%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:0%"></div><div class="v154-mk v154-mk--sig" style="left:0%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:0%"></div><div class="v154-mk" style="left:0%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div></td>
+              </tr>
+              <tr>
+                <td class="v154-td-name">LUX* South Ari Atoll</td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:70%"></div><div class="v154-mk" style="left:70%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:55%"></div><div class="v154-mk" style="left:55%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:5%"></div><div class="v154-mk v154-mk--sig" style="left:5%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:85%"></div><div class="v154-mk" style="left:85%"></div></div></td>
+              </tr>
+              <tr>
+                <td class="v154-td-name">Veligandu Maldives</td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:60%"></div><div class="v154-mk" style="left:60%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:20%"></div><div class="v154-mk v154-mk--sig" style="left:20%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:65%"></div><div class="v154-mk" style="left:65%"></div></div></td>
+              </tr>
+              <tr>
+                <td class="v154-td-name">Ayada Maldives</td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:49%"></div><div class="v154-mk" style="left:49%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:95%"></div><div class="v154-mk v154-mk--sig" style="left:95%"></div></div></td>
+                <td><div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="v154-stack">
+          <div class="v154-card">
+            <div class="v154-card-name">VARU by Atmosphere</div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Luxury level</div>
+              <div class="v154-card-ends"><span>Moderate</span><span>Ultra-luxury</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:40%"></div><div class="v154-mk" style="left:40%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Fit for</div>
+              <div class="v154-card-ends"><span>Couples</span><span>Families</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:45%"></div><div class="v154-mk" style="left:45%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">House reef</div>
+              <div class="v154-card-ends"><span>Non-existing</span><span>Superb</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:0%"></div><div class="v154-mk v154-mk--sig" style="left:0%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Gastronomy</div>
+              <div class="v154-card-ends"><span>Good</span><span>Outstanding</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:65%"></div><div class="v154-mk" style="left:65%"></div></div>
+            </div>
+          </div>
+          <div class="v154-card">
+            <div class="v154-card-name">Anantara Veli</div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Luxury level</div>
+              <div class="v154-card-ends"><span>Moderate</span><span>Ultra-luxury</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:70%"></div><div class="v154-mk" style="left:70%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Fit for</div>
+              <div class="v154-card-ends"><span>Couples</span><span>Families</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:0%"></div><div class="v154-mk v154-mk--sig" style="left:0%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">House reef</div>
+              <div class="v154-card-ends"><span>Non-existing</span><span>Superb</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:0%"></div><div class="v154-mk" style="left:0%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Gastronomy</div>
+              <div class="v154-card-ends"><span>Good</span><span>Outstanding</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div>
+            </div>
+          </div>
+          <div class="v154-card">
+            <div class="v154-card-name">LUX* South Ari Atoll</div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Luxury level</div>
+              <div class="v154-card-ends"><span>Moderate</span><span>Ultra-luxury</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:70%"></div><div class="v154-mk" style="left:70%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Fit for</div>
+              <div class="v154-card-ends"><span>Couples</span><span>Families</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:55%"></div><div class="v154-mk" style="left:55%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">House reef</div>
+              <div class="v154-card-ends"><span>Non-existing</span><span>Superb</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:5%"></div><div class="v154-mk v154-mk--sig" style="left:5%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Gastronomy</div>
+              <div class="v154-card-ends"><span>Good</span><span>Outstanding</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:85%"></div><div class="v154-mk" style="left:85%"></div></div>
+            </div>
+          </div>
+          <div class="v154-card">
+            <div class="v154-card-name">Veligandu Maldives</div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Luxury level</div>
+              <div class="v154-card-ends"><span>Moderate</span><span>Ultra-luxury</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:60%"></div><div class="v154-mk" style="left:60%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Fit for</div>
+              <div class="v154-card-ends"><span>Couples</span><span>Families</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:20%"></div><div class="v154-mk v154-mk--sig" style="left:20%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">House reef</div>
+              <div class="v154-card-ends"><span>Non-existing</span><span>Superb</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Gastronomy</div>
+              <div class="v154-card-ends"><span>Good</span><span>Outstanding</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:65%"></div><div class="v154-mk" style="left:65%"></div></div>
+            </div>
+          </div>
+          <div class="v154-card">
+            <div class="v154-card-name">Ayada Maldives</div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Luxury level</div>
+              <div class="v154-card-ends"><span>Moderate</span><span>Ultra-luxury</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Fit for</div>
+              <div class="v154-card-ends"><span>Couples</span><span>Families</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:49%"></div><div class="v154-mk" style="left:49%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">House reef</div>
+              <div class="v154-card-ends"><span>Non-existing</span><span>Superb</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:95%"></div><div class="v154-mk v154-mk--sig" style="left:95%"></div></div>
+            </div>
+            <div class="v154-card-ax">
+              <div class="v154-card-cat">Gastronomy</div>
+              <div class="v154-card-ends"><span>Good</span><span>Outstanding</span></div>
+              <div class="v154-bar"><div class="v154-fill" style="width:75%"></div><div class="v154-mk" style="left:75%"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
   <div class="section-header reveal" id="section-inkludert">
     <span class="section-num">03</span>
     <span class="section-title-label">Inkludert i reisen</span>
@@ -3980,6 +4213,51 @@ body.is-confirmation-mode .sticky-cta{
           <div class="v133-hp-hl-item">Resortet imøtekommer både par og familier med gjennomtenkte fasiliteter over hele øya. Det finnes et stort primært infinity-basseng, moderne treningssenter og utendørs sportsbaner. For yngre reisende tilbyr Onamalu Kids Club kreative verksteder, spill og barnebasseng, slik at hele familien får plass til å nyte ferien i sitt eget tempo.</div>
         </div>
       </div>
+      <div class="v153-pos">
+        <div class="v153-pos-head">Bli kjent med resortet</div>
+        <div class="v153-pos-grid">
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Luxury level</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Moderate</span><span class="v153-ax-end r">Ultra-luxury</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:40%"></div><div class="v153-marker" style="left:40%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Atmosphere</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Lively</span><span class="v153-ax-end r">Tranquil</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:45%"></div><div class="v153-marker" style="left:45%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Location</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Nearby</span><span class="v153-ax-end r">Remote</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:25%"></div><div class="v153-marker" style="left:25%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Fit for</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Couples</span><span class="v153-ax-end r">Families</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:45%"></div><div class="v153-marker" style="left:45%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Style</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Barefoot</span><span class="v153-ax-end r">Sophisticated</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:55%"></div><div class="v153-marker" style="left:55%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">House reef</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Non-existing</span><span class="v153-ax-end r">Superb</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:0%"></div><div class="v153-marker" style="left:0%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Gastronomy</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Good</span><span class="v153-ax-end r">Outstanding</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:65%"></div><div class="v153-marker" style="left:65%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Lagoon</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Pretty</span><span class="v153-ax-end r">Breathtaking</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:85%"></div><div class="v153-marker" style="left:85%"></div></div>
+          </div>
+        </div>
+      </div>
       <div class="v133-hp-info">
         <div class="v133-hp-info-col">
           <div class="ilbl">Lokasjon</div>
@@ -4085,6 +4363,51 @@ body.is-confirmation-mode .sticky-cta{
           <div class="v133-hp-hl-item">Surf-breaks i verdensklasse er en sjelden luksus på Maldivene, men Velis beliggenhet gjør det mulig. Resortets eget profesjonelle surfesenter (drevet av det anerkjente Tropicsurf) frakter deg på få minutter med båt direkte ut til noen av atollens beste og råeste bølger, uansett hvilket nivå du er på.</div>
         </div>
       </div>
+      <div class="v153-pos">
+        <div class="v153-pos-head">Bli kjent med resortet</div>
+        <div class="v153-pos-grid">
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Luxury level</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Moderate</span><span class="v153-ax-end r">Ultra-luxury</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:70%"></div><div class="v153-marker" style="left:70%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Atmosphere</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Lively</span><span class="v153-ax-end r">Tranquil</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:80%"></div><div class="v153-marker" style="left:80%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Location</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Nearby</span><span class="v153-ax-end r">Remote</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:25%"></div><div class="v153-marker" style="left:25%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Fit for</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Couples</span><span class="v153-ax-end r">Families</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:0%"></div><div class="v153-marker" style="left:0%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Style</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Barefoot</span><span class="v153-ax-end r">Sophisticated</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:55%"></div><div class="v153-marker" style="left:55%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">House reef</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Non-existing</span><span class="v153-ax-end r">Superb</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:0%"></div><div class="v153-marker" style="left:0%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Gastronomy</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Good</span><span class="v153-ax-end r">Outstanding</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:75%"></div><div class="v153-marker" style="left:75%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Lagoon</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Pretty</span><span class="v153-ax-end r">Breathtaking</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:90%"></div><div class="v153-marker" style="left:90%"></div></div>
+          </div>
+        </div>
+      </div>
       <div class="v133-hp-info">
         <div class="v133-hp-info-col">
           <div class="ilbl">Lokasjon</div>
@@ -4172,6 +4495,51 @@ body.is-confirmation-mode .sticky-cta{
           <div class="v133-hp-hl-item">Gjennomførte og morsomme pop-up-konsepter preger øya, inkludert en skjult kino under stjernene, hemmelige flaskeposter gjemt i hagen med premier, og resortets eget kafferisteri, Café LUX*.</div>
           <div class="v133-hp-hl-item">Det store LUX* ME Spa huser 15 eksklusive behandlingsvillaer, hvorav fire står på påler direkte over vannet med glassgulv, slik at du kan følge med på marinelivet under massasjen.</div>
           <div class="v133-hp-hl-item">Det enorme utvalget av gratis vannsport, to store infinity-bassenger, belyste tennisbaner og et av Maldivenes mest moderne treningssentre sikrer at det alltid er noe å gjøre for de energiske.</div>
+        </div>
+      </div>
+      <div class="v153-pos">
+        <div class="v153-pos-head">Bli kjent med resortet</div>
+        <div class="v153-pos-grid">
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Luxury level</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Moderate</span><span class="v153-ax-end r">Ultra-luxury</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:70%"></div><div class="v153-marker" style="left:70%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Atmosphere</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Lively</span><span class="v153-ax-end r">Tranquil</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:20%"></div><div class="v153-marker" style="left:20%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Location</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Nearby</span><span class="v153-ax-end r">Remote</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:25%"></div><div class="v153-marker" style="left:25%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Fit for</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Couples</span><span class="v153-ax-end r">Families</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:55%"></div><div class="v153-marker" style="left:55%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Style</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Barefoot</span><span class="v153-ax-end r">Sophisticated</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:75%"></div><div class="v153-marker" style="left:75%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">House reef</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Non-existing</span><span class="v153-ax-end r">Superb</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:5%"></div><div class="v153-marker" style="left:5%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Gastronomy</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Good</span><span class="v153-ax-end r">Outstanding</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:85%"></div><div class="v153-marker" style="left:85%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Lagoon</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Pretty</span><span class="v153-ax-end r">Breathtaking</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:75%"></div><div class="v153-marker" style="left:75%"></div></div>
+          </div>
         </div>
       </div>
       <div class="v133-hp-info">
@@ -4263,6 +4631,51 @@ body.is-confirmation-mode .sticky-cta{
           <div class="v133-hp-hl-item">Det prisvinnende Hani Spa er bygget på påler over den krystallklare lagunen. Her kan dere nyte holistisk og asiatisk-inspirert massasje, mens dere kikker direkte ned på det rolige, turkise vannet gjennom glasspaneler i gulvet.</div>
         </div>
       </div>
+      <div class="v153-pos">
+        <div class="v153-pos-head">Bli kjent med resortet</div>
+        <div class="v153-pos-grid">
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Luxury level</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Moderate</span><span class="v153-ax-end r">Ultra-luxury</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:60%"></div><div class="v153-marker" style="left:60%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Atmosphere</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Lively</span><span class="v153-ax-end r">Tranquil</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:75%"></div><div class="v153-marker" style="left:75%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Location</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Nearby</span><span class="v153-ax-end r">Remote</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:20%"></div><div class="v153-marker" style="left:20%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Fit for</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Couples</span><span class="v153-ax-end r">Families</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:20%"></div><div class="v153-marker" style="left:20%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Style</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Barefoot</span><span class="v153-ax-end r">Sophisticated</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:30%"></div><div class="v153-marker" style="left:30%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">House reef</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Non-existing</span><span class="v153-ax-end r">Superb</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:75%"></div><div class="v153-marker" style="left:75%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Gastronomy</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Good</span><span class="v153-ax-end r">Outstanding</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:65%"></div><div class="v153-marker" style="left:65%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Lagoon</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Pretty</span><span class="v153-ax-end r">Breathtaking</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:80%"></div><div class="v153-marker" style="left:80%"></div></div>
+          </div>
+        </div>
+      </div>
       <div class="v133-hp-info">
         <div class="v133-hp-info-col">
           <div class="ilbl">Lokasjon</div>
@@ -4350,6 +4763,51 @@ body.is-confirmation-mode .sticky-cta{
           <div class="v133-hp-hl-item">Det kulinariske universet teller åtte prisvinnende restauranter og barer, inkludert signaturrestauranten Ocean Breeze over vannet, samt Ottoman Lounge, som serverer autentisk tyrkisk kaffe og vannpipe i enestående omgivelser.</div>
           <div class="v133-hp-hl-item">Det prisvinnende AySpa strekker seg over 3500 kvadratmeter i hjertet av øya og er berømt for sitt grandiose, tyrkiske hammam, sine marmorbelagte baderom og skreddersydde, holistiske ritualer under trækronene.</div>
           <div class="v133-hp-hl-item">Aktivitetsnivået er eksepsjonelt høyt med et fullt utstyrt dykkesenter, surfemuligheter på noen av Maldivenes beste bølger rett i nærheten, samt opplyste tennis- og fotballbaner midt i den tropiske jungelen.</div>
+        </div>
+      </div>
+      <div class="v153-pos">
+        <div class="v153-pos-head">Bli kjent med resortet</div>
+        <div class="v153-pos-grid">
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Luxury level</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Moderate</span><span class="v153-ax-end r">Ultra-luxury</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:75%"></div><div class="v153-marker" style="left:75%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Atmosphere</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Lively</span><span class="v153-ax-end r">Tranquil</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:51%"></div><div class="v153-marker" style="left:51%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Location</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Nearby</span><span class="v153-ax-end r">Remote</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:100%"></div><div class="v153-marker" style="left:100%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Fit for</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Couples</span><span class="v153-ax-end r">Families</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:49%"></div><div class="v153-marker" style="left:49%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Style</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Barefoot</span><span class="v153-ax-end r">Sophisticated</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:45%"></div><div class="v153-marker" style="left:45%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">House reef</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Non-existing</span><span class="v153-ax-end r">Superb</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:95%"></div><div class="v153-marker" style="left:95%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Gastronomy</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Good</span><span class="v153-ax-end r">Outstanding</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:75%"></div><div class="v153-marker" style="left:75%"></div></div>
+          </div>
+          <div class="v153-ax">
+            <div class="v153-ax-cat">Lagoon</div>
+            <div class="v153-ax-ends"><span class="v153-ax-end">Pretty</span><span class="v153-ax-end r">Breathtaking</span></div>
+            <div class="v153-bar"><div class="v153-fill" style="width:80%"></div><div class="v153-marker" style="left:80%"></div></div>
+          </div>
         </div>
       </div>
       <div class="v133-hp-info">
