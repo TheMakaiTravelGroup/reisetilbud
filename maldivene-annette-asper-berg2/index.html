@@ -2875,12 +2875,20 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
   letter-spacing:0.18em;text-transform:uppercase;
   opacity:0.85;
 }
+/* V175: headline stay-row (navn + INKLUDERET-mærkat) + inkluderet-badge */
+.v133-hp-villa--stay .stay-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;}
+.v133-hp-villa--stay .stay-row-info{flex:1;min-width:0;}
+.v133-hp-villa--stay .stay-surcharge{flex:0 0 auto;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:1px;}
+.v133-hp-villa--stay .surcharge-lbl{font-family:var(--ff-ui);font-size:8px;font-weight:500;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;opacity:0.85;}
+.v133-hp-villa--stay .stay-included .surcharge-lbl{font-size:9px;opacity:1;}
 @media (max-width:600px){
   .v133-hp-villa--stay .stay-name{font-size:17px;}
   .v133-hp-villa--stay .stay-meal{font-size:12.5px;}
   .v133-hp-villa--stay .stay-meta{font-size:12.5px;}
   .v133-hp-villa--alt .stay-row{flex-direction:column;gap:6px;}
   .v133-hp-villa--alt .stay-surcharge{text-align:left;align-items:flex-start;}
+  .v133-hp-villa--stay .stay-row{flex-direction:row;}
+  .v133-hp-villa--stay .stay-surcharge{text-align:right;align-items:flex-end;}
 }
 /* BOOK button — gradient gold for headline (matches V145 favorit CTA),
    outlined gold for alternatives (lighter visual weight). */
@@ -2965,6 +2973,29 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
 .v170-inc-title{font-family:var(--ff-ui);font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dk,#9a7b2e);}
 .v170-inc-body{font-family:var(--ff-body);font-size:15px;line-height:1.7;color:var(--ink);position:relative;}
 @media(max-width:768px){ .v170-included{padding:18px 20px 16px;margin-top:16px;} }
+
+/* V175: RUNDREJSE-ophold — samme familie som v170, matcher guld-æstetikken */
+.v175-roundtrip{margin-top:20px;background:linear-gradient(135deg,#fdfaf2 0%,#f7f0e0 100%);
+  border:1px solid var(--gold);border-left:3px solid var(--gold);border-radius:3px;padding:22px 26px 20px;position:relative;overflow:hidden;}
+.v175-rt-logo{position:absolute;top:18px;right:20px;width:38px;height:38px;opacity:0.95;pointer-events:none;}
+.v175-rt-head{display:flex;align-items:center;margin-bottom:16px;position:relative;
+  /* flugt med hotelnavnene: ryk ind svarende til nummer-cirklen (26px) + gap (14px) */
+  padding-left:40px;}
+.v175-rt-title{font-family:var(--ff-ui);font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-dk,#9a7b2e);}
+.v175-rt-list{display:flex;flex-direction:column;gap:0;position:relative;}
+.v175-rt-stop{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid rgba(154,123,46,0.14);}
+.v175-rt-stop:last-child{border-bottom:none;}
+.v175-rt-num{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;
+  font-family:var(--ff-ui);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.v175-rt-main{flex:1;min-width:0;}
+.v175-rt-hotel{font-family:var(--ff-body);font-size:15px;font-weight:600;color:var(--ink);line-height:1.35;}
+.v175-rt-stars{color:var(--gold-dk,#9a7b2e);font-size:13px;white-space:nowrap;}
+.v175-rt-meta{font-family:var(--ff-ui);font-size:12px;color:var(--ink-mid);margin-top:2px;letter-spacing:0.02em;}
+.v175-rt-nights{font-weight:600;color:var(--gold-dk,#9a7b2e);}
+.v175-rt-link{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold);transition:color .15s;}
+.v175-rt-link:hover{color:var(--gold-dk,#9a7b2e);}
+.v175-rt-arrow{font-size:11px;color:var(--gold-dk,#9a7b2e);}
+@media(max-width:768px){ .v175-roundtrip{padding:18px 20px 16px;margin-top:16px;} .v175-rt-stop{gap:11px;} }
 
 /* V140: trip-level Rasmus' anbefaling — now matches hotel-panel edges
    (no max-width constraint), with a gold accent top stripe + more
