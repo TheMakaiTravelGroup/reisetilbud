@@ -4126,7 +4126,7 @@ body.is-confirmation-mode .sticky-cta{
 
 </section><!-- /trip-section #maldivene -->
 
-<script type="application/json" id="mldv-booking-data">{"customerName":"Annette Asper Berg","customerEmail":"annetteasperberg@gmail.com","customerPhone":"95969290","adults":2,"teenagers":2,"children":0,"infants":0,"teenagerAges":"14,17","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Maldivene","monthYear":"feb / mar 2027","dateRange":"21. februar 2027 — 1. mars 2027","dateEnd":"2027-03-01","nights":"7 netter / 9 dager","currency":"NOK","isRoundTrip":false,"priceTotal":"304.500","priceTotalFmt":"304.500","route":[],"flight":{"included":{"label":"Discover Airlines · Economy Class · 21. feb. → 1. mars","carrier":"Discover Airlines","cabin":"Economy Class","fromCity":"Oslo"},"alt":{"label":"Discover Airlines · Economy Class · 21. feb. → 1. mars","carrier":"Discover Airlines","cabin":"Economy Class","fromCity":"Oslo","priceFmt":"24.500","currency":"NOK"}},"hotels":[{"id":"hotel-1793702685266-4boyf","name":"Dusit Thani Maldives","location":"Baa Atoll","rates":[{"idx":0,"room":"Two Bedroom Overwater Pool Pavilion","mealPlan":"Pure Indulgence All-Inclusive — Dine Around","total":"304500","totalFmt":"304.500","included":true}]}]}]}</script>
+<script type="application/json" id="mldv-booking-data">{"customerName":"Annette Asper Berg","customerEmail":"annetteasperberg@gmail.com","customerPhone":"95969290","adults":2,"teenagers":2,"children":0,"infants":0,"teenagerAges":"14,17","childrenAges":"","infantAges":"","sigName":"Wendie Pedersen","sigEmail":"wp@maldivia.no","sigPhone":"+47 23 96 51 71","language":"no","bookingEndpoint":"https://formspree.io/f/meewjdoz","trips":[{"idx":0,"destination":"Maldivene","monthYear":"feb / mar 2027","dateRange":"21. februar 2027 — 1. mars 2027","dateEnd":"2027-03-01","nights":"7 netter / 9 dager","currency":"NOK","isRoundTrip":false,"priceTotal":"304.500","priceTotalFmt":"304.500","route":[],"flight":{"included":{"label":"Discover Airlines · Economy Class · 21. feb. → 1. mars","carrier":"Discover Airlines","cabin":"Economy Class","fromCity":"Oslo"},"alt":{"label":"Discover Airlines · Economy Class · 20. feb. → 28. feb.","carrier":"Discover Airlines","cabin":"Economy Class","fromCity":"Oslo","priceFmt":"24.500","currency":"NOK"}},"hotels":[{"id":"hotel-1793702685266-4boyf","name":"Dusit Thani Maldives","location":"Baa Atoll","rates":[{"idx":0,"room":"Two Bedroom Overwater Pool Pavilion","mealPlan":"Pure Indulgence All-Inclusive — Dine Around","total":"304500","totalFmt":"304.500","included":true}]}]}]}</script>
 
 <!-- ════ V130 BOOKING MODAL ════ -->
 <div id="mldv-booking-modal" class="mldv-bm" hidden role="dialog" aria-modal="true" aria-labelledby="mldv-bm-title">
@@ -4136,10 +4136,10 @@ body.is-confirmation-mode .sticky-cta{
     <div class="mldv-bm-head">
       <div class="eyebrow-gold">Send booking-forespørsel</div>
       <h2 id="mldv-bm-title">Et skritt unna <span class="accent">drømmereisen</span></h2>
-      <p>Dette er en forespørsel om booking av den valgte reisen. Vi sjekker pris og tilgjengelighet og vender tilbake til deg på mail med bekreftelsen, såfremt alle elementer er ledige og til ovenstående priser.</p>
+      <p>Send inn, så bekrefter vi reisen — så lenge alle elementer fortsatt er ledige og til prisene i tilbudet. Du får bekreftelsen på mail. Har noe endret seg, hører du fra oss først.</p>
     </div>
     <div class="mldv-bm-trust">
-      <span class="mldv-bm-trust-item"><span class="ck">✓</span>Ingen binding før endelig bekreftelse</span>
+      <span class="mldv-bm-trust-item"><span class="ck">✓</span>Bekreftet så lenge pris og tilgjengelighet holder</span>
       <span class="mldv-bm-trust-item"><span class="ck">✓</span>Vi sjekker pris og tilgjengelighet først</span>
       <span class="mldv-bm-trust-item"><span class="ck">✓</span>The &quot;Maldivia Promise&quot;</span>
     </div>
@@ -4195,7 +4195,7 @@ body.is-confirmation-mode .sticky-cta{
         <p class="hint">Bryllupsreise, jubileum, kostholdsbehov, sætepreferanser — eller noe annet vi bør vite. Helt valgfritt.</p>
         <div class="mldv-bm-field"><textarea name="wishes" rows="3" placeholder=""></textarea></div>
       </fieldset>
-      <div class="mldv-bm-reserve">Dette er en forespørsel om booking av den valgte reisen. Vi sjekker pris og tilgjengelighet og vender tilbake til deg på mail med bekreftelsen, såfremt alle elementer er ledige og til ovenstående priser.</div>
+      <div class="mldv-bm-reserve">Dette er en forespørsel om booking av den valgte reisen. Så lenge alle elementer fortsatt er ledige og koster det samme som i tilbudet, er reisen bekreftet — og vi sender bekreftelsen på mail. Skulle noe ha endret seg, kontakter vi deg før vi går videre.</div>
       <button type="submit" class="mldv-bm-submit">Send booking-forespørsel →</button>
       <p class="mldv-bm-legal">Ved å bekrefte aksepterer du våre <a href="https://maldivia.no/informasjon-og-reisevilkar-vedrorende-din-reise-til-maldivene/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">betalingsbetingelser</a>. Reisebekreftelsen sendes per e-post med forbehold for at alle elementer kan bookes i samsvar med tilbudet.</p>
     </form>
@@ -4205,7 +4205,7 @@ body.is-confirmation-mode .sticky-cta{
 (function(){
   var DATA = null;
   try { DATA = JSON.parse(document.getElementById("mldv-booking-data").textContent); } catch(e) { return; }
-  var L = {"adult":"Voksen","teen":"Teenager","child":"Barn","infant":"Spedbarn","fullName":"Fullt navn","birthDate":"Fødselsdato","successTitle":"Forespørselen er sendt","successBody":"Vi har mottatt din booking-forespørsel. Vi sjekker pris og tilgjengelighet og sender bekreftelse på mail.","successClose":"Lukk","journeyEyebrow":"Dere bestiller","journeyTotal":"Hele rundreisen","journeyUpgradeHint":"Ønsker dere et av tilleggene fra tilbudet (annen villatype eller meal plan)? Skriv det i feltet \"Spesielle ønsker\" lenger nede.","nightsWordSingular":"natt","nightsWordPlural":"netter","inclFlightOpt":"Inkludert","fromWord":"fra","firstNames":"Fornavn(e)","lastName":"Etternavn(e)","ageReturn":"Alder ved hjemkomst","yearsWord":"år"};
+  var L = {"adult":"Voksen","teen":"Teenager","child":"Barn","infant":"Spedbarn","fullName":"Fullt navn","birthDate":"Fødselsdato","successTitle":"Forespørselen er sendt","successBody":"Vi har mottatt din booking-forespørsel. Så lenge alle elementer fortsatt er ledige og til samme pris, er reisen bekreftet — og du får bekreftelsen på mail. Har noe endret seg, hører du fra oss først.","successClose":"Lukk","journeyEyebrow":"Dere bestiller","journeyTotal":"Hele rundreisen","journeyUpgradeHint":"Ønsker dere et av tilleggene fra tilbudet (annen villatype eller meal plan)? Skriv det i feltet \"Spesielle ønsker\" lenger nede.","nightsWordSingular":"natt","nightsWordPlural":"netter","inclFlightOpt":"Inkludert","fromWord":"fra","firstNames":"Fornavn(e)","lastName":"Etternavn(e)","ageReturn":"Alder ved hjemkomst","yearsWord":"år"};
   var modal = document.getElementById("mldv-booking-modal");
   if (!modal) return;
 
