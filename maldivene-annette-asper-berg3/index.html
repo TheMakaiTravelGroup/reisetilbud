@@ -3138,6 +3138,19 @@ html[lang="en"] .v133-hp-villa.included .v133-hp-villa-name::before{content:'★
   /* V175: lange hotelnavne må aldrig sprænge formens kant — select krymper korrekt og klipper med ellipsis i stedet */
   max-width:100%;box-sizing:border-box;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .mldv-bm-field{min-width:0;}
+/* V175: custom 2-linjers dropdown — native <option> kan ikke wrappe, så vi
+   bygger en div-baseret dropdown der aldrig går ud over skærmkanten. */
+.mldv-dd{position:relative;width:100%;}
+.mldv-dd-btn{width:100%;box-sizing:border-box;text-align:left;background:var(--white);border:1px solid var(--sand-deep);border-radius:3px;padding:12px 42px 12px 16px;font-family:var(--ff-ui);color:var(--ink);cursor:pointer;position:relative;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%239d8665' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:16px;}
+.mldv-dd-btn:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(157,134,101,0.15);}
+.mldv-dd-l1{font-size:14px;font-weight:600;line-height:1.3;color:var(--ink);word-break:break-word;}
+.mldv-dd-l2{font-size:12px;line-height:1.35;color:var(--ink-mid);margin-top:2px;word-break:break-word;}
+.mldv-dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:var(--white);border:1px solid var(--sand-deep);border-radius:4px;box-shadow:0 10px 28px rgba(0,0,0,0.14);max-height:320px;overflow-y:auto;}
+.mldv-dd.open .mldv-dd-menu{display:block;}
+.mldv-dd-opt{padding:11px 16px;cursor:pointer;border-bottom:1px solid rgba(157,134,101,0.12);}
+.mldv-dd-opt:last-child{border-bottom:none;}
+.mldv-dd-opt:hover,.mldv-dd-opt.sel{background:#faf6ec;}
 .mldv-bm textarea{min-height:80px;resize:vertical;font-family:var(--ff-body);line-height:1.55;}
 .mldv-bm-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .mldv-bm-grid-3{display:grid;grid-template-columns:1fr 2fr;gap:14px;}
@@ -4157,17 +4170,20 @@ body.is-confirmation-mode .sticky-cta{
         <div id="mldv-hotel-pick">
           <div class="mldv-bm-field">
             <label>Hotell</label>
-            <select name="hotel" id="mldv-hotel-select" onchange="mldvUpdateVillaOptions(this.value)"></select>
+            <div class="mldv-dd" id="mldv-hotel-dd"><div class="mldv-dd-btn" tabindex="0" role="button"><div class="mldv-dd-l1"></div><div class="mldv-dd-l2"></div></div><div class="mldv-dd-menu"></div></div>
+            <input type="hidden" name="hotel" id="mldv-hotel-select">
           </div>
           <div class="mldv-bm-field">
             <label>Romtype &amp; forpleining</label>
-            <select name="villa" id="mldv-villa-select"></select>
+            <div class="mldv-dd" id="mldv-villa-dd"><div class="mldv-dd-btn" tabindex="0" role="button"><div class="mldv-dd-l1"></div><div class="mldv-dd-l2"></div></div><div class="mldv-dd-menu"></div></div>
+            <input type="hidden" name="villa" id="mldv-villa-select">
           </div>
         </div>
         <div id="mldv-flight-pick" style="display:none;">
           <div class="mldv-bm-field">
             <label>Flyreise</label>
-            <select name="flight" id="mldv-flight-select"></select>
+            <div class="mldv-dd" id="mldv-flight-dd"><div class="mldv-dd-btn" tabindex="0" role="button"><div class="mldv-dd-l1"></div><div class="mldv-dd-l2"></div></div><div class="mldv-dd-menu"></div></div>
+            <input type="hidden" name="flight" id="mldv-flight-select">
           </div>
         </div>
       </fieldset>
@@ -4217,9 +4233,9 @@ body.is-confirmation-mode .sticky-cta{
     var p = preselect || {};
     if (p.trip != null) { var ts = document.getElementById("mldv-trip-select"); if (ts) ts.value = p.trip; }
     mldvUpdateHotelOptions(document.getElementById("mldv-trip-select").value);
-    if (p.hotel != null) { var hs = document.getElementById("mldv-hotel-select"); if (hs) hs.value = p.hotel; }
+    if (p.hotel != null) { mldvSelectDD("mldv-hotel-dd", "mldv-hotel-select", String(p.hotel)); }
     mldvUpdateVillaOptions(document.getElementById("mldv-hotel-select").value);
-    if (p.rate != null) { var vs = document.getElementById("mldv-villa-select"); if (vs) vs.value = p.rate; }
+    if (p.rate != null) { mldvSelectDD("mldv-villa-dd", "mldv-villa-select", String(p.rate)); }
     mldvBuildTravellerRows();
     modal.hidden = false;
     document.body.style.overflow = "hidden";
@@ -4281,8 +4297,8 @@ body.is-confirmation-mode .sticky-cta{
       summary.style.display = "block";
       picker.style.display = "none";
       // Set hidden values so submit knows it is rundrejse
-      var hs = document.getElementById("mldv-hotel-select"); if (hs) { hs.removeAttribute("required"); hs.innerHTML = "<option value=\"0\">rundrejse</option>"; hs.value = "0"; }
-      var vs = document.getElementById("mldv-villa-select"); if (vs) { vs.removeAttribute("required"); vs.innerHTML = "<option value=\"0\">rundrejse</option>"; vs.value = "0"; }
+      var hs = document.getElementById("mldv-hotel-select"); if (hs) { hs.removeAttribute("required"); hs.value = "0"; }
+      var vs = document.getElementById("mldv-villa-select"); if (vs) { vs.removeAttribute("required"); vs.value = "0"; }
       mldvUpdateFlightOptions(tripIdx);
       return;
     }
@@ -4290,15 +4306,12 @@ body.is-confirmation-mode .sticky-cta{
     summary.style.display = "none";
     picker.style.display = "block";
     var hs = document.getElementById("mldv-hotel-select");
-    hs.setAttribute("required","required");
-    hs.innerHTML = "";
-    trip.hotels.forEach(function(h, i) {
-      var opt = document.createElement("option");
-      opt.value = i;
+    if (hs) hs.setAttribute("required","required");
+    var hotelOpts = trip.hotels.map(function(h, i){
       var st = h.stars ? (" " + String(h.stars).replace("+","") + "\u2605" + (String(h.stars).indexOf("+")>-1?"+":"")) : "";
-      opt.textContent = h.name + st + (h.location ? " \u00b7 " + h.location : "");
-      hs.appendChild(opt);
+      return { value: String(i), l1: h.name + st, l2: (h.location || "") };
     });
+    mldvFillDD("mldv-hotel-dd", "mldv-hotel-select", hotelOpts, function(val){ mldvUpdateVillaOptions(val); });
     mldvUpdateVillaOptions(0);
     mldvUpdateFlightOptions(tripIdx);
   };
@@ -4310,20 +4323,56 @@ body.is-confirmation-mode .sticky-cta{
     if (!trip || !pick || !sel || !trip.flight) { if (pick) pick.style.display = "none"; return; }
     // kun vis valget hvis der FINDES en alternativ flyrejse
     if (!trip.flight.alt) { pick.style.display = "none"; sel.innerHTML = ""; return; }
-    sel.innerHTML = "";
     var incl = trip.flight.included;
     var inclFrom = incl.fromCity ? " (" + L.fromWord + " " + incl.fromCity + ")" : "";
-    var o1 = document.createElement("option"); o1.value = "included";
-    o1.textContent = incl.label + inclFrom + " — " + L.inclFlightOpt;
-    sel.appendChild(o1);
     var alt = trip.flight.alt;
     var altFrom = alt.fromCity ? " (" + L.fromWord + " " + alt.fromCity + ")" : "";
-    var altPrice = alt.priceFmt ? " — +" + alt.currency + " " + alt.priceFmt : "";
-    var o2 = document.createElement("option"); o2.value = "alt";
-    o2.textContent = alt.label + altFrom + altPrice;
-    sel.appendChild(o2);
-    sel.value = "included";
+    var altPrice = alt.priceFmt ? "+" + alt.currency + " " + alt.priceFmt : "";
+    var flightOpts = [
+      { value:"included", l1: incl.label + inclFrom, l2: L.inclFlightOpt },
+      { value:"alt", l1: alt.label + altFrom, l2: altPrice || L.altFlightOpt }
+    ];
+    mldvFillDD("mldv-flight-dd", "mldv-flight-select", flightOpts, null);
     pick.style.display = "block";
+  };
+
+  window.mldvFillDD = function(ddId, hiddenId, opts, onChange){
+    var dd = document.getElementById(ddId); var hidden = document.getElementById(hiddenId);
+    if (!dd || !hidden) return;
+    var btn = dd.querySelector(".mldv-dd-btn"); var menu = dd.querySelector(".mldv-dd-menu");
+    var l1 = btn.querySelector(".mldv-dd-l1"); var l2 = btn.querySelector(".mldv-dd-l2");
+    menu.innerHTML = "";
+    var setSel = function(o){ hidden.value = o.value; l1.textContent = o.l1 || ""; l2.textContent = o.l2 || ""; l2.style.display = o.l2 ? "block" : "none"; };
+    opts.forEach(function(o){
+      var el = document.createElement("div"); el.className = "mldv-dd-opt"; el.setAttribute("data-val", o.value);
+      var d1 = document.createElement("div"); d1.className = "mldv-dd-l1"; d1.textContent = o.l1 || "";
+      el.appendChild(d1);
+      if (o.l2) { var d2 = document.createElement("div"); d2.className = "mldv-dd-l2"; d2.textContent = o.l2; el.appendChild(d2); }
+      el.addEventListener("click", function(){
+        setSel(o); dd.classList.remove("open");
+        menu.querySelectorAll(".mldv-dd-opt").forEach(function(x){ x.classList.remove("sel"); }); el.classList.add("sel");
+        if (typeof onChange === "function") onChange(o.value);
+      });
+      menu.appendChild(el);
+    });
+    if (opts.length) { setSel(opts[0]); var first = menu.querySelector(".mldv-dd-opt"); if (first) first.classList.add("sel"); }
+    if (!dd._wired) { dd._wired = true;
+      btn.addEventListener("click", function(e){ e.stopPropagation(); document.querySelectorAll(".mldv-dd.open").forEach(function(x){ if(x!==dd) x.classList.remove("open"); }); dd.classList.toggle("open"); });
+      btn.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); dd.classList.toggle("open"); } });
+      document.addEventListener("click", function(e){ if(!dd.contains(e.target)) dd.classList.remove("open"); });
+    }
+  };
+  window.mldvSelectDD = function(ddId, hiddenId, val){
+    var dd = document.getElementById(ddId); var hidden = document.getElementById(hiddenId);
+    if (!dd || !hidden) return;
+    var opt = dd.querySelector(".mldv-dd-opt[data-val=\"" + val + "\"]");
+    if (!opt) return;
+    var l1 = opt.querySelector(".mldv-dd-l1"); var l2 = opt.querySelector(".mldv-dd-l2");
+    hidden.value = val;
+    var btnL1 = dd.querySelector(".mldv-dd-btn .mldv-dd-l1"); var btnL2 = dd.querySelector(".mldv-dd-btn .mldv-dd-l2");
+    if (btnL1) btnL1.textContent = l1 ? l1.textContent : "";
+    if (btnL2) { btnL2.textContent = l2 ? l2.textContent : ""; btnL2.style.display = l2 ? "block" : "none"; }
+    dd.querySelectorAll(".mldv-dd-opt").forEach(function(x){ x.classList.remove("sel"); }); opt.classList.add("sel");
   };
 
   // POPULATE villa options based on hotel index
@@ -4334,15 +4383,12 @@ body.is-confirmation-mode .sticky-cta{
     var hotel = trip.hotels[hotelIdx | 0];
     if (!hotel) return;
     var vs = document.getElementById("mldv-villa-select");
-    vs.innerHTML = "";
-    hotel.rates.forEach(function(r, i) {
-      var opt = document.createElement("option");
-      opt.value = i;
-      var price = r.totalFmt ? "  —  " + trip.currency + " " + r.totalFmt : "";
-      var meal = r.mealPlan ? "  ·  " + r.mealPlan : "";
-      opt.textContent = r.room + meal + price;
-      vs.appendChild(opt);
+    var villaOpts = hotel.rates.map(function(r, i){
+      var price = r.totalFmt ? (trip.currency + " " + r.totalFmt) : "";
+      var l2 = [r.mealPlan || "", price].filter(Boolean).join("  \u00b7  ");
+      return { value: String(i), l1: r.room || "", l2: l2 };
     });
+    mldvFillDD("mldv-villa-dd", "mldv-villa-select", villaOpts, null);
   };
 
   window.mldvAgeAtReturn = function(birthISO) {
